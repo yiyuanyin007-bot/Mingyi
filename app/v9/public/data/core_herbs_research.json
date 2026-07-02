@@ -1,0 +1,582 @@
+{
+  "version": 1,
+  "description": "35 张经方核心药物组合（君臣佐使 / 核心药对）检索汇总，用于方名↔药物题出题。",
+  "notes": [
+    "核心药物组合不等于全部药物，而是临床记忆与辨证时最关键的药对或药组。",
+    "来源以《伤寒论》原方、《医宗金鉴·删补名医方论》、百度健康/百度百科及《方剂学》教材为主。",
+    "麻黄杏仁甘草石膏汤与麻杏甘石汤为同一方剂，已在目标清单中合并，不重复建卡。",
+    "检索来源补充：经方派 https://www.jingfangpai.cn/ ，其中黄煌教授文章质量较高，优先作为现代临床应用与方证识别的参考。"
+  ],
+  "formulas": [
+    {
+      "id": "gui-zhi-tang",
+      "name": "桂枝汤",
+      "core_herbs": [
+        "桂枝",
+        "芍药"
+      ],
+      "core_combinations": "桂枝、芍药",
+      "rationale": "桂枝解肌发表、芍药敛阴和营，二者一散一收，调和营卫，为全方核心药对。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10056069/"
+      ]
+    },
+    {
+      "id": "ma-huang-tang",
+      "name": "麻黄汤",
+      "core_herbs": [
+        "麻黄",
+        "桂枝",
+        "杏仁"
+      ],
+      "core_combinations": "麻黄、桂枝、杏仁",
+      "rationale": "麻黄发汗解表、宣肺平喘，桂枝助麻黄发汗，杏仁降肺气平喘，三药共奏辛温发汗、宣肺平喘之功。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "ge-gen-tang",
+      "name": "葛根汤",
+      "core_herbs": [
+        "葛根",
+        "麻黄",
+        "桂枝"
+      ],
+      "core_combinations": "葛根、麻黄、桂枝",
+      "rationale": "葛根升津液、舒筋脉，麻黄、桂枝发汗解表，三药合用治太阳阳明合病、项背强几几。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10044655/"
+      ]
+    },
+    {
+      "id": "da-cheng-qi-tang",
+      "name": "大承气汤",
+      "core_herbs": [
+        "大黄",
+        "芒硝",
+        "厚朴",
+        "枳实"
+      ],
+      "core_combinations": "大黄、芒硝、厚朴、枳实",
+      "rationale": "大黄、芒硝泻热通便，厚朴、枳实行气散结，四药相配峻下热结，为阳明腑实重剂。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "xiao-chai-hu-tang",
+      "name": "小柴胡汤",
+      "core_herbs": [
+        "柴胡",
+        "黄芩"
+      ],
+      "core_combinations": "柴胡、黄芩",
+      "rationale": "柴胡透解少阳半表之邪，黄芩清泄少阳半里之热，二者相伍和解少阳，为方中君药核心。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "知乎/黄煌观点",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10044655/"
+      ]
+    },
+    {
+      "id": "gui-zhi-jia-ge-gen-tang",
+      "name": "桂枝加葛根汤",
+      "core_herbs": [
+        "桂枝",
+        "芍药",
+        "葛根"
+      ],
+      "core_combinations": "桂枝、芍药、葛根",
+      "rationale": "在桂枝汤调和营卫基础上加葛根升津液、舒筋脉，核心变为桂枝芍药调营卫 + 葛根升津。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "gui-zhi-jia-houpo-xingzi-tang",
+      "name": "桂枝加厚朴杏子汤",
+      "core_herbs": [
+        "桂枝",
+        "芍药",
+        "厚朴",
+        "杏仁"
+      ],
+      "core_combinations": "桂枝、芍药、厚朴、杏仁",
+      "rationale": "桂枝汤调和营卫以解表，厚朴、杏仁降气平喘，核心为解表与降气平喘并举。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "gui-zhi-qu-shaoyao-tang",
+      "name": "桂枝去芍药汤",
+      "core_herbs": [
+        "桂枝",
+        "甘草",
+        "生姜",
+        "大枣"
+      ],
+      "core_combinations": "桂枝、甘草、生姜、大枣",
+      "rationale": "去芍药之酸收，保留桂枝、甘草、姜枣辛甘化阳、温通心阳，主治胸满、脉促。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "ma-huang-xing-ren-gan-cao-shi-gao-tang",
+      "name": "麻黄杏仁甘草石膏汤",
+      "core_herbs": [
+        "麻黄",
+        "石膏",
+        "杏仁"
+      ],
+      "core_combinations": "麻黄、石膏、杏仁",
+      "rationale": "麻黄宣肺平喘，石膏清泄肺热，杏仁降肺气，三药共成辛凉宣泄、清肺平喘之法。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10044655/"
+      ]
+    },
+    {
+      "id": "xiao-jian-zhong-tang",
+      "name": "小建中汤",
+      "core_herbs": [
+        "桂枝",
+        "芍药",
+        "胶饴"
+      ],
+      "core_combinations": "桂枝、芍药、胶饴",
+      "rationale": "桂枝、芍药调和阴阳，胶饴温中补虚、缓急止痛，为温中补虚之核心。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10038899/"
+      ]
+    },
+    {
+      "id": "da-qing-long-tang",
+      "name": "大青龙汤",
+      "core_herbs": [
+        "麻黄",
+        "桂枝",
+        "石膏"
+      ],
+      "core_combinations": "麻黄、桂枝、石膏",
+      "rationale": "麻黄、桂枝辛温发汗解表，石膏清泄里热，三者体现外散风寒、内清里热之大法。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10044655/"
+      ]
+    },
+    {
+      "id": "xiao-qing-long-tang",
+      "name": "小青龙汤",
+      "core_herbs": [
+        "麻黄",
+        "桂枝",
+        "干姜",
+        "细辛",
+        "五味子"
+      ],
+      "core_combinations": "麻黄、桂枝、干姜、细辛、五味子",
+      "rationale": "麻黄、桂枝外散风寒，干姜、细辛温化水饮，五味子敛肺止咳，外散内温、开合相济。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "知乎/黄煌观点（姜辛味为核心）"
+      ]
+    },
+    {
+      "id": "gui-zhi-jia-fu-zi-tang",
+      "name": "桂枝加附子汤",
+      "core_herbs": [
+        "桂枝",
+        "附子"
+      ],
+      "core_combinations": "桂枝、附子",
+      "rationale": "桂枝汤调和营卫以固表，附子回阳固表止汗，核心为解表温阳、固表止汗。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "gui-zhi-ma-huang-ge-ban-tang",
+      "name": "桂枝麻黄各半汤",
+      "core_herbs": [
+        "桂枝",
+        "麻黄"
+      ],
+      "core_combinations": "桂枝、麻黄",
+      "rationale": "取桂枝汤与麻黄汤各半量，微发其汗，桂枝、麻黄并用为调和营卫、小发汗之关键。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "gui-zhi-er-yue-bi-yi-tang",
+      "name": "桂枝二越婢一汤",
+      "core_herbs": [
+        "桂枝",
+        "麻黄",
+        "石膏"
+      ],
+      "core_combinations": "桂枝、麻黄、石膏",
+      "rationale": "桂枝、麻黄微发其汗，石膏清泄里热，主治表郁里热之轻证。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "ge-gen-jia-ban-xia-tang",
+      "name": "葛根加半夏汤",
+      "core_herbs": [
+        "葛根",
+        "麻黄",
+        "半夏"
+      ],
+      "core_combinations": "葛根、麻黄、半夏",
+      "rationale": "在葛根汤升津解表基础上加半夏降逆和胃，核心为解表升津 + 降逆止呕。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "ge-gen-huang-qin-huang-lian-tang",
+      "name": "葛根黄芩黄连汤",
+      "core_herbs": [
+        "葛根",
+        "黄芩",
+        "黄连"
+      ],
+      "core_combinations": "葛根、黄芩、黄连",
+      "rationale": "葛根升阳止利解表，黄芩、黄连清热燥湿止利，三药共成解表清里之核心。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "wu-ling-san",
+      "name": "五苓散",
+      "core_herbs": [
+        "泽泻",
+        "茯苓",
+        "猪苓",
+        "白术",
+        "桂枝"
+      ],
+      "core_combinations": "泽泻、茯苓、猪苓、白术、桂枝",
+      "rationale": "泽泻、茯苓、猪苓利水渗湿，白术健脾，桂枝温阳化气，五药共奏利水渗湿、温阳化气。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10035309/"
+      ]
+    },
+    {
+      "id": "zhen-wu-tang",
+      "name": "真武汤",
+      "core_herbs": [
+        "附子",
+        "茯苓",
+        "白术"
+      ],
+      "core_combinations": "附子、茯苓、白术",
+      "rationale": "附子温肾助阳，茯苓、白术健脾利水，三药为温阳利水之核心。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10026723/"
+      ]
+    },
+    {
+      "id": "si-ni-tang",
+      "name": "四逆汤",
+      "core_herbs": [
+        "附子",
+        "干姜",
+        "甘草"
+      ],
+      "core_combinations": "附子、干姜、甘草",
+      "rationale": "附子回阳救逆，干姜温中散寒，甘草调和诸药、缓姜附燥烈，三药为回阳救逆基础。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "bai-hu-tang",
+      "name": "白虎汤",
+      "core_herbs": [
+        "石膏",
+        "知母"
+      ],
+      "core_combinations": "石膏、知母",
+      "rationale": "石膏辛甘大寒清热生津，知母苦寒质润滋阴润燥，二者相须为用，清气分大热。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10044655/"
+      ]
+    },
+    {
+      "id": "tiao-wei-cheng-qi-tang",
+      "name": "调胃承气汤",
+      "core_herbs": [
+        "大黄",
+        "芒硝"
+      ],
+      "core_combinations": "大黄、芒硝",
+      "rationale": "大黄泻下攻积，芒硝软坚润燥，二药配伍泻热通便、软坚润燥，为缓下热结之核心。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "da-chai-hu-tang",
+      "name": "大柴胡汤",
+      "core_herbs": [
+        "柴胡",
+        "黄芩",
+        "大黄",
+        "枳实"
+      ],
+      "core_combinations": "柴胡、黄芩、大黄、枳实",
+      "rationale": "柴胡、黄芩和解少阳，大黄、枳实内泻阳明热结，体现和解与通下并用。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》",
+        "经方派（黄煌）"
+      ],
+      "source_urls": [
+        "https://www.jingfangpai.cn/p/10044655/"
+      ]
+    },
+    {
+      "id": "chai-hu-jia-long-gu-mu-li-tang",
+      "name": "柴胡加龙骨牡蛎汤",
+      "core_herbs": [
+        "柴胡",
+        "龙骨",
+        "牡蛎",
+        "黄芩"
+      ],
+      "core_combinations": "柴胡、龙骨、牡蛎、黄芩",
+      "rationale": "柴胡、黄芩和解少阳，龙骨、牡蛎重镇安神，为和解泻热、重镇安神之核心。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "zhi-zi-chi-tang",
+      "name": "栀子豉汤",
+      "core_herbs": [
+        "栀子",
+        "香豉"
+      ],
+      "core_combinations": "栀子、香豉",
+      "rationale": "栀子清泄三焦郁热，香豉宣郁除烦，二者一清一宣，清热除烦。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "chai-hu-jia-mang-xiao-tang",
+      "name": "柴胡加芒硝汤",
+      "core_herbs": [
+        "柴胡",
+        "黄芩",
+        "芒硝"
+      ],
+      "core_combinations": "柴胡、黄芩、芒硝",
+      "rationale": "小柴胡汤和解少阳，加芒硝泻热通便，核心为和解少阳兼泻热润燥。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "zhi-zi-gan-cao-chi-tang",
+      "name": "栀子甘草豉汤",
+      "core_herbs": [
+        "栀子",
+        "香豉",
+        "甘草"
+      ],
+      "core_combinations": "栀子、香豉、甘草",
+      "rationale": "栀子豉汤清热除烦，加甘草益气和中，适用于虚烦兼少气。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "zhi-zi-sheng-jiang-chi-tang",
+      "name": "栀子生姜豉汤",
+      "core_herbs": [
+        "栀子",
+        "香豉",
+        "生姜"
+      ],
+      "core_combinations": "栀子、香豉、生姜",
+      "rationale": "栀子豉汤清热除烦，加生姜和胃止呕，适用于虚烦兼呕。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "zhi-zi-hou-po-tang",
+      "name": "栀子厚朴汤",
+      "core_herbs": [
+        "栀子",
+        "厚朴",
+        "枳实"
+      ],
+      "core_combinations": "栀子、厚朴、枳实",
+      "rationale": "栀子清热除烦，厚朴、枳实行气消满，核心为清热除烦、行气除满。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "zhi-zi-gan-jiang-tang",
+      "name": "栀子干姜汤",
+      "core_herbs": [
+        "栀子",
+        "干姜"
+      ],
+      "core_combinations": "栀子、干姜",
+      "rationale": "栀子清上焦热，干姜温中散寒，寒热并用，清上温中。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "gan-jiang-fu-zi-tang",
+      "name": "干姜附子汤",
+      "core_herbs": [
+        "干姜",
+        "附子"
+      ],
+      "core_combinations": "干姜、附子",
+      "rationale": "附子回阳救逆，干姜温中散寒，二药辛热同用，单刀直入、急救回阳。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "fu-ling-si-ni-tang",
+      "name": "茯苓四逆汤",
+      "core_herbs": [
+        "附子",
+        "干姜",
+        "茯苓",
+        "人参"
+      ],
+      "core_combinations": "附子、干姜、茯苓、人参",
+      "rationale": "四逆汤回阳救逆，加茯苓利水宁心、人参益气生津，主治阳虚厥逆兼烦躁。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "tao-he-cheng-qi-tang",
+      "name": "桃核承气汤",
+      "core_herbs": [
+        "桃仁",
+        "大黄",
+        "桂枝",
+        "芒硝"
+      ],
+      "core_combinations": "桃仁、大黄、桂枝、芒硝",
+      "rationale": "桃仁活血破瘀，大黄、芒硝泻热通便，桂枝温通血脉，逐瘀泻热、下焦蓄血。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "di-dang-tang",
+      "name": "抵当汤",
+      "core_herbs": [
+        "水蛭",
+        "虻虫",
+        "大黄",
+        "桃仁"
+      ],
+      "core_combinations": "水蛭、虻虫、大黄、桃仁",
+      "rationale": "水蛭、虻虫破血逐瘀，大黄、桃仁泻热化瘀，四药共成破血下瘀峻剂。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    },
+    {
+      "id": "bai-hu-jia-ren-shen-tang",
+      "name": "白虎加人参汤",
+      "core_herbs": [
+        "石膏",
+        "知母",
+        "人参"
+      ],
+      "core_combinations": "石膏、知母、人参",
+      "rationale": "白虎汤清气分大热，加人参益气生津，主治热盛津伤、大烦渴不解。",
+      "sources": [
+        "《伤寒论》",
+        "《医宗金鉴·删补名医方论》"
+      ]
+    }
+  ]
+}

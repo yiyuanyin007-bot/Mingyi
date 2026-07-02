@@ -1,0 +1,148 @@
+[
+  {
+    "formula_id": "li-zhong-wan",
+    "formula_name": "理中丸",
+    "source_chapter": "霍乱病篇",
+    "necessary": [
+      "吐利",
+      "寒多不用水"
+    ],
+    "common": [
+      "腹痛",
+      "手足不温",
+      "不欲饮食",
+      "舌淡苔白",
+      "脉沉迟"
+    ],
+    "excluding": [
+      "实热吐利",
+      "湿热泄泻",
+      "阴虚内热"
+    ],
+    "herbs": [
+      "人参",
+      "干姜",
+      "白术",
+      "甘草"
+    ],
+    "source_article": null
+  },
+  {
+    "formula_id": "wu-mei-wan",
+    "formula_name": "乌梅丸",
+    "source_chapter": "厥阴病篇",
+    "necessary": [
+      "吐蛔",
+      "时烦时止"
+    ],
+    "common": [
+      "厥冷",
+      "得食而呕",
+      "腹痛",
+      "久利",
+      "上热下寒"
+    ],
+    "excluding": [
+      "实热腹痛",
+      "纯寒无热"
+    ],
+    "herbs": [
+      "乌梅",
+      "细辛",
+      "干姜",
+      "黄连",
+      "当归",
+      "附子",
+      "蜀椒",
+      "桂枝",
+      "人参",
+      "黄柏"
+    ],
+    "source_article": null
+  },
+  {
+    "formula_id": "dang-gui-si-ni-tang",
+    "formula_name": "当归四逆汤",
+    "source_chapter": "厥阴病篇",
+    "necessary": [
+      "手足厥寒",
+      "脉细欲绝"
+    ],
+    "common": [
+      "腹痛",
+      "头痛",
+      "寒疝",
+      "舌淡苔白"
+    ],
+    "excluding": [
+      "实热厥逆",
+      "阳虚寒厥",
+      "阳郁厥逆"
+    ],
+    "herbs": [
+      "当归",
+      "桂枝",
+      "芍药",
+      "细辛",
+      "甘草",
+      "通草",
+      "大枣"
+    ],
+    "source_article": null
+  },
+  {
+    "formula_id": "bai-tou-weng-tang",
+    "formula_name": "白头翁汤",
+    "source_chapter": "厥阴病篇",
+    "necessary": [
+      "热利",
+      "下重"
+    ],
+    "common": [
+      "口渴",
+      "肛门灼热",
+      "腹痛",
+      "舌红苔黄"
+    ],
+    "excluding": [
+      "寒利",
+      "虚寒久利",
+      "湿利"
+    ],
+    "herbs": [
+      "白头翁",
+      "黄柏",
+      "黄连",
+      "秦皮"
+    ],
+    "source_article": null
+  },
+  {
+    "formula_id": "si-ni-jia-ren-shen-tang",
+    "formula_name": "四逆加人参汤",
+    "source_chapter": "霍乱病篇",
+    "necessary": [
+      "四肢厥逆",
+      "下利清谷",
+      "脉微欲绝"
+    ],
+    "common": [
+      "恶寒",
+      "汗出",
+      "面色苍白",
+      "气促",
+      "口干"
+    ],
+    "excluding": [
+      "实热证",
+      "单纯阴虚"
+    ],
+    "herbs": [
+      "甘草",
+      "干姜",
+      "附子",
+      "人参"
+    ],
+    "source_article": null
+  }
+]

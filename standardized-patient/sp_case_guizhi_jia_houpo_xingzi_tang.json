@@ -1,0 +1,603 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "sp-010-ty-43",
+  "mode": "article",
+  "difficulty": 2,
+  "difficulty_config": {
+    "inquiry_slots": 5,
+    "l2_allowance_per_direction": 1,
+    "l3_noise_probability": 0.15,
+    "distractor_count": 4,
+    "distractor_level": "medium",
+    "physical_exam_completeness": "full",
+    "chief_complaint_directness": "moderate"
+  },
+  "source_article": "SHL-ty-43",
+  "source_classic": "伤寒论",
+  "chapter": "太阳病篇",
+  "patient": {
+    "name": "李老师",
+    "age": 62,
+    "gender": "女",
+    "occupation": "退休教师",
+    "background": "退休语文教师，三天前因感冒就诊，被误用泻药",
+    "persona_id": "talkative-elderly-female"
+  },
+  "chief_complaint": {
+    "text": "大夫啊，我这病真是越治越复杂了。本来吧，我就是个普通感冒，发热、怕冷，身上也出汗，头还有点疼。结果三天前那个诊所大夫说我上火了，给我开了泻药，让我拉肚子。这下可好，泻药吃了之后，感冒没好，反而开始喘上了，气儿不够用，稍微动一下就喘得厉害。我这出汗还是一直有，风吹过来还是怕冷，头也还疼。您说我这是不是给治坏了呀？我之前教了三十多年书，身体一直还行，这次真是让人着急。",
+    "revealed_symptoms": [
+      "发热",
+      "恶风",
+      "汗出",
+      "头痛",
+      "下后微喘",
+      "表未解"
+    ],
+    "l0_symptoms": [
+      "发热",
+      "恶风",
+      "汗出",
+      "头痛",
+      "下后微喘",
+      "表未解"
+    ],
+    "directness": "moderate",
+    "word_count": 192
+  },
+  "inquiries": {
+    "01_寒热": {
+      "direction_id": "01_寒热",
+      "direction_name": "寒热",
+      "keywords": [
+        "怕冷",
+        "发热",
+        "寒热往来"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "身上热乎乎的，量体温大概37度5到38度，不算高烧，但一直不退。还有就是怕风，风吹过来就起鸡皮疙瘩，家里窗户都不敢开，风扇更不敢开。汗出了之后更觉得冷，缩在被子里也不敢伸胳膊出去。",
+        "revealed_symptoms": [
+          "发热",
+          "恶风",
+          "汗后恶寒"
+        ],
+        "sample_question": "怕冷吗？发烧吗？"
+      },
+      "l2": {
+        "trigger_question": "这发热怕冷是从什么时候开始的？吃了泻药之后有没有变化？",
+        "text": "本来三天前就是发热怕冷，那是感冒。吃了泻药之后，这发热怕冷还没好，表证根本没解，还是老样子。您说我这是不是误治了？",
+        "revealed_symptoms": [
+          "表未解"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我孙子前两天也是发烧，不过他吃了退烧药就好了，比我强多了。",
+        "type": "情绪归因",
+        "misleading_symptom": ""
+      }
+    },
+    "02_汗出": {
+      "direction_id": "02_汗出",
+      "direction_name": "汗出",
+      "keywords": [
+        "汗量",
+        "汗后感",
+        "盗汗",
+        "自汗"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "汗挺多的，稍微动一下就一身汗，擦了又有。衣服都湿了好几件。我白天一直出汗，晚上睡着了也有一点。",
+        "revealed_symptoms": [
+          "汗出",
+          "自汗"
+        ],
+        "sample_question": "出汗多吗？"
+      },
+      "l2": {
+        "trigger_question": "汗后觉得舒服吗？",
+        "text": "汗出了之后更觉得冷，没力气。而且汗一直止不住，擦了又有，像漏了一样。微微出汗，但就是不停。",
+        "revealed_symptoms": [
+          "汗后畏寒",
+          "汗漏不止"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我以前当老师的时候，板书写多了也爱出汗，但这回不一样。",
+        "type": "错误归因",
+        "misleading_symptom": ""
+      }
+    },
+    "03_头身": {
+      "direction_id": "03_头身",
+      "direction_name": "头身",
+      "keywords": [
+        "头痛",
+        "项背",
+        "四肢",
+        "胸胁"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "头有点疼，昏昏沉沉的，但不是疼得特别厉害。身上也没特别酸痛，就是觉得没力气。",
+        "revealed_symptoms": [
+          "头痛",
+          "头昏"
+        ],
+        "sample_question": "头痛吗？身上酸痛吗？"
+      },
+      "l2": {
+        "trigger_question": "身上其他地方呢？有没有项背僵硬？",
+        "text": "身上倒是没有明显的酸痛，也不僵硬。脖子后背都能转。就是头疼、没力气，精神不太好。",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "",
+        "type": "",
+        "misleading_symptom": ""
+      }
+    },
+    "04_二便": {
+      "direction_id": "04_二便",
+      "direction_name": "二便",
+      "keywords": [
+        "小便",
+        "大便",
+        "颜色",
+        "次数"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "吃了泻药之后，大便拉稀了两天，现在好了，一天一次。小便正常，颜色不黄。",
+        "revealed_symptoms": [
+          "便溏已止"
+        ],
+        "sample_question": "大小便怎么样？"
+      },
+      "l2": {
+        "trigger_question": "大便现在成型吗？",
+        "text": "现在成型了，就是之前吃了泻药拉稀。没有其他问题。",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "",
+        "type": "",
+        "misleading_symptom": ""
+      }
+    },
+    "05_饮食": {
+      "direction_id": "05_饮食",
+      "direction_name": "饮食",
+      "keywords": [
+        "胃口",
+        "口渴",
+        "喜冷/热",
+        "呕吐"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "胃口不太好，看到饭有点烦，不想吃油腻的。不恶心，也不吐。口渴倒是不太明显，但也不想喝冷水。",
+        "revealed_symptoms": [
+          "食欲不振"
+        ],
+        "sample_question": "胃口怎么样？口渴吗？"
+      },
+      "l2": {
+        "trigger_question": "想喝热的还是冷的？",
+        "text": "想喝温热的，凉的不想喝。但也不怎么渴。",
+        "revealed_symptoms": [
+          "喜热饮"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "",
+        "type": "",
+        "misleading_symptom": ""
+      }
+    },
+    "06_胸腹": {
+      "direction_id": "06_胸腹",
+      "direction_name": "胸腹",
+      "keywords": [
+        "胸闷",
+        "心悸",
+        "腹胀",
+        "腹痛"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "胸口不闷，肚子也不胀不痛。就是呼吸有点急，稍微活动一下就喘，气不够用。不过不算太严重，不活动的时候还好。",
+        "revealed_symptoms": [
+          "微喘"
+        ],
+        "sample_question": "胸口闷吗？喘吗？"
+      },
+      "l2": {
+        "trigger_question": "这喘是什么时候开始的？",
+        "text": "就是吃了泻药之后才开始喘的。本来只是感冒，不喘的。泻药吃下去，拉了肚子，第二天就开始有点喘，气儿不够用了。之前三十年教书，我肺活量可好了，从来没喘过。",
+        "revealed_symptoms": [
+          "下后微喘"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我老伴也有哮喘，不过他那是老慢支，跟我这不一样吧？",
+        "type": "错误归因",
+        "misleading_symptom": ""
+      }
+    },
+    "07_耳目": {
+      "direction_id": "07_耳目",
+      "direction_name": "耳目",
+      "keywords": [
+        "耳鸣",
+        "听力",
+        "目眩",
+        "视力"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "耳朵不响，听力正常。头有点昏，但看东西不转。眼睛也挺好的，就是鼻子有点塞，呼吸声重。",
+        "revealed_symptoms": [
+          "鼻鸣"
+        ],
+        "sample_question": "耳朵响吗？头晕吗？"
+      },
+      "l2": {
+        "trigger_question": "鼻子塞多久了？",
+        "text": "从发病开始就有，三天了，一直塞，呼吸声重。但我主要是来看喘的，这鼻塞倒是老毛病。",
+        "revealed_symptoms": [
+          "鼻鸣持续"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "",
+        "type": "",
+        "misleading_symptom": ""
+      }
+    },
+    "08_睡眠": {
+      "direction_id": "08_睡眠",
+      "direction_name": "睡眠",
+      "keywords": [
+        "入睡",
+        "多梦",
+        "易醒",
+        "烦躁"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "睡得着，但不算很好。主要是身上不舒服，热乎乎的又出汗，睡得不踏实。没有做梦多。",
+        "revealed_symptoms": [
+          "睡眠欠安"
+        ],
+        "sample_question": "睡得着吗？做梦多吗？"
+      },
+      "l2": {
+        "trigger_question": "半夜会醒吗？",
+        "text": "有时候会醒，出汗热醒的，擦了汗又睡。没有烦躁到睡不着。",
+        "revealed_symptoms": [
+          "汗后醒"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "",
+        "type": "",
+        "misleading_symptom": ""
+      }
+    },
+    "09_旧病": {
+      "direction_id": "09_旧病",
+      "direction_name": "旧病",
+      "keywords": [
+        "既往",
+        "家族",
+        "用药史"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "我以前身体挺好的，教书三十多年，很少生病。就是这几年退休后，偶尔会感冒，但吃点药就好了。家里没有类似的病。",
+        "revealed_symptoms": [
+          "体健",
+          "偶感风寒"
+        ],
+        "sample_question": "以前有什么病？"
+      },
+      "l2": {
+        "trigger_question": "以前感冒是什么症状？有没有喘过？",
+        "text": "以前感冒也是怕冷、发热，但从来不出这么多汗，也从来不喘。这次最奇怪，吃了泻药反而喘起来了。",
+        "revealed_symptoms": [
+          "无喘既往史"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我教了三十多年书，嗓子一直好，从来没喘过，这次真是奇怪。",
+        "type": "情绪归因",
+        "misleading_symptom": ""
+      }
+    },
+    "10_诱因": {
+      "direction_id": "10_诱因",
+      "direction_name": "诱因",
+      "keywords": [
+        "饮食",
+        "受寒",
+        "情绪",
+        "劳累"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "本来只是感冒，三天前那个诊所大夫说我上火了，给我开了泻药，让我拉肚子。我吃了泻药，拉了肚子，结果感冒没好，反而开始喘了。",
+        "revealed_symptoms": [
+          "误下",
+          "外感风寒"
+        ],
+        "sample_question": "发病前吃了什么？"
+      },
+      "l2": {
+        "trigger_question": "吃了什么泻药？",
+        "text": "具体什么药我也不懂，大夫说我是上火，要通通便。吃了之后就拉肚子，拉了两三次。我现在后悔死了，不该吃那泻药的。",
+        "revealed_symptoms": [
+          "误下诱因"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我邻居说我是体虚，该补补，但我不敢乱吃药了。",
+        "type": "自我用药",
+        "misleading_symptom": ""
+      }
+    }
+  },
+  "physical_exam": {
+    "completeness": "full",
+    "inspection": {
+      "tongue_body": "正常",
+      "tongue_color": "淡红",
+      "coating": "薄白",
+      "special": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "稍促",
+      "cough": "无",
+      "odor": "无"
+    },
+    "palpation": {
+      "pulse_position": "浮",
+      "pulse_rate": "缓",
+      "pulse_shape": "弱",
+      "pulse_force": "无力",
+      "composite": "浮缓"
+    },
+    "pressing": {
+      "abdomen": "柔软，喜按",
+      "limbs": "温",
+      "skin": "湿润，有汗"
+    }
+  },
+  "case_summary": "【主诉】\n李老师，62岁，退休教师。三天前因感冒被误用泻药后起病。\n\n【现病史】\n- 发热：体温37.5-38℃，持续不退，表证未解\n- 恶风：风吹即起鸡皮疙瘩，不敢开窗\n- 汗出：动则汗出，擦之复有，汗后畏寒\n- 头痛：头昏沉，隐隐作痛\n- 微喘：误下后出现，活动后加重，气不够用\n- 表未解：感冒症状持续，误治后未减轻\n\n【查体】\n舌淡红苔薄白。脉浮缓。呼吸稍促。腹软喜按。四肢温，肌肤湿润有汗。",
+  "question": {
+    "mode": "article",
+    "options": [
+      {
+        "id": "SHL-ty-43",
+        "label": "第43条",
+        "snippet": "太阳病，下之微喘者，表未解故也，桂枝加厚朴杏子汤主之。",
+        "is_correct": true,
+        "distractor_type": "correct"
+      },
+      {
+        "id": "SHL-ty-35",
+        "label": "第35条",
+        "snippet": "太阳病，头痛发热，身疼腰痛，骨节疼痛，恶风，无汗而喘者，麻黄汤主之。",
+        "is_correct": false,
+        "distractor_type": "same_disease_different_formula"
+      },
+      {
+        "id": "SHL-ty-40",
+        "label": "第40条",
+        "snippet": "伤寒表不解，心下有水气，干呕发热而咳，或渴，或利，或噎，或小便不利、少腹满，或喘者，小青龙汤主之。",
+        "is_correct": false,
+        "distractor_type": "same_disease_different_formula"
+      },
+      {
+        "id": "SHL-ty-208",
+        "label": "第208条",
+        "snippet": "阳明病，脉迟，虽汗出不恶寒者，其身必重，短气腹满而喘，有潮热者，此外欲解，可攻里也。手足濈然汗出者，此大便已硬也，大承气汤主之。",
+        "is_correct": false,
+        "distractor_type": "different_disease_similar_symptoms"
+      },
+      {
+        "id": "SHL-ty-12",
+        "label": "第12条",
+        "snippet": "太阳中风，阳浮而阴弱，阳浮者热自发，阴弱者汗自出，啬啬恶寒，淅淅恶风，翕翕发热，鼻鸣干呕者，桂枝汤主之。",
+        "is_correct": false,
+        "distractor_type": "same_formula_variant"
+      }
+    ]
+  },
+  "answer_key": {
+    "correct_article_id": "SHL-ty-43",
+    "correct_formula_id": "gui-zhi-jia-houpo-xingzi-tang",
+    "correct_article_number": 43,
+    "correct_article_text": "太阳病，下之微喘者，表未解故也，桂枝加厚朴杏子汤主之。",
+    "correct_formula_name": "桂枝加厚朴杏子汤",
+    "correct_herbs": [
+      "桂枝",
+      "芍药",
+      "甘草",
+      "生姜",
+      "大枣",
+      "厚朴",
+      "杏仁"
+    ]
+  },
+  "reference_analysis": {
+    "captured_vs_source": [
+      {
+        "symptom": "下后微喘",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0",
+        "key": true
+      },
+      {
+        "symptom": "表未解",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-01_寒热",
+        "level": "l2",
+        "key": true
+      },
+      {
+        "symptom": "汗出",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0",
+        "key": true
+      },
+      {
+        "symptom": "恶风",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0"
+      },
+      {
+        "symptom": "发热",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0"
+      },
+      {
+        "symptom": "头痛",
+        "in_patient": true,
+        "in_source": false,
+        "source": "chief_complaint",
+        "level": "l0",
+        "note": "条文未提及，属太阳表证常见伴随症状"
+      },
+      {
+        "symptom": "脉浮缓",
+        "in_patient": true,
+        "in_source": true,
+        "source": "physical_exam",
+        "level": "physical"
+      }
+    ],
+    "key_differentials": [
+      {
+        "symptom": "汗出",
+        "excludes": [
+          "SHL-ty-35"
+        ],
+        "reason": "麻黄汤证无汗而喘，本证有汗出（表虚），为核心鉴别点"
+      },
+      {
+        "symptom": "微喘",
+        "includes": [
+          "SHL-ty-43"
+        ],
+        "reason": "桂枝汤证无喘，本证有微喘（加厚朴杏子），误下后始喘是第43条核心特征"
+      },
+      {
+        "symptom": "内无水饮",
+        "excludes": [
+          "SHL-ty-40"
+        ],
+        "reason": "小青龙汤证内有水饮（咳喘痰多泡沫），本证无咳痰、无干呕、无水饮内停之象"
+      },
+      {
+        "symptom": "无腹满硬痛",
+        "excludes": [
+          "SHL-ty-208"
+        ],
+        "reason": "大承气汤证阳明腑实，腹满硬痛、潮热、手足濈然汗出，本证腹软喜按、无潮热"
+      }
+    ],
+    "missed_opportunities": [
+      {
+        "direction": "05_饮食",
+        "reason": "未选择饮食方向，错失确认是否口渴、喜冷饮（排除阳明里热）",
+        "impact": "低"
+      },
+      {
+        "direction": "07_耳目",
+        "reason": "未选择耳目方向，错失确认是否有咳喘痰多（排除小青龙汤证水饮内停）",
+        "impact": "低"
+      }
+    ]
+  }
+}

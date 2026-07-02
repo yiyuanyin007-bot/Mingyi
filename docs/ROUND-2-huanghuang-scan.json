@@ -1,0 +1,328 @@
+{
+  "小柴胡汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_乳腺癌术后局部创面感染不愈案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_小儿过敏性鼻炎案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_左肺腺癌伴全身多发骨转移案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_干燥综合症案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_怕冷手指关节晨僵不适案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性支气管炎_皮肤瘙痒案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性支气管炎咳喘案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性淋巴细胞性白血病案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性粒细胞性白血病骨髓移植术后.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_支气管扩张案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_眩晕频发案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_糖尿病白塞氏病案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_老年房颤案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_迁延性咳嗽汗多案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_食管癌根治术后疲劳案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    },
+    {
+      "dir": "常用经方",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/常用经方\\黄煌教授_我常用的几张经方.md"
+    },
+    {
+      "dir": "临床经验",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/临床经验\\黄煌教授用小柴胡汤加减治疗干燥综合征经验.md"
+    }
+  ],
+  "五苓散": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_口渴浮肿多汗案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_左肺腺癌伴全身多发骨转移案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性尿路感染反复发作案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性淋巴细胞性白血病案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_更年期诸多疾病案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_溶血性贫血案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_玻璃体混浊案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_眩晕频发案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_肾病综合症案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_胆囊炎胆结石胆泥淤积_胆囊积液_脂肪肝案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_膀胱癌灌注后小便不畅案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_膝关节腔积液多汗案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_顽固性高血压脱发案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_食管癌根治术后疲劳案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    },
+    {
+      "dir": "常用经方",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/常用经方\\黄煌教授_我常用的几张经方.md"
+    },
+    {
+      "dir": "临床经验",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/临床经验\\黄煌教授用小柴胡汤加减治疗干燥综合征经验.md"
+    },
+    {
+      "dir": "临床经验",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/临床经验\\黄煌教授用黄芪桂枝五物汤合五苓散治疗自身免疫性溶血性贫血经验.md"
+    }
+  ],
+  "栀子厚朴汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_头昏_浑身乏力之胆囊结石_糜烂性胃炎案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_头晕_耳鸣案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_快慢综合征案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_扁平苔癣术后浮肿案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_甲状腺机能亢进案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_结肠息肉术后大便乏力案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_胃痛浮肿案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    },
+    {
+      "dir": "常用经方",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/常用经方\\黄煌教授_我常用的几张经方.md"
+    }
+  ],
+  "柴胡加龙骨牡蛎汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_头晕_耳鸣案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_甲状腺机能亢进案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_老年脑梗后失眠案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_顽固性失眠案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    },
+    {
+      "dir": "常用经方",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/常用经方\\黄煌教授_我常用的几张经方.md"
+    }
+  ],
+  "小青龙汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_小儿过敏性鼻炎案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性支气管炎咳喘案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    }
+  ],
+  "麻黄汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_小儿过敏性鼻炎案.md"
+    }
+  ],
+  "四逆汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_尿路感染常反复发作案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_怕冷手指关节晨僵不适案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性淋巴细胞性白血病案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_敏感性胃炎案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    }
+  ],
+  "桂枝汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_怕冷手指关节晨僵不适案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_慢性淋巴细胞性白血病案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_敏感性胃炎案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_胃痛浮肿案.md"
+    },
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_近端脊肌萎缩症（运动神经元疾病）案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    },
+    {
+      "dir": "常用经方",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/常用经方\\黄煌教授_我常用的几张经方.md"
+    }
+  ],
+  "真武汤": [
+    {
+      "dir": "医案",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/医案\\黄煌教授医案_肾病综合症案.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用.md"
+    },
+    {
+      "dir": "经方言论",
+      "path": "extracted/黄煌教授经方沙龙/cleaned/经方言论\\黄煌经方言论整理版_十分实用_v2.md"
+    }
+  ]
+}

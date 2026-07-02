@@ -1,0 +1,270 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/prescription_sop.json",
+  "title": "Prescription SOP Record Schema",
+  "description": "开方SOP记录数据Schema，记录完整的7步开方流程",
+  "type": "object",
+  "required": ["record_id", "doctor_id", "created_at", "step1_collection", "step2_liu_jing", "step3_formula_match", "step4_dosage", "step5_preparation", "step6_tracking"],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "记录唯一标识，格式：SOP-{YYYYMMDD}-{NNN}"
+    },
+    "patient_id": {
+      "type": "string",
+      "description": "患者标识（如P01、P02）"
+    },
+    "doctor_id": {
+      "type": "string",
+      "description": "医生标识",
+      "default": "chen_doctor"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "记录创建时间（ISO 8601格式）"
+    },
+    "step1_collection": {
+      "type": "object",
+      "description": "Step 1: 信息采集",
+      "required": ["chief_complaint", "symptoms"],
+      "properties": {
+        "chief_complaint": {
+          "type": "string",
+          "description": "主诉"
+        },
+        "symptoms": {
+          "type": "array",
+          "description": "症状列表",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tongue": {
+          "type": "string",
+          "description": "舌象"
+        },
+        "pulse": {
+          "type": "string",
+          "description": "脉象"
+        },
+        "structured_input": {
+          "type": "object",
+          "description": "结构化症状分类（系统自动生成）",
+          "properties": {
+            "sun_symptoms": { "type": "array", "items": { "type": "string" } },
+            "yangming_symptoms": { "type": "array", "items": { "type": "string" } },
+            "shaoyang_symptoms": { "type": "array", "items": { "type": "string" } },
+            "shaoyin_symptoms": { "type": "array", "items": { "type": "string" } },
+            "taiyin_symptoms": { "type": "array", "items": { "type": "string" } },
+            "jueyin_symptoms": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "step2_liu_jing": {
+      "type": "object",
+      "description": "Step 2: 六经定位",
+      "required": ["system_suggestion", "confidence", "doctor_agreement"],
+      "properties": {
+        "system_suggestion": {
+          "type": "string",
+          "description": "系统推荐的六经定位"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "系统推荐置信度"
+        },
+        "supporting_symptoms": {
+          "type": "array",
+          "description": "支撑症状列表",
+          "items": {
+            "type": "object",
+            "properties": {
+              "symptom": { "type": "string" },
+              "liu_jing": { "type": "string" },
+              "confidence": { "type": "number" }
+            }
+          }
+        },
+        "alternatives": {
+          "type": "array",
+          "description": "备选六经定位",
+          "items": {
+            "type": "object",
+            "properties": {
+              "liu_jing": { "type": "string" },
+              "confidence": { "type": "number" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "doctor_agreement": {
+          "type": "boolean",
+          "description": "医生是否同意系统推荐"
+        },
+        "doctor_liu_jing": {
+          "type": "string",
+          "description": "医生确认的六经（如不同意系统推荐）"
+        },
+        "doctor_note": {
+          "type": "string",
+          "description": "医生备注"
+        }
+      }
+    },
+    "step3_formula_match": {
+      "type": "object",
+      "description": "Step 3: 方证匹配",
+      "required": ["system_recommendations", "doctor_choice"],
+      "properties": {
+        "system_recommendations": {
+          "type": "array",
+          "description": "系统推荐的Top 3方剂",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "properties": {
+              "rank": { "type": "integer", "description": "排名" },
+              "formula": { "type": "string", "description": "方剂名" },
+              "formula_id": { "type": "string", "description": "方剂ID" },
+              "probability": { "type": "number", "description": "匹配概率" },
+              "supporting_articles": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "支撑条文编号"
+              },
+              "key_differentiators": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "鉴别要点"
+              }
+            }
+          }
+        },
+        "doctor_choice": {
+          "type": "string",
+          "description": "医生选择的方剂"
+        },
+        "doctor_adjustments": {
+          "type": "object",
+          "description": "医生调整（如修改方剂）",
+          "properties": {
+            "modified": { "type": "boolean" },
+            "reason": { "type": "string" },
+            "added_herbs": { "type": "array", "items": { "type": "string" } },
+            "removed_herbs": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "step4_dosage": {
+      "type": "object",
+      "description": "Step 4: 剂量确定",
+      "required": ["base_dosage", "final_prescription"],
+      "properties": {
+        "base_dosage": {
+          "type": "string",
+          "description": "基础剂量标准",
+          "enum": ["教材标准", "轻量标准", "经方标准", "原方标准"]
+        },
+        "weight": {
+          "type": "number",
+          "description": "患者体重（kg）"
+        },
+        "adjustments": {
+          "type": "array",
+          "description": "剂量调整",
+          "items": {
+            "type": "object",
+            "properties": {
+              "herb": { "type": "string", "description": "药名" },
+              "change": { "type": "string", "description": "调整量（如'+3g'）" },
+              "reason": { "type": "string", "description": "调整原因" }
+            }
+          }
+        },
+        "final_prescription": {
+          "type": "object",
+          "description": "最终处方（药物:剂量）",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "step5_preparation": {
+      "type": "object",
+      "description": "Step 5: 煎服法与禁忌",
+      "required": ["usage"],
+      "properties": {
+        "usage": {
+          "type": "string",
+          "description": "煎服法"
+        },
+        "contraindications": {
+          "type": "array",
+          "description": "禁忌事项",
+          "items": { "type": "string" }
+        },
+        "notes": {
+          "type": "string",
+          "description": "注意事项"
+        },
+        "doctor_additional_notes": {
+          "type": "string",
+          "description": "医生补充注意事项"
+        }
+      }
+    },
+    "step6_tracking": {
+      "type": "object",
+      "description": "Step 6: 记录与追踪",
+      "required": ["prescribed_at"],
+      "properties": {
+        "prescribed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "开方时间"
+        },
+        "follow_up_scheduled": {
+          "type": "string",
+          "format": "date",
+          "description": "复诊日期"
+        },
+        "follow_up_reminder": {
+          "type": "boolean",
+          "description": "是否设置复诊提醒"
+        },
+        "outcome": {
+          "type": "string",
+          "description": "疗效",
+          "enum": ["痊愈", "显著改善", "改善", "无效", "加重", "待观察"]
+        },
+        "patient_feedback": {
+          "type": "string",
+          "description": "患者反馈"
+        },
+        "doctor_outcome_notes": {
+          "type": "string",
+          "description": "医生疗效记录"
+        },
+        "iterations": {
+          "type": "array",
+          "description": "复诊迭代记录",
+          "items": {
+            "type": "object",
+            "properties": {
+              "visit": { "type": "integer", "description": "第几次复诊" },
+              "date": { "type": "string", "format": "date" },
+              "symptoms": { "type": "string" },
+              "formula": { "type": "string" },
+              "adjustments": { "type": "string" },
+              "outcome": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

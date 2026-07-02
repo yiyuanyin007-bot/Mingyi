@@ -1,0 +1,1 @@
+action:evaluate args:{code:(()=>{const v=localStorage.getItem('A01_card_notes');const obj=JSON.parse(v);const c=obj.notes['xiao-jian-zhong-tang'].content; return c.substring(0,500);})()} session:evidence-rewrite

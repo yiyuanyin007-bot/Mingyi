@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方案C：仪表盘错题 · 快捷区块</title>
+<style>
+:root {
+  --bg: #f5f6f8;
+  --panel: #fff;
+  --border: #e5e7eb;
+  --text: #1f2937;
+  --text-sec: #6b7280;
+  --accent: #059669;
+  --accent-bg: #ecfdf5;
+  --error: #dc2626;
+  --error-bg: #fef2f2;
+  --warn: #d97706;
+  --warn-bg: #fffbeb;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* 场景描述 */
+.scene-desc {
+  padding: 12px 24px; background: #fff3e0; border-bottom: 1px solid #ffe0b2;
+  font-size: 14px; color: #e65100; text-align: center;
+}
+
+/* 模拟仪表盘 */
+.dashboard { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* 顶部栏 */
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.topbar h1 { font-size: 20px; }
+.topbar-actions { display: flex; gap: 8px; }
+.topbar-actions button { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; cursor: pointer; }
+.btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* 今日概览 */
+.today-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.today-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+.today-card h3 { font-size: 12px; color: var(--text-sec); margin-bottom: 8px; text-transform: uppercase; }
+.today-card .num { font-size: 32px; font-weight: 700; }
+.today-card .num.red { color: var(--error); }
+.today-card .num.green { color: var(--accent); }
+.today-card .num.blue { color: #2563eb; }
+
+/* 错题区块 — 核心设计 */
+.wrongbook-section { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 24px; }
+.wrongbook-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.wrongbook-title { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.wrongbook-badge { background: var(--error); color: white; font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+.wrongbook-actions { display: flex; gap: 8px; }
+.wrongbook-actions button { font-size: 12px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; }
+.btn-review { background: var(--error); color: white; border-color: var(--error); }
+.btn-review:hover { background: #b91c1c; }
+
+/* 横向错题卡片流 */
+.wrongbook-flow { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+.wrongbook-flow::-webkit-scrollbar { height: 6px; }
+.wrongbook-flow::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.wrong-card {
+  min-width: 260px; max-width: 260px; border: 1px solid var(--border); border-radius: 12px; padding: 14px;
+  background: var(--panel); transition: all 0.15s; cursor: pointer;
+}
+.wrong-card:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.wrong-card-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; display: inline-block; margin-bottom: 8px; }
+.wrong-card-tag.confused { background: var(--warn-bg); color: var(--warn); }
+.wrong-card-tag.unknown { background: #eff6ff; color: #2563eb; }
+.wrong-card-tag.random { background: var(--error-bg); color: var(--error); }
+.wrong-card-title { font-size: 14px; font-weight: 600; line-height: 1.5; margin-bottom: 8px; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.wrong-card-meta { font-size: 11px; color: var(--text-sec); margin-bottom: 10px; }
+.wrong-card-stats { display: flex; gap: 12px; font-size: 11px; color: var(--text-sec); margin-bottom: 10px; }
+.wrong-card-bar { display: flex; gap: 3px; margin-bottom: 10px; }
+.wrong-card-bar-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+.wrong-card-bar-dot.done { background: var(--accent); }
+.wrong-card-btn { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); font-size: 12px; cursor: pointer; background: var(--bg); }
+.wrong-card-btn:hover { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+
+/* "更多"卡片 */
+.wrong-card-more {
+  min-width: 100px; border: 2px dashed var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--text-sec); cursor: pointer; background: var(--bg);
+}
+.wrong-card-more:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+/* 下方卡片列表 */
+.card-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card-item { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 12px; cursor: pointer; }
+.card-item:hover { border-color: var(--accent); }
+.card-item-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.card-item-desc { font-size: 12px; color: var(--text-sec); }
+</style>
+</head>
+<body>
+
+<div class="scene-desc">
+  📖 <strong>方案C：仪表盘错题 · 快捷区块</strong> — 错题不离开首页，像音乐播放器的"最近播放"一样，横向滑动查看。点击展开详情或一键复习。适合"极简主义"用户。
+</div>
+
+<div class="dashboard">
+
+  <div class="topbar">
+    <h1>《伤寒论》方剂训练</h1>
+    <div class="topbar-actions">
+      <button>📊 今日学习</button>
+      <button class="btn-primary">📝 开始复习</button>
+    </div>
+  </div>
+
+  <div class="today-row">
+    <div class="today-card">
+      <h3>今日答题</h3>
+      <div class="num">28</div>
+    </div>
+    <div class="today-card">
+      <h3>正确率</h3>
+      <div class="num green">75%</div>
+    </div>
+    <div class="today-card">
+      <h3>待复习笔记</h3>
+      <div class="num blue">5</div>
+    </div>
+    <div class="today-card">
+      <h3>错题本</h3>
+      <div class="num red">12</div>
+    </div>
+  </div>
+
+  <!-- 核心设计：错题区块 -->
+  <div class="wrongbook-section">
+    <div class="wrongbook-header">
+      <div class="wrongbook-title">
+        📚 错题本
+        <span class="wrongbook-badge">12</span>
+        <span style="font-size:12px;color:var(--text-sec);font-weight:400;">— 5 题今日待复习</span>
+      </div>
+      <div class="wrongbook-actions">
+        <button>🤔 搞混了(4)</button>
+        <button>❓ 没学过(3)</button>
+        <button>😫 乱选(2)</button>
+        <button class="btn-review">🔁 一键复习全部</button>
+      </div>
+    </div>
+
+    <div class="wrongbook-flow">
+      <div class="wrong-card">
+        <span class="wrong-card-tag confused">🤔 搞混了</span>
+        <div class="wrong-card-title">白虎汤的禁忌是什么？</div>
+        <div class="wrong-card-meta">白虎汤 · 0→contra</div>
+        <div class="wrong-card-stats">
+          <span>❌ 错 2 次</span>
+          <span>✅ 对 1 次</span>
+          <span>💡 有笔记</span>
+        </div>
+        <div class="wrong-card-bar">
+          <div class="wrong-card-bar-dot done"></div><div class="wrong-card-bar-dot done"></div><div class="wrong-card-bar-dot"></div>
+          <div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div>
+        </div>
+        <button class="wrong-card-btn">🔄 重做</button>
+      </div>
+
+      <div class="wrong-card">
+        <span class="wrong-card-tag unknown">❓ 没学过</span>
+        <div class="wrong-card-title">患者出现呕不止、心下急，最可能选哪个方？</div>
+        <div class="wrong-card-meta">大柴胡汤 · 1→0</div>
+        <div class="wrong-card-stats">
+          <span>❌ 错 1 次</span>
+          <span>✅ 对 0 次</span>
+        </div>
+        <div class="wrong-card-bar">
+          <div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div>
+          <div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div>
+        </div>
+        <button class="wrong-card-btn">🤖 去 Kimi 学</button>
+      </div>
+
+      <div class="wrong-card">
+        <span class="wrong-card-tag random">😫 乱选的</span>
+        <div class="wrong-card-title">药物组合"栀子、香豉"对应哪个方？</div>
+        <div class="wrong-card-meta">栀子豉汤 · 2→0</div>
+        <div class="wrong-card-stats">
+          <span>❌ 错 1 次</span>
+          <span>✅ 对 1 次</span>
+          <span>💡 有笔记</span>
+        </div>
+        <div class="wrong-card-bar">
+          <div class="wrong-card-bar-dot done"></div><div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div>
+          <div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div>
+        </div>
+        <button class="wrong-card-btn">✅ 标记已掌握</button>
+      </div>
+
+      <div class="wrong-card">
+        <span class="wrong-card-tag confused">🤔 搞混了</span>
+        <div class="wrong-card-title">药物组合"干姜、附子"对应哪个方？</div>
+        <div class="wrong-card-meta">干姜附子汤 · 2→0</div>
+        <div class="wrong-card-stats">
+          <span>❌ 错 2 次</span>
+          <span>✅ 对 0 次</span>
+        </div>
+        <div class="wrong-card-bar">
+          <div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div>
+          <div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div><div class="wrong-card-bar-dot"></div>
+        </div>
+        <button class="wrong-card-btn">🔄 重做</button>
+      </div>
+
+      <div class="wrong-card-more">
+        查看全部 12 题 →
+      </div>
+    </div>
+  </div>
+
+  <!-- 卡片列表（原有） -->
+  <div class="card-list">
+    <div class="card-item"><div class="card-item-name">桂枝汤</div><div class="card-item-desc">太阳中风，阳浮阴弱</div></div>
+    <div class="card-item"><div class="card-item-name">麻黄汤</div><div class="card-item-desc">太阳病，头痛发热</div></div>
+    <div class="card-item"><div class="card-item-name">葛根汤</div><div class="card-item-desc">太阳病，项背强几几</div></div>
+  </div>
+
+</div>
+
+</body>
+</html>

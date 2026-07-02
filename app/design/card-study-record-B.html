@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡片学习记录 - 版本B：详情展开版</title>
+<style>
+:root {
+  --bg: #f5f5f0;
+  --bg-panel: #fff;
+  --bg-hover: #faf9f6;
+  --border: #e8e4df;
+  --text: #2a2a28;
+  --text-secondary: #6b6863;
+  --text-muted: #9a9590;
+  --accent: #b45309;
+  --accent-bg: #fef3c7;
+  --success: #22c55e;
+  --success-bg: #dcfce7;
+  --danger: #ef4444;
+  --danger-bg: #fee2e2;
+  --warning: #f59e0b;
+  --warning-bg: #fef3c7;
+}
+body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif; background: var(--bg); padding: 40px 24px; margin: 0; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 32px; }
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.card-list-item {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.card-list-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.card-name { font-size: 16px; font-weight: 600; color: var(--text); }
+.card-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  padding: 2px 8px; border-radius: 10px; font-size: 11px;
+  background: var(--bg); color: var(--text-secondary);
+  border: 1px solid var(--border); cursor: pointer;
+}
+
+/* 版本B特有：展开按钮 + 详情面板 */
+.expand-btn {
+  font-size: 12px; color: var(--accent); cursor: pointer;
+  background: none; border: none; padding: 0; font-weight: 600;
+  display: flex; align-items: center; gap: 4px;
+}
+.expand-btn:hover { text-decoration: underline; }
+
+/* 默认状态：简洁摘要 */
+.study-summary-b {
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.summary-left { display: flex; align-items: center; gap: 8px; }
+.summary-dots { display: flex; gap: 3px; }
+.summary-dots .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #d1d5db;
+}
+.summary-dots .dot.mastered { background: var(--success); }
+.summary-dots .dot.learning { background: var(--warning); }
+.summary-text { font-size: 12px; color: var(--text-muted); }
+.summary-wrong { font-size: 12px; color: var(--danger); font-weight: 600; }
+
+/* 展开后的详情面板 */
+.study-detail-b {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: none; /* 默认隐藏 */
+  flex-direction: column;
+  gap: 12px;
+}
+.study-detail-b.expanded { display: flex; }
+
+.detail-section { display: flex; flex-direction: column; gap: 6px; }
+.detail-section-title {
+  font-size: 12px; font-weight: 600; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* 向量状态列表 */
+.vector-list { display: flex; flex-direction: column; gap: 4px; }
+.vector-item {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; padding: 4px 0;
+}
+.vector-name { color: var(--text); }
+.vector-bar {
+  display: flex; gap: 3px; align-items: center;
+}
+.vector-bar .seg {
+  width: 16px; height: 6px; border-radius: 3px; background: #e5e7eb;
+}
+.vector-bar .seg.mastered { background: var(--success); }
+.vector-bar .seg.learning { background: var(--warning); }
+.vector-status { font-size: 11px; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+.vector-status.mastered { background: var(--success-bg); color: #166534; }
+.vector-status.learning { background: var(--warning-bg); color: #92400e; }
+.vector-status.unknown { background: #f3f4f6; color: var(--text-muted); }
+
+/* 时间/统计信息 */
+.detail-stats {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  font-size: 12px; color: var(--text-secondary);
+}
+.detail-stats .stat { display: flex; align-items: center; gap: 4px; }
+.detail-stats .stat-value { font-weight: 600; color: var(--text); }
+
+/* 错题记录 */
+.wrong-list { display: flex; flex-direction: column; gap: 4px; }
+.wrong-item {
+  font-size: 12px; padding: 6px 8px; border-radius: 6px;
+  background: var(--danger-bg); color: var(--danger);
+  display: flex; align-items: center; gap: 6px;
+}
+.wrong-item .diagnosis-tag {
+  font-size: 10px; font-weight: 600; padding: 1px 5px; border-radius: 4px;
+  background: var(--danger); color: white;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>卡片学习记录 · 版本B：详情展开版</h1>
+  <div class="subtitle">信息最全。点击"展开记录"显示6向量详情、学习轨迹、错题分布。默认状态简洁。</div>
+
+  <div class="card-list">
+
+    <!-- 卡片1：已展开 -->
+    <div class="card-list-item">
+      <div>
+        <div class="card-header">
+          <div>
+            <div class="card-name">桂枝汤</div>
+            <div class="card-desc">太阳中风主方</div>
+          </div>
+          <button class="expand-btn" onclick="toggleDetail(this)">▲ 收起记录</button>
+        </div>
+        <div class="card-tags">
+          <span class="tag">太阳病</span><span class="tag">解表剂</span><span class="tag">风伤卫</span>
+        </div>
+      </div>
+      <!-- 默认摘要 -->
+      <div class="study-summary-b">
+        <div class="summary-left">
+          <div class="summary-dots">
+            <div class="dot mastered"></div><div class="dot mastered"></div><div class="dot mastered"></div>
+            <div class="dot learning"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+          <span class="summary-text">3/6 已掌握</span>
+        </div>
+      </div>
+      <!-- 展开详情 -->
+      <div class="study-detail-b expanded">
+        <div class="detail-section">
+          <div class="detail-section-title">向量掌握状态</div>
+          <div class="vector-list">
+            <div class="vector-item">
+              <span class="vector-name">症状→方名</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="vector-bar"><div class="seg mastered"></div><div class="seg mastered"></div><div class="seg mastered"></div><div class="seg mastered"></div><div class="seg"></div><div class="seg"></div></div>
+                <span class="vector-status mastered">已掌握</span>
+              </div>
+            </div>
+            <div class="vector-item">
+              <span class="vector-name">方名→症状</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="vector-bar"><div class="seg mastered"></div><div class="seg mastered"></div><div class="seg mastered"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+                <span class="vector-status mastered">已掌握</span>
+              </div>
+            </div>
+            <div class="vector-item">
+              <span class="vector-name">方名→药组</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="vector-bar"><div class="seg mastered"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+                <span class="vector-status learning">学习中</span>
+              </div>
+            </div>
+            <div class="vector-item">
+              <span class="vector-name">药组→方名</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="vector-bar"><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+                <span class="vector-status unknown">未学习</span>
+              </div>
+            </div>
+            <div class="vector-item">
+              <span class="vector-name">禁忌</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="vector-bar"><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+                <span class="vector-status unknown">未学习</span>
+              </div>
+            </div>
+            <div class="vector-item">
+              <span class="vector-name">煎服法</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="vector-bar"><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+                <span class="vector-status unknown">未学习</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-title">学习轨迹</div>
+          <div class="detail-stats">
+            <span class="stat">上次学习: <span class="stat-value">2天前</span></span>
+            <span class="stat">总计学习: <span class="stat-value">5次</span></span>
+            <span class="stat">最近考试: <span class="stat-value">3天前 (答对3/5)</span></span>
+            <span class="stat" style="color:var(--danger);">⚠️ 下次复习: <span class="stat-value">今天</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卡片2：默认折叠，有错题 -->
+    <div class="card-list-item">
+      <div>
+        <div class="card-header">
+          <div>
+            <div class="card-name">桂枝加葛根汤</div>
+            <div class="card-desc">太阳中风兼项背强痛</div>
+          </div>
+          <button class="expand-btn" onclick="toggleDetail(this)">▼ 展开记录</button>
+        </div>
+        <div class="card-tags">
+          <span class="tag">太阳病</span><span class="tag">项背强几几</span><span class="tag">汗出</span>
+        </div>
+      </div>
+      <div class="study-summary-b">
+        <div class="summary-left">
+          <div class="summary-dots">
+            <div class="dot mastered"></div><div class="dot learning"></div><div class="dot"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+          <span class="summary-text">1/6 已掌握</span>
+        </div>
+        <span class="summary-wrong">💡 2条错题</span>
+      </div>
+      <div class="study-detail-b">
+        <div class="detail-section">
+          <div class="detail-section-title">错题记录</div>
+          <div class="wrong-list">
+            <div class="wrong-item">
+              <span class="diagnosis-tag">🔀 类方混淆</span>
+              <span>桂枝汤 vs 桂枝加葛根汤 — 症状区分不清</span>
+            </div>
+            <div class="wrong-item">
+              <span class="diagnosis-tag">🕳️ 知识缺口</span>
+              <span>症状→方名 — 项背强几几的病因理解不足</span>
+            </div>
+          </div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-title">学习轨迹</div>
+          <div class="detail-stats">
+            <span class="stat">上次学习: <span class="stat-value">5天前</span></span>
+            <span class="stat">总计学习: <span class="stat-value">2次</span></span>
+            <span class="stat">下次复习: <span class="stat-value">3天后</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卡片3：未学习 -->
+    <div class="card-list-item">
+      <div>
+        <div class="card-header">
+          <div>
+            <div class="card-name">小建中汤</div>
+            <div class="card-desc">虚劳里急</div>
+          </div>
+          <button class="expand-btn" onclick="toggleDetail(this)">▼ 展开记录</button>
+        </div>
+        <div class="card-tags">
+          <span class="tag">太阴病</span><span class="tag">补益剂</span><span class="tag">腹痛</span>
+        </div>
+      </div>
+      <div class="study-summary-b">
+        <div class="summary-left">
+          <div class="summary-dots">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+          <span class="summary-text" style="color:var(--text-muted);">0/6 未学习</span>
+        </div>
+      </div>
+      <div class="study-detail-b">
+        <div class="detail-section">
+          <div class="detail-section-title">向量掌握状态</div>
+          <div class="vector-list">
+            <div class="vector-item"><span class="vector-name">症状→方名</span><span class="vector-status unknown">未学习</span></div>
+            <div class="vector-item"><span class="vector-name">方名→症状</span><span class="vector-status unknown">未学习</span></div>
+            <div class="vector-item"><span class="vector-name">方名→药组</span><span class="vector-status unknown">未学习</span></div>
+            <div class="vector-item"><span class="vector-name">药组→方名</span><span class="vector-status unknown">未学习</span></div>
+            <div class="vector-item"><span class="vector-name">禁忌</span><span class="vector-status unknown">未学习</span></div>
+            <div class="vector-item"><span class="vector-name">煎服法</span><span class="vector-status unknown">未学习</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卡片4：全部掌握 -->
+    <div class="card-list-item">
+      <div>
+        <div class="card-header">
+          <div>
+            <div class="card-name">麻黄汤</div>
+            <div class="card-desc">太阳伤寒主方</div>
+          </div>
+          <button class="expand-btn" onclick="toggleDetail(this)">▼ 展开记录</button>
+        </div>
+        <div class="card-tags">
+          <span class="tag">太阳病</span><span class="tag">解表剂</span><span class="tag">寒伤营</span>
+        </div>
+      </div>
+      <div class="study-summary-b">
+        <div class="summary-left">
+          <div class="summary-dots">
+            <div class="dot mastered"></div><div class="dot mastered"></div><div class="dot mastered"></div>
+            <div class="dot mastered"></div><div class="dot mastered"></div><div class="dot mastered"></div>
+          </div>
+          <span class="summary-text" style="color:var(--success);">6/6 已掌握</span>
+        </div>
+      </div>
+      <div class="study-detail-b">
+        <div class="detail-section">
+          <div class="detail-section-title">学习轨迹</div>
+          <div class="detail-stats">
+            <span class="stat">上次学习: <span class="stat-value">1天前</span></span>
+            <span class="stat">总计学习: <span class="stat-value">8次</span></span>
+            <span class="stat">最近考试: <span class="stat-value">2天前 (全对)</span></span>
+            <span class="stat">下次复习: <span class="stat-value">7天后</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+function toggleDetail(btn) {
+  const card = btn.closest('.card-list-item');
+  const detail = card.querySelector('.study-detail-b');
+  detail.classList.toggle('expanded');
+  btn.textContent = detail.classList.contains('expanded') ? '▲ 收起记录' : '▼ 展开记录';
+}
+</script>
+</body>
+</html>

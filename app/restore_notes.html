@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>经方学习系统 · 笔记恢复</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #f5f5f5; line-height: 1.6; }
+.card { background: white; border-radius: 12px; padding: 20px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.card h3 { margin-top: 0; color: #1a1a2e; font-size: 18px; }
+.status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.status.done { background: #d4edda; color: #155724; }
+.status.pending { background: #fff3cd; color: #856404; }
+.btn { background: #4a6fa5; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer; margin: 8px 4px; transition: background 0.2s; }
+.btn:hover { background: #3a5f95; }
+.btn:disabled { background: #ccc; cursor: not-allowed; }
+.btn.success { background: #28a745; }
+.btn.success:hover { background: #218838; }
+.log { background: #f8f9fa; border-radius: 8px; padding: 12px; margin: 12px 0; font-family: monospace; font-size: 13px; max-height: 300px; overflow-y: auto; border: 1px solid #e9ecef; white-space: pre-wrap; }
+.warn { background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+.info { background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+.note-item { margin: 8px 0; padding: 10px 14px; background: #f8f9fa; border-radius: 6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.note-item .left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #ccc; border-top-color: #4a6fa5; border-radius: 50%; animation: spin 1s linear infinite; margin-left: 6px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<h1>🔄 经方学习系统 · 笔记恢复</h1>
+<div class="warn">
+<strong>⚠️ 数据丢失检测</strong><br>
+系统检测到浏览器 localStorage 为空（重装系统导致）。以下 4 张卡片的循证审计修正版笔记已备份，可一键恢复。
+</div>
+<div class="card">
+<h3>📋 待恢复笔记</h3>
+<div id="cards-area"><div class="note-item"><span class="spinner"></span> 正在加载备份数据...</div></div>
+</div>
+<div class="card">
+<h3>🛠️ 恢复操作</h3>
+<button class="btn" id="btn-restore" onclick="restoreAll()" disabled>一键恢复全部笔记</button>
+<button class="btn success" onclick="goToApp()">进入主系统</button>
+<div class="log" id="log">等待数据加载...</div>
+</div>
+<div class="info" id="info-area" style="display:none">
+💡 <strong>提示</strong>：恢复完成后，请点击「进入主系统」回到主页面。学习进度需重新练习累积，但已恢复的笔记可直接查看。
+</div>
+<script>
+let DATA = null;
+function log(msg) {
+  const el = document.getElementById('log');
+  const time = new Date().toLocaleTimeString('zh-CN', {hour12:false});
+  el.textContent += time + ' ' + msg + '\n';
+  el.scrollTop = el.scrollHeight;
+}
+function renderCards() {
+  const area = document.getElementById('cards-area');
+  if (!DATA) { area.innerHTML = '<div class="note-item">❌ 数据加载失败</div>'; return; }
+  let html = '';
+  for (const [id, info] of Object.entries(DATA.meta)) {
+    const cls = info.status === '已完成' ? 'done' : 'pending';
+    html += '<div class="note-item"><div class="left"><span>✅ <strong>' + info.name + '</strong></span><span class="status ' + cls + '">' + info.status + '</span><span style="color:#666;font-size:12px;">审计ID: ' + info.auditId + '</span><span style="color:#666;font-size:12px;">' + info.length + ' 字</span></div></div>';
+  }
+  area.innerHTML = html;
+  document.getElementById('btn-restore').disabled = false;
+}
+async function loadData() {
+  log('正在加载备份数据...');
+  try {
+    const res = await fetch('../data/notes_backup/restore_notes_data.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    DATA = await res.json();
+    log('✅ 数据加载成功：' + Object.keys(DATA.notes).length + ' 张卡片');
+    renderCards();
+  } catch (e) {
+    log('❌ 数据加载失败：' + e.message);
+    document.getElementById('cards-area').innerHTML = '<div class="note-item">❌ 加载失败：' + e.message + '</div>';
+  }
+}
+function restoreAll() {
+  if (!DATA) { log('❌ 数据未加载'); return; }
+  const btn = document.getElementById('btn-restore');
+  btn.disabled = true;
+  btn.textContent = '恢复中...';
+  log('开始恢复笔记...');
+  
+  // 读取现有的卡片笔记（新格式：A01_card_notes）
+  let cardNotes = {};
+  try {
+    const raw = localStorage.getItem('A01_card_notes');
+    if (raw) cardNotes = JSON.parse(raw).notes || {};
+  } catch(e) {}
+  
+  // 兼容：也检查旧位置 A01_study_notes（数组格式）
+  let studyNotesArray = [];
+  try {
+    const raw = localStorage.getItem('A01_study_notes');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed.notes)) studyNotesArray = parsed.notes;
+    }
+  } catch(e) {}
+  
+  let restored = 0;
+  for (const [cardId, content] of Object.entries(DATA.notes)) {
+    const meta = DATA.meta[cardId];
+    // 写入 A01_card_notes（对象格式）
+    cardNotes[cardId] = {
+      cardId: cardId,
+      cardName: meta?.name || cardId,
+      content: content,
+      updatedAt: new Date().toISOString()
+    };
+    
+    // 同时更新 A01_study_notes（兼容错题本系统）
+    const idx = studyNotesArray.findIndex(n => n.cardId === cardId);
+    const studyNote = { cardId: cardId, content: content, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+    if (idx >= 0) { studyNotesArray[idx] = studyNote; log('📝 更新：' + meta?.name); }
+    else { studyNotesArray.push(studyNote); log('✅ 新增：' + meta?.name + ' (' + content.length + '字)'); }
+    restored++;
+  }
+  
+  // 保存到正确的键 A01_card_notes（卡片笔记，学习页可见）
+  localStorage.setItem('A01_card_notes', JSON.stringify({notes: cardNotes}));
+  // 同时保存到 A01_study_notes（错题本兼容）
+  localStorage.setItem('A01_study_notes', JSON.stringify({notes: studyNotesArray}));
+  
+  log('\n🎉 恢复完成！共 ' + restored + ' 张卡片');
+  log('A01_card_notes（卡片笔记）和 A01_study_notes（错题本）均已写入。');
+  log('请进入主系统查看学习页底部的「我的笔记」。');
+  btn.textContent = '✅ 已恢复';
+  document.getElementById('info-area').style.display = 'block';
+}
+function goToApp() {
+  window.location.href = 'http://localhost:8100/app/index.html';
+}
+loadData();
+</script>
+</body>
+</html>

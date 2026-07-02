@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方案A：错题本 · 列表式</title>
+<style>
+:root {
+  --bg: #f5f6f8;
+  --panel: #fff;
+  --border: #e5e7eb;
+  --text: #1f2937;
+  --text-sec: #6b7280;
+  --accent: #059669;
+  --accent-bg: #ecfdf5;
+  --error: #dc2626;
+  --error-bg: #fef2f2;
+  --warn: #d97706;
+  --warn-bg: #fffbeb;
+  --info: #2563eb;
+  --info-bg: #eff6ff;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* 顶部 */
+.topbar {
+  background: var(--panel); border-bottom: 1px solid var(--border); padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10;
+}
+.topbar-title { font-size: 18px; font-weight: 600; }
+.back-btn { color: var(--text-sec); font-size: 14px; cursor: pointer; }
+
+/* 统计卡片 */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 16px 24px;
+}
+.stat-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+  box-shadow: var(--shadow);
+}
+.stat-number { font-size: 28px; font-weight: 700; color: var(--error); }
+.stat-number.green { color: var(--accent); }
+.stat-number.blue { color: var(--info); }
+.stat-label { font-size: 12px; color: var(--text-sec); margin-top: 4px; }
+
+/* 过滤器 */
+.filter-bar {
+  display: flex; gap: 8px; padding: 0 24px 16px; flex-wrap: wrap; align-items: center;
+}
+.filter-btn {
+  padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border);
+  background: var(--panel); font-size: 13px; cursor: pointer; transition: all 0.15s;
+}
+.filter-btn:hover, .filter-btn.active { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); font-weight: 600; }
+
+/* 错题列表 */
+.wrong-list { padding: 0 24px 24px; }
+.wrong-item {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+  margin-bottom: 12px; box-shadow: var(--shadow); transition: all 0.15s;
+}
+.wrong-item:hover { border-color: var(--accent); }
+.wrong-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.wrong-title { font-size: 15px; font-weight: 600; line-height: 1.5; flex: 1; }
+.wrong-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 600; margin-left: 8px; white-space: nowrap;
+}
+.tag-confused { background: var(--warn-bg); color: var(--warn); }
+.tag-unknown { background: var(--info-bg); color: var(--info); }
+.tag-random { background: var(--error-bg); color: var(--error); }
+.wrong-meta { font-size: 12px; color: var(--text-sec); margin-bottom: 10px; }
+.wrong-meta span { margin-right: 12px; }
+.wrong-body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;
+  padding: 12px; background: var(--bg); border-radius: 8px;
+}
+.wrong-choice { font-size: 13px; }
+.wrong-choice.wrong { color: var(--error); }
+.wrong-choice.right { color: var(--accent); }
+.wrong-actions { display: flex; gap: 8px; }
+.wrong-actions button {
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+  font-size: 13px; cursor: pointer; transition: all 0.15s;
+}
+.btn-retry { background: var(--accent); color: white; border-color: var(--accent); }
+.btn-retry:hover { background: #047857; }
+.btn-study { background: var(--panel); color: var(--text); }
+.btn-study:hover { background: var(--bg); }
+.btn-master { background: var(--panel); color: var(--text-sec); }
+.btn-master:hover { color: var(--accent); border-color: var(--accent); }
+
+/* 复习进度 */
+.review-progress { display: flex; gap: 4px; margin-top: 10px; }
+.review-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+.review-dot.done { background: var(--accent); }
+.review-label { font-size: 11px; color: var(--text-sec); margin-left: 8px; }
+
+/* 场景描述 */
+.scene-desc {
+  padding: 16px 24px; background: #fff3e0; border-bottom: 1px solid #ffe0b2; font-size: 14px; color: #e65100;
+}
+</style>
+</head>
+<body>
+
+<div class="scene-desc">
+  📖 <strong>方案A：错题本 · 列表式</strong> — 像一本笔记本，所有错题按时间排列，可过滤、可管理、可逐题攻破。适合喜欢"整理感"的用户。
+</div>
+
+<div class="topbar">
+  <div class="back-btn">← 返回仪表盘</div>
+  <div class="topbar-title">📚 我的错题本</div>
+  <div style="font-size:12px;color:var(--text-sec);">共 12 题</div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-number">12</div>
+    <div class="stat-label">累计错题</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number green">3</div>
+    <div class="stat-label">已掌握</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number blue">5</div>
+    <div class="stat-label">今日待复习</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--warn);">4</div>
+    <div class="stat-label">搞混了</div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active">全部</button>
+  <button class="filter-btn">🤔 搞混了</button>
+  <button class="filter-btn">😵 记错了</button>
+  <button class="filter-btn">❓ 没学过</button>
+  <button class="filter-btn">😫 乱选的</button>
+  <button class="filter-btn">📅 今日复习</button>
+  <button class="filter-btn">🔁 反复错</button>
+</div>
+
+<div class="wrong-list">
+
+  <div class="wrong-item">
+    <div class="wrong-header">
+      <div class="wrong-title">白虎汤的禁忌是什么？</div>
+      <span class="wrong-tag tag-confused">🤔 搞混了</span>
+    </div>
+    <div class="wrong-meta">
+      <span>📅 2026-06-18</span>
+      <span>📊 已练 2 次</span>
+      <span>🔄 上次仍错</span>
+      <span>💡 笔记已记</span>
+    </div>
+    <div class="wrong-body">
+      <div class="wrong-choice wrong">❌ 你的答案：脉微弱无阳者慎用</div>
+      <div class="wrong-choice right">✅ 正确答案：表证未解</div>
+    </div>
+    <div class="wrong-actions">
+      <button class="btn-retry">🔁 重做这题</button>
+      <button class="btn-study">🤖 去 Kimi 学习</button>
+      <button class="btn-master">✅ 已掌握</button>
+    </div>
+    <div class="review-progress">
+      <div class="review-dot done"></div><div class="review-dot done"></div><div class="review-dot"></div>
+      <div class="review-dot"></div><div class="review-dot"></div><div class="review-dot"></div>
+      <span class="review-label">艾宾浩斯复习：2/6 次</span>
+    </div>
+  </div>
+
+  <div class="wrong-item">
+    <div class="wrong-header">
+      <div class="wrong-title">患者出现 呕不止、心下急，最可能选哪个方？</div>
+      <span class="wrong-tag tag-unknown">❓ 没学过</span>
+    </div>
+    <div class="wrong-meta">
+      <span>📅 2026-06-18</span>
+      <span>📊 已练 0 次</span>
+      <span>📝 无笔记</span>
+    </div>
+    <div class="wrong-body">
+      <div class="wrong-choice wrong">❌ 你的答案：桂枝去芍药汤</div>
+      <div class="wrong-choice right">✅ 正确答案：大柴胡汤</div>
+    </div>
+    <div class="wrong-actions">
+      <button class="btn-retry">🔁 重做这题</button>
+      <button class="btn-study">🤖 去 Kimi 学习</button>
+      <button class="btn-master">✅ 已掌握</button>
+    </div>
+    <div class="review-progress">
+      <div class="review-dot"></div><div class="review-dot"></div><div class="review-dot"></div>
+      <div class="review-dot"></div><div class="review-dot"></div><div class="review-dot"></div>
+      <span class="review-label">艾宾浩斯复习：0/6 次</span>
+    </div>
+  </div>
+
+  <div class="wrong-item">
+    <div class="wrong-header">
+      <div class="wrong-title">药物组合"栀子、香豉"对应哪个方？</div>
+      <span class="wrong-tag tag-random">😫 乱选的</span>
+    </div>
+    <div class="wrong-meta">
+      <span>📅 2026-06-17</span>
+      <span>📊 已练 1 次</span>
+      <span>✅ 上次对了</span>
+      <span>💡 笔记已记</span>
+    </div>
+    <div class="wrong-body">
+      <div class="wrong-choice wrong">❌ 你的答案：栀子厚朴汤</div>
+      <div class="wrong-choice right">✅ 正确答案：栀子豉汤</div>
+    </div>
+    <div class="wrong-actions">
+      <button class="btn-retry">🔁 重做这题</button>
+      <button class="btn-study">🤖 去 Kimi 学习</button>
+      <button class="btn-master">✅ 已掌握</button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方案A：卡片内展开 - 条文讲解原型</title>
+<style>
+  :root {
+    --bg-body: #fafafa; --bg-panel: #ffffff; --text-primary: #1a1a2e;
+    --text-secondary: #4a4a5a; --text-muted: #8a8a9a; --accent: #5a8a6a;
+    --accent-bg: #eaf4ec; --accent-dark: #4a7a5a; --border: #e5e5e5;
+    --error: #c45c5c; --radius: 12px; --radius-sm: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06); --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+    --font-base: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  [data-theme="dark"] {
+    --bg-body: #1a1a2e; --bg-panel: #242438; --text-primary: #f0f0f0;
+    --text-secondary: #c0c0d0; --text-muted: #808090; --accent: #6a9a7a;
+    --accent-bg: #2a3a2e; --accent-dark: #7aab8a; --border: #3a3a4a;
+    --error: #d07070; --shadow: 0 2px 12px rgba(0,0,0,0.2); --shadow-lg: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-base); background: var(--bg-body); color: var(--text-primary); line-height: 1.7; padding: 20px; transition: var(--transition); }
+  .page-container { max-width: 900px; margin: 0 auto; }
+  .theme-toggle { position: fixed; top: 20px; right: 20px; background: var(--bg-panel); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; cursor: pointer; color: var(--text-secondary); font-size: 14px; box-shadow: var(--shadow); z-index: 1000; transition: var(--transition); }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .learn-header { background: var(--bg-panel); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 24px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: var(--transition); }
+  .learn-header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .learn-sub { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+  .learn-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .tag { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; background: var(--accent-bg); color: var(--accent); border: 1px solid var(--border); }
+  .section-title { font-size: 15px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin: 32px 0 16px; display: flex; align-items: center; gap: 8px; }
+  .md-content { font-size: 15px; line-height: 1.85; color: var(--text-primary); }
+  .md-content p { margin-bottom: 14px; }
+  .md-content p:last-child { margin-bottom: 0; }
+  .md-content strong { color: var(--text-primary); font-weight: 700; }
+  .md-tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 4px; background: var(--accent-bg); color: var(--accent-dark); margin-right: 4px; vertical-align: middle; border: 1px solid var(--accent); letter-spacing: 0.5px; }
+  .md-tag-teacher1 { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 4px; background: #e8f0fe; color: #4a7ab8; margin-right: 4px; vertical-align: middle; border: 1px solid #4a7ab8; letter-spacing: 0.5px; }
+  [data-theme="dark"] .md-tag-teacher1 { background: #1a2a4a; color: #6a9ad8; border-color: #4a7ab8; }
+  .md-tag-teacher2 { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 4px; background: #fff3e0; color: #c87a2a; margin-right: 4px; vertical-align: middle; border: 1px solid #c87a2a; letter-spacing: 0.5px; }
+  [data-theme="dark"] .md-tag-teacher2 { background: #3a2a1a; color: #d89040; border-color: #c87a2a; }
+  .md-quote { background: var(--accent-bg); border-left: 4px solid var(--accent); padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 12px 0; font-size: 14px; color: var(--text-secondary); line-height: 1.8; font-style: italic; }
+  [data-theme="dark"] .md-quote { background: rgba(106,154,122,0.1); }
+  .anno-card { background: var(--bg-panel); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; transition: var(--transition); }
+  .anno-header { padding: 20px 24px 0; }
+  .anno-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .anno-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+  .anno-summary { padding: 0 24px 16px; font-size: 14.5px; line-height: 1.8; color: var(--text-secondary); position: relative; }
+  .anno-summary::after { content: ''; position: absolute; bottom: 0; left: 24px; right: 24px; height: 40px; background: linear-gradient(transparent, var(--bg-panel)); pointer-events: none; }
+  .proto-footer { margin-top: 40px; padding: 20px; text-align: center; font-size: 13px; color: var(--text-muted); background: var(--bg-panel); border-radius: var(--radius); border: 1px solid var(--border); }
+  .proto-footer strong { color: var(--accent); }
+  @media (max-width: 640px) { body { padding: 12px; } .learn-header { padding: 18px 20px; } .learn-header h1 { font-size: 22px; } .anno-header { padding: 16px 20px 0; } .anno-summary { padding: 0 20px 14px; } }
+</style>
+<style>
+  .anno-full { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-width 0.3s; border-top: 0px solid var(--border); }
+  .anno-full.expanded { max-height: 2000px; border-top-width: 1px; }
+  .anno-full-inner { padding: 20px 24px 24px; background: linear-gradient(to bottom, rgba(90,138,106,0.03), transparent 60px); }
+  [data-theme="dark"] .anno-full-inner { background: linear-gradient(to bottom, rgba(106,154,122,0.05), transparent 60px); }
+  .anno-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--accent); background: transparent; border: 1px solid var(--border); padding: 6px 16px; border-radius: 20px; cursor: pointer; margin: 0 24px 16px; transition: var(--transition); }
+  .anno-btn:hover { background: var(--accent-bg); border-color: var(--accent); }
+  .anno-btn.active { background: var(--accent-bg); color: var(--accent-dark); border-color: var(--accent); }
+  .anno-btn svg { transition: transform 0.3s; }
+  .anno-btn.active svg { transform: rotate(180deg); }
+  .anno-card.expanded-card { border-color: var(--accent); box-shadow: 0 4px 20px rgba(90,138,106,0.1); }
+  [data-theme="dark"] .anno-card.expanded-card { box-shadow: 0 4px 20px rgba(106,154,122,0.15); }
+  .anno-card.expanded-card .anno-summary { display: none; }
+  .anno-card.expanded-card .anno-summary::after { display: none; }
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()">🌓 切换主题</button>
+<div class="page-container">
+  <div class="learn-header">
+    <h1>桂枝汤</h1>
+    <div class="learn-sub">太阳病篇 · 调和营卫第一方</div>
+    <div class="learn-tags">
+      <span class="tag">太阳中风</span><span class="tag">汗出恶风</span><span class="tag">脉浮缓</span>
+    </div>
+  </div>
+  <div class="section-title">📜 条文讲解</div>
+<div class="anno-card" id="card1">
+  <div class="anno-header">
+    <div class="anno-title">伤寒论第12条</div>
+    <div class="anno-meta">小红书针道轩 / 刘渡舟 / 胡希恕</div>
+  </div>
+  <div class="anno-summary" id="summary1">【条文】太阳中风，阳浮而阴弱，阳浮者，热自发；阴弱者，汗自出。啬啬恶寒，淅淅恶风，翕翕发热，鼻鸣干呕者，桂枝汤主之。【刘渡舟】本条论述太阳中风表虚证的病机与证治。阳浮是指卫阳浮盛于外，故发热；阴弱是指营阴不足于内，故汗出。阳浮阴弱，即卫强营弱，营卫不和。啬啬恶寒是恶寒畏缩之状；淅淅恶风是遇风则冷...</div>
+  <div class="anno-full" id="full1"><div class="anno-full-inner" id="inner1"></div></div>
+  <button class="anno-btn" id="btn1" onclick="toggleCard(1)">
+    <span>展开全文</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+</div>
+<div class="anno-card" id="card2">
+  <div class="anno-header">
+    <div class="anno-title">伤寒论第253条</div>
+    <div class="anno-meta">小红书针道轩 / 刘渡舟 / 胡希恕</div>
+  </div>
+  <div class="anno-summary" id="summary2">【条文】阳明病，发热汗多者，急下之，宜大承气汤。【刘渡舟】本条论述阳明燥热外逼，热汗不已，治当急下存阴之证。阳明病，指胃家实之里热证。发热汗出，是阳明里热蒸腾于外，逼迫津液外泄。汗为人体五液之一，由津液所化生。汗出多，则津液被耗而阴伤；阴伤，则体内燥热愈盛；燥热愈盛，则汗出亦愈多...</div>
+  <div class="anno-full" id="full2"><div class="anno-full-inner" id="inner2"></div></div>
+  <button class="anno-btn" id="btn2" onclick="toggleCard(2)">
+    <span>展开全文</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+</div>
+<div class="anno-card" id="card3">
+  <div class="anno-header">
+    <div class="anno-title">伤寒论第76条（上）</div>
+    <div class="anno-meta">小红书针道轩 / 刘渡舟 / 胡希恕</div>
+  </div>
+  <div class="anno-summary" id="summary3">【条文】发汗后，水药不得入口为逆，若更发汗，必吐下不止。发汗吐下后，虚烦不得眠，若剧者，必反复颠倒，心中懊憹，栀子豉汤主之。【刘渡舟】本条论述汗吐下后热郁胸膈的证治及两个加减方。发汗吐下后，邪热内陷胸膈，扰动心神，故虚烦不得眠。虚烦之"虚"，非指正气虚，而是指无形邪热...</div>
+  <div class="anno-full" id="full3"><div class="anno-full-inner" id="inner3"></div></div>
+  <button class="anno-btn" id="btn3" onclick="toggleCard(3)">
+    <span>展开全文</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+</div>
+  <div class="proto-footer">
+    <strong>方案A：卡片内展开（Accordion）</strong><br>
+    点击展开后，卡片平滑增高，全文替换摘要原地显示。<br>
+    适合：条文对比阅读，不跳出上下文，可同时展开多个卡片对照。
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+}
+function renderMD(text) {
+  if (!text) return '';
+  var processed = text
+    .replace(/【条文】/g, '<span class="md-tag">【条文】</span>')
+    .replace(/【刘渡舟】/g, '<span class="md-tag-teacher1">【刘渡舟】</span>')
+    .replace(/【胡希恕】/g, '<span class="md-tag-teacher2">【胡希恕】</span>')
+    .replace(/个人总结/g, '<span class="md-tag" style="background:#f5f0e8;color:#8a6a3a;border-color:#c4a86b;">个人总结</span>');
+  var html = marked.parse(processed, { breaks: true });
+  html = html.replace(/<blockquote>/g, '<div class="md-quote">');
+  html = html.replace(/<\/blockquote>/g, '</div>');
+  return html;
+}
+</script>
+<script>
+var FULL_TEXTS = {"1": "【条文】太阳中风，阳浮而阴弱，阳浮者，热自发；阴弱者，汗自出。啬啬恶寒，淅淅恶风，翕翕发热，鼻鸣干呕者，桂枝汤主之。\n\n【刘渡舟】本条论述太阳中风表虚证的病机与证治。阳浮是指卫阳浮盛于外，与邪热相争，故发热；阴弱者，营阴不足于内，不能内守，故汗出。阳浮而阴弱，即卫强营弱，营卫不和。啬啬恶寒，是恶寒畏缩之状；淅淅恶风，是遇风则冷，无风则缓；翕翕发热，是热势轻浅如羽毛覆盖。鼻鸣，是肺气不利，风寒客于肺窍；干呕，是胃气上逆，风邪干于胃腑。本条为桂枝汤证之典型，凡见发热、汗出、恶风、脉浮缓者，皆可使用桂枝汤调和营卫。\n\n【胡希恕】太阳中风，阳浮于外，阴弱于内，阳浮故发热，阴弱故汗出。此为营卫不调之证。啬啬恶寒、淅淅恶风，即风邪在表之证。翕翕发热，热势不剧。鼻鸣者，肺窍不利；干呕者，胃气上逆。此皆太阳中风之证，桂枝汤主之。桂枝汤本为调和营卫而设，桂枝辛温通阳，芍药酸寒敛阴，两药合用，一散一收，调和营卫，使汗出邪去而正不伤。生姜、大枣、甘草，和胃生津，滋助汗源。此方不治风，而治风邪所伤之营卫不和，此为仲景心法。", "2": "【条文】阳明病，发热汗多者，急下之，宜大承气汤。\n\n【刘渡舟】本条论述阳明燥热外逼，热汗不已，治当急下存阴之证。阳明病，指胃家实之里热证。发热汗出，是阳明里热蒸腾于外，逼迫津液外泄。汗为人体五液之一，由津液所化生。汗出多，则津液被耗而阴伤；阴伤，则体内燥热愈盛；燥热愈盛，则汗出亦愈多，从而形成恶性循环。不仅伤阳明胃液，且有内竭少阴真阴之虑。张仲景提醒医者，要\"见微知著\"，遇有热汗不已者，亦当用大承气汤釜底抽薪，急下以存阴液。程郊倩说：\"发热而复汗多，阳气大蒸于外，虑阴液暴亡于中，虽无内实之兼证，宜急下之。\"\n\n【胡希恕】阳明病，发热汗多，蒸蒸发热，汗出连绵不断，此为里热炽盛，逼迫津液外出。若迟疑不决，则津液枯竭，转成阴伤燥热之危证。故仲景曰\"急下之\"，宜大承气汤。急下者，急用大承气汤泻下燥屎，撤其里热，热除则汗自止，津液得以保存。此与白虎汤证之发热汗出不同：白虎汤证是阳明经热，里未成实，只见大热、大汗、大渴、脉洪大；本条是阳明腑实，燥屎内结，虽有发热汗多，但必有腹满痛、拒按、潮热、谵语等可下之证。不可但见发热汗多即用大承气，须脉证合参，确有里实方可用之。", "3": "【条文】发汗后，水药不得入口为逆，若更发汗，必吐下不止。发汗吐下后，虚烦不得眠，若剧者，必反复颠倒，心中懊憹，栀子豉汤主之；若少气者，栀子甘草豉汤主之；若呕者，栀子生姜豉汤主之。\n\n【刘渡舟】本条论述汗吐下后热郁胸膈的证治及两个加减方。发汗吐下后，邪热内陷胸膈，扰动心神，故虚烦不得眠。虚烦之\"虚\"，非指正气虚，而是指无形邪热（与痰食实邪之实烦相对）。心中懊憹是热郁胸膈的典型症状，自觉心中烦闷难耐，如饥似热，不可名状。若热邪伤气，兼见少气（气短懒言），则加甘草益气，为栀子甘草豉汤；若热扰胃气，兼见呕吐，则加生姜和胃降逆，为栀子生姜豉汤。方中栀子苦寒，清泄三焦火郁，导心火下行；豆豉辛甘微苦，宣发郁热，透邪外出。二药配伍，一清一宣，使郁热得清、得散。\n\n【胡希恕】栀子豉汤是治热郁胸膈的有效方剂。栀子苦寒祛热，走而不守；豆豉宣发郁热。发汗吐下后，津液受损，邪热内陷胸膈，扰心则烦，热郁则懊憹。虚烦者，对实烦而言，非虚证之烦，乃无形邪热所致。栀子豉汤方中无重剂，栀子、豆豉皆轻清之品，专治胸膈郁热。若少气是热伤气，加甘草；若呕是胃气上逆，加生姜。此与承气汤之实烦、白虎汤之气分大热，皆有不同。"};
+var activeId = null;
+function toggleCard(id) {
+  var card = document.getElementById('card'+id);
+  var full = document.getElementById('full'+id);
+  var inner = document.getElementById('inner'+id);
+  var btn = document.getElementById('btn'+id);
+  var span = btn.querySelector('span');
+  var svg = btn.querySelector('svg');
+  if (activeId === id) {
+    full.classList.remove('expanded');
+    card.classList.remove('expanded-card');
+    btn.classList.remove('active');
+    span.textContent = '展开全文';
+    svg.style.transform = 'rotate(0deg)';
+    activeId = null;
+  } else {
+    if (activeId) {
+      var prevFull = document.getElementById('full'+activeId);
+      var prevCard = document.getElementById('card'+activeId);
+      var prevBtn = document.getElementById('btn'+activeId);
+      if (prevFull) prevFull.classList.remove('expanded');
+      if (prevCard) prevCard.classList.remove('expanded-card');
+      if (prevBtn) { prevBtn.classList.remove('active'); prevBtn.querySelector('span').textContent = '展开全文'; prevBtn.querySelector('svg').style.transform = 'rotate(0deg)'; }
+    }
+    if (!inner.dataset.rendered) { inner.innerHTML = renderMD(FULL_TEXTS[id]); inner.dataset.rendered = 'true'; }
+    full.classList.add('expanded');
+    card.classList.add('expanded-card');
+    btn.classList.add('active');
+    span.textContent = '收起';
+    svg.style.transform = 'rotate(180deg)';
+    activeId = id;
+  }
+}
+</script>
+</body>
+</html>

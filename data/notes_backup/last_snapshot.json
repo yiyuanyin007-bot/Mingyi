@@ -1,0 +1,8 @@
+{
+  "snapshot_date": "2026-06-22T06:47:00+08:00",
+  "source": "webbridge_read_post_reinstall",
+  "localstorage_keys": ["A01_study_notes", "A01_migration_done", "A01_traces", "A01_mastery"],
+  "note_count": 0,
+  "mastery_count": 0,
+  "note": "User reinstalled OS. All browser data lost. 0 notes, 0 mastery records. Previous audited notes backed up in data/notes_backup/. Server started on :8100 for this session."
+}

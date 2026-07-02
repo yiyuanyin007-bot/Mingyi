@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SP 标准化病人 · 三方案预览</title>
+<style>
+:root {
+  --bg-body: #fafafa; --bg-panel: #ffffff; --bg-card: #f5f5f5; --bg-hover: #eeeeee;
+  --border: #e0e0e0; --text-primary: #212121; --text-secondary: #616161; --text-muted: #9e9e9e;
+  --accent: #455a64; --accent-bg: #eceff1; --success: #2e7d32; --error: #c62828;
+  --shadow: 0 1px 2px rgba(0,0,0,0.06); --radius: 10px;
+}
+[data-theme="dark"] {
+  --bg-body: #121212; --bg-panel: #1e1e1e; --bg-card: #252525; --bg-hover: #2d2d2d;
+  --border: #333333; --text-primary: #e0e0e0; --text-secondary: #b0b0b0; --text-muted: #757575;
+  --accent: #90a4ae; --accent-bg: #263238; --success: #4caf50; --error: #ef5350;
+  --shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg-body); color: var(--text-primary); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+/* 顶部 */
+.topbar { height: 52px; background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
+.topbar-title { font-size: 16px; font-weight: 600; }
+.scheme-tabs { display: flex; gap: 8px; }
+.scheme-tab { padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); cursor: pointer; font-size: 13px; }
+.scheme-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.theme-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-panel); cursor: pointer; margin-left: 10px; }
+
+/* 主体 */
+.main { flex: 1; overflow: hidden; position: relative; }
+.scheme-view { display: none; height: 100%; overflow-y: auto; padding: 20px; }
+.scheme-view.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 共用组件 */
+.btn-primary { padding: 10px 20px; border-radius: 8px; border: none; background: var(--accent); color: #fff; font-size: 14px; cursor: pointer; }
+.btn-secondary { padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); font-size: 14px; cursor: pointer; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+.tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); display: inline-block; }
+
+/* 选项按钮 */
+.option-card {
+  background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px; cursor: pointer; font-size: 15px; transition: all 0.15s; text-align: left;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.option-card:hover { border-color: var(--accent); background: var(--accent-bg); }
+.option-card.selected { border-color: var(--accent); background: var(--accent-bg); }
+.option-card.correct { border-color: var(--success); background: rgba(46,125,50,0.08); color: var(--success); }
+.option-card.wrong { border-color: var(--error); background: rgba(198,40,40,0.08); color: var(--error); }
+.option-label { font-size: 13px; color: var(--text-secondary); font-weight: 600; }
+.option-text { font-size: 14px; line-height: 1.6; }
+
+/* 反馈 */
+.feedback { margin-top: 14px; padding: 14px; border-radius: 8px; font-size: 13px; line-height: 1.7; background: var(--bg-card); border: 1px solid var(--border); display: none; }
+.feedback.show { display: block; }
+
+/* ==================== 方案A：聊天流 ==================== */
+#aContainer { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; height: 100%; }
+.a-patient-bar { display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+.a-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.a-patient-info { flex: 1; }
+.a-patient-name { font-size: 16px; font-weight: 600; }
+.a-patient-meta { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.a-chat { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-bottom: 12px; }
+.a-bubble-patient { align-self: flex-start; max-width: 85%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px 12px 12px 4px; padding: 12px 14px; font-size: 15px; line-height: 1.7; }
+.a-bubble-doctor { align-self: flex-end; max-width: 85%; background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 12px 12px 4px 12px; padding: 10px 14px; font-size: 14px; color: var(--text-primary); }
+.a-bubble-system { align-self: center; font-size: 12px; color: var(--text-muted); padding: 4px 12px; background: var(--bg-body); border-radius: 12px; }
+.a-bubble-noise { align-self: flex-start; max-width: 85%; background: rgba(255,193,7,0.08); border: 1px dashed var(--text-muted); border-radius: 12px 12px 12px 4px; padding: 10px 14px; font-size: 13px; color: var(--text-secondary); font-style: italic; }
+.a-controls { border-top: 1px solid var(--border); padding-top: 12px; flex-shrink: 0; }
+.a-direction-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 12px; }
+.a-dir-btn { padding: 10px 4px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); font-size: 13px; cursor: pointer; transition: all 0.15s; text-align: center; }
+.a-dir-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.a-dir-btn:disabled { opacity: 0.4; cursor: not-allowed; background: var(--bg-hover); }
+.a-dir-btn.used { background: var(--success); color: #fff; border-color: var(--success); }
+.a-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.a-exam-area { margin-top: 16px; }
+.a-exam-options { display: flex; flex-direction: column; gap: 10px; }
+.a-exam-option { padding: 16px; }
+
+/* ==================== 方案B：左右分栏 ==================== */
+#bContainer { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; height: 100%; }
+.b-left { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+.b-right { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+.b-patient-card { display: flex; align-items: center; gap: 12px; }
+.b-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.b-chat-history { display: flex; flex-direction: column; gap: 10px; }
+.b-chat-item { display: flex; gap: 10px; }
+.b-chat-item.doctor { flex-direction: row-reverse; }
+.b-chat-item .b-bubble { padding: 10px 12px; border-radius: 10px; font-size: 14px; line-height: 1.6; max-width: 90%; }
+.b-chat-item.patient .b-bubble { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px 10px 10px 2px; }
+.b-chat-item.doctor .b-bubble { background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 10px 10px 2px 10px; }
+.b-directions { display: flex; flex-direction: column; gap: 8px; }
+.b-dir-btn { padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-panel); cursor: pointer; font-size: 14px; text-align: left; transition: all 0.15s; }
+.b-dir-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-bg); }
+.b-dir-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.b-dir-btn.used { background: var(--success); color: #fff; border-color: var(--success); }
+.b-ask-follow { font-size: 12px; color: var(--accent); margin-top: 4px; cursor: pointer; display: inline-block; }
+.b-exam-options { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.b-exam-option { min-height: 90px; }
+
+/* ==================== 方案C：步骤向导 ==================== */
+#cContainer { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; height: 100%; }
+.c-stepbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; margin-bottom: 16px; }
+.c-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative; }
+.c-step:not(:last-child)::after { content: ''; position: absolute; top: 10px; right: -50%; width: 100%; height: 2px; background: var(--border); z-index: 0; }
+.c-step-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--border); border: 2px solid var(--border); position: relative; z-index: 1; transition: all 0.3s; }
+.c-step.active .c-step-dot { background: var(--accent); border-color: var(--accent); }
+.c-step.completed .c-step-dot { background: var(--success); border-color: var(--success); }
+.c-step-label { font-size: 12px; color: var(--text-secondary); }
+.c-step.active .c-step-label { color: var(--accent); font-weight: 600; }
+.c-content { flex: 1; overflow-y: auto; padding-bottom: 16px; }
+.c-patient-card { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.c-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.c-chief-complaint { font-size: 16px; line-height: 1.8; padding: 20px; }
+.c-direction-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0; }
+.c-dir-btn { padding: 14px 4px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); font-size: 13px; cursor: pointer; transition: all 0.15s; text-align: center; }
+.c-dir-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-bg); }
+.c-dir-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.c-dir-btn.used { background: var(--success); color: #fff; border-color: var(--success); }
+.c-history { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.c-physical-exam { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.c-pe-item { padding: 12px; }
+.c-pe-title { font-size: 12px; color: var(--text-secondary); font-weight: 600; margin-bottom: 6px; }
+.c-pe-content { font-size: 13px; line-height: 1.6; }
+.c-summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; font-size: 14px; line-height: 1.7; white-space: pre-line; margin-bottom: 16px; }
+.c-exam-options { display: flex; flex-direction: column; gap: 10px; }
+.c-exam-option { padding: 16px; }
+.c-actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+@media (max-width: 720px) {
+  .a-direction-grid { grid-template-columns: repeat(3, 1fr); }
+  #bContainer { grid-template-columns: 1fr; }
+  .c-direction-grid { grid-template-columns: repeat(3, 1fr); }
+  .c-physical-exam { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-title">标准化病人（SP）· 三方案预览</div>
+  <div style="display:flex;align-items:center;">
+    <div class="scheme-tabs">
+      <button class="scheme-tab active" onclick="switchScheme('A')">方案A：聊天流</button>
+      <button class="scheme-tab" onclick="switchScheme('B')">方案B：左右分栏</button>
+      <button class="scheme-tab" onclick="switchScheme('C')">方案C：步骤向导</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" title="切换主题">🌙</button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ==================== 方案A：聊天流 ==================== -->
+<div class="scheme-view active" id="schemeA">
+  <div id="aContainer">
+    <div class="a-patient-bar" id="aPatientBar"></div>
+    <div class="a-chat" id="aChat"></div>
+    <div class="a-controls" id="aControls">
+      <div class="a-direction-grid" id="aDirGrid"></div>
+      <div class="a-actions">
+        <button class="btn-secondary" id="aEndBtn" onclick="endInquiry('A')">结束问诊</button>
+      </div>
+      <div id="aExamArea" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 方案B：左右分栏 ==================== -->
+<div class="scheme-view" id="schemeB">
+  <div id="bContainer">
+    <div class="b-left">
+      <div class="card b-patient-card" id="bPatientCard"></div>
+      <div class="b-chat-history" id="bChatHistory"></div>
+      <div id="bPhysicalExam" style="display:none;"></div>
+    </div>
+    <div class="b-right">
+      <div id="bDirectionsPanel">
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:10px;font-weight:600;">选择问诊方向（最多 <span id="bSlots">5</span> 个）</div>
+        <div class="b-directions" id="bDirList"></div>
+        <div style="margin-top:12px;display:flex;justify-content:flex-end;">
+          <button class="btn-secondary" onclick="endInquiry('B')">结束问诊</button>
+        </div>
+      </div>
+      <div id="bExamPanel" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 方案C：步骤向导 ==================== -->
+<div class="scheme-view" id="schemeC">
+  <div id="cContainer">
+    <div class="c-stepbar" id="cStepbar">
+      <div class="c-step active" data-step="1"><div class="c-step-dot"></div><div class="c-step-label">患者主诉</div></div>
+      <div class="c-step" data-step="2"><div class="c-step-dot"></div><div class="c-step-label">问诊采集</div></div>
+      <div class="c-step" data-step="3"><div class="c-step-dot"></div><div class="c-step-label">四诊查体</div></div>
+      <div class="c-step" data-step="4"><div class="c-step-dot"></div><div class="c-step-label">条文判断</div></div>
+    </div>
+    <div class="c-content" id="cContent"></div>
+    <div class="c-actions" id="cActions"></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ==================== 数据 & 状态 ====================
+let SP_DATA = null;
+const state = {
+  A: { usedDirs: new Set(), askedFollowUp: new Set(), triggeredL3: new Set(), examRevealed: false, answered: null },
+  B: { usedDirs: new Set(), askedFollowUp: new Set(), triggeredL3: new Set(), examRevealed: false, answered: null },
+  C: { usedDirs: new Set(), askedFollowUp: new Set(), triggeredL3: new Set(), step: 1, answered: null }
+};
+
+// 加载 JSON
+async function loadData() {
+  try {
+    const res = await fetch('../sp-demo-SHL-ty-12.json');
+    SP_DATA = await res.json();
+  } catch (e) {
+    // 若 CORS 或路径问题，尝试相对路径
+    try {
+      const res2 = await fetch('sp-demo-SHL-ty-12.json');
+      SP_DATA = await res2.json();
+    } catch (e2) {
+      alert('加载 sp-demo-SHL-ty-12.json 失败，请确保文件在同一目录或上级目录');
+      console.error(e, e2);
+      return;
+    }
+  }
+  initAll();
+}
+
+// ==================== 切换方案 ====================
+function switchScheme(scheme) {
+  document.querySelectorAll('.scheme-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.scheme-view').forEach(v => v.classList.remove('active'));
+  document.querySelector(`.scheme-tab:nth-child(${scheme === 'A' ? 1 : scheme === 'B' ? 2 : 3})`).classList.add('active');
+  document.getElementById('scheme' + scheme).classList.add('active');
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+
+// ==================== 初始化 ====================
+function initAll() {
+  initA();
+  initB();
+  initC();
+}
+
+// ==================== 方案A：聊天流 ====================
+function initA() {
+  const p = SP_DATA.patient;
+  const dc = SP_DATA.difficulty_config;
+  document.getElementById('aPatientBar').innerHTML = `
+    <div class="a-avatar">${p.gender === '女' ? '👩' : '👨'}</div>
+    <div class="a-patient-info">
+      <div class="a-patient-name">${p.name} <span style="font-size:12px;font-weight:400;color:var(--text-secondary)">（${p.age}岁 · ${p.occupation}）</span></div>
+      <div class="a-patient-meta">${p.background} · 难度${SP_DATA.difficulty} · 可选${dc.inquiry_slots}个方向</div>
+    </div>`;
+  // 清空聊天
+  const chat = document.getElementById('aChat');
+  chat.innerHTML = '';
+  // 系统提示
+  chat.innerHTML += `<div class="a-bubble-system">患者进入诊室，请开始问诊</div>`;
+  // 患者主诉
+  setTimeout(() => {
+    chat.innerHTML += `<div class="a-bubble-patient">${SP_DATA.chief_complaint.text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+  }, 300);
+  // 方向按钮
+  renderADirections();
+}
+
+function renderADirections() {
+  const grid = document.getElementById('aDirGrid');
+  const dc = SP_DATA.difficulty_config;
+  const used = state.A.usedDirs;
+  const dirs = SP_DATA.inquiries;
+  const entries = Object.entries(dirs).filter(([k, v]) => v.available);
+  grid.innerHTML = entries.map(([k, v]) => {
+    const isUsed = used.has(k);
+    const disabled = !isUsed && used.size >= dc.inquiry_slots;
+    return `<button class="a-dir-btn ${isUsed ? 'used' : ''}" ${disabled ? 'disabled' : ''} onclick="selectDirA('${k}')">${v.direction_name}</button>`;
+  }).join('');
+  // 结束问诊按钮状态
+  document.getElementById('aEndBtn').disabled = state.A.examRevealed;
+}
+
+function selectDirA(dirId) {
+  if (state.A.usedDirs.has(dirId) || state.A.usedDirs.size >= SP_DATA.difficulty_config.inquiry_slots || state.A.examRevealed) return;
+  const chat = document.getElementById('aChat');
+  const dir = SP_DATA.inquiries[dirId];
+  // 医生问
+  chat.innerHTML += `<div class="a-bubble-doctor">问：${dir.l1.sample_question}</div>`;
+  // 患者答 L1
+  setTimeout(() => {
+    chat.innerHTML += `<div class="a-bubble-patient">${dir.l1.text}</div>`;
+    // 追问按钮
+    if (dir.l2 && dir.l2.text) {
+      const followId = 'follow-' + dirId + '-' + Date.now();
+      chat.innerHTML += `<div style="align-self:flex-end;"><button class="btn-secondary" style="font-size:12px;padding:6px 12px;" id="${followId}" onclick="followUpA('${dirId}','${followId}')">追问：${dir.l2.trigger_question}</button></div>`;
+    }
+    // L3 噪声（前端随机）
+    if (dir.l3_noise && dir.l3_noise.probability > 0 && Math.random() < dir.l3_noise.probability) {
+      state.A.triggeredL3.add(dirId);
+      setTimeout(() => {
+        chat.innerHTML += `<div class="a-bubble-noise">💬 ${dir.l3_noise.text}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+      }, 600);
+    }
+    chat.scrollTop = chat.scrollHeight;
+  }, 400);
+  state.A.usedDirs.add(dirId);
+  renderADirections();
+}
+
+function followUpA(dirId, btnId) {
+  const btn = document.getElementById(btnId);
+  if (btn) btn.remove();
+  const chat = document.getElementById('aChat');
+  const dir = SP_DATA.inquiries[dirId];
+  chat.innerHTML += `<div class="a-bubble-doctor">追问：${dir.l2.trigger_question}</div>`;
+  setTimeout(() => {
+    chat.innerHTML += `<div class="a-bubble-patient">${dir.l2.text}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+  }, 400);
+  state.A.askedFollowUp.add(dirId);
+}
+
+function endInquiry(scheme) {
+  if (scheme === 'A') {
+    state.A.examRevealed = true;
+    document.getElementById('aDirGrid').style.display = 'none';
+    document.getElementById('aEndBtn').style.display = 'none';
+    const chat = document.getElementById('aChat');
+    // 查体
+    chat.innerHTML += `<div class="a-bubble-system">医生完成四诊检查</div>`;
+    const pe = SP_DATA.physical_exam;
+    chat.innerHTML += `<div class="a-bubble-patient" style="background:var(--bg-panel);border-style:dashed;">
+      <div style="font-size:12px;color:var(--text-secondary);font-weight:600;margin-bottom:6px;">【查体结果】</div>
+      <div style="font-size:13px;line-height:1.6;">
+        <b>舌象：</b>${pe.inspection.tongue_color}，${pe.inspection.coating}<br>
+        <b>脉象：</b>${pe.palpation.composite}<br>
+        <b>腹部：</b>${pe.pressing.abdomen}<br>
+        <b>四肢：</b>${pe.pressing.limbs}
+      </div>
+    </div>`;
+    chat.scrollTop = chat.scrollHeight;
+    // 展示作答
+    setTimeout(() => renderExamA(), 600);
+  }
+  if (scheme === 'B') {
+    state.B.examRevealed = true;
+    document.getElementById('bDirectionsPanel').style.display = 'none';
+    const left = document.getElementById('bPhysicalExam');
+    left.style.display = 'block';
+    const pe = SP_DATA.physical_exam;
+    left.innerHTML = `
+      <div class="card" style="margin-top:10px;">
+        <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:10px;">📋 查体结果</div>
+        <div style="font-size:13px;line-height:1.7;">
+          <b>舌象：</b>${pe.inspection.tongue_color}，${pe.inspection.coating}<br>
+          <b>脉象：</b>${pe.palpation.composite}<br>
+          <b>腹部：</b>${pe.pressing.abdomen}<br>
+          <b>四肢：</b>${pe.pressing.limbs}
+        </div>
+      </div>
+      <div class="card" style="margin-top:10px;white-space:pre-line;font-size:14px;line-height:1.7;">${SP_DATA.case_summary}</div>
+    `;
+    renderExamB();
+  }
+}
+
+function renderExamA() {
+  const area = document.getElementById('aExamArea');
+  area.style.display = 'block';
+  const opts = SP_DATA.question.options;
+  const mode = SP_DATA.question.mode === 'article' ? '条文' : '方剂';
+  area.innerHTML = `
+    <div style="font-size:13px;color:var(--text-secondary);font-weight:600;margin-bottom:10px;">请选择对应的${mode}：</div>
+    <div class="a-exam-options">${opts.map((o, i) => `
+      <div class="option-card a-exam-option" id="a-opt-${i}" onclick="selectAnswerA(${i})">
+        <div class="option-label">${o.label}</div>
+        <div class="option-text">${o.snippet || o.name}</div>
+      </div>
+    `).join('')}</div>
+    <div class="feedback" id="aFeedback"></div>
+  `;
+  area.scrollIntoView({ behavior: 'smooth' });
+}
+
+function selectAnswerA(idx) {
+  if (state.A.answered !== null) return;
+  const opts = SP_DATA.question.options;
+  const o = opts[idx];
+  state.A.answered = idx;
+  document.getElementById('a-opt-' + idx).classList.add(o.is_correct ? 'correct' : 'wrong');
+  opts.forEach((opt, i) => { if (opt.is_correct) document.getElementById('a-opt-' + i).classList.add('correct'); });
+  const fb = document.getElementById('aFeedback');
+  fb.classList.add('show');
+  const ans = SP_DATA.answer_key;
+  fb.innerHTML = o.is_correct
+    ? `<strong style="color:var(--success)">回答正确！</strong> 对应${SP_DATA.question.mode === 'article' ? '条文' : '方剂'}：${ans.correct_article_text || ans.correct_formula_name}`
+    : `<strong style="color:var(--error)">回答错误。</strong> 正确答案是：${ans.correct_article_text || ans.correct_formula_name}`;
+}
+
+// ==================== 方案B：左右分栏 ====================
+function initB() {
+  const p = SP_DATA.patient;
+  const dc = SP_DATA.difficulty_config;
+  document.getElementById('bSlots').textContent = dc.inquiry_slots;
+  document.getElementById('bPatientCard').innerHTML = `
+    <div class="b-avatar">${p.gender === '女' ? '👩' : '👨'}</div>
+    <div>
+      <div style="font-size:15px;font-weight:600;">${p.name} <span style="font-size:12px;color:var(--text-secondary);font-weight:400">（${p.age}岁 · ${p.occupation}）</span></div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${p.background}</div>
+      <div style="margin-top:6px;"><span class="tag">难度${SP_DATA.difficulty}</span></div>
+    </div>`;
+  // 主诉
+  document.getElementById('bChatHistory').innerHTML = `
+    <div class="b-chat-item patient">
+      <div class="b-bubble">${SP_DATA.chief_complaint.text}</div>
+    </div>`;
+  // 方向
+  renderBDirections();
+}
+
+function renderBDirections() {
+  const list = document.getElementById('bDirList');
+  const dc = SP_DATA.difficulty_config;
+  const used = state.B.usedDirs;
+  const entries = Object.entries(SP_DATA.inquiries).filter(([k, v]) => v.available);
+  list.innerHTML = entries.map(([k, v]) => {
+    const isUsed = used.has(k);
+    const disabled = !isUsed && used.size >= dc.inquiry_slots;
+    return `<button class="b-dir-btn ${isUsed ? 'used' : ''}" ${disabled ? 'disabled' : ''} onclick="selectDirB('${k}')">${v.direction_name} ${isUsed ? '✓' : ''}</button>`;
+  }).join('');
+}
+
+function selectDirB(dirId) {
+  if (state.B.usedDirs.has(dirId) || state.B.usedDirs.size >= SP_DATA.difficulty_config.inquiry_slots || state.B.examRevealed) return;
+  const hist = document.getElementById('bChatHistory');
+  const dir = SP_DATA.inquiries[dirId];
+  hist.innerHTML += `
+    <div class="b-chat-item doctor"><div class="b-bubble">问：${dir.l1.sample_question}</div></div>
+    <div class="b-chat-item patient"><div class="b-bubble">${dir.l1.text}</div></div>`;
+  if (dir.l2 && dir.l2.text) {
+    const fid = 'b-f-' + dirId;
+    hist.innerHTML += `<div class="b-chat-item doctor"><div class="b-bubble" style="background:var(--bg-panel);border-color:var(--border);"><span class="b-ask-follow" onclick="followUpB('${dirId}')">追问：${dir.l2.trigger_question}</span></div></div>`;
+  }
+  // L3
+  if (dir.l3_noise && dir.l3_noise.probability > 0 && Math.random() < dir.l3_noise.probability) {
+    state.B.triggeredL3.add(dirId);
+    hist.innerHTML += `<div class="b-chat-item patient"><div class="b-bubble" style="border-style:dashed;color:var(--text-muted);font-style:italic;">💬 ${dir.l3_noise.text}</div></div>`;
+  }
+  state.B.usedDirs.add(dirId);
+  renderBDirections();
+  // 滚动到底
+  setTimeout(() => { const el = document.getElementById('bChatHistory'); el.lastElementChild?.scrollIntoView({ behavior: 'smooth' }); }, 100);
+}
+
+function followUpB(dirId) {
+  const hist = document.getElementById('bChatHistory');
+  const dir = SP_DATA.inquiries[dirId];
+  hist.innerHTML += `
+    <div class="b-chat-item doctor"><div class="b-bubble">追问：${dir.l2.trigger_question}</div></div>
+    <div class="b-chat-item patient"><div class="b-bubble">${dir.l2.text}</div></div>`;
+  state.B.askedFollowUp.add(dirId);
+}
+
+function renderExamB() {
+  const panel = document.getElementById('bExamPanel');
+  panel.style.display = 'block';
+  const opts = SP_DATA.question.options;
+  const mode = SP_DATA.question.mode === 'article' ? '条文' : '方剂';
+  panel.innerHTML = `
+    <div style="font-size:13px;color:var(--text-secondary);font-weight:600;margin-bottom:10px;">请选择对应的${mode}：</div>
+    <div class="b-exam-options">${opts.map((o, i) => `
+      <div class="option-card b-exam-option" id="b-opt-${i}" onclick="selectAnswerB(${i})">
+        <div class="option-label">${o.label}</div>
+        <div class="option-text">${o.snippet || o.name}</div>
+      </div>
+    `).join('')}</div>
+    <div class="feedback" id="bFeedback"></div>
+  `;
+}
+
+function selectAnswerB(idx) {
+  if (state.B.answered !== null) return;
+  const opts = SP_DATA.question.options;
+  const o = opts[idx];
+  state.B.answered = idx;
+  document.getElementById('b-opt-' + idx).classList.add(o.is_correct ? 'correct' : 'wrong');
+  opts.forEach((opt, i) => { if (opt.is_correct) document.getElementById('b-opt-' + i).classList.add('correct'); });
+  const fb = document.getElementById('bFeedback');
+  fb.classList.add('show');
+  const ans = SP_DATA.answer_key;
+  fb.innerHTML = o.is_correct
+    ? `<strong style="color:var(--success)">回答正确！</strong> ${ans.correct_article_text || ans.correct_formula_name}`
+    : `<strong style="color:var(--error)">回答错误。</strong> 正确答案是：${ans.correct_article_text || ans.correct_formula_name}`;
+}
+
+// ==================== 方案C：步骤向导 ====================
+function initC() {
+  state.C.step = 1;
+  updateCStep();
+  renderCStep1();
+}
+
+function updateCStep() {
+  const step = state.C.step;
+  document.querySelectorAll('.c-step').forEach(s => {
+    const n = parseInt(s.dataset.step);
+    s.classList.remove('active', 'completed');
+    if (n < step) s.classList.add('completed');
+    if (n === step) s.classList.add('active');
+  });
+}
+
+function renderCStep1() {
+  const p = SP_DATA.patient;
+  const content = document.getElementById('cContent');
+  content.innerHTML = `
+    <div class="c-patient-card">
+      <div class="c-avatar">${p.gender === '女' ? '👩' : '👨'}</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;">${p.name} <span style="font-size:13px;color:var(--text-secondary);font-weight:400">${p.age}岁 · ${p.occupation}</span></div>
+        <div style="font-size:13px;color:var(--text-secondary);margin-top:3px;">${p.background}</div>
+      </div>
+    </div>
+    <div class="card c-chief-complaint">${SP_DATA.chief_complaint.text}</div>
+  `;
+  document.getElementById('cActions').innerHTML = `<button class="btn-primary" onclick="nextCStep()">开始问诊 →</button>`;
+}
+
+function renderCStep2() {
+  const content = document.getElementById('cContent');
+  const dc = SP_DATA.difficulty_config;
+  const used = state.C.usedDirs;
+  // 已选对话历史
+  let historyHtml = '';
+  used.forEach(dirId => {
+    const dir = SP_DATA.inquiries[dirId];
+    historyHtml += `<div class="card" style="border-left:3px solid var(--accent);"><div style="font-size:12px;color:var(--text-secondary);font-weight:600;">问：${dir.direction_name}</div><div style="font-size:14px;margin-top:6px;line-height:1.6;">${dir.l1.text}</div>${state.C.askedFollowUp.has(dirId) ? `<div style="font-size:13px;margin-top:6px;color:var(--text-secondary);border-top:1px dashed var(--border);padding-top:6px;"><b>追问：</b>${dir.l2.text}</div>` : ''}</div>`;
+  });
+  const entries = Object.entries(SP_DATA.inquiries).filter(([k, v]) => v.available && !used.has(k));
+  const canSelect = used.size < dc.inquiry_slots;
+  content.innerHTML = `
+    <div style="font-size:13px;color:var(--text-secondary);margin-bottom:10px;">已选择 ${used.size} / ${dc.inquiry_slots} 个方向</div>
+    <div class="c-history">${historyHtml}</div>
+    <div class="c-direction-grid">${entries.map(([k, v]) => `
+      <button class="c-dir-btn" ${canSelect ? '' : 'disabled'} onclick="selectDirC('${k}')">${v.direction_name}</button>
+    `).join('')}</div>
+  `;
+  document.getElementById('cActions').innerHTML = `
+    <button class="btn-secondary" onclick="prevCStep()">← 返回主诉</button>
+    <button class="btn-primary" ${used.size === 0 ? 'disabled' : ''} onclick="nextCStep()">结束问诊 →</button>
+  `;
+}
+
+function selectDirC(dirId) {
+  if (state.C.usedDirs.has(dirId) || state.C.usedDirs.size >= SP_DATA.difficulty_config.inquiry_slots) return;
+  const dir = SP_DATA.inquiries[dirId];
+  state.C.usedDirs.add(dirId);
+  // 是否自动追问（模拟）
+  if (dir.l2 && dir.l2.text && Math.random() > 0.5) {
+    state.C.askedFollowUp.add(dirId);
+  }
+  // L3
+  if (dir.l3_noise && dir.l3_noise.probability > 0 && Math.random() < dir.l3_noise.probability) {
+    state.C.triggeredL3.add(dirId);
+  }
+  renderCStep2();
+}
+
+function renderCStep3() {
+  const content = document.getElementById('cContent');
+  const pe = SP_DATA.physical_exam;
+  content.innerHTML = `
+    <div class="card" style="margin-bottom:14px;">
+      <div style="font-size:14px;font-weight:600;color:var(--text-secondary);margin-bottom:10px;">📋 病历摘要</div>
+      <div style="font-size:14px;line-height:1.7;white-space:pre-line;">${SP_DATA.case_summary}</div>
+    </div>
+    <div style="font-size:14px;font-weight:600;color:var(--text-secondary);margin-bottom:10px;">🔍 四诊查体</div>
+    <div class="c-physical-exam">
+      <div class="card c-pe-item"><div class="c-pe-title">👅 望诊 · 舌象</div><div class="c-pe-content">舌体：${pe.inspection.tongue_body}<br>舌质：${pe.inspection.tongue_color}<br>舌苔：${pe.inspection.coating}</div></div>
+      <div class="card c-pe-item"><div class="c-pe-title">👂 闻诊</div><div class="c-pe-content">语声：${pe.auscultation.voice}<br>呼吸：${pe.auscultation.breath}</div></div>
+      <div class="card c-pe-item"><div class="c-pe-title">🫀 切诊 · 脉象</div><div class="c-pe-content">${pe.palpation.composite}<br>（${pe.palpation.pulse_position}${pe.palpation.pulse_rate}${pe.palpation.pulse_shape}，${pe.palpation.pulse_force}）</div></div>
+      <div class="card c-pe-item"><div class="c-pe-title">🖐 按诊</div><div class="c-pe-content">腹部：${pe.pressing.abdomen}<br>四肢：${pe.pressing.limbs}</div></div>
+    </div>
+  `;
+  document.getElementById('cActions').innerHTML = `
+    <button class="btn-secondary" onclick="prevCStep()">← 返回问诊</button>
+    <button class="btn-primary" onclick="nextCStep()">开始作答 →</button>
+  `;
+}
+
+function renderCStep4() {
+  const content = document.getElementById('cContent');
+  const opts = SP_DATA.question.options;
+  const mode = SP_DATA.question.mode === 'article' ? '条文' : '方剂';
+  content.innerHTML = `
+    <div class="card" style="margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;">📋 病历摘要（参考）</div>
+      <div style="font-size:13px;line-height:1.6;white-space:pre-line;color:var(--text-secondary);">${SP_DATA.case_summary}</div>
+    </div>
+    <div style="font-size:15px;font-weight:600;margin-bottom:10px;">请选择对应的${mode}：</div>
+    <div class="c-exam-options">${opts.map((o, i) => `
+      <div class="option-card c-exam-option" id="c-opt-${i}" onclick="selectAnswerC(${i})">
+        <div class="option-label">${o.label}</div>
+        <div class="option-text">${o.snippet || o.name}</div>
+      </div>
+    `).join('')}</div>
+    <div class="feedback" id="cFeedback"></div>
+  `;
+  document.getElementById('cActions').innerHTML = `
+    <button class="btn-secondary" onclick="prevCStep()">← 返回查体</button>
+  `;
+}
+
+function nextCStep() {
+  if (state.C.step < 4) { state.C.step++; updateCStep(); }
+  if (state.C.step === 2) renderCStep2();
+  if (state.C.step === 3) renderCStep3();
+  if (state.C.step === 4) renderCStep4();
+}
+function prevCStep() {
+  if (state.C.step > 1) { state.C.step--; updateCStep(); }
+  if (state.C.step === 1) renderCStep1();
+  if (state.C.step === 2) renderCStep2();
+  if (state.C.step === 3) renderCStep3();
+}
+
+function selectAnswerC(idx) {
+  if (state.C.answered !== null) return;
+  const opts = SP_DATA.question.options;
+  const o = opts[idx];
+  state.C.answered = idx;
+  document.getElementById('c-opt-' + idx).classList.add(o.is_correct ? 'correct' : 'wrong');
+  opts.forEach((opt, i) => { if (opt.is_correct) document.getElementById('c-opt-' + i).classList.add('correct'); });
+  const fb = document.getElementById('cFeedback');
+  fb.classList.add('show');
+  const ans = SP_DATA.answer_key;
+  fb.innerHTML = o.is_correct
+    ? `<strong style="color:var(--success)">回答正确！</strong> ${ans.correct_article_text || ans.correct_formula_name}`
+    : `<strong style="color:var(--error)">回答错误。</strong> 正确答案是：${ans.correct_article_text || ans.correct_formula_name}`;
+}
+
+// 启动
+loadData();
+</script>
+</body>
+</html>

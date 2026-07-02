@@ -1,0 +1,256 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-gui-zhi-gan-cao-tang-fm-2-20260621072125",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-064",
+    "source_classic": "伤寒论",
+    "chapter": "太阳病篇",
+    "patient": {
+      "name": "张女士",
+      "age": 45,
+      "gender": "女",
+      "occupation": "小学教师",
+      "background": "平时身体偏弱，上周感冒后自行服用大量发汗药，汗出不止后现心悸明显",
+      "persona_id": "anxious-middle-aged-female"
+    },
+    "chief_complaint": {
+      "text": "大夫，我这心里头跳得慌，已经三四天了。就是上周感冒，我自己吃了好多发汗的药，姜汤也喝了，汗出了不少。之后这心脏就扑通扑通跳得厉害，有时候还觉得停了一下似的。我老是把手按在胸口上才能舒服点，不按着就空落落的。还有啊，稍微走两步就喘不上气，觉得特别虚。大夫，这是不是心脏出什么大问题了？",
+      "revealed_symptoms": ["心下悸", "欲得按", "气短"],
+      "l0_symptoms": ["心下悸", "欲得按", "气短"],
+      "directness": "moderate",
+      "word_count": 186
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": ["怕冷", "发热", "寒热往来"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "现在不发烧了，感冒已经好了。但总觉得身上有点怕冷，特别是汗出了之后，觉得凉飕飕的。",
+          "revealed_symptoms": ["微恶寒"],
+          "sample_question": "现在怕冷吗？发烧吗？"
+        },
+        "l2": {
+          "trigger_question": "汗出了之后是不是更觉得冷？",
+          "text": "对对，就是汗一出，皮肤摸起来凉凉的，就觉得有风在往骨头里钻，得赶紧加件衣服。",
+          "revealed_symptoms": ["汗后恶寒"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我查了体温，每天下午都有37度2的低烧，是不是还有炎症没消？要不要吃点头孢？",
+          "type": "自我用药",
+          "misleading_symptom": "错误归因低热"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": ["出汗", "盗汗", "自汗"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "出汗可多了！就是感冒那两天发汗发得太狠了。现在白天动不动也出汗，稍微动一动就一身汗，衣服都湿透了。晚上睡觉不盗汗，但白天自汗多。",
+          "revealed_symptoms": ["自汗", "大汗出"],
+          "sample_question": "出汗情况怎么样？"
+        },
+        "l2": {
+          "trigger_question": "汗出之后有没有觉得更不舒服？",
+          "text": "有啊！汗一出，心跳得更厉害了，人也没力气，觉得虚得很。",
+          "revealed_symptoms": ["汗后心悸加重"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我听说出汗多就是阴虚，是不是该吃点六味地黄丸补补？",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因阴虚"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": ["头痛", "身痛", "项背强", "头晕"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "头有点晕，但不是那种天旋地转的晕，就是觉得昏沉沉的，没精神。身上倒是不疼。",
+          "revealed_symptoms": ["头晕"],
+          "sample_question": "有头痛头晕吗？身上疼吗？"
+        },
+        "l2": {
+          "trigger_question": "除了头晕，有没有觉得胸闷或者气短？",
+          "text": "胸闷还好，就是气短，说话多了都觉得累。心口这里有时候觉得憋闷。",
+          "revealed_symptoms": ["气短", "胸闷"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我颈椎一直不好，会不会是颈椎病引起的头晕和心悸？",
+          "type": "错误归因",
+          "misleading_symptom": "颈椎病"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": ["小便", "大便", "便秘", "腹泻"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "小便正常，颜色也不黄。大便有点干，两天一次，但不算便秘。",
+          "revealed_symptoms": ["大便偏干"],
+          "sample_question": "大小便怎么样？"
+        },
+        "l2": {
+          "trigger_question": "口渴吗？想喝水吗？",
+          "text": "口不太渴，也不想喝太多水，就是觉得嘴干。喝水也是喝温热的，凉的胃不舒服。",
+          "revealed_symptoms": ["口干不欲饮", "喜热饮"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我便秘是不是应该多吃点香蕉？",
+          "type": "自我用药",
+          "misleading_symptom": "无关建议"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": ["胃口", "口渴", "恶心", "呕吐"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "胃口一般，不想吃太多，但也不是完全吃不下。没有恶心想吐的感觉。",
+          "revealed_symptoms": ["食欲减退"],
+          "sample_question": "吃饭怎么样？有恶心想吐吗？"
+        },
+        "l2": {
+          "trigger_question": "喜欢吃热的还是凉的？",
+          "text": "肯定吃热的！凉的胃就不舒服。最近都是喝热粥，觉得胃里暖和点。",
+          "revealed_symptoms": ["喜热食"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我昨天吃了点凉的西瓜，结果胃就不舒服了，是不是胃有问题？",
+          "type": "错误归因",
+          "misleading_symptom": "胃寒"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": ["胸闷", "心悸", "腹痛", "腹胀"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "就是心口这里跳得厉害，按着能舒服点。不按就觉得空落落的，好像心要掉出来一样。肚子不胀，按上去也不疼。",
+          "revealed_symptoms": ["心下悸", "欲得按", "腹软"],
+          "sample_question": "胸口肚子有什么不舒服？"
+        },
+        "l2": {
+          "trigger_question": "按上去是舒服的还是疼的？",
+          "text": "按上去舒服！特别喜欢按，我自己没事就用手捂着心口。按紧了就觉得踏实。",
+          "revealed_symptoms": ["喜按"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我做了心电图，医生说有点早搏，但说不要紧。可我总觉得是大问题。",
+          "type": "恐惧联想",
+          "misleading_symptom": "现代医学诊断干扰"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": ["耳鸣", "耳聋", "目赤", "目眩"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "耳朵眼睛都正常，没有耳鸣，看东西也不花。",
+          "revealed_symptoms": [],
+          "sample_question": "耳朵眼睛有不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "有没有觉得眼前发黑？",
+          "text": "没有眼前发黑，就是站起来的时候有点头晕，但很快就过去了。",
+          "revealed_symptoms": ["起立头晕"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我最近看手机多，眼睛有点干，是不是视力下降了？",
+          "type": "无关细节",
+          "misleading_symptom": "无关"
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": ["失眠", "多梦", "易醒", "嗜睡"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "睡眠不太好，因为心跳得厉害，躺下更明显，所以入睡有点困难。睡着了还行，不容易醒。",
+          "revealed_symptoms": ["入睡困难"],
+          "sample_question": "睡觉怎么样？"
+        },
+        "l2": {
+          "trigger_question": "躺下是不是心跳更明显？",
+          "text": "对对！躺下就觉得心跳扑通扑通的，更明显了，所以得侧着身，用手按着胸口才能睡。",
+          "revealed_symptoms": ["卧则心悸加重"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我听说失眠是神经衰弱，是不是该吃点安神补脑液？",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": ["既往病史", "慢性病", "手术史"],
+        "available": true,
+        "required_for_difficulty": [1, 2, 3],
+        "l1": {
+          "text": "以前身体就偏弱，容易感冒，但每次过几天就好了。没有高血压、糖尿病。没做过大手术。",
+          "revealed_symptoms": ["体虚易感冒"],
+          "sample_question": "以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "平时有没有觉得心慌或者气短？",
+          "text": "平时没有，就是这次发汗之后才出现的。以前从来没这么跳过。",
+          "revealed_symptoms": ["新发症状"]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我妈妈也有心脏病，是不是遗传的？",
+          "type": "恐惧联想",
+          "misleading_symptom": "家族史干扰"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": ["发病原因", "加重因素", "缓解因素"],
+        "available": true,
+        "requi

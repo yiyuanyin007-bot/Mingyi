@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据管理交互原型 · 经方学习系统</title>
+<style>
+:root {
+  --bg-body: #fafafa; --bg-panel: #ffffff; --bg-card: #f5f5f5; --bg-hover: #eeeeee;
+  --border: #e0e0e0; --text-primary: #212121; --text-secondary: #616161; --text-muted: #9e9e9e;
+  --accent: #455a64; --accent-bg: #eceff1; --accent-light: #90a4ae;
+  --success: #2e7d32; --success-bg: #e8f5e9; --warning: #f9a825; --warning-bg: #fff8e1;
+  --error: #c62828; --error-bg: #ffebee; --info: #0277bd; --info-bg: #e1f5fe;
+  --shadow: 0 1px 2px rgba(0,0,0,0.06); --shadow-lg: 0 4px 20px rgba(0,0,0,0.1);
+}
+[data-theme="dark"] {
+  --bg-body: #121212; --bg-panel: #1e1e1e; --bg-card: #252525; --bg-hover: #2d2d2d;
+  --border: #333333; --text-primary: #e0e0e0; --text-secondary: #b0b0b0; --text-muted: #757575;
+  --accent: #90a4ae; --accent-bg: #263238; --accent-light: #78909c;
+  --success: #4caf50; --success-bg: #1b3a1c; --warning: #fbc02d; --warning-bg: #3a2e0a;
+  --error: #ef5350; --error-bg: #3a1c1c; --info: #4fc3f7; --info-bg: #0d2c3e;
+  --shadow: 0 1px 2px rgba(0,0,0,0.2); --shadow-lg: 0 4px 20px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg-body); color: var(--text-primary); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+/* ===== 模拟主系统界面 ===== */
+.topbar { height: 52px; background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-shadow: var(--shadow); flex-shrink: 0; }
+.topbar-title { font-size: 16px; font-weight: 600; }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.topbar-btn { padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); cursor: pointer; font-size: 13px; transition: all 0.15s; }
+.topbar-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.topbar-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+.main { flex: 1; overflow-y: auto; padding: 24px; }
+
+/* ===== 检测横幅 ===== */
+.restore-banner { background: var(--info-bg); border: 1px solid var(--info); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; animation: slideDown 0.4s ease; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+.restore-banner-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.restore-banner-icon { font-size: 24px; }
+.restore-banner-text { font-size: 14px; line-height: 1.6; }
+.restore-banner-title { font-weight: 600; color: var(--text-primary); }
+.restore-banner-desc { color: var(--text-secondary); font-size: 13px; margin-top: 2px; }
+.restore-banner-actions { display: flex; gap: 8px; }
+.btn-primary { padding: 8px 16px; border-radius: 6px; border: none; background: var(--accent); color: white; font-size: 13px; cursor: pointer; transition: opacity 0.15s; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-secondary { padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); font-size: 13px; cursor: pointer; }
+.btn-secondary:hover { background: var(--bg-hover); }
+.btn-text { padding: 8px 12px; border-radius: 6px; border: none; background: transparent; color: var(--text-muted); font-size: 13px; cursor: pointer; text-decoration: underline; }
+
+/* ===== 模拟仪表盘 ===== */
+.mock-dashboard { max-width: 1200px; margin: 0 auto; }
+.mock-dashboard-title { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+.mock-dashboard-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+.mock-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.mock-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; cursor: pointer; transition: all 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+.mock-card:hover { border-color: var(--accent); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.mock-card-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.mock-card-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+.mock-card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.mock-tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); }
+
+/* ===== 弹窗遮罩 ===== */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 1999; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s; }
+.modal-overlay.open { display: flex; opacity: 1; }
+.modal-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 640px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow-lg); transform: translateY(20px); transition: transform 0.3s ease; }
+.modal-overlay.open .modal-box { transform: translateY(0); }
+.modal-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; flex-shrink: 0; }
+.modal-title { font-size: 18px; font-weight: 700; }
+.modal-subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+.modal-close { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.15s; flex-shrink: 0; }
+.modal-close:hover { background: var(--error); color: white; border-color: var(--error); }
+.modal-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; flex-shrink: 0; background: var(--bg-card); }
+
+/* ===== 数据管理面板（大弹窗） ===== */
+.panel-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 1999; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s; }
+.panel-overlay.open { display: flex; opacity: 1; }
+.panel-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 800px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow-lg); transform: translateY(20px); transition: transform 0.3s ease; }
+.panel-overlay.open .panel-box { transform: translateY(0); }
+.panel-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); flex-shrink: 0; padding: 0 24px; }
+.panel-tab { padding: 14px 20px; font-size: 14px; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; background: none; border: none; }
+.panel-tab:hover { color: var(--text-primary); }
+.panel-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.panel-body { flex: 1; overflow-y: auto; padding: 24px; }
+
+/* ===== 恢复卡片列表 ===== */
+.restore-list { display: flex; flex-direction: column; gap: 10px; }
+.restore-item { border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; transition: all 0.15s; }
+.restore-item:hover { border-color: var(--accent-light); }
+.restore-item-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.restore-checkbox { width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent); }
+.restore-name { font-weight: 600; font-size: 15px; }
+.restore-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex: 1; }
+.restore-badge { padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge-done { background: var(--success-bg); color: var(--success); }
+.badge-pending { background: var(--warning-bg); color: var(--warning); }
+.badge-missing { background: var(--info-bg); color: var(--info); }
+.badge-overwrite { background: var(--error-bg); color: var(--error); }
+.restore-length { font-size: 12px; color: var(--text-muted); }
+.restore-actions { display: flex; gap: 8px; margin-left: auto; }
+.btn-small { padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); font-size: 12px; cursor: pointer; }
+.btn-small:hover { background: var(--bg-hover); color: var(--text-primary); }
+.restore-preview { background: var(--bg-card); border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 13px; line-height: 1.7; color: var(--text-secondary); max-height: 200px; overflow-y: auto; display: none; white-space: pre-wrap; border-left: 3px solid var(--accent-light); }
+.restore-preview.open { display: block; animation: fadeIn 0.2s ease; }
+.restore-status { font-size: 12px; margin-left: 8px; }
+.status-missing { color: var(--info); }
+.status-overwrite { color: var(--error); }
+
+/* ===== 统计卡片 ===== */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.stat-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; }
+.stat-value { font-size: 28px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+.stat-label { font-size: 12px; color: var(--text-secondary); }
+
+/* ===== 操作区 ===== */
+.action-group { margin-bottom: 20px; }
+.action-group-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); }
+.action-group-title.danger { color: var(--error); }
+.action-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn-action { padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-secondary); font-size: 13px; cursor: pointer; transition: all 0.15s; }
+.btn-action:hover { background: var(--bg-hover); border-color: var(--accent-light); }
+.btn-action.primary { background: var(--accent); color: white; border-color: var(--accent); }
+.btn-action.primary:hover { opacity: 0.85; }
+.btn-action.danger { background: var(--error-bg); color: var(--error); border-color: var(--error); }
+.btn-action.danger:hover { background: var(--error); color: white; }
+
+/* ===== Toast ===== */
+.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-60px); background: #333; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 9999; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ===== 动画 ===== */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== 演示控制区 ===== */
+.demo-controls { position: fixed; bottom: 20px; right: 20px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow-lg); z-index: 1000; max-width: 280px; }
+.demo-controls-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.demo-btn { display: block; width: 100%; padding: 8px 12px; margin-bottom: 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); font-size: 12px; cursor: pointer; text-align: left; }
+.demo-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.demo-btn:last-child { margin-bottom: 0; }
+.demo-btn.active { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+
+/* ===== 确认弹窗 ===== */
+.confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.2s; }
+.confirm-overlay.open { display: flex; opacity: 1; }
+.confirm-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 420px; padding: 24px; box-shadow: var(--shadow-lg); transform: scale(0.95); transition: transform 0.2s ease; }
+.confirm-overlay.open .confirm-box { transform: scale(1); }
+.confirm-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.confirm-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+.confirm-actions { display: flex; justify-content: flex-end; gap: 10px; }
+</style>
+</head>
+<body>
+
+<!-- ===== 模拟主系统 ===== -->
+<div class="topbar">
+  <div class="topbar-title">《伤寒论》方剂训练 · MVP v8 <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);margin-left:8px;">桌面版</span></div>
+  <div class="topbar-actions">
+    <button class="topbar-btn" id="btnDataMgmt" onclick="openDataPanel()">⚙️ 数据管理</button>
+    <button class="topbar-btn" id="btnDaily">📊 今日学习</button>
+    <button class="topbar-btn" id="btnSP">SP问诊</button>
+    <button class="topbar-btn" id="btnClinical">临床录入</button>
+    <button class="topbar-btn" id="btnStats">统计</button>
+    <button class="topbar-btn" id="btnDashboard">卡片</button>
+    <button class="topbar-btn" onclick="toggleTheme()">🌙</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- 检测横幅（默认显示） -->
+  <div class="restore-banner" id="restoreBanner">
+    <div class="restore-banner-left">
+      <div class="restore-banner-icon">📦</div>
+      <div class="restore-banner-text">
+        <div class="restore-banner-title">检测到循证审计笔记备份</div>
+        <div class="restore-banner-desc">系统检测到 localStorage 笔记为空，有 4 张循证审计笔记（小建中汤/桂枝汤/麻黄汤/小青龙汤）可恢复。可能是重装系统或首次访问。</div>
+      </div>
+    </div>
+    <div class="restore-banner-actions">
+      <button class="btn-primary" onclick="openRestoreModal()">查看并恢复</button>
+      <button class="btn-secondary" onclick="dismissBanner()">忽略，暂不恢复</button>
+      <button class="btn-text" onclick="toggleBannerDetail()">了解详情</button>
+    </div>
+  </div>
+  <div id="bannerDetail" style="display:none;margin-bottom:20px;padding:12px 16px;background:var(--bg-card);border-radius:8px;font-size:13px;color:var(--text-secondary);line-height:1.6;border-left:3px solid var(--accent-light);">
+    💡 <strong>为什么出现这个提示？</strong><br>
+    经方学习系统的笔记数据保存在浏览器本地存储（localStorage）中。当重装系统、更换浏览器或清除浏览数据时，这些数据会丢失。系统会自动检测项目目录中的备份数据，帮助您恢复之前的学习成果。
+  </div>
+
+  <!-- 模拟仪表盘 -->
+  <div class="mock-dashboard">
+    <div class="mock-dashboard-title">选择一张卡片开始学习</div>
+    <div class="mock-dashboard-desc">学习进度会自动保存到浏览器本地存储。检测到笔记备份可用。</div>
+    <div class="mock-card-grid">
+      <div class="mock-card"><div class="mock-card-name">小建中汤</div><div class="mock-card-desc">中焦虚寒、气血两虚所致的虚劳里急</div><div class="mock-card-tags"><span class="mock-tag">太阳病</span><span class="mock-tag">虚寒</span></div></div>
+      <div class="mock-card"><div class="mock-card-name">桂枝汤</div><div class="mock-card-desc">太阳中风表虚证，汗出恶风脉浮缓</div><div class="mock-card-tags"><span class="mock-tag">太阳病</span><span class="mock-tag">表虚</span></div></div>
+      <div class="mock-card"><div class="mock-card-name">麻黄汤</div><div class="mock-card-desc">太阳表实寒闭，无汗而喘脉浮紧</div><div class="mock-card-tags"><span class="mock-tag">太阳病</span><span class="mock-tag">表实</span></div></div>
+      <div class="mock-card"><div class="mock-card-name">小青龙汤</div><div class="mock-card-desc">太阳外寒内饮，咳喘痰多清稀</div><div class="mock-card-tags"><span class="mock-tag">太阳病</span><span class="mock-tag">外寒内饮</span></div></div>
+      <div class="mock-card"><div class="mock-card-name">大承气汤</div><div class="mock-card-desc">阳明腑实重证，谵语潮热大便硬</div><div class="mock-card-tags"><span class="mock-tag">阳明病</span><span class="mock-tag">攻下</span></div></div>
+      <div class="mock-card"><div class="mock-card-name">小柴胡汤</div><div class="mock-card-desc">少阳病主方，往来寒热胸胁苦满</div><div class="mock-card-tags"><span class="mock-tag">少阳病</span><span class="mock-tag">和解</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 数据恢复弹窗 ===== -->
+<div class="modal-overlay" id="restoreModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">📦 恢复循证审计笔记</div>
+        <div class="modal-subtitle">从项目备份中选择性恢复笔记数据</div>
+      </div>
+      <button class="modal-close" onclick="closeRestoreModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">
+        检测到 <strong>4 张卡片</strong> 的循证审计笔记备份。已根据本地数据自动勾选可安全恢复的项目。
+      </div>
+
+      <div class="restore-list" id="restoreList">
+        <!-- 动态生成 -->
+      </div>
+
+      <div style="margin-top:16px;padding:12px;background:var(--warning-bg);border-radius:8px;font-size:13px;color:var(--text-secondary);display:none;" id="overwriteWarning">
+        ⚠️ <strong>覆盖警告</strong>：您选择了本地已存在笔记的卡片，恢复后将覆盖现有内容。建议先导出当前笔记备份。
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div style="display:flex;gap:8px;margin-right:auto;align-items:center;">
+        <button class="btn-small" onclick="selectAll()">全选</button>
+        <button class="btn-small" onclick="selectMissing()">仅未存在</button>
+        <button class="btn-small" onclick="invertSelection()">反选</button>
+      </div>
+      <button class="btn-secondary" onclick="closeRestoreModal()">取消</button>
+      <button class="btn-primary" id="btnConfirmRestore" onclick="confirmRestore()">确认恢复</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 数据管理面板（大弹窗） ===== -->
+<div class="panel-overlay" id="dataPanel">
+  <div class="panel-box">
+    <div class="modal-header" style="border-bottom:none;padding-bottom:12px;">
+      <div>
+        <div class="modal-title">⚙️ 数据管理</div>
+        <div class="modal-subtitle">统一管理学习痕迹、笔记、备份与恢复</div>
+      </div>
+      <button class="modal-close" onclick="closeDataPanel()">×</button>
+    </div>
+    <div class="panel-tabs">
+      <button class="panel-tab active" onclick="switchTab('overview')">📊 概览</button>
+      <button class="panel-tab" onclick="switchTab('restore')">📦 恢复</button>
+      <button class="panel-tab" onclick="switchTab('backup')">💾 备份/导出</button>
+      <button class="panel-tab" onclick="switchTab('reset')">⚠️ 重置</button>
+    </div>
+    <div class="panel-body" id="panelBody">
+      <!-- 动态内容 -->
+    </div>
+  </div>
+</div>
+
+<!-- ===== 确认弹窗 ===== -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-title" id="confirmTitle">确认恢复</div>
+    <div class="confirm-body" id="confirmBody">您确定要恢复选中的笔记吗？</div>
+    <div class="confirm-actions">
+      <button class="btn-secondary" onclick="closeConfirm()">取消</button>
+      <button class="btn-primary" id="confirmActionBtn" onclick="executeRestore()">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== 演示控制面板 ===== -->
+<div class="demo-controls">
+  <div class="demo-controls-title">🎮 演示控制台</div>
+  <button class="demo-btn" onclick="showBanner()">显示检测横幅</button>
+  <button class="demo-btn" onclick="hideBanner()">隐藏横幅</button>
+  <button class="demo-btn" onclick="openRestoreModal()">打开恢复弹窗</button>
+  <button class="demo-btn" onclick="openDataPanel()">打开数据管理面板</button>
+  <button class="demo-btn" onclick="simulateRestore()">模拟恢复成功</button>
+  <button class="demo-btn" onclick="toggleTheme()">切换明暗主题</button>
+  <div style="margin-top:10px;font-size:11px;color:var(--text-muted);line-height:1.5;">
+    提示：此原型用于体验交互流程。点击上方按钮模拟不同场景。
+  </div>
+</div>
+
+<script>
+// ===== 模拟数据 =====
+const BACKUP_DATA = {
+  notes: {
+    "xiao-jian-zhong-tang": "1. 核心辨证点\n\n中焦虚寒、气血两虚所致的虚劳里急...",
+    "gui-zhi-tang": "**桂枝汤**\n\n---\n\n### 1. 核心辨证点\n\n**一句话总结**：太阳中风**表虚证**...",
+    "ma-huang-tang": "# 麻黄汤 学习笔记\n\n## 1. 核心辨证点（一句话）\n\n**太阳病表实寒闭**...",
+    "xiao-qing-long-tang": "**小青龙汤**\n\n---\n\n### 1. 核心辨证点\n\n**一句话总结**：太阳病**外寒内饮**..."
+  },
+  meta: {
+    "xiao-jian-zhong-tang": { name: "小建中汤", auditId: "XJZ-20260620-001", status: "已完成", length: 5159 },
+    "gui-zhi-tang": { name: "桂枝汤", auditId: "GZT-20260621-001", status: "已完成", length: 2789 },
+    "ma-huang-tang": { name: "麻黄汤", auditId: "MHT-20260622-001", status: "已完成", length: 4796 },
+    "xiao-qing-long-tang": { name: "小青龙汤", auditId: "XQLT-20260622-001", status: "待审计", length: 5771 }
+  },
+  version: "2026-06-22", source: "evidence_audit_backup"
+};
+
+const LOCAL_NOTES = []; // 模拟本地无笔记
+// const LOCAL_NOTES = [{ cardId: "gui-zhi-tang" }]; // 模拟本地已有桂枝汤笔记
+
+let selectedCards = new Set();
+let currentTab = 'overview';
+let bannerDismissed = false;
+
+// ===== 工具函数 =====
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+
+// ===== 横幅控制 =====
+function showBanner() {
+  document.getElementById('restoreBanner').style.display = 'flex';
+  bannerDismissed = false;
+}
+
+function hideBanner() {
+  document.getElementById('restoreBanner').style.display = 'none';
+  document.getElementById('bannerDetail').style.display = 'none';
+}
+
+function dismissBanner() {
+  hideBanner();
+  bannerDismissed = true;
+  showToast('已忽略，可在「数据管理」中手动恢复');
+}
+
+function toggleBannerDetail() {
+  const el = document.getElementById('bannerDetail');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// ===== 恢复弹窗 =====
+function openRestoreModal() {
+  renderRestoreList();
+  document.getElementById('restoreModal').classList.add('open');
+}
+
+function closeRestoreModal() {
+  document.getElementById('restoreModal').classList.remove('open');
+}
+
+function renderRestoreList() {
+  const list = document.getElementById('restoreList');
+  let html = '';
+  
+  for (const [cardId, meta] of Object.entries(BACKUP_DATA.meta)) {
+    const hasLocal = LOCAL_NOTES.some(n => n.cardId === cardId);
+    const statusClass = meta.status === '已完成' ? 'badge-done' : 'badge-pending';
+    const statusText = meta.status === '已完成' ? '已完成' : '待审计';
+    const missingClass = hasLocal ? 'badge-overwrite' : 'badge-missing';
+    const missingText = hasLocal ? '本地已存在（将覆盖）' : '本地不存在（将新增）';
+    const defaultChecked = !hasLocal;
+    
+    if (defaultChecked) selectedCards.add(cardId);
+    else selectedCards.delete(cardId);
+    
+    const previewId = 'preview-' + cardId;
+    const content = BACKUP_DATA.notes[cardId].substring(0, 300) + '...';
+    
+    html += `
+      <div class="restore-item" id="item-${cardId}">
+        <div class="restore-item-header">
+          <input type="checkbox" class="restore-checkbox" id="cb-${cardId}" ${defaultChecked ? 'checked' : ''} onchange="toggleCard('${cardId}')">
+          <div class="restore-name">${meta.name}</div>
+          <div class="restore-meta">
+            <span class="restore-badge ${statusClass}">${statusText}</span>
+            <span class="restore-badge ${missingClass}">${missingText}</span>
+            <span class="restore-length">${meta.length} 字</span>
+            <span style="font-size:12px;color:var(--text-muted);">ID: ${meta.auditId}</span>
+          </div>
+          <div class="restore-actions">
+            <button class="btn-small" onclick="togglePreview('${cardId}')">👁 预览</button>
+          </div>
+        </div>
+        <div class="restore-preview" id="${previewId}">${content}</div>
+      </div>
+    `;
+  }
+  
+  list.innerHTML = html;
+  updateRestoreButton();
+}
+
+function toggleCard(cardId) {
+  const cb = document.getElementById('cb-' + cardId);
+  if (cb.checked) selectedCards.add(cardId);
+  else selectedCards.delete(cardId);
+  updateRestoreButton();
+  checkOverwriteWarning();
+}
+
+function updateRestoreButton() {
+  const btn = document.getElementById('btnConfirmRestore');
+  btn.textContent = selectedCards.size > 0 ? `确认恢复 ${selectedCards.size} 张笔记` : '请先选择要恢复的笔记';
+  btn.disabled = selectedCards.size === 0;
+  btn.style.opacity = selectedCards.size === 0 ? '0.5' : '1';
+}
+
+function checkOverwriteWarning() {
+  let hasOverwrite = false;
+  for (const cardId of selectedCards) {
+    if (LOCAL_NOTES.some(n => n.cardId === cardId)) {
+      hasOverwrite = true; break;
+    }
+  }
+  document.getElementById('overwriteWarning').style.display = hasOverwrite ? 'block' : 'none';
+}
+
+function togglePreview(cardId) {
+  const el = document.getElementById('preview-' + cardId);
+  el.classList.toggle('open');
+}
+
+function selectAll() {
+  for (const cardId of Object.keys(BACKUP_DATA.meta)) {
+    selectedCards.add(cardId);
+    document.getElementById('cb-' + cardId).checked = true;
+  }
+  updateRestoreButton();
+  checkOverwriteWarning();
+}
+
+function selectMissing() {
+  for (const [cardId, meta] of Object.entries(BACKUP_DATA.meta)) {
+    const hasLocal = LOCAL_NOTES.some(n => n.cardId === cardId);
+    if (!hasLocal) {
+      selectedCards.add(cardId);
+      document.getElementById('cb-' + cardId).checked = true;
+    } else {
+      selectedCards.delete(cardId);
+      document.getElementById('cb-' + cardId).checked = false;
+    }
+  }
+  updateRestoreButton();
+  checkOverwriteWarning();
+}
+
+function invertSelection() {
+  for (const cardId of Object.keys(BACKUP_DATA.meta)) {
+    const cb = document.getElementById('cb-' + cardId);
+    cb.checked = !cb.checked;
+    if (cb.checked) selectedCards.add(cardId);
+    else selectedCards.delete(cardId);
+  }
+  updateRestoreButton();
+  checkOverwriteWarning();
+}
+
+function confirmRestore() {
+  if (selectedCards.size === 0) return;
+  
+  let hasOverwrite = false;
+  for (const cardId of selectedCards) {
+    if (LOCAL_NOTES.some(n => n.cardId === cardId)) { hasOverwrite = true; break; }
+  }
+  
+  document.getElementById('confirmTitle').textContent = '确认恢复笔记';
+  document.getElementById('confirmBody').innerHTML = 
+    `您选择了恢复 <strong>${selectedCards.size}</strong> 张卡片的笔记。<br>` +
+    (hasOverwrite ? '⚠️ 其中部分卡片本地已有笔记，恢复后将<strong>覆盖</strong>现有内容。' : '这些卡片本地不存在，将新增笔记。') +
+    '<br><br>建议操作前导出当前笔记备份。';
+  document.getElementById('confirmActionBtn').textContent = '确认恢复';
+  document.getElementById('confirmActionBtn').onclick = executeRestore;
+  document.getElementById('confirmActionBtn').className = 'btn-primary';
+  document.getElementById('confirmOverlay').classList.add('open');
+}
+
+function executeRestore() {
+  closeConfirm();
+  closeRestoreModal();
+  hideBanner();
+  showToast(`✅ 成功恢复 ${selectedCards.size} 张卡片笔记！请刷新页面查看。`);
+  bannerDismissed = true;
+}
+
+function closeConfirm() {
+  document.getElementById('confirmOverlay').classList.remove('open');
+}
+
+function simulateRestore() {
+  showToast('✅ 模拟恢复成功：已恢复 3 张卡片笔记（小建中汤/桂枝汤/麻黄汤）');
+  hideBanner();
+}
+
+// ===== 数据管理面板 =====
+function openDataPanel() {
+  switchTab('overview');
+  document.getElementById('dataPanel').classList.add('open');
+}
+
+function closeDataPanel() {
+  document.getElementById('dataPanel').classList.remove('open');
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderPanelBody();
+}
+
+function renderPanelBody() {
+  const body = document.getElementById('panelBody');
+  
+  if (currentTab === 'overview') {
+    body.innerHTML = `
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-value">1,247</div><div class="stat-label">本地学习痕迹</div></div>
+        <div class="stat-card"><div class="stat-value">${LOCAL_NOTES.length}</div><div class="stat-label">本地错题笔记</div></div>
+        <div class="stat-card"><div class="stat-value">4</div><div class="stat-label">备份笔记卡片</div></div>
+        <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">已完成审计</div></div>
+      </div>
+      <div class="action-group">
+        <div class="action-group-title">快速操作</div>
+        <div class="action-buttons">
+          <button class="btn-action" onclick="openRestoreFromPanel()">📦 从备份恢复笔记</button>
+          <button class="btn-action" onclick="showToast('导出功能在此原型中模拟')">💾 导出学习痕迹</button>
+          <button class="btn-action" onclick="showToast('导出功能在此原型中模拟')">📄 导出笔记为 Markdown</button>
+          <button class="btn-action" onclick="showToast('复制功能在此原型中模拟')">📋 复制全部数据到剪贴板</button>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding:16px;background:var(--bg-card);border-radius:10px;font-size:13px;color:var(--text-secondary);line-height:1.7;">
+        <strong style="color:var(--text-primary);">💡 数据安全提示</strong><br>
+        您的学习数据保存在浏览器本地存储中。建议定期导出备份，避免重装系统或清理浏览数据时丢失。项目目录中的循证审计笔记是只读备份，不会自动更新。
+      </div>
+    `;
+  } else if (currentTab === 'restore') {
+    body.innerHTML = `
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">
+        从循证审计备份中恢复笔记。已根据本地数据自动标记覆盖风险。
+      </div>
+      <div class="restore-list" id="panelRestoreList"></div>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end;">
+        <button class="btn-small" onclick="selectAllFromPanel()">全选</button>
+        <button class="btn-small" onclick="selectMissingFromPanel()">仅未存在</button>
+        <button class="btn-primary" onclick="confirmRestoreFromPanel()">确认恢复</button>
+      </div>
+    `;
+    setTimeout(() => renderPanelRestoreList(), 0);
+  } else if (currentTab === 'backup') {
+    body.innerHTML = `
+      <div class="action-group">
+        <div class="action-group-title">导出学习数据</div>
+        <div class="action-buttons">
+          <button class="btn-action" onclick="showToast('已导出学习痕迹到 sh_traces_2026-06-21.json')">📊 导出学习痕迹</button>
+          <button class="btn-action" onclick="showToast('已导出笔记到 study_notes_2026-06-21.json')">📝 导出错题笔记</button>
+          <button class="btn-action primary" onclick="showToast('已导出全部数据到 backup_all_2026-06-21.json')">📦 导出全部数据</button>
+        </div>
+      </div>
+      <div class="action-group">
+        <div class="action-group-title">导入数据</div>
+        <div class="action-buttons">
+          <button class="btn-action" onclick="showToast('请选择之前导出的 JSON 文件')">📂 导入学习痕迹</button>
+          <button class="btn-action" onclick="showToast('请选择之前导出的 JSON 文件')">📂 导入错题笔记</button>
+        </div>
+      </div>
+      <div style="margin-top:16px;padding:12px;background:var(--info-bg);border-radius:8px;font-size:13px;color:var(--text-secondary);">
+        💡 导入操作会合并数据而非完全覆盖。如果导入的笔记与本地笔记冲突，将提示您选择保留哪个版本。
+      </div>
+    `;
+  } else if (currentTab === 'reset') {
+    body.innerHTML = `
+      <div class="action-group">
+        <div class="action-group-title danger">⚠️ 危险操作区</div>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.6;">
+          以下操作将永久删除数据，无法撤销。执行前请确保已导出备份。
+        </div>
+        <div class="action-buttons">
+          <button class="btn-action danger" onclick="confirmResetAction('学习进度')">🗑 重置学习进度（掌握度/ streak）</button>
+          <button class="btn-action danger" onclick="confirmResetAction('错题笔记')">🗑 清空所有错题笔记</button>
+          <button class="btn-action danger" onclick="confirmResetAction('全部数据')">🗑 重置全部数据（痕迹+笔记+进度）</button>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding:16px;background:var(--error-bg);border-radius:10px;font-size:13px;color:var(--text-secondary);line-height:1.7;border-left:4px solid var(--error);">
+        <strong style="color:var(--error);">⚠️ 警告</strong><br>
+        重置操作仅清除浏览器本地存储的数据。项目目录中的循证审计备份文件不受影响，可随时通过「恢复」标签页重新恢复。
+      </div>
+    `;
+  }
+}
+
+function renderPanelRestoreList() {
+  const list = document.getElementById('panelRestoreList');
+  if (!list) return;
+  let html = '';
+  for (const [cardId, meta] of Object.entries(BACKUP_DATA.meta)) {
+    const hasLocal = LOCAL_NOTES.some(n => n.cardId === cardId);
+    const statusClass = meta.status === '已完成' ? 'badge-done' : 'badge-pending';
+    const missingClass = hasLocal ? 'badge-overwrite' : 'badge-missing';
+    html += `
+      <div class="restore-item">
+        <div class="restore-item-header">
+          <input type="checkbox" class="restore-checkbox" id="pcb-${cardId}">
+          <div class="restore-name">${meta.name}</div>
+          <div class="restore-meta">
+            <span class="restore-badge ${statusClass}">${meta.status === '已完成' ? '已完成' : '待审计'}</span>
+            <span class="restore-badge ${missingClass}">${hasLocal ? '本地已存在' : '本地不存在'}</span>
+            <span class="restore-length">${meta.length} 字</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  list.innerHTML = html;
+}
+
+function selectAllFromPanel() { showToast('全选功能在此原型中模拟'); }
+function selectMissingFromPanel() { showToast('仅未存在功能在此原型中模拟'); }
+function confirmRestoreFromPanel() { showToast('确认恢复功能在此原型中模拟'); }
+function openRestoreFromPanel() { switchTab('restore'); document.querySelector('.panel-tab:nth-child(2)').click(); }
+function confirmResetAction(target) {
+  document.getElementById('confirmTitle').textContent = '⚠️ 确认重置';
+  document.getElementById('confirmBody').innerHTML = `确定要清空<strong>${target}</strong>吗？<br><br><span style="color:var(--error);">此操作不可恢复。请确保已导出备份。</span>`;
+  document.getElementById('confirmActionBtn').textContent = '确认清空';
+  document.getElementById('confirmActionBtn').className = 'btn-action danger';
+  document.getElementById('confirmActionBtn').onclick = () => { closeConfirm(); showToast(`已清空 ${target}`); };
+  document.getElementById('confirmOverlay').classList.add('open');
+}
+
+// ===== 初始化 =====
+renderPanelBody();
+</script>
+</body>
+</html>

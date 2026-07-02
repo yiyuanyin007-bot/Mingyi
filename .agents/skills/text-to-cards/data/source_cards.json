@@ -1,0 +1,98 @@
+[
+  {
+    "id": "gui-zhi-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "太阳病篇",
+    "article_number": "待补充",
+    "text": "太阳病，头痛，发热，汗出，恶风，桂枝汤主之。",
+    "mentioned_formulas": [
+      "桂枝汤"
+    ],
+    "symptoms": [
+      "汗出",
+      "恶风",
+      "头痛",
+      "发热",
+      "脉浮缓"
+    ],
+    "key_conclusion": "桂枝汤主之。"
+  },
+  {
+    "id": "ma-huang-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "太阳病篇",
+    "article_number": "待补充",
+    "text": "太阳病，头痛发热，身疼腰痛，骨节疼痛，恶风，无汗而喘者，麻黄汤主之。",
+    "mentioned_formulas": [
+      "麻黄汤"
+    ],
+    "symptoms": [
+      "无汗",
+      "喘",
+      "头痛发热",
+      "身疼腰痛",
+      "骨节疼痛",
+      "恶风",
+      "脉浮紧"
+    ],
+    "key_conclusion": "麻黄汤主之。"
+  },
+  {
+    "id": "ge-gen-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "太阳病篇",
+    "article_number": "待补充",
+    "text": "太阳病，项背强几几，无汗恶风，葛根汤主之。",
+    "mentioned_formulas": [
+      "葛根汤"
+    ],
+    "symptoms": [
+      "项背强痛",
+      "无汗",
+      "恶风",
+      "头痛",
+      "发热"
+    ],
+    "key_conclusion": "葛根汤主之。"
+  },
+  {
+    "id": "da-cheng-qi-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "阳明病篇",
+    "article_number": "待补充",
+    "text": "阳明病，谵语，潮热，大便硬，大承气汤主之。",
+    "mentioned_formulas": [
+      "大承气汤"
+    ],
+    "symptoms": [
+      "大便硬",
+      "潮热",
+      "谵语",
+      "绕脐痛",
+      "手足濈然汗出"
+    ],
+    "key_conclusion": "大承气汤主之。"
+  },
+  {
+    "id": "xiao-chai-hu-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "少阳病篇",
+    "article_number": "待补充",
+    "text": "伤寒五六日，中风，往来寒热，胸胁苦满，默默不欲饮食，心烦喜呕，小柴胡汤主之。",
+    "mentioned_formulas": [
+      "小柴胡汤"
+    ],
+    "symptoms": [
+      "往来寒热",
+      "胸胁苦满",
+      "默默不欲饮食",
+      "心烦喜呕"
+    ],
+    "key_conclusion": "小柴胡汤主之。"
+  }
+]

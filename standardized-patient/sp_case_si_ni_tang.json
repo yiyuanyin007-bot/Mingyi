@@ -1,0 +1,576 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "sp-014-ss-323",
+  "mode": "article",
+  "difficulty": 2,
+  "difficulty_config": {
+    "inquiry_slots": 5,
+    "l2_allowance_per_direction": 1,
+    "l3_noise_probability": 0.15,
+    "distractor_count": 4,
+    "distractor_level": "medium",
+    "physical_exam_completeness": "full",
+    "chief_complaint_directness": "moderate"
+  },
+  "source_article": "SHL-ss-323",
+  "source_classic": "伤寒论",
+  "chapter": "少阴病篇",
+  "patient": {
+    "name": "王老汉",
+    "age": 75,
+    "gender": "男",
+    "occupation": "退休农民",
+    "background": "常年务农，近年畏寒加重，3天前下地受寒后起病",
+    "persona_id": "silent-elderly-male"
+  },
+  "chief_complaint": {
+    "text": "大夫，您快看看俺爹。他这几天手脚冰凉，冰到肘子和膝盖，盖三床被子还发抖。一直拉肚子，吃什么拉什么，不消化。整天昏昏沉沉的，叫都叫不醒，老想睡觉。三天了，话也不说，饭也不吃，您看这可怎么办啊。",
+    "revealed_symptoms": [
+      "四肢厥逆",
+      "恶寒",
+      "下利清谷",
+      "但欲寐"
+    ],
+    "l0_symptoms": [
+      "四肢厥逆",
+      "恶寒",
+      "下利清谷",
+      "但欲寐"
+    ],
+    "directness": "moderate",
+    "word_count": 130
+  },
+  "inquiries": {
+    "01_寒热": {
+      "direction_id": "01_寒热",
+      "direction_name": "寒热",
+      "keywords": [
+        "怕冷",
+        "发热",
+        "寒热往来"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）他这几天特别怕冷，盖三床被子还发抖，手脚冰凉，冰到肘子和膝盖，怎么暖都暖不过来。",
+        "revealed_symptoms": [
+          "恶寒",
+          "四肢厥逆"
+        ],
+        "sample_question": "怕冷吗？手脚怎么样？"
+      },
+      "l2": {
+        "trigger_question": "盖几床被子还冷吗？",
+        "text": "（家属）盖了三床被子还冷，手脚还是冰凉，一点热乎气都没有。",
+        "revealed_symptoms": [
+          "盖几床被子还冷"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者微微睁眼，含糊道：嗯...（随即又闭上眼）",
+        "type": "情绪归因"
+      }
+    },
+    "02_汗出": {
+      "direction_id": "02_汗出",
+      "direction_name": "汗出",
+      "keywords": [
+        "汗量",
+        "汗后感",
+        "盗汗",
+        "自汗"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）没有汗，一点汗都没有，皮肤干干的，冰凉。",
+        "revealed_symptoms": [
+          "无汗"
+        ],
+        "sample_question": "出汗多吗？"
+      },
+      "l2": {
+        "trigger_question": "以前出汗吗？",
+        "text": "（家属）以前干活还出汗，现在一点汗都没有，皮肤干冷。",
+        "revealed_symptoms": [
+          "无汗"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：不想说话...",
+        "type": "情绪归因"
+      }
+    },
+    "03_头身": {
+      "direction_id": "03_头身",
+      "direction_name": "头身",
+      "keywords": [
+        "头痛",
+        "项背",
+        "四肢",
+        "胸胁"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）他说身上不舒服，有点疼，但说不清楚哪里疼。头也有点昏。",
+        "revealed_symptoms": [
+          "身痛"
+        ],
+        "sample_question": "头痛吗？身上哪里痛？"
+      },
+      "l2": {
+        "trigger_question": "身上哪里最疼？",
+        "text": "（家属）全身都不舒服，叫疼，但按哪里都软软的，不拒按。",
+        "revealed_symptoms": [
+          "身痛"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：嗯...",
+        "type": "情绪归因"
+      }
+    },
+    "04_二便": {
+      "direction_id": "04_二便",
+      "direction_name": "二便",
+      "keywords": [
+        "小便",
+        "大便",
+        "颜色",
+        "次数"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）拉肚子，一天好几次，吃什么拉什么，不消化，稀得像水。",
+        "revealed_symptoms": [
+          "下利清谷"
+        ],
+        "sample_question": "大便怎么样？"
+      },
+      "l2": {
+        "trigger_question": "大便是什么样子的？",
+        "text": "（家属）吃什么拉什么，完全不消化，稀得像水，能看到没消化的米粒。",
+        "revealed_symptoms": [
+          "吃什么拉什么"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：不想说话...",
+        "type": "情绪归因"
+      }
+    },
+    "05_饮食": {
+      "direction_id": "05_饮食",
+      "direction_name": "饮食",
+      "keywords": [
+        "胃口",
+        "口渴",
+        "喜冷/热",
+        "呕吐"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）他这几天几乎没吃东西，吃了就恶心想吐，水也喝不下去。",
+        "revealed_symptoms": [
+          "呕吐"
+        ],
+        "sample_question": "胃口怎么样？想吐吗？"
+      },
+      "l2": {
+        "trigger_question": "想喝水吗？想喝热的还是冷的？",
+        "text": "（家属）不想喝水，水到了嘴边就恶心想吐，啥也吃不下。",
+        "revealed_symptoms": [
+          "恶心想吐"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：嗯...",
+        "type": "情绪归因"
+      }
+    },
+    "06_胸腹": {
+      "direction_id": "06_胸腹",
+      "direction_name": "胸腹",
+      "keywords": [
+        "胸闷",
+        "心悸",
+        "腹胀",
+        "腹痛"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）胸口不闷，肚子也不胀不痛，就是觉得冷。",
+        "revealed_symptoms": [],
+        "sample_question": "胸口闷吗？肚子胀吗？"
+      },
+      "l2": {
+        "trigger_question": "肚子按上去痛吗？",
+        "text": "（家属）按肚子是软的，不按不痛，就是觉得冰冷。",
+        "revealed_symptoms": [
+          "腹软"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：不想说话...",
+        "type": "情绪归因"
+      }
+    },
+    "07_耳目": {
+      "direction_id": "07_耳目",
+      "direction_name": "耳目",
+      "keywords": [
+        "耳鸣",
+        "听力",
+        "目眩",
+        "视力"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）耳朵不聋，看东西也不转。就是叫他没什么反应。",
+        "revealed_symptoms": [],
+        "sample_question": "耳朵响吗？头晕吗？"
+      },
+      "l2": {
+        "trigger_question": "眼睛清楚吗？",
+        "text": "（家属）眼睛清楚，就是老闭着眼睛，睁不开。",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：嗯...",
+        "type": "情绪归因"
+      }
+    },
+    "08_睡眠": {
+      "direction_id": "08_睡眠",
+      "direction_name": "睡眠",
+      "keywords": [
+        "入睡",
+        "多梦",
+        "易醒",
+        "烦躁"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）老想睡觉，昏昏沉沉的，叫都叫不醒。",
+        "revealed_symptoms": [
+          "但欲寐"
+        ],
+        "sample_question": "睡得着吗？"
+      },
+      "l2": {
+        "trigger_question": "能叫醒吗？",
+        "text": "（家属）叫半天才睁眼，又睡过去了，说话含糊不清。",
+        "revealed_symptoms": [
+          "昏昏沉沉，叫不醒"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：不想说话...",
+        "type": "情绪归因"
+      }
+    },
+    "09_旧病": {
+      "direction_id": "09_旧病",
+      "direction_name": "旧病",
+      "keywords": [
+        "既往",
+        "家族",
+        "用药史"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）以前身体还行，就是这几年越来越怕冷，冬天比别人穿得多。",
+        "revealed_symptoms": [],
+        "sample_question": "以前有什么病？"
+      },
+      "l2": {
+        "trigger_question": "以前有什么大病吗？",
+        "text": "（家属）没有大病，就是老寒腿，冬天手脚冰凉，喜欢喝热汤。",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：嗯...",
+        "type": "情绪归因"
+      }
+    },
+    "10_诱因": {
+      "direction_id": "10_诱因",
+      "direction_name": "诱因",
+      "keywords": [
+        "饮食",
+        "受寒",
+        "情绪",
+        "劳累"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "（家属代述）三天前下地干活，天气冷穿得少，回来就这样了，可能受了寒。",
+        "revealed_symptoms": [
+          "受寒"
+        ],
+        "sample_question": "发病前受寒了吗？"
+      },
+      "l2": {
+        "trigger_question": "回来后有做什么？",
+        "text": "（家属）回来喝了点热水，第二天就开始拉肚子，手脚冰凉，越来越重。",
+        "revealed_symptoms": [
+          "起病过程"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "患者含糊道：不想说话...",
+        "type": "情绪归因"
+      }
+    }
+  },
+  "physical_exam": {
+    "completeness": "full",
+    "inspection": {
+      "tongue_body": "正常",
+      "tongue_color": "淡白",
+      "coating": "白滑",
+      "special": "面色苍白，口唇淡紫，精神极度萎靡"
+    },
+    "auscultation": {
+      "voice": "低微，气息微弱",
+      "breath": "微弱",
+      "cough": "无",
+      "odor": "无异常"
+    },
+    "palpation": {
+      "pulse_position": "沉",
+      "pulse_rate": "微",
+      "pulse_shape": "细",
+      "pulse_force": "无力",
+      "composite": "沉微"
+    },
+    "pressing": {
+      "abdomen": "柔软，喜按，肤冷",
+      "limbs": "四肢厥冷至肘膝",
+      "skin": "干冷，无汗"
+    }
+  },
+  "case_summary": "【主诉】\n患者（家属代述），男，75岁，退休农民。3天前下地受寒后起病，现症见：手脚冰凉至肘膝，极度畏寒，盖多被不解；腹泻频作，下利清谷，完谷不化；昏昏欲睡，叫之难应；恶心欲吐，水谷难入。\n\n【现病史】\n- 恶寒：极度畏寒，盖三床被仍觉冷，寒战不止\n- 四肢厥逆：手脚冰凉至肘膝，肤冷无汗\n- 但欲寐：神志昏沉，欲寐难醒，叫之反应迟钝\n- 下利清谷：腹泻频作，完谷不化，日数次\n- 呕吐：恶心欲吐，水谷难入，几乎不能进食\n\n【查体】\n舌淡白苔白滑。脉沉微无力。腹软喜按，肤冷。四肢厥冷至肘膝，肌肤干冷无汗。面色苍白，口唇淡紫，精神极度萎靡。\n\n【问诊选择】\n寒热 / 汗出 / 头身 / 二便 / 饮食 / 胸腹 / 耳目 / 睡眠 / 旧病 / 诱因\n（难度2：可选5个方向）",
+  "question": {
+    "mode": "article",
+    "options": [
+      {
+        "id": "SHL-ss-323",
+        "label": "第323条",
+        "snippet": "少阴病，脉沉者，急温之，宜四逆汤。",
+        "is_correct": true,
+        "distractor_type": "correct"
+      },
+      {
+        "id": "SHL-ss-316",
+        "label": "第316条",
+        "snippet": "少阴病，二三日不已，至四五日，腹痛，小便不利，四肢沉重疼痛，自下利者，此为有水气，其人或咳，或小便利，或下利，或呕者，真武汤主之。",
+        "is_correct": false,
+        "distractor_type": "same_disease_different_formula"
+      },
+      {
+        "id": "SHL-ym-176",
+        "label": "第176条",
+        "snippet": "伤寒，脉浮滑，此以表有热，里有寒，白虎汤主之。",
+        "is_correct": false,
+        "distractor_type": "same_symptom_opposite_pathology"
+      },
+      {
+        "id": "SHL-ym-208",
+        "label": "第208条",
+        "snippet": "阳明病，脉迟，虽汗出不恶寒者，其身必重，短气，腹满而喘，有潮热者，此外欲解，可攻里也。手足濈然汗出者，此大便已硬也，大承气汤主之。",
+        "is_correct": false,
+        "distractor_type": "different_disease_similar_symptoms"
+      },
+      {
+        "id": "SHL-ss-96",
+        "label": "第96条",
+        "snippet": "伤寒五六日，中风，往来寒热，胸胁苦满，嘿嘿不欲饮食，心烦喜呕，或胸中烦而不呕，或渴，或腹中痛，或胁下痞硬，或心下悸、小便不利，或不渴、身有微热，或咳者，小柴胡汤主之。",
+        "is_correct": false,
+        "distractor_type": "different_disease_similar_symptoms"
+      }
+    ]
+  },
+  "answer_key": {
+    "correct_article_id": "SHL-ss-323",
+    "correct_formula_id": "si-ni-tang",
+    "correct_article_number": 323,
+    "correct_article_text": "少阴病，脉沉者，急温之，宜四逆汤。",
+    "correct_formula_name": "四逆汤",
+    "correct_herbs": [
+      "附子",
+      "干姜",
+      "甘草"
+    ]
+  },
+  "reference_analysis": {
+    "captured_vs_source": [
+      {
+        "symptom": "四肢厥逆",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0",
+        "key": true
+      },
+      {
+        "symptom": "下利清谷",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-04_二便",
+        "level": "l1",
+        "key": true
+      },
+      {
+        "symptom": "但欲寐",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-08_睡眠",
+        "level": "l1",
+        "key": true
+      },
+      {
+        "symptom": "恶寒",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-01_寒热",
+        "level": "l1",
+        "key": true
+      },
+      {
+        "symptom": "脉沉微",
+        "in_patient": true,
+        "in_source": true,
+        "source": "physical_exam",
+        "level": "physical",
+        "key": true
+      },
+      {
+        "symptom": "呕吐",
+        "in_patient": true,
+        "in_source": false,
+        "source": "inquiry-05_饮食",
+        "level": "l1",
+        "note": "本条文未提及呕吐，但四逆汤证可见"
+      },
+      {
+        "symptom": "身痛",
+        "in_patient": true,
+        "in_source": false,
+        "source": "inquiry-03_头身",
+        "level": "l1",
+        "note": "本条文未提及身痛"
+      }
+    ],
+    "key_differentials": [
+      {
+        "symptom": "四肢厥逆 vs 四肢沉重",
+        "excludes": [
+          "SHL-ss-316"
+        ],
+        "reason": "真武汤（第316条）为阳虚水泛，有四肢沉重疼痛、水肿、小便不利；本证无水肿，四肢厥冷纯为阳虚寒盛"
+      },
+      {
+        "symptom": "恶寒肢冷 vs 大热大汗",
+        "excludes": [
+          "SHL-ym-176"
+        ],
+        "reason": "白虎汤（第176条）为阳明里热，大热大汗，四肢温；本证四肢厥冷、畏寒，病机截然相反"
+      },
+      {
+        "symptom": "腹软喜按 vs 腹满硬痛",
+        "excludes": [
+          "SHL-ym-208"
+        ],
+        "reason": "大承气汤（第208条）为阳明腑实，腹满硬痛、潮热；本证腹软喜按、肤冷，属虚寒"
+      },
+      {
+        "symptom": "无往来寒热",
+        "excludes": [
+          "SHL-ss-96"
+        ],
+        "reason": "小柴胡汤（第96条）为少阳病，往来寒热、胸胁苦满；本证无往来寒热，属少阴病"
+      }
+    ],
+    "missed_opportunities": [
+      {
+        "direction": "02_汗出",
+        "reason": "未选择汗出方向，错失确认无汗（阳虚不能蒸化）的机会",
+        "impact": "低"
+      },
+      {
+        "direction": "09_旧病",
+        "reason": "未选择旧病方向，错失确认既往阳虚体质（老寒腿、畏寒加重）的机会",
+        "impact": "低"
+      }
+    ]
+  }
+}

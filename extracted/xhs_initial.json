@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "data": {
+    "type": "string",
+    "value": "[{\"id\":\"\",\"text\":\"window.__SSR__=true\"},{\"id\":\"\",\"text\":\"window.__INITIAL_STATE__={\\\"global\\\":{\\\"appSettings\\\":{\\\"notificationInterval\\\":30,\\\"prefetchTimeout\\\":3001,\\\"prefetchRedisExpires\\\":259200000,\\\"webLabRedisExpires\\\":864000000,\\\"searchFilterGuideConfig\\\":{\\\"maxDaily\"}]"
+  }
+}

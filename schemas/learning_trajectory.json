@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/learning_trajectory.json",
+  "title": "Learning Trajectory Data Schema",
+  "description": "学习轨迹数据Schema，用于记录和分析用户学习进度",
+  "type": "object",
+  "required": ["user_id", "classic", "liu_jing_mastery", "timeline", "radar_data", "ai_suggestions"],
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "用户唯一标识"
+    },
+    "classic": {
+      "type": "string",
+      "description": "当前经典（伤寒论/金匮要略/温病条辨/黄帝内经）",
+      "enum": ["伤寒论", "金匮要略", "温病条辨", "黄帝内经"]
+    },
+    "liu_jing_mastery": {
+      "type": "object",
+      "description": "六经掌握度",
+      "properties": {
+        "太阳病": {
+          "type": "object",
+          "properties": {
+            "total": { "type": "integer", "description": "太阳病总方剂数" },
+            "mastered": { "type": "integer", "description": "已掌握方剂数" },
+            "rate": { "type": "number", "description": "掌握率(0-1)" },
+            "weak_vectors": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "薄弱向量（如0->2, 2->0）"
+            }
+          }
+        },
+        "阳明病": { "$ref": "#/properties/liu_jing_mastery/properties/太阳病" },
+        "少阳病": { "$ref": "#/properties/liu_jing_mastery/properties/太阳病" },
+        "太阴病": { "$ref": "#/properties/liu_jing_mastery/properties/太阳病" },
+        "少阴病": { "$ref": "#/properties/liu_jing_mastery/properties/太阳病" },
+        "厥阴病": { "$ref": "#/properties/liu_jing_mastery/properties/太阳病" },
+        "差后劳复": { "$ref": "#/properties/liu_jing_mastery/properties/太阳病" }
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "description": "学习事件时间轴",
+      "items": {
+        "type": "object",
+        "required": ["date", "action", "formula"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "action": {
+            "type": "string",
+            "enum": ["学习", "考试", "复习", "开方", "总结"]
+          },
+          "formula": { "type": "string", "description": "方剂名" },
+          "score": { "type": "number", "description": "得分（如考试得分）" },
+          "total": { "type": "number", "description": "总分" },
+          "note": { "type": "string", "description": "备注" }
+        }
+      }
+    },
+    "radar_data": {
+      "type": "object",
+      "description": "雷达图数据（6个维度）",
+      "properties": {
+        "方证对应": { "type": "number", "minimum": 0, "maximum": 1 },
+        "药物剂量": { "type": "number", "minimum": 0, "maximum": 1 },
+        "煎服法": { "type": "number", "minimum": 0, "maximum": 1 },
+        "条文记忆": { "type": "number", "minimum": 0, "maximum": 1 },
+        "鉴别诊断": { "type": "number", "minimum": 0, "maximum": 1 },
+        "临床应用": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "ai_suggestions": {
+      "type": "array",
+      "description": "AI建议列表",
+      "items": {
+        "type": "object",
+        "required": ["priority", "type", "message"],
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": ["P0", "P1", "P2"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["补弱", "复习", "强化", "推荐"]
+          },
+          "message": { "type": "string" },
+          "target_formula": { "type": "string" },
+          "target_vector": { "type": "string" }
+        }
+      }
+    }
+  }
+}

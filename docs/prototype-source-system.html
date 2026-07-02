@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>条文系统原型 - 三方案体验</title>
+<style>
+:root {
+  --bg-body: #fafafa;
+  --bg-panel: #ffffff;
+  --bg-card: #f5f5f5;
+  --bg-hover: #eeeeee;
+  --border: #e0e0e0;
+  --text-primary: #212121;
+  --text-secondary: #616161;
+  --text-muted: #9e9e9e;
+  --accent: #455a64;
+  --accent-bg: #eceff1;
+  --success: #2e7d32;
+  --error: #c62828;
+  --shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-body);
+  color: var(--text-primary);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部方案切换 */
+.proto-header {
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.proto-header-title { font-size: 16px; font-weight: 600; margin-right: 12px; }
+.proto-scheme-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.15s;
+}
+.proto-scheme-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* 主容器 */
+.proto-main {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+}
+
+/* 模拟学习页面 */
+.learn-page {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+.learn-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.learn-col { display: flex; flex-direction: column; gap: 16px; }
+
+/* 模拟卡片区块 */
+.mock-section {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.mock-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+.mock-section-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.mock-herb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.mock-herb-item {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* 经验区块 */
+.mock-exp {
+  background: var(--accent-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* 笔记区块 */
+.mock-note {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  min-height: 60px;
+}
+
+/* ===== 方案A：内联条文 ===== */
+.source-inline {
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.source-inline-header {
+  background: var(--accent-bg);
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.source-inline-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.source-inline-body.open {
+  max-height: 600px;
+  overflow-y: auto;
+}
+.source-card {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+}
+.source-card:last-child { border-bottom: none; }
+.source-card-header {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.source-card-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+.source-card-actions {
+  display: flex;
+  gap: 8px;
+}
+.source-btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  font-size: 12px;
+  cursor: pointer;
+}
+.source-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* ===== 方案B：侧边面板 ===== */
+.source-panel {
+  position: fixed;
+  top: 0;
+  right: -340px;
+  width: 340px;
+  height: 100vh;
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  box-shadow: -2px 0 12px rgba(0,0,0,0.08);
+  transition: right 0.3s ease;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+}
+.source-panel.open { right: 0; }
+.source-panel-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.source-panel-close {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.source-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+}
+.source-panel-list {
+  width: 100px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+.source-panel-list-item {
+  padding: 10px 12px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+.source-panel-list-item.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+}
+.source-panel-detail {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+.source-panel-detail-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--bg-card);
+  border-radius: 8px;
+}
+
+/* ===== 方案C：模态框 ===== */
+.source-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.source-modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+.source-modal {
+  width: 80%;
+  max-width: 700px;
+  height: 80vh;
+  background: var(--bg-panel);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
+.source-modal-overlay.open .source-modal {
+  transform: scale(1);
+}
+.source-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.source-modal-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+}
+.source-modal-list {
+  width: 140px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 12px 0;
+}
+.source-modal-list-item {
+  padding: 10px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-left: 3px solid transparent;
+}
+.source-modal-list-item:hover { background: var(--bg-hover); }
+.source-modal-list-item.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+  border-left-color: var(--accent);
+}
+.source-modal-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+.source-modal-detail-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+}
+
+/* 浮动按钮 */
+.float-nav {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+}
+.float-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.float-nav-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+.float-nav-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* 遮罩 */
+.panel-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.2);
+  z-index: 140;
+  display: none;
+}
+.panel-overlay.open { display: block; }
+
+/* 隐藏 */
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- 顶部方案切换 -->
+<div class="proto-header">
+  <div class="proto-header-title">📐 条文系统原型体验</div>
+  <button class="proto-scheme-btn active" onclick="switchScheme('A')">方案A：内联</button>
+  <button class="proto-scheme-btn" onclick="switchScheme('B')">方案B：侧边</button>
+  <button class="proto-scheme-btn" onclick="switchScheme('C')">方案C：弹窗</button>
+  <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">点击右下角「S」体验条文系统</span>
+</div>
+
+<!-- 主容器 -->
+<div class="proto-main">
+
+  <!-- 模拟学习页面 -->
+  <div class="learn-page" id="learnPage">
+    <div class="learn-columns">
+      <div class="learn-col">
+        <div class="mock-section">
+          <div class="mock-section-title">桂枝汤</div>
+          <div class="mock-section-body">太阳中风主方</div>
+        </div>
+        <div class="mock-section">
+          <div class="mock-section-title">原文条文</div>
+          <div class="mock-section-body">太阳病，头痛，发热，汗出，恶风，桂枝汤主之。</div>
+        </div>
+        <div class="mock-section">
+          <div class="mock-section-title">药物组成</div>
+          <div class="mock-herb-grid">
+            <div class="mock-herb-item">桂枝<br>3两</div>
+            <div class="mock-herb-item">芍药<br>3两</div>
+            <div class="mock-herb-item">甘草<br>2两</div>
+            <div class="mock-herb-item">生姜<br>3两</div>
+            <div class="mock-herb-item">大枣<br>12枚</div>
+          </div>
+        </div>
+      </div>
+      <div class="learn-col">
+        <div class="mock-section">
+          <div class="mock-section-title">病机</div>
+          <div class="mock-section-body">风邪袭表，营卫不和</div>
+        </div>
+        <div class="mock-section">
+          <div class="mock-section-title">经验记录</div>
+          <div class="mock-exp">
+            <strong>桂枝汤治汗出恶风一例</strong><br>
+            患者表现为汗出、恶风、脉浮缓，予桂枝汤原方。服后汗出减少，恶风减轻。
+          </div>
+        </div>
+
+        <!-- 方案A：内联条文区块（默认显示） -->
+        <div class="source-inline" id="sourceInline">
+          <div class="source-inline-header" onclick="toggleInline()">
+            <span>📜 条文系统（3条）</span>
+            <span id="inlineArrow">▼</span>
+          </div>
+          <div class="source-inline-body" id="inlineBody">
+            <div class="source-card">
+              <div class="source-card-header">太阳病篇 · 条文12</div>
+              <div class="source-card-text">太阳病，头痛，发热，汗出，恶风，桂枝汤主之。</div>
+              <div class="source-card-actions">
+                <button class="source-btn" onclick="mockKimi('条文12')">🤖 问Kimi</button>
+                <button class="source-btn" onclick="mockNote('条文12')">📝 记笔记</button>
+              </div>
+            </div>
+            <div class="source-card">
+              <div class="source-card-header">太阳病篇 · 条文95</div>
+              <div class="source-card-text">太阳病，发热汗出者，此为营弱卫强，故使汗出，欲救邪风者，宜桂枝汤。</div>
+              <div class="source-card-actions">
+                <button class="source-btn" onclick="mockKimi('条文95')">🤖 问Kimi</button>
+                <button class="source-btn" onclick="mockNote('条文95')">📝 记笔记</button>
+              </div>
+            </div>
+            <div class="source-card">
+              <div class="source-card-header">太阳病篇 · 条文24</div>
+              <div class="source-card-text">太阳病，初服桂枝汤，反烦不解者，先刺风池、风府，却与桂枝汤则愈。</div>
+              <div class="source-card-actions">
+                <button class="source-btn" onclick="mockKimi('条文24')">🤖 问Kimi</button>
+                <button class="source-btn" onclick="mockNote('条文24')">📝 记笔记</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mock-note">
+          <strong>📝 我的笔记</strong><br>
+          核心辨证点：风伤卫，营卫不和...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 方案B：侧边面板（初始隐藏） -->
+  <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+  <div class="source-panel" id="sourcePanel">
+    <div class="source-panel-header">
+      <span>📜 条文系统</span>
+      <button class="source-panel-close" onclick="closePanel()">×</button>
+    </div>
+    <div class="source-panel-body">
+      <div class="source-panel-list">
+        <div class="source-panel-list-item active" onclick="selectPanelItem(this, 0)">条文12</div>
+        <div class="source-panel-list-item" onclick="selectPanelItem(this, 1)">条文95</div>
+        <div class="source-panel-list-item" onclick="selectPanelItem(this, 2)">条文24</div>
+      </div>
+      <div class="source-panel-detail" id="panelDetail">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">太阳病篇 · 条文12</div>
+        <div class="source-panel-detail-text">太阳病，头痛，发热，汗出，恶风，桂枝汤主之。</div>
+        <div style="display:flex;gap:8px;margin-bottom:16px;">
+          <button class="source-btn" onclick="mockKimi('条文12')">🤖 问Kimi</button>
+          <button class="source-btn" onclick="mockNote('条文12')">📝 记笔记</button>
+        </div>
+        <div style="font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:12px;">
+          🔗 关联方剂：桂枝汤
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 方案C：模态框（初始隐藏） -->
+  <div class="source-modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="source-modal" onclick="event.stopPropagation()">
+      <div class="source-modal-header">
+        <span>📜 条文系统</span>
+        <button class="source-panel-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="source-modal-body">
+        <div class="source-modal-list">
+          <div class="source-modal-list-item active" onclick="selectModalItem(this, 0)">条文12</div>
+          <div class="source-modal-list-item" onclick="selectModalItem(this, 1)">条文95</div>
+          <div class="source-modal-list-item" onclick="selectModalItem(this, 2)">条文24</div>
+        </div>
+        <div class="source-modal-detail" id="modalDetail">
+          <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">太阳病篇 · 条文12</div>
+          <div class="source-modal-detail-text">太阳病，头痛，发热，汗出，恶风，桂枝汤主之。</div>
+          <div style="display:flex;gap:10px;margin-bottom:20px;">
+            <button class="source-btn" style="font-size:13px;padding:6px 14px;" onclick="mockKimi('条文12')">🤖 问Kimi</button>
+            <button class="source-btn" style="font-size:13px;padding:6px 14px;" onclick="mockNote('条文12')">📝 记笔记</button>
+          </div>
+          <div style="font-size:13px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:16px;">
+            🔗 关联方剂：<strong>桂枝汤</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 浮动按钮 -->
+<div class="float-nav">
+  <button class="float-nav-btn" onclick="scrollToTop()" title="回到顶部">⬆</button>
+  <button class="float-nav-btn" onclick="scrollToNotes()" title="跳到笔记">N</button>
+  <button class="float-nav-btn" id="btnSource" onclick="toggleSource()" title="条文系统">S</button>
+  <button class="float-nav-btn" onclick="scrollToBottom()" title="回到底部">⬇</button>
+</div>
+
+<script>
+const sourceData = [
+  { id: '12', chapter: '太阳病篇', text: '太阳病，头痛，发热，汗出，恶风，桂枝汤主之。', formula: '桂枝汤' },
+  { id: '95', chapter: '太阳病篇', text: '太阳病，发热汗出者，此为营弱卫强，故使汗出，欲救邪风者，宜桂枝汤。', formula: '桂枝汤' },
+  { id: '24', chapter: '太阳病篇', text: '太阳病，初服桂枝汤，反烦不解者，先刺风池、风府，却与桂枝汤则愈。', formula: '桂枝汤' },
+];
+
+let currentScheme = 'A';
+
+function switchScheme(scheme) {
+  currentScheme = scheme;
+  document.querySelectorAll('.proto-scheme-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  // 重置所有状态
+  document.getElementById('inlineBody').classList.remove('open');
+  document.getElementById('inlineArrow').textContent = '▼';
+  closePanel();
+  closeModal();
+
+  // 根据方案调整
+  if (scheme === 'A') {
+    document.getElementById('sourceInline').classList.remove('hidden');
+  } else {
+    document.getElementById('sourceInline').classList.add('hidden');
+  }
+
+  document.getElementById('btnSource').classList.remove('active');
+}
+
+function toggleSource() {
+  const btn = document.getElementById('btnSource');
+  if (currentScheme === 'A') {
+    toggleInline();
+    btn.classList.toggle('active');
+  } else if (currentScheme === 'B') {
+    document.getElementById('sourcePanel').classList.toggle('open');
+    document.getElementById('panelOverlay').classList.toggle('open');
+    btn.classList.toggle('active');
+  } else if (currentScheme === 'C') {
+    document.getElementById('modalOverlay').classList.add('open');
+    btn.classList.add('active');
+  }
+}
+
+// 方案A
+function toggleInline() {
+  const body = document.getElementById('inlineBody');
+  const arrow = document.getElementById('inlineArrow');
+  body.classList.toggle('open');
+  arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+
+// 方案B
+function closePanel() {
+  document.getElementById('sourcePanel').classList.remove('open');
+  document.getElementById('panelOverlay').classList.remove('open');
+  document.getElementById('btnSource').classList.remove('active');
+}
+function selectPanelItem(el, idx) {
+  document.querySelectorAll('.source-panel-list-item').forEach(item => item.classList.remove('active'));
+  el.classList.add('active');
+  const d = sourceData[idx];
+  document.getElementById('panelDetail').innerHTML = `
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">${d.chapter} · 条文${d.id}</div>
+    <div class="source-panel-detail-text">${d.text}</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button class="source-btn" onclick="mockKimi('条文${d.id}')">🤖 问Kimi</button>
+      <button class="source-btn" onclick="mockNote('条文${d.id}')">📝 记笔记</button>
+    </div>
+    <div style="font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:12px;">
+      🔗 关联方剂：${d.formula}
+    </div>
+  `;
+}
+
+// 方案C
+function closeModal(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('btnSource').classList.remove('active');
+}
+function selectModalItem(el, idx) {
+  document.querySelectorAll('.source-modal-list-item').forEach(item => item.classList.remove('active'));
+  el.classList.add('active');
+  const d = sourceData[idx];
+  document.getElementById('modalDetail').innerHTML = `
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">${d.chapter} · 条文${d.id}</div>
+    <div class="source-modal-detail-text">${d.text}</div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;">
+      <button class="source-btn" style="font-size:13px;padding:6px 14px;" onclick="mockKimi('条文${d.id}')">🤖 问Kimi</button>
+      <button class="source-btn" style="font-size:13px;padding:6px 14px;" onclick="mockNote('条文${d.id}')">📝 记笔记</button>
+    </div>
+    <div style="font-size:13px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:16px;">
+      🔗 关联方剂：<strong>${d.formula}</strong>
+    </div>
+  `;
+}
+
+function mockKimi(id) { alert('🤖 打开 Kimi 问：' + id + '\n\n此处会生成基于该条文的专属 prompt'); }
+function mockNote(id) { alert('📝 记笔记：' + id + '\n\n此处会打开文本编辑器，记录对该条文的理解'); }
+
+function scrollToTop() { document.querySelector('.learn-page').scrollTop = 0; }
+function scrollToBottom() { const lp = document.querySelector('.learn-page'); lp.scrollTop = lp.scrollHeight; }
+function scrollToNotes() { /* 模拟 */ document.querySelector('.learn-page').scrollTop = 99999; }
+
+// ESC 关闭
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closePanel(); closeModal(); }
+});
+</script>
+
+</body>
+</html>

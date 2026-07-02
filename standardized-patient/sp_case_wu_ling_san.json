@@ -1,0 +1,640 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "sp-012-ty-71",
+  "mode": "article",
+  "difficulty": 2,
+  "difficulty_config": {
+    "inquiry_slots": 5,
+    "l2_allowance_per_direction": 1,
+    "l3_noise_probability": 0.15,
+    "distractor_count": 4,
+    "distractor_level": "medium",
+    "physical_exam_completeness": "full",
+    "chief_complaint_directness": "moderate"
+  },
+  "source_article": "SHL-ty-71",
+  "source_classic": "伤寒论",
+  "chapter": "太阳病篇",
+  "patient": {
+    "name": "李女士",
+    "age": 48,
+    "gender": "女",
+    "occupation": "家庭主妇",
+    "background": "平时操持家务，近日因天气变化受凉感冒",
+    "persona_id": "anxious-middle-aged-female"
+  },
+  "chief_complaint": {
+    "text": "大夫，我本来是普通感冒，前天去社区医院开了发汗的药，吃完出了好多汗。回来后口渴得厉害，喝了好多水也不解渴，越喝越渴。最吓人的是小便少，不顺畅，尿不出来多少。还有点低热，头也痛。我上网查了，说可能是肾病或者糖尿病，您说我这不会是肾出问题了吧？我都急死了，家里人也担心，昨晚烦躁得都没睡着。",
+    "revealed_symptoms": [
+      "发汗后",
+      "消渴",
+      "烦渴",
+      "小便不利",
+      "微热",
+      "头痛发热"
+    ],
+    "l0_symptoms": [
+      "发汗后",
+      "消渴",
+      "烦渴",
+      "小便不利",
+      "微热",
+      "头痛发热"
+    ],
+    "directness": "moderate",
+    "word_count": 130
+  },
+  "inquiries": {
+    "01_寒热": {
+      "direction_id": "01_寒热",
+      "direction_name": "寒热",
+      "keywords": [
+        "怕冷",
+        "发热",
+        "寒热往来"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "有点低热，体温大概37度5到38度之间，身上热乎乎的。头也痛，前额那里胀痛。",
+        "revealed_symptoms": [
+          "微热",
+          "头痛发热"
+        ],
+        "sample_question": "怕冷吗？发烧吗？"
+      },
+      "l2": {
+        "trigger_question": "发烧什么时候最重？",
+        "text": "低烧一直不退，从发汗后就这样了，体温没超过38度，但就是不下去，身上热乎乎的难受。",
+        "revealed_symptoms": [
+          "低烧不退"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我查过百度，说低烧不退可能是慢性炎症或者肾病，大夫您说我是不是肾出问题了？",
+        "type": "网络诊断",
+        "misleading_symptom": "错误归因"
+      }
+    },
+    "02_汗出": {
+      "direction_id": "02_汗出",
+      "direction_name": "汗出",
+      "keywords": [
+        "汗量",
+        "汗后感",
+        "盗汗",
+        "自汗"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "就是吃了发汗药后出了好多汗，衣服都湿透了。现在稍微动一下还出汗，但比那天少些了。",
+        "revealed_symptoms": [
+          "发汗后",
+          "大汗出"
+        ],
+        "sample_question": "出汗多吗？什么时候出汗？"
+      },
+      "l2": {
+        "trigger_question": "出了汗后感觉怎么样？",
+        "text": "出了汗之后更觉得口渴，口干得厉害，喝水也不管用，越喝越渴。",
+        "revealed_symptoms": [
+          "汗后口渴加重"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "出点汗应该没事吧，大夫说发汗就是在排毒，我这是把毒排出来了。",
+        "type": "轻描淡写",
+        "misleading_symptom": "错误归因"
+      }
+    },
+    "03_头身": {
+      "direction_id": "03_头身",
+      "direction_name": "头身",
+      "keywords": [
+        "头痛",
+        "项背",
+        "四肢",
+        "胸胁"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "头痛，主要是前额胀痛，有点发热。身上没劲，四肢觉得酸软乏力。",
+        "revealed_symptoms": [
+          "头痛发热"
+        ],
+        "sample_question": "头痛吗？身上酸痛吗？"
+      },
+      "l2": {
+        "trigger_question": "脖子僵硬吗？身上酸痛吗？",
+        "text": "脖子不僵硬，身上没有明显的肌肉酸痛，不像以前感冒那样浑身疼，就是觉得没力气，昏昏沉沉的。",
+        "revealed_symptoms": [
+          "身倦乏力"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我查过百度，说头痛可能是高血压或者脑供血不足，大夫您说我是不是血压高了？",
+        "type": "网络诊断",
+        "misleading_symptom": "错误归因"
+      }
+    },
+    "04_二便": {
+      "direction_id": "04_二便",
+      "direction_name": "二便",
+      "keywords": [
+        "小便",
+        "大便",
+        "颜色",
+        "次数"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "小便少，不顺畅，尿不出来多少。颜色不算黄，但量特别少。大便正常，一天一次。",
+        "revealed_symptoms": [
+          "小便不利"
+        ],
+        "sample_question": "小便怎么样？大便干还是稀？"
+      },
+      "l2": {
+        "trigger_question": "小便的时候痛吗？肚子胀吗？",
+        "text": "小便时不痛，就是尿少，每次就一点点，不顺。肚子也不胀，不按不痛。",
+        "revealed_symptoms": [
+          "尿少不畅"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我查过百度，说尿少可能是肾炎或者肾衰竭，大夫您说我是不是肾出大问题了？我特别害怕。",
+        "type": "网络诊断",
+        "misleading_symptom": "焦虑相关叙述"
+      }
+    },
+    "05_饮食": {
+      "direction_id": "05_饮食",
+      "direction_name": "饮食",
+      "keywords": [
+        "胃口",
+        "口渴",
+        "喜冷/热",
+        "呕吐"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "烦渴得厉害，渴得厉害，喝水也不解渴。有时候喝水就吐，水不下去，胃里不舒服。",
+        "revealed_symptoms": [
+          "烦渴",
+          "水入则吐"
+        ],
+        "sample_question": "胃口怎么样？口渴吗？想喝热水还是冷水？"
+      },
+      "l2": {
+        "trigger_question": "口渴想喝热的还是冷的？喝多少水？",
+        "text": "越喝越渴，喝多少都觉得渴，停不住地想喝水。但喝下去胃里不舒服，有时候刚喝就吐出来了。",
+        "revealed_symptoms": [
+          "越喝越渴"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我喝了很多蜂蜜水，不知道有没有用。网上说蜂蜜水滋阴，我就一直喝。",
+        "type": "自我用药",
+        "misleading_symptom": "错误用药"
+      }
+    },
+    "06_胸腹": {
+      "direction_id": "06_胸腹",
+      "direction_name": "胸腹",
+      "keywords": [
+        "胸闷",
+        "心悸",
+        "腹胀",
+        "腹痛"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "胃里面有点不舒服，心下痞闷，但不痛。按上去软软的，没有硬块。",
+        "revealed_symptoms": [
+          "胃中不适"
+        ],
+        "sample_question": "胸口闷吗？心跳快吗？肚子胀吗？"
+      },
+      "l2": {
+        "trigger_question": "按肚子痛吗？腹胀吗？",
+        "text": "按肚子是软的，不按不痛，也不胀。就是胃那里有点痞闷，喝水多了更难受。",
+        "revealed_symptoms": [
+          "腹软喜按"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我胃不舒服可能是胃炎吧，以前也有胃胀的时候，吃点胃药就好了。",
+        "type": "错误归因",
+        "misleading_symptom": "错误归因"
+      }
+    },
+    "07_耳目": {
+      "direction_id": "07_耳目",
+      "direction_name": "耳目",
+      "keywords": [
+        "耳鸣",
+        "听力",
+        "目眩",
+        "视力"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "耳朵不响，听力正常。眼睛看东西不转，不眩晕。就是头有点昏沉。",
+        "revealed_symptoms": [],
+        "sample_question": "耳朵响吗？头晕吗？"
+      },
+      "l2": {
+        "trigger_question": "眼前发黑吗？",
+        "text": "没有眼前发黑，没有耳鸣，眼睛没事。",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    },
+    "08_睡眠": {
+      "direction_id": "08_睡眠",
+      "direction_name": "睡眠",
+      "keywords": [
+        "入睡",
+        "多梦",
+        "易醒",
+        "烦躁"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "睡眠不好，因为口渴得厉害，老想起来喝水，喝完又尿少，心烦。昨晚烦躁得都没睡着。",
+        "revealed_symptoms": [
+          "烦躁不得眠",
+          "睡眠欠安"
+        ],
+        "sample_question": "睡得着吗？做梦多吗？"
+      },
+      "l2": {
+        "trigger_question": "半夜会醒吗？醒了做什么？",
+        "text": "半夜会醒，口渴醒的，喝几口水又躺下，但睡不着，烦躁，翻来覆去。",
+        "revealed_symptoms": [
+          "夜渴醒"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "睡不好是不是更年期啊？我这年龄也快了，是不是激素问题？",
+        "type": "错误归因",
+        "misleading_symptom": "错误归因"
+      }
+    },
+    "09_旧病": {
+      "direction_id": "09_旧病",
+      "direction_name": "旧病",
+      "keywords": [
+        "既往",
+        "家族",
+        "用药史"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "以前没有糖尿病，没有肾病，血压也正常。就是容易感冒，体质偏弱。",
+        "revealed_symptoms": [
+          "易感冒",
+          "体虚"
+        ],
+        "sample_question": "以前有什么病？吃过什么药？"
+      },
+      "l2": {
+        "trigger_question": "以前感冒是什么症状？",
+        "text": "以前感冒就是流鼻涕、咳嗽，吃感冒药就好了，没这样过，没出现过口渴尿少的情况。",
+        "revealed_symptoms": [
+          "既往感冒无蓄水"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我查过百度，说糖尿病也会口渴多尿，但我尿又少，这不是糖尿病吧？",
+        "type": "网络诊断",
+        "misleading_symptom": "焦虑相关叙述"
+      }
+    },
+    "10_诱因": {
+      "direction_id": "10_诱因",
+      "direction_name": "诱因",
+      "keywords": [
+        "饮食",
+        "受寒",
+        "情绪",
+        "劳累"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        1,
+        2,
+        3
+      ],
+      "l1": {
+        "text": "本来就是感冒，去医院大夫开了发汗药，吃了出了大汗后就这样了。大夫还让我多喝热水。",
+        "revealed_symptoms": [
+          "发汗后",
+          "大汗出"
+        ],
+        "sample_question": "发病前吃了什么？受寒了吗？"
+      },
+      "l2": {
+        "trigger_question": "回来后喝了什么？吃了什么药？",
+        "text": "大夫让多喝热水，我喝了好多，但越喝越渴，尿还少。药就是医院开的发汗药，具体名字不记得了。",
+        "revealed_symptoms": [
+          "饮水后加重"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.15,
+        "triggered": false,
+        "text": "我就是吃了发汗药才这样的，早知道不吃了，越治越重。",
+        "type": "质疑医生",
+        "misleading_symptom": "情绪归因"
+      }
+    }
+  },
+  "physical_exam": {
+    "completeness": "full",
+    "inspection": {
+      "tongue_body": "正常",
+      "tongue_color": "淡红",
+      "coating": "白润",
+      "special": "苔白润，提示水饮内停"
+    },
+    "auscultation": {
+      "voice": "正常，略带焦虑语速",
+      "breath": "正常",
+      "cough": "无",
+      "odor": "无"
+    },
+    "palpation": {
+      "pulse_position": "浮",
+      "pulse_rate": "略数",
+      "pulse_shape": "正常",
+      "pulse_force": "稍弱",
+      "composite": "浮"
+    },
+    "pressing": {
+      "abdomen": "柔软，喜按",
+      "limbs": "温",
+      "skin": "湿润，微有汗"
+    }
+  },
+  "case_summary": "【主诉】\n李女士，48岁，家庭主妇。前天因感冒服发汗药后，大汗出，随即出现口渴不止、小便不利、微热头痛。\n\n【现病史】\n- 发汗后：服发汗药后大汗出，衣服湿透\n- 消渴/烦渴：口渴剧烈，饮不解渴，越喝越渴，水入则吐\n- 小便不利：尿少不畅，每次尿量少，无尿痛\n- 微热：体温37.5-38℃，低热持续不退\n- 头痛发热：前额胀痛，身上热乎乎\n- 烦躁：夜间因口渴烦躁不得眠\n\n【查体】\n舌淡红苔白润（水饮内停）。脉浮。腹软喜按。四肢温，肌肤湿润微汗。\n\n【问诊选择】\n寒热 / 汗出 / 二便 / 饮食 / 诱因 / 头身 / 胸腹 / 睡眠 / 旧病 / 耳目\n（难度2：可选5个方向）",
+  "question": {
+    "mode": "article",
+    "options": [
+      {
+        "id": "SHL-ty-71",
+        "label": "第71条",
+        "snippet": "太阳病，发汗后，大汗出，胃中干，烦躁不得眠，欲得饮水者，少少与饮之，令胃气和则愈。若脉浮，小便不利，微热消渴者，五苓散主之。",
+        "is_correct": true,
+        "distractor_type": "correct"
+      },
+      {
+        "id": "SHL-ty-176",
+        "label": "第176条",
+        "snippet": "伤寒，脉浮滑，此以表有热，里有寒，白虎汤主之。（大烦渴、大热、大汗出，无小便不利、无表证）",
+        "is_correct": false,
+        "distractor_type": "same_disease_different_formula"
+      },
+      {
+        "id": "SHL-ty-40",
+        "label": "第40条",
+        "snippet": "伤寒，表不解，心下有水气，干呕，发热而咳，或渴，或利，或噎，或小便不利，少腹满，或喘者，小青龙汤主之。（外寒内饮，咳喘痰多，无太阳病后蓄水）",
+        "is_correct": false,
+        "distractor_type": "same_disease_different_formula"
+      },
+      {
+        "id": "SHL-ty-208",
+        "label": "第208条",
+        "snippet": "阳明病，脉迟，虽汗出不恶寒者，其身必重，短气，腹满而喘，有潮热者，此外欲解，可攻里也。手足濈然汗出者，此大便已硬也，大承气汤主之。（腹满硬痛，潮热，无消渴小便不利）",
+        "is_correct": false,
+        "distractor_type": "different_disease_similar_symptoms"
+      },
+      {
+        "id": "SHL-ty-26",
+        "label": "第26条",
+        "snippet": "服桂枝汤，大汗出后，大烦渴不解，脉洪大者，白虎加人参汤主之。（大汗出后大烦渴，无小便不利，脉洪大而非浮）",
+        "is_correct": false,
+        "distractor_type": "same_disease_different_formula"
+      }
+    ]
+  },
+  "answer_key": {
+    "correct_article_id": "SHL-ty-71",
+    "correct_formula_id": "wu-ling-san",
+    "correct_article_number": 71,
+    "correct_article_text": "太阳病，发汗后，大汗出，胃中干，烦躁不得眠，欲得饮水者，少少与饮之，令胃气和则愈。若脉浮，小便不利，微热消渴者，五苓散主之。",
+    "correct_formula_name": "五苓散",
+    "correct_herbs": [
+      "猪苓",
+      "茯苓",
+      "泽泻",
+      "白术",
+      "桂枝"
+    ]
+  },
+  "reference_analysis": {
+    "captured_vs_source": [
+      {
+        "symptom": "发汗后",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0"
+      },
+      {
+        "symptom": "大汗出",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-02_汗出",
+        "level": "l1"
+      },
+      {
+        "symptom": "烦躁不得眠",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-08_睡眠",
+        "level": "l1"
+      },
+      {
+        "symptom": "消渴",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0",
+        "key": true
+      },
+      {
+        "symptom": "烦渴",
+        "in_patient": true,
+        "in_source": false,
+        "source": "chief_complaint",
+        "level": "l0",
+        "note": "条文用'消渴'，患者口语表达为'烦渴'"
+      },
+      {
+        "symptom": "小便不利",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0",
+        "key": true
+      },
+      {
+        "symptom": "水入则吐",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-05_饮食",
+        "level": "l1",
+        "key": true
+      },
+      {
+        "symptom": "脉浮",
+        "in_patient": true,
+        "in_source": true,
+        "source": "physical_exam",
+        "level": "physical",
+        "key": true
+      },
+      {
+        "symptom": "微热",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0"
+      },
+      {
+        "symptom": "头痛发热",
+        "in_patient": true,
+        "in_source": false,
+        "source": "chief_complaint",
+        "level": "l0",
+        "note": "条文未明确提及头痛，但太阳病表证常见"
+      },
+      {
+        "symptom": "胃中干",
+        "in_patient": false,
+        "in_source": true,
+        "note": "条文前半段'胃中干'为误治后津伤，本患者为后半段'脉浮，小便不利，微热消渴'的蓄水证，未出现胃中干"
+      }
+    ],
+    "key_differentials": [
+      {
+        "symptom": "小便不利+消渴+水入则吐",
+        "includes": [
+          "SHL-ty-71"
+        ],
+        "reason": "五苓散证核心鉴别点：太阳表证未解（脉浮），津液输布障碍（小便不利），水饮内停致渴（消渴、水入则吐）。白虎汤/白虎加人参汤均无小便不利，且脉洪大而非浮。"
+      },
+      {
+        "symptom": "大烦渴、大热、大汗，无小便不利、无表证",
+        "excludes": [
+          "SHL-ty-176"
+        ],
+        "reason": "白虎汤证为阳明里热，大烦渴、大热、大汗，脉洪大，无小便不利、无脉浮等表证；本证有微热、脉浮、小便不利，为太阳蓄水。"
+      },
+      {
+        "symptom": "大汗出后大烦渴，无小便不利，脉洪大",
+        "excludes": [
+          "SHL-ty-26"
+        ],
+        "reason": "白虎加人参汤证为服桂枝汤大汗出后，胃热津伤，大烦渴不解，脉洪大，无小便不利；本证有小便不利、水入则吐、脉浮，病机为蓄水而非津伤。"
+      },
+      {
+        "symptom": "外寒内饮，咳喘痰多，无太阳病后蓄水",
+        "excludes": [
+          "SHL-ty-40"
+        ],
+        "reason": "小青龙汤证为外寒内饮，以咳喘痰多为主症；本证无咳喘，为发汗后太阳表邪不解、膀胱气化不利之蓄水证。"
+      },
+      {
+        "symptom": "腹满硬痛，潮热，无消渴小便不利",
+        "excludes": [
+          "SHL-ty-208"
+        ],
+        "reason": "大承气汤证为阳明腑实，腹满硬痛、潮热、便秘；本证无里实，腹软喜按，主症为消渴、小便不利，病在太阳蓄水而非阳明腑实。"
+      }
+    ],
+    "missed_opportunities": [
+      {
+        "direction": "03_头身",
+        "reason": "未追问头身症状，错失确认是否头痛剧烈、项背是否强痛的机会",
+        "impact": "低"
+      },
+      {
+        "direction": "06_胸腹",
+        "reason": "未选择胸腹方向，错失确认腹诊是否柔软喜按、排除阳明腑实的机会",
+        "impact": "中"
+      },
+      {
+        "direction": "09_旧病",
+        "reason": "未选择旧病方向，错失确认患者既往是否有糖尿病、肾病等病史",
+        "impact": "低"
+      }
+    ]
+  }
+}

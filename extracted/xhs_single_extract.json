@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "data": {
+    "type": "string",
+    "value": "{\"url\":\"https://www.xiaohongshu.com/404?source=/404/sec_RRKcXvXe?redirectPath=https%3A%2F%2Fwww.xiaohongshu.com%2Fexplore%2F68b46710000000001c00b905&error_code=300031&error_msg=%E5%BD%93%E5%89%8D%E7%AC%94%E8%AE%B0%E6%9A%82%E6%97%B6%E6%97%A0%E6%B3%95%E6%B5%8F%E8%A7%88&uuid=00bb27cc-c47c-4402-acc1-3e93dbf6ab0d&verifyMsg=\",\"title\":\"当前笔记暂时无法浏览\",\"content\":\"首页\\n点点\\nai\\nRED\\n直播\\n发布\\n消息\\n我\"}"
+  }
+}

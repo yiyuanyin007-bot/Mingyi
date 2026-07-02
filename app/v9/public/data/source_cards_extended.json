@@ -1,0 +1,1163 @@
+[
+  {
+    "id": "wu-ling-san-ext",
+    "type": "source_card_extended",
+    "formula_id": "wu-ling-san",
+    "formula_name": "五苓散",
+    "mentioned_formulas": [
+      "五苓散"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第72条",
+        "article_num": 72,
+        "text": "太阳病府证（蓄水证）发汗已，脉浮数，烦渴者，五苓散主之。",
+        "source": "小红书针道轩",
+        "note_id": "66a3b7f9000000000600e214",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第73条",
+        "article_num": 73,
+        "text": "太阳病腑证（附：茯苓甘草汤证）伤寒出汗而渴者，五苓散主之：不渴者，茯苓甘草汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "66a515ba000000000600e102",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第74条",
+        "article_num": 74,
+        "text": "太阳病腑证（蓄水证）中风发热，六七日不解而烦，有表里证，渴欲饮水，水入则吐者，名曰水逆，五苓散主之。",
+        "source": "小红书针道轩",
+        "note_id": "66a8f4b5000000002701d570",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 3,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "si-ni-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "si-ni-tang",
+    "formula_name": "四逆汤",
+    "mentioned_formulas": [
+      "四逆汤"
+    ],
+    "source_chapter": "少阴病篇",
+    "articles": [
+      {
+        "article_number": "第29条",
+        "article_num": 29,
+        "text": "愈足温者，更作芍药甘草汤与之，其脚即伸；若胃气不和，语者，少与调胃承气汤；若重发汗，复加烧针者，四逆汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "665dc12d0000000014019c9e",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第317条",
+        "article_num": 317,
+        "text": "少阴病，下利清谷，里寒外热，手足厥逆，脉微欲绝，身反不恶寒，其人面色赤。或腹痛，或干呕，或咽痛，或利止脉不出者，通脉四逆汤主之。(317)",
+        "source": "小红书针道轩",
+        "note_id": "67f52361000000001b03c1bf",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第351条",
+        "article_num": 351,
+        "text": "手足厥寒，脉细欲绝者，当归四逆汤主之。(351)",
+        "source": "小红书针道轩",
+        "note_id": "683c715200000000220040de",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第353条",
+        "article_num": 353,
+        "text": "大汗出，热不去，内拘急，四肢疼，又下利厥逆而恶寒者，四逆汤主之。(353)",
+        "source": "小红书针道轩",
+        "note_id": "684063e4000000002100b605",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第354条",
+        "article_num": 354,
+        "text": "大汗，若大下利，而厥冷者，四逆汤主之。（354)",
+        "source": "小红书针道轩",
+        "note_id": "6841a9630000000022004bb6",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 5,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "da-cheng-qi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "da-cheng-qi-tang",
+    "formula_name": "大承气汤",
+    "mentioned_formulas": [
+      "大承气汤"
+    ],
+    "source_chapter": "阳明病篇",
+    "articles": [
+      {
+        "article_number": "第320条",
+        "article_num": 320,
+        "text": "少阴病，得之二三日，口燥咽干者，急下之，大承气汤主之。(320)",
+        "source": "小红书针道轩",
+        "note_id": "67fd2a22000000001d0218f7",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "da-chai-hu-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "da-chai-hu-tang",
+    "formula_name": "大柴胡汤",
+    "mentioned_formulas": [
+      "大柴胡汤"
+    ],
+    "source_chapter": "少阳病篇",
+    "articles": [
+      {
+        "article_number": "第165条",
+        "article_num": 165,
+        "text": "大柴胡汤证伤寒发热、汗出不解，心中瘩硬、呕吐而下利者，大柴胡汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6736192a0000000019016813",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "da-qing-long-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "da-qing-long-tang",
+    "formula_name": "大青龙汤",
+    "mentioned_formulas": [
+      "大青龙汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第240条",
+        "article_num": 240,
+        "text": "判断表里证病患烦热，汗出则解；又如疤状，日哺所发热者，属阳明也。脉实者，宜下之：脉浮虚者，宜发汗。下之与大承气汤，发汗宜桂枝汤。（240）刘渡舟老师：本条论述表里证的辨证与治疗。第238条讲的是下后病不解，有可攻、不可攻之辨：本条论述汗后病不解，有可汗与可下之别，两条对参，充实了阳明病大承气汤的辨证内容。“病人烦热”，说明热势较甚。若属太阳之表，则汗出表解而热除。今汗出后文出现了阵寒阵热、寒热如疤之证，为太阳表邪未尽，尚有小邪不解；“日哺所发热者”是里实热的反映，故日“属阳明也”。此太阳、阳明证俱见，即表里同病，其治当根据病情的轻重缓急而有所区别。如见实脉，即三部有力的脉象，表明其证以胃家实为主，宜以下法泻其实，用大承气汤：若见脉浮而虚，即脉浮缓而弱，提示其证重在太阳，宜以汗法解其表，可用桂枝汤，而不能用大承气汤。本条举一证一脉，即潮热、脉实作为辨阳明胃家实的客观指征，强调了脉证合参的辨证论治重要性，并进而补充了大承气汤的辨证要点。胡希翘老师：“病人烦热，汗出则解，又如疤状”，“又”应该是个“复”字，“复”这里当“反”字讲。“复如疤状”，这是《玉函经》上的，后边有注，这个应该改个“复”字。“日脯所发热者，属阳明也。脉实者，宜下之”，这个“宜下之”，在《玉函经》上是“当下之”。“脉浮虚者，当发汗。下之与大承气汤，发汗宜桂枝汤”，“宜”大承气汤，不是“与”字。“病人发烦热”，“烦热”指着大青龙汤证说的（38条，“太阳中风，脉浮紧，发热恶寒，身疼痛，不汗出而烦躁者，大青龙汤主之”）。一般的表实证不那么烦躁，本条有热，不汗出而烦躁，所以他底下搁个“汗出则解”，也就是大青龙汤证不汗出而发烦躁。那么用大青龙汤，达到汗出，烦热就解了，本条条文的深层含义是这么来的。可是解是解了，“复如疤状”，反而这个病就变了，像发疤疾似的，指的发热有定时：“日哺所发热”，日间暮的时候发热，此时的发热“属阳明也”，这是转属阳明证。“脉实者，当下之”，此时如果脉实，肯定是由表传里了，应该下。“脉浮虚者，当发汗”，这还是表不解，根据（54条，“时发热汗出者.宜桂枝汤\"），也是定时发热。所以“日哺所发热”，既可为大承气汤证，也可为桂枝汤证，这要辨之于脉。桂枝汤也肯定在这个时候每天发热。定时发热，而要汗出，那是桂枝汤证。这个日哺所发热又属阳明。若脉沉实而有力，肯定是传里了，那就得泻：若脉还浮，那还是在表。脉虚，是经过大发汗了，服过大青龙汤了，他津液不足了，当然还是桂枝汤证。所以“脉浮虚者，当发汗。发汗宜桂枝汤”本条的难点就在上面这两句话，“病人烦热，汗出则解”。这个病它来势猛峻得很，方用大青龙汤，大青龙汤它是内以清热、外以解表的这么一个方剂，发汗也相当重。那么这个药刚吃下去，表将罢而就传里，这个病就是急剧变化，正在变化莫测之时，这时候要是稍一缓那就变证百出，所以治病不但要辨证，还得详审当时的病情。一般说单就“日脯所发热而已”，还没发潮热，那不能用大承气汤。但在这个情形之下，那是不得了的，所以要用大承气汤！由于有大青龙证，用完大青龙汤，反而又传里，你看看这个病，这是正在急剧发生变化之时，最应大投重剂，所以用大承气汤。这个你往后看急下的章节就知道了，病来势猛暴。所以在临床上很不容易，问症要详细，你不问他，怎么知道吃大青龙汤了？我们个人治病当然心里面明白了，旁人治的病赶上这个时候找你来（接着治疗）了，你不详细问就不行。脉实和脉虚是个对比，脉实，实而有力，就是脉跳动也有力，为之脉实，跳动无力的则为脉虚。个人总结：“烦热，汗出而解”，说明热势较甚，但仍属太阳表证（38条，大青龙汤证），因汗不得出所致的烦躁，故此时用发汗法表则解。但发汗后出现“又如疤状，日哺所发热者”，烦热虽解，但出现定时发热，时冷时热，如疤状。如疤状为少阳证，而“日脯所发潮热”为阳明病，但此言“日哺所发热”，故不能断定病邪已传阳明而用攻下之法。此时当诊其脉，若出现脉实，即寸关尺三部均有力，提示胃家实，需用大承气汤攻下：若脉浮弱，脉浮缓弱，提示邪仍在表，因经过大青龙汤发汗，故此时用桂枝汤发汗解表。因本条文的病证发展迅速，变化急剧，若单纯的“日哺所发热”是不能用大承气汤的。",
+        "source": "小红书针道轩",
+        "note_id": "67795fd3000000001300af01",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "xiao-chai-hu-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "xiao-chai-hu-tang",
+    "formula_name": "小柴胡汤",
+    "mentioned_formulas": [
+      "小柴胡汤"
+    ],
+    "source_chapter": "少阳病篇",
+    "articles": [
+      {
+        "article_number": "第144条",
+        "article_num": 144,
+        "text": "妇人中风，七八日续得寒热，发作有时，经水适断者，此为热入血室，其血必结，故使如疤状，发作有时，小柴胡汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "672331a1000000001b02b7a3",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第265条",
+        "article_num": 265,
+        "text": "少阳病禁治伤寒，脉弦细、头痛发热者，属少阳。少阳不可发汗，发汗则谕语。此属胃，胃和则愈；胃不和，烦而悸。（265）刘渡舟老师：本条补述了少阳病脉证，并指出少阳病的治禁及误汗后的变证。条，“脉细者，此为阳微结”），这里的阳微结，就是少阳病：（100条，“阳脉涩，阴脉弦，法当腹中急痛者，先与小建中汤；不差者，与小柴胡汤主之”），提出了少阳病应见弦脉。本条可以说是综合了以上两条的精神，明确指出少阳病的弦细脉象。伤寒、头痛、发热，本属太阳病证，如果脉浮，则属太阳病无疑。今见脉弦细而不浮，说明病不在太阳，而在少阳，故曰“属少阳”。属者，转属之意。因本为太阳伤寒，而后传入少阳，故不言少阳病，而言“属少阳”。病在表者当发汗，少阳为病邪在半表半里，故日“不可发汗”。如果误发少阳之汗，必伤胃中津液而成燥：燥热上扰则见谕语，故白“此属胃”。此证或津液能以自复，则胃燥得润：或少与调胃承气汤微和胃气，使“胃和则愈”。如果津液不能恢复，燥热不解，将进而耗伤阴血。阴血伤则心失所养，故见心烦、心悸之证。以上两条，都论述了少阳病的治疗禁忌，前条讲少阳病不可吐下，吐下则悸而惊：本条谓少阳病不可发汗，发汗则谢语，甚至发生烦悸之证。《医宗金鉴·伤寒心法要诀》对少阳治禁作了如下归纳：“少阳三禁要详明，汗谚吐下悸而惊，甚则吐下利不止，水浆不入命难生。”金元时期的李东垣又提出少阳病还应有利小便之禁，对少阳治禁又做了进一步的补充。少阳禁汗、吐、下、利小便，是言其常，而在小柴胡汤的和解基础上如兼用汗、下、利小便之法，则又是言其变。治疗少阳病证，如果能做到知常而达变，则就全面地掌握了治疗方法。胡希恕老师：“头痛发热”，是太阳病的证候，但太阳伤寒，脉不应弦细，脉应该浮紧，要如果再头痛发热，肯定是太阳伤寒。“脉弦细”，病在外者脉浮，病在里则脉沉，这个脉也不浮也不沉。三部九候诊脉，每一部脉有三候，就是“浮”以候表，“沉”以候里。就是我们手轻按，就是浮取则看表有邪；按，找脉，叫沉以取之，它是里有邪。那么弦呢？就是中以取之，不浮不沉。指力一般，不轻也不重，这个时候摸脉有了，这个脉比较直，浮的时候，感觉不出来。弦就是少阳脉。弦有多种多样的，不是说脉弦就是少阳脉。浮弦与浮紧差不多，都是表实的一种证候。沉弦，里边肚子痛也沉弦，弦也能够应拘急的现象，如少腹急痛也脉沉弦。不浮也不沉的弦，就是中取之，这是在半表半里，既不在表也不在里。这个地方比较实，就是所谓的少阳脉。“而细”，咱们前面讲过，（37条，“太阳病，十日以去，脉浮细而嗜卧者，外已解也”，细就是气虚血少的脉，就是津液虚。少阳病，像柴胡证有，“血弱气尽，滕理开，邪气因入”。表证的时候，脉浮紧，尤其伤寒脉，血液充实，津液当然也充实，所以脉非常紧。在少阳病，血气都往里面退，退到里面去。所以在表的脉就细了，不充血了，体液不在外边了，所以脉又弦又细，肯定是少阳脉。头一段没提出少阳脉，在这里提出少阳脉。本来是头痛发热，太阳伤寒有此证，但应脉浮紧；而现在头痛发热，脉不浮紧而弦细，所以说属少阳。这一段很有用意，一个是要辨别少阳病与太阳病，就相似点进行鉴别。所以头痛有热，往往一看就是感冒，这个感冒是在表还是在半表半里呢？在表可发汗，在半表半里不可发汗？所以他另有这么一个含意，让你辨太阳伤寒与少阳的头痛发热，一个鉴别点",
+        "source": "小红书针道轩",
+        "note_id": "6797b593000000002a00ec55",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "xiao-qing-long-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "xiao-qing-long-tang",
+    "formula_name": "小青龙汤",
+    "mentioned_formulas": [
+      "小青龙汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第41条",
+        "article_num": 41,
+        "text": "小青龍湯伤寒心下有水气，咳而微喘，发热不渴。服汤已渴者，此寒去欲解也。小青龙汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6670393c000000000e032e43",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "gan-jiang-fu-zi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gan-jiang-fu-zi-tang",
+    "formula_name": "干姜附子汤",
+    "mentioned_formulas": [
+      "干姜附子汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第62条",
+        "article_num": 62,
+        "text": "太阳病变证（肾阳虚证-干姜附子汤证）下之后，复发汗，昼日烦躁不得眠，夜而安静，不呕，不渴，无表证，脉沉微，身无大热者。干姜附子湯主之。（61）干姜附子渴方干姜一两附子一枚（生用，去皮，切八片）上二味，以水三升，煮取一升，去澤，顿服。刘渡舟：本条论述阳虚阴盛烦躁的证治。凡表里同病之证，治应先汗后下为合法。今先下后汗，则属误治，病证不仅未愈，反使表里阳气俱伤。阳虚则阴盛，阴盛则来搏击弱阳，阴阳相争，则见烦躁不宁。白日人体之弱阳得天阳相助，能与阴争，故证见烦躁而不得眠，夜间阴气用事，弱阳无力与盛阴相抗衡，故夜而安静。烦躁本多属阳热之证，如太阳病有不汗出而烦躁或反烦不解：阳明病有大烦渴不解；少阳病有心烦喜呕。此处虽见昼日烦躁，但“不呕”则知非少阳病：“不渴”则知非阳明病：又“无表证”则知非太阳病，三阳无邪可言，而又见“沉微”之脉，沉主里病，微为阳衰，正是少阴真阳衰微，阴寒独盛之象，说明此昼日烦躁不得眠，属于阴证无疑。肾为阴阳之根，若阴盛阳衰至甚，则阳气难藏而有离根之险。根之虚阳外越，被逼于上为“戴阳”，被格于外为“格阳”，戴阳与格阳均是阳亡的先兆。戴阳于上，面红如妆；格阳于外，身大热而欲得近衣。本条言“身无大热者”，意即尚有微热，说明残存之阳幸而未尽外越。故以干姜、附子辛热纯剂，急煎顿服，力挽残阳于万一。方义：干姜附子汤由干姜、附子组成。姜、附大辛大热，以复先后天脾肾之阳。附子生用，力更峻猛。一次顿服，使药力集中，收效迅速。本方加甘草名四逆汤，加葱白名白通汤。此证因无阴盛阳郁之象，故不用白通汤：阴寒势甚，亡阳于顷刻，故当急温，迟则无及，故也不用四逆汤。本证阳气暴虚，阴寒独盛，寒极发躁，残阳欲亡，故舍甘草之恋缓，单取姜附之迅猛，急以扶阳抑阴为先。胡希翘：“下之后，复发汗”，提示承接上条：“昼日烦躁不得眠，夜而安静，不呕，不渴，无表证，脉沉微，身无大热者，干姜附子汤主之”。这条他没提振寒，大概也振寒，光提个脉，脉沉微。这条的主要意思是让你学辨证，正面的反应太少，所以从正面来辨这个证比较困难，故从侧面来，用排除法进行辨析。$“昼日烦躁不得眠，夜而安静”，三阳病都有烦躁，三阴病也有烦躁。烦躁最厉害的莫过于榄子玻汤，虚烦不得眠。如果是子汤这种烦躁的话，不会夜面安静，而是昼夜都烦躁：“不呕”，病由表传到半表半里是要呕的，说明这个烦躁也不关乎少阳病：“不渴”，里头有热，人是要渴的，阳明病。不渴，所以这个烦躁也不关乎阳明：“无表证”，也不是表不解的那个烦，没有表证，排除太阳病：阳明病的身大热，蒸蒸发热。本条身无大热，既没有表热，也没有蒸蒸发热。纯阴证有时候外边带点热（四逆汤证）。这种热就是所谓无根之火，外边是虚热，里面是真寒，这种情形是最坏的，所谓格阳于外，是纯阴寒。从排除法可知，既不是板子或汤虚烦证，不是少阳病的烦，不是胃家实渴而烦的烦，同时也不是表不解所致的烦：外头没有大热，既没有表热也没有阳明之里热的这种外证，这背定是阴证的烦躁。阴证的烦躁最坏了，依古人看法全是说“阴阳绝离”，就是正不胜邪了，就是脏器胜不了病邪，所以烦躁。这还是躁多而烦少，躁者乱也，这在阴证里头是最危险的一个证候，所以用“干姜附子汤主之”。干姜、附子这两味药，古人也说附子不得干姜，不足建其热。这两个药全是温性热药，附子偏于治下，比如下利偏于用附子，要是呕吐常用干姜，所以干姜温上。那么这两个药摘在一起，就是彻上彻下，所以里头真正有阴寒，非这样用药不可，而且量非常重。此方子再加甘草就是四逆汤了。这个病（昼日烦躁不得眠，夜而安静）不急迫，只是烦躁脉沉微，没有其他的急迫的症状，所以不搁甘草。我们现在用就是附子、干姜等量用就行，干姜9克，附子也用9克就行。生附子有毒，咱们刚开始学用，要注意一些，不要因为原方是生用，咱们也生用。就是生用也药不死人，不能说药死人，但折腾人，常常使人头眩，头眩昏，常有这种情况。大量用也能死人的。个人总结：跟之前一样使用下法后再发汗，而出现昼日烦躁不得眠，夜而安静，脉沉微。这里给的临床症状不多，但给了不呕、不渴、无表证、无大热有利于排除辩证。不呕排除少阳病，不渴则排除阳明病，无表证排除太阳病，三阳病皆排除了，可知烦躁并非阳热实证所致，而是汗下失法所致的里虚阴寒证，治疗用干姜附子汤。附子偏于温下、治下；干姜用于温上，两药合用上下兼顾，回阳救逆。",
+        "source": "小红书针道轩",
+        "note_id": "6690f7870000000025015dce",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第64条",
+        "article_num": 64,
+        "text": "太阳病变证（心阳虚）发汗过多，其人叉手自冒心，心下悸，欲得按者，桂枝甘草汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6695360f0000000025002439",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "zhi-zi-chi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "zhi-zi-chi-tang",
+    "formula_name": "栀子豉汤",
+    "mentioned_formulas": [
+      "栀子豉汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第78条",
+        "article_num": 78,
+        "text": "栀子鼓汤类证伤寒五六日，大下之后，身热不去，心中结痛者，未欲解也，栀子豉汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "66b07c360000000025030fac",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "gui-zhi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gui-zhi-tang",
+    "formula_name": "桂枝汤",
+    "mentioned_formulas": [
+      "桂枝汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第12条",
+        "article_num": 12,
+        "text": "太阳中风，阳浮而阴弱，阳浮者，热自发，阴弱者，汗自出，音啬恶寒，浙浙恶风，翁发热，鼻鸣干呕者，桂枝汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6642d0fe000000001e037e8c",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第17条",
+        "article_num": 17,
+        "text": "若酒客病，不可与桂枝汤，得之则呕，以酒客不喜甘故也。（17）01胡希恕“酒客病”，就是酗酒的人。酗酒的人常得酒病，因酒蕴湿蕴热，故易大便不通；酒由里往外蒸，也出汗。若误以为是桂枝汤证可不行。酒蕴湿蕴热而汗出，此热在里，而桂枝汤是解外热的，里热千万不能用，“得之则呕”。因里头有热，所以酗酒的人喜清凉，有湿有热，故而不喜甘温。桂枝汤是甘温药，甘温除热，除表热除外热，而且还得精气虚，精气不虚用着桂枝汤都不行。若误用桂枝汤，则反助其热，壅逆于上，一定要呕。甘药多塾，壅者往上塾，再加上温，里头又有热，则以热激热，非吐不可。所以桂枝汤应该戒用的地方（有多处）：1.麻黄汤证：同是表证，脉浮紧、发热、无汗的表实证即麻黄汤证，不能用（桂枝汤）；2.里热：本条文虽然汗出，但搁个“酒客病”，说明里热也不能用。若用则非吐不可。所以桂枝汤，遇到里热的病，千万不要用。前面明说“太阳病，头痛，发热，汗出，恶风者，桂枝汤主之”，必须有太阳病，这可是一个主要条件。所以桂枝汤，遇到里热的病，千万不要用。前面明说“太阳病，头痛，发热，汗出，恶风者，桂枝汤主之”，必须有太阳病，这可是一个主要条件。在临床诊疗过程中，也不能片面看问题，看见出汗就是精气虚，就用桂枝汤，这可不行，那可要出错误的。必须要全面观察，第一个确定它是太阳病，太阳病发热汗出，那你可以用桂枝汤。它不是太阳病，而是里热的问题，那用它（桂枝汤）就坏了，一定要呕的。@文案整理：马来西亚留学生小詹",
+        "source": "小红书针道轩",
+        "note_id": "664b53c80000000016013038",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "bai-hu-jia-ren-shen-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "bai-hu-jia-ren-shen-tang",
+    "formula_name": "白虎加人参汤",
+    "mentioned_formulas": [
+      "白虎加人参汤"
+    ],
+    "source_chapter": "阳明病篇",
+    "articles": [
+      {
+        "article_number": "第169条",
+        "article_num": 169,
+        "text": "白虎加人参汤证伤寒无大热、口燥渴、心烦、背微恶寒者，白虎加人参汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "673e03db0000000007034159",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第222条",
+        "article_num": 222,
+        "text": "阳明病热证（白虎加人参汤证）若渴欲饮水，口干舌燥者，白虎加人参汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "676d80b90000000013019a85",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "bai-hu-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "bai-hu-tang",
+    "formula_name": "白虎汤",
+    "mentioned_formulas": [
+      "白虎汤"
+    ],
+    "source_chapter": "阳明病篇",
+    "articles": [
+      {
+        "article_number": "第219条",
+        "article_num": 219,
+        "text": "并，腹满身重，难以转侧，口不仁，面垢，逾语遗尿。发汗则语：下之则额上生汗，手足逆冷：若自汗出者，白虎汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "676c2e67000000001300fcb5",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第225条",
+        "article_num": 225,
+        "text": "少阴病本证脉浮而迟，表热里寒，下利清谷者，四逆汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "676ec63d0000000013018f98",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第268条",
+        "article_num": 268,
+        "text": "三阳合病（重在少阳）三阳合病，脉浮大，上关上，但欲眠睡，目合则汗。（268）刘渡舟老师：本条论述以少阳病证为主的三阳合病脉证。凡言合病，皆指阳经合病，关于三阳合病，前已有论述，如（219条，“三阳合病，腹满身重，难以转侧，口不仁面面垢，谢语遗尿..若自汗出者，白虎汤主之”的证治，因阳明的热证突出，故治疗专取阳明而用白虎汤。本条三阳合病，从其脉证辨别，则是重点在少阳，故当治以和解之法，使枢机利、表里和，则三阳病解。“脉浮大”，浮为太阳之脉，大为阳明之脉；“上关上”，即浮大之脉在关上部位最明显。仲景脉法称寸脉为“寸口”，关脉为“关上”，尺脉为“尺中”。所谓“上关上”就是说浮大脉象在于关部之上，反映了阳热之邪盛为甚。亦有注家认为关脉以候胆，“脉浮大，上关上”，反映少阳经的邪热气盛，此说似亦可以。邪热垂盛若扰于神明，则昏昏而欲眠睡，此之“但欲眠睡”要和少阴病“但欲寐”相区别：三阳合病，但欲眠睡，脉见浮大，上关上，是一派阳热旺盛之象；少阴病，但欲寐，脉见微细，是一派阳衰阴盛之证。二者虽均有但欲眠睡，但寒热殊异，虚实遍别。“目合则汗”，即眼晴闭上就汗出，亦称为盗汗。少阳为半表半里而主枢，关系人体阴阳表里出入之机。目合则阳入于阴，少阳本主相火，阳热内迫，则里热更盛。阳加于阴谓之汗，里热盛而逼津外渗，所以目合则汗。这正是少阳经有邪热的反映。本条所述三阳合病，仍以少阳邪热为重，文中虽未提及治法，根据病情分析当和解少阳之邪，而较为适宜。胡希恕老师：三阳合病就是既有太阳病，又有阳明病，再有少阳病，同时发作，不是有先有后，这就为合病。有太阳病的发热怕冷，阳明病的大便干或者胃家实等情况，再有少阳病口苦咽干等情况合在一起，叫三阳合病，同时发作。本条三阳合病的证候他没说，只说了“脉浮大，上关上”，就脉上说这是三阳合病，脉浮是太阳脉：脉大为阳明脉，阳明脉大：上关上为少阳脉。“上关上”，靠关上一点叫上关上，上关上以候心下之疾，《金匮要略》里“五脏风寒积聚”一篇说，上关上以候心下之积。少阳病在胸胁部位，主要在胁下，胁下与心下在上下的部位上说是相当的，因此上关上以候少阳之邪。三部九候，三部是上以候上，下以候下，中以候中，这是粗糙地说，细说就是“夫脉当取太过不及”，就是“胸痹心痛短气病脉证治”讲的，非常好。浮大之脉，显现于上关上，冲着脉上说，上关上，候少阳之邪，这个地方脉浮大是少阳有热，所以本条就脉上说是三阳合病。阳性证都是亢奋的、热性的，三阳都是热，就是表里内外全热了。在《内经》上有一句话，“壮火食气，气食少火”，人一点没有（火）是不行的，可是得不大的火，少火，人的气就能生，但火大了伤食人气，所以说“壮火食气”。那么三阳同时有热，内外表里这是壮火（俱热）了，伤人气，所以“但欲眠睡”。“目合则汗”，这是盗汗。那么换个角度再说，就是热在里蒸的一个现象，内外俱热，所以人昏昏欲睡而盗汗出，个人总结：本条论述了三阳合病的脉象，即“脉浮大，上关上”，浮为太阳之脉，大为阳明之脉，“上关上”是指关脉以上，主以候心下之疾，也有人认为是说其脉端直以长，即弦脉，两种均为少阳脉，故“脉浮大，上关上”为三阳受邪之脉。“但欲眠睡，目合则汗”，即嗜睡、盗汗，说明里热扰及心神，神志昏蒙，且迫津外出所致。",
+        "source": "小红书针道轩",
+        "note_id": "679e03f80000000029038a35",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 3,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "ge-gen-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "ge-gen-tang",
+    "formula_name": "葛根汤",
+    "mentioned_formulas": [
+      "葛根汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第14条",
+        "article_num": 14,
+        "text": "太阳病，项背强几几，反汗出恶风者，桂枝加葛根汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6644c5dc000000001e0322d2",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第32条",
+        "article_num": 32,
+        "text": "太阳与阳明合病者，必自下利，葛根汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6663252700000000060066bd",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "ma-huang-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "ma-huang-tang",
+    "formula_name": "麻黄汤",
+    "mentioned_formulas": [
+      "麻黄汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第46条",
+        "article_num": 46,
+        "text": "九日不解，表证仍在，此当发其汗。服药已微除，其人发烦目，剧者必邮，邮乃解。所以然者，阳气重故也。麻黄汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "667840a5000000001f004bc0",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第55条",
+        "article_num": 55,
+        "text": "麻黄汤证伤寒脉浮紧，不发汗，因致邮者，麻黄汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "66894f6f000000001c02719a",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "extracted/xiaohongshu_teacher/伤寒论条文_小红书针道轩.md"
+  },
+  {
+    "id": "gui-zhi-jia-ge-gen-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gui-zhi-jia-ge-gen-tang",
+    "formula_name": "桂枝加葛根汤",
+    "mentioned_formulas": [
+      "桂枝加葛根汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第14条",
+        "article_num": 14,
+        "text": "太阳病，项背强兀兀，反汗出恶风者，桂枝加葛根汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "gui-zhi-jia-houpo-xingzi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gui-zhi-jia-houpo-xingzi-tang",
+    "formula_name": "桂枝加厚朴杏子汤",
+    "mentioned_formulas": [
+      "桂枝加厚朴杏子汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第43条",
+        "article_num": 43,
+        "text": "太阳病，下之微喘者，表未解故也，桂枝加厚朴杏子汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6672aed9000000000d00f8e8",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "gui-zhi-qu-shaoyao-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gui-zhi-qu-shaoyao-tang",
+    "formula_name": "桂枝去芍药汤",
+    "mentioned_formulas": [
+      "桂枝去芍药汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第21条",
+        "article_num": 21,
+        "text": "太阳病，下之后，脉促，胸满者，桂枝去芍药汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "gui-zhi-jia-fu-zi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gui-zhi-jia-fu-zi-tang",
+    "formula_name": "桂枝加附子汤",
+    "mentioned_formulas": [
+      "桂枝加附子汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第20条",
+        "article_num": 20,
+        "text": "太阳病，发汗，遂漏不止，其人恶风，小便难，四肢微急，难以屈伸者，桂枝加附子汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "gui-zhi-ma-huang-ge-ban-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gui-zhi-ma-huang-ge-ban-tang",
+    "formula_name": "桂枝麻黄各半汤",
+    "mentioned_formulas": [
+      "桂枝麻黄各半汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第23条",
+        "article_num": 23,
+        "text": "太阳病，得之八九日，如疟状，发热恶寒，热多寒少，其人不呕，圊便欲自可，一日二三度发。脉微缓者，为欲愈也；脉微而恶寒者，此阴阳俱虚，不可更发汗、更下、更吐也；面色反有热色者，未欲解也，以其不能得小汗出，身必痒，宜桂枝麻黄各半汤。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "gui-zhi-er-yue-bi-yi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "gui-zhi-er-yue-bi-yi-tang",
+    "formula_name": "桂枝二越婢一汤",
+    "mentioned_formulas": [
+      "桂枝二越婢一汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第27条",
+        "article_num": 27,
+        "text": "太阳病，发热恶寒，热多寒少，脉微弱者，此无阳也，不可发汗，宜桂枝二越婢一汤。",
+        "source": "小红书针道轩",
+        "note_id": "66588f5000000000140188dc",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "ma-huang-xing-ren-gan-cao-shi-gao-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "ma-huang-xing-ren-gan-cao-shi-gao-tang",
+    "formula_name": "麻黄杏仁甘草石膏汤",
+    "mentioned_formulas": [
+      "麻黄杏仁甘草石膏汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第63条",
+        "article_num": 63,
+        "text": "发汗后，不可更行桂枝汤。汗出而喘。无大热者，可与麻黄杏仁甘草石膏汤。",
+        "source": "小红书针道轩",
+        "note_id": "6693318400000000250019fa",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "ge-gen-jia-ban-xia-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "ge-gen-jia-ban-xia-tang",
+    "formula_name": "葛根加半夏汤",
+    "mentioned_formulas": [
+      "葛根加半夏汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第33条",
+        "article_num": 33,
+        "text": "太阳与阳明合病，不下利，但呕者，葛根加半夏汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "66647334000000000d00ea57",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "ge-gen-huang-qin-huang-lian-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "ge-gen-huang-qin-huang-lian-tang",
+    "formula_name": "葛根黄芩黄连汤",
+    "mentioned_formulas": [
+      "葛根黄芩黄连汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第34条",
+        "article_num": 34,
+        "text": "太阳病，桂枝证，医反下之，利遂不止。脉促者，表未解也，喘而汗出者，葛根黄芩黄连汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "6665c748000000000e0325eb",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "chai-hu-jia-mang-xiao-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "chai-hu-jia-mang-xiao-tang",
+    "formula_name": "柴胡加芒硝汤",
+    "mentioned_formulas": [
+      "柴胡加芒硝汤"
+    ],
+    "source_chapter": "少阳病篇",
+    "articles": [
+      {
+        "article_number": "暂缺",
+        "article_num": 0,
+        "text": "本方的扩展条文尚待补充，主要来源：少阳病篇相关条文。",
+        "source": "待补充",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "chai-hu-jia-long-gu-mu-li-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "chai-hu-jia-long-gu-mu-li-tang",
+    "formula_name": "柴胡加龙骨牡蛎汤",
+    "mentioned_formulas": [
+      "柴胡加龙骨牡蛎汤"
+    ],
+    "source_chapter": "少阳病篇",
+    "articles": [
+      {
+        "article_number": "第107条",
+        "article_num": 107,
+        "text": "伤寒八九日，下之，胸满烦惊，小便不利，谵语，一身尽重不可转侧者，柴胡加龙骨牡蛎汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "zhi-zi-gan-cao-chi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "zhi-zi-gan-cao-chi-tang",
+    "formula_name": "栀子甘草豉汤",
+    "mentioned_formulas": [
+      "栀子甘草豉汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第76条",
+        "article_num": 76,
+        "text": "发汗后，水药不得入口，为逆；若更发汗，必吐下不止。发汗吐下后。虚烦不得眠，若剧者，必反复颠倒，心中懊憹，栀子豉汤主之；若少气者，栀子甘草豉汤主之；若呕者，栀子生姜豉汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "66aba082000000002701054f",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "zhi-zi-sheng-jiang-chi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "zhi-zi-sheng-jiang-chi-tang",
+    "formula_name": "栀子生姜豉汤",
+    "mentioned_formulas": [
+      "栀子生姜豉汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第76条",
+        "article_num": 76,
+        "text": "发汗后，水药不得入口，为逆；若更发汗，必吐下不止。发汗吐下后。虚烦不得眠，若剧者，必反复颠倒，心中懊憹，栀子豉汤主之；若少气者，栀子甘草豉汤主之；若呕者，栀子生姜豉汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "66aba082000000002701054f",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "zhi-zi-hou-po-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "zhi-zi-hou-po-tang",
+    "formula_name": "栀子厚朴汤",
+    "mentioned_formulas": [
+      "栀子厚朴汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第79条",
+        "article_num": 79,
+        "text": "伤寒下后，心烦腹满，卧起不安者，栀子厚朴汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "zhi-zi-gan-jiang-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "zhi-zi-gan-jiang-tang",
+    "formula_name": "栀子干姜汤",
+    "mentioned_formulas": [
+      "栀子干姜汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第80条",
+        "article_num": 80,
+        "text": "伤寒，医以丸药大下之，身热不去，微烦者，栀子干姜汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "zhen-wu-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "zhen-wu-tang",
+    "formula_name": "真武汤",
+    "mentioned_formulas": [
+      "真武汤"
+    ],
+    "source_chapter": "少阴病篇",
+    "articles": [
+      {
+        "article_number": "第82条",
+        "article_num": 82,
+        "text": "太阳病发汗，汗出不解，其人仍发热，心下悸，头眩，身瞤动，振振欲擗地者，真武汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第316条",
+        "article_num": 316,
+        "text": "少阴病，二三日不已，至四五日，腹痛，小便不利，四肢沉重疼痛，自下利者，此为有水气。其人或咳，或小便利，或下利，或呕者，真武汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "67f3f36c000000001e006f52",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "fu-ling-si-ni-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "fu-ling-si-ni-tang",
+    "formula_name": "茯苓四逆汤",
+    "mentioned_formulas": [
+      "茯苓四逆汤"
+    ],
+    "source_chapter": "少阴病篇",
+    "articles": [
+      {
+        "article_number": "第69条",
+        "article_num": 69,
+        "text": "发汗，若下之，病仍不解烦躁者，茯苓四逆汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "669e7e5400000000270183b3",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "tao-he-cheng-qi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "tao-he-cheng-qi-tang",
+    "formula_name": "桃核承气汤",
+    "mentioned_formulas": [
+      "桃核承气汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第106条",
+        "article_num": 106,
+        "text": "太阳病不解，热结膀胱，其人如狂，血自下，下者愈。其外不解者尚未可攻，当先解其外。外解已，但少腹急结者，乃可攻之，宜桃核承气汤。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 1,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "di-dang-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "di-dang-tang",
+    "formula_name": "抵当汤",
+    "mentioned_formulas": [
+      "抵当汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第124条",
+        "article_num": 124,
+        "text": "太阳病六七日，表证仍在，脉微而沉，反不结胸，其人发狂者，以热在下焦，少腹当硬满。小便自利者，下血乃愈。所以然者，以太阳随经，瘀热在里故也，抵当汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第125条",
+        "article_num": 125,
+        "text": "太阳病,身黄,脉沉结，少腹硬,小便不利者，为无血也；小便自利,其人如狂者，血证谛也，抵当汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第237条",
+        "article_num": 237,
+        "text": "阳明证，其人喜忘者，必有蓄血。所以然者，本有久瘀血，故令喜忘；屎虽硬，大便反易，其色必黑者，宜抵当汤下之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第257条",
+        "article_num": 257,
+        "text": "病人无表里证，发热七八日，虽脉浮数者，可下之。假令已下，脉数不解，合热则消谷喜饥，至六七日不大便者，有瘀血，宜抵当汤。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 4,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "xiao-jian-zhong-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "xiao-jian-zhong-tang",
+    "formula_name": "小建中汤",
+    "mentioned_formulas": [
+      "小建中汤"
+    ],
+    "source_chapter": "太阳病篇",
+    "articles": [
+      {
+        "article_number": "第100条",
+        "article_num": 100,
+        "text": "伤寒，阳脉涩，阴脉弦，法当腹中急痛，先与小建中汤，不差者，小柴胡汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第102条",
+        "article_num": 102,
+        "text": "伤寒二三日，心中悸而烦者，小建中汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 2,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  },
+  {
+    "id": "tiao-wei-cheng-qi-tang-ext",
+    "type": "source_card_extended",
+    "formula_id": "tiao-wei-cheng-qi-tang",
+    "formula_name": "调胃承气汤",
+    "mentioned_formulas": [
+      "调胃承气汤"
+    ],
+    "source_chapter": "阳明病篇",
+    "articles": [
+      {
+        "article_number": "第29条",
+        "article_num": 29,
+        "text": "伤寒，脉浮，自汗出，小便数，心烦，微恶寒，脚挛急。反与桂枝欲攻其表，此误也。得之便厥，咽中干，烦躁吐逆者，作甘草干姜汤与之，以复其阳；若厥愈足温者，更作芍药甘草汤与之，其脚即伸；若胃气不和，谵语者，少与调胃承气汤；若重发汗，复加烧针者，四逆汤主之。",
+        "source": "小红书针道轩",
+        "note_id": "665b4b5c0000000005005e5c",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第70条",
+        "article_num": 70,
+        "text": "发汗后，恶寒者，虚故也；不恶寒，但热者，实也，当和胃气，与调胃承气汤。",
+        "source": "小红书针道轩",
+        "note_id": "669fcb07000000002701ed7a",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第94条",
+        "article_num": 94,
+        "text": "太阳病未解，脉阴阳俱停，必先振栗汗出而解。但阳脉微者先汗出而解；但阴脉微者下之而解。若欲下之宜调胃承气汤。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第105条",
+        "article_num": 105,
+        "text": "伤寒十三日，过经谵语者，以有热也，当以汤下之。若小便利者，大便当硬，而反下利，脉调和者，知医以丸药下之，非其治也。若自下利者，脉当微厥；今反和者，此为内实也。调胃承气汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第123条",
+        "article_num": 123,
+        "text": "太阳病，过经十余日，心下温温欲吐，而胸中痛，大便反溏，腹微满，郁郁微烦，先此时自极吐下者，与调胃承气汤。若不尔者，不可与。但欲呕，胸中痛，微溏者，此非柴胡汤证，以呕，故知极吐下也。调胃承气汤。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第207条",
+        "article_num": 207,
+        "text": "阳明病，不吐不下，心烦者，可与调胃承气汤。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第248条",
+        "article_num": 248,
+        "text": "太阳病三日，发汗不解，蒸蒸发热者，属胃也。调胃承气汤主之。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      },
+      {
+        "article_number": "第249条",
+        "article_num": 249,
+        "text": "伤寒吐后，腹胀满者，与调胃承气汤。",
+        "source": "伤寒论",
+        "note_id": "",
+        "annotations": {
+          "刘渡舟": "资料暂缺",
+          "胡希恕": "资料暂缺"
+        }
+      }
+    ],
+    "total_articles": 8,
+    "source": "source_cards.json + xiaohongshu_teacher"
+  }
+]

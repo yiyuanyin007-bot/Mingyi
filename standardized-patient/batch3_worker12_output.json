@@ -1,0 +1,1192 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-ma-zi-ren-wan-fm-2-20260622-145148",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-247",
+    "source_classic": "伤寒论",
+    "chapter": "阳明病篇",
+    "patient": {
+      "name": "刘先生",
+      "age": 45,
+      "gender": "男",
+      "occupation": "建筑工程师",
+      "background": "平时工作忙，经常熬夜加班，饮食习惯偏油腻辛辣",
+      "persona_id": "skeptical-patient"
+    },
+    "chief_complaint": {
+      "text": "大夫，我来看便秘的，这个毛病折腾我好久了。大概半年前开始，大便就不太通畅，一开始是干，后来干脆三四天拉一次，每次费劲得很，拉出来的像羊屎蛋一样，硬邦邦的。最怪的是，我一天跑厕所小便好多次，大概六七趟，但每次也就一点，水明明喝得不少，但小便就是清亮清亮的。肚子也胀，但不像人家那种便秘胀得痛，就是感觉满胀胀的。看了几个西医，吃了不少药，不太管用。上一个大夫说是肠道菌群失调，让我吃益生菌，也没见好。我就想来中医看看，到底能不能调理好。",
+      "revealed_symptoms": [
+        "大便硬",
+        "小便数",
+        "腹满"
+      ],
+      "l0_symptoms": [
+        "大便硬",
+        "小便数",
+        "腹满"
+      ],
+      "directness": "moderate",
+      "word_count": 238
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不怕冷，也不怎么发热。就是觉得燥热，尤其是心里烦，晚上睡觉觉得热，但也不是发烧那种。",
+          "revealed_symptoms": [
+            "不恶寒",
+            "心中烦热"
+          ],
+          "sample_question": "您觉得怕冷吗？有没有发烧？"
+        },
+        "l2": {
+          "trigger_question": "您说心里烦，是那种烦躁还是燥热？",
+          "text": "就是觉得热燥燥的，手心也热，但量体温又不高。晚上有时候睡到半夜觉得口干，想起来喝水。",
+          "revealed_symptoms": [
+            "手足心热",
+            "夜热口干"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我上网查了，说这应该是阴虚火旺，应该吃点滋阴降火的药吧？",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "无汗",
+          "盗汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "汗不多，平时也不怎么爱出汗。晚上睡得好的时候也没有盗汗。",
+          "revealed_symptoms": [
+            "汗少"
+          ],
+          "sample_question": "您出汗多吗？有没有盗汗？"
+        },
+        "l2": {
+          "trigger_question": "手心脚心出汗吗？",
+          "text": "手心脚心倒是有点热，但不怎么出汗。就是觉得干燥，皮肤干，嘴唇也干。",
+          "revealed_symptoms": [
+            "皮肤干燥",
+            "口干"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我同事说便秘是因为出汗太少，让我多运动出汗，但我跑步之后便秘更重了。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "头晕"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头倒是不痛，就是有时候觉得头晕，可能是没睡好。脖子后面有点僵，工作久坐的关系吧。",
+          "revealed_symptoms": [
+            "头晕",
+            "颈项僵"
+          ],
+          "sample_question": "有头痛、头晕吗？身体有什么不舒服？"
+        },
+        "l2": {
+          "trigger_question": "头晕是经常的还是偶尔？",
+          "text": "偶尔吧，主要是下午的时候。可能是气血不够？不，大夫您说是什么？我反正就是觉得疲倦。",
+          "revealed_symptoms": [
+            "疲倦"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是颈椎问题导致的，之前拍片说颈椎有点增生。",
+          "type": "错误归因",
+          "misleading_symptom": "颈椎病归因"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "便秘"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "大便就是最大的问题了。三四天一次，干得像石头，每次都费好大力气。小便次数特别多，一天六七次，量不多，颜色很清。",
+          "revealed_symptoms": [
+            "大便硬",
+            "小便数",
+            "小便清"
+          ],
+          "sample_question": "您大便怎么样？小便呢？"
+        },
+        "l2": {
+          "trigger_question": "您多久没大便了？肚子胀不胀？",
+          "text": "最近一次是前天，到今天还没拉。肚子胀是有点胀，满胀胀的，但按上去不硬也不痛，就是觉得不舒服。不是那种绞痛。",
+          "revealed_symptoms": [
+            "腹满",
+            "按之软",
+            "无腹痛"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我试过吃酵素、吃益生菌，朋友还推荐我喝橄榄油，都不行。",
+          "type": "自我用药",
+          "misleading_symptom": "自我用药"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "食欲",
+          "口渴",
+          "饮食"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "食欲还行，就是吃饭没什么胃口。口干得很，特别是下午，总想喝水。喝水能喝不少，但越喝越渴。",
+          "revealed_symptoms": [
+            "口干",
+            "口渴多饮"
+          ],
+          "sample_question": "您吃饭怎么样？口干吗？"
+        },
+        "l2": {
+          "trigger_question": "您喜欢喝热水还是凉水？",
+          "text": "喜欢喝凉的，温水喝着不解渴。但喝凉水有时候胃不舒服，所以也就喝常温的。",
+          "revealed_symptoms": [
+            "喜冷饮"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是糖尿病，网上说口渴多饮是糖尿病。",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹胀",
+          "腹痛"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "肚子胀，满胀胀的，但不是很痛。就是觉得不舒服，躺下的时候感觉更满。胸不闷。",
+          "revealed_symptoms": [
+            "腹满"
+          ],
+          "sample_question": "您肚子怎么样？胀吗？痛吗？"
+        },
+        "l2": {
+          "trigger_question": "按下去肚子是软的还是硬的？",
+          "text": "按下去是软的，不硬。不像人家那种实热便秘肚子硬邦邦的。按上去也不痛，就是觉得胀。",
+          "revealed_symptoms": [
+            "按之软",
+            "无腹痛",
+            "无拒按"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "上一个大夫给我按了肚子，说可能是肠梗阻，吓死我了。",
+          "type": "恐惧联想",
+          "misleading_symptom": "错误诊断"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "目赤",
+          "眼花"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "耳朵没有耳鸣，眼睛也不红。就是看久了电脑觉得眼睛干涩。",
+          "revealed_symptoms": [
+            "目干涩"
+          ],
+          "sample_question": "您耳朵和眼睛有什么不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "看东西有没有模糊？",
+          "text": "没有模糊，就是看久了觉得累。我觉得是用眼过度。",
+          "revealed_symptoms": []
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我买了滴眼液，医生说有干眼症，可能和这病有关。",
+          "type": "自我用药",
+          "misleading_symptom": "错误关联"
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "睡眠"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "睡眠一般，晚上能睡着，但半夜有时候起来上厕所，醒了就再睡。有点烦躁的时候入睡慢。",
+          "revealed_symptoms": [
+            "夜尿",
+            "入睡难"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "半夜醒来是几点？醒了能很快睡着吗？",
+          "text": "大概一两点，或者三四点。醒了之后迷迷糊糊能再睡。就是觉得口干，起来喝口水。",
+          "revealed_symptoms": [
+            "夜渴"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是睡眠呼吸暂停，是不是应该做个睡眠监测？",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往史",
+          "手术",
+          "慢性病"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "以前没什么大病。就是肠胃从小就一般，容易便秘，但以前没这么严重。没有其他慢性病。",
+          "revealed_symptoms": [
+            "素有便秘"
+          ],
+          "sample_question": "您以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "您这个便秘是从什么时候开始的？有什么诱因吗？",
+          "text": "半年前吧，之前工作压力大，经常出差，饮食也不规律。刚开始还能自己调，后来越来越严重。",
+          "revealed_symptoms": [
+            "饮食不规律",
+            "工作压力大"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我网上查了一下，长期便秘容易得结肠癌，您说我是不是应该去做肠镜？",
+          "type": "恐惧联想",
+          "misleading_symptom": "恐惧联想"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "诱因",
+          "加重",
+          "缓解"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "好像是半年前工作调动之后，压力大了，应酬也多了，喝酒吃肉多了就开始不对劲。",
+          "revealed_symptoms": [
+            "饮食不节",
+            "工作压力大"
+          ],
+          "sample_question": "您这个病是怎么引起的？"
+        },
+        "l2": {
+          "trigger_question": "吃了什么会加重？吃了什么会缓解？",
+          "text": "吃辣的、油炸的就更不舒服。吃蔬菜、水果会稍微好一点，但也不解决根本问题。喝水多小便更多，但大便还是干。",
+          "revealed_symptoms": [
+            "辛辣加重",
+            "多水不润"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是换了牌子的咖啡，咖啡因导致我脱水，所以便秘。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "正常",
+        "tongue_color": "红",
+        "coating": "薄黄少津",
+        "special": "舌面干燥，少津"
+      },
+      "auscultation": {
+        "voice": "正常",
+        "breath": "正常",
+        "cough": "无",
+        "odor": "无特殊"
+      },
+      "palpation": {
+        "pulse_position": "浮",
+        "pulse_rate": "数",
+        "pulse_shape": "涩",
+        "pulse_force": "有力",
+        "composite": "浮涩"
+      },
+      "pressing": {
+        "abdomen": "腹满，按之软，不拒按",
+        "limbs": "温",
+        "skin": "干燥"
+      }
+    },
+    "case_summary": "【主诉】\n刘先生，45岁，建筑工程师。半年来大便干结，3-4日一行，伴小便频数。\n\n【现病史】\n- 大便：三四天一次，干结如羊屎，排便费力\n- 小便：一日六七次，量多色清，饮水后更甚\n- 腹满：腹部满胀，按之软，不拒按，无腹痛\n- 口干：口渴喜冷饮，下午加重，夜间口干起夜饮水\n- 饮食：食欲尚可，但食量减少\n- 寒热：无发热恶寒，自觉燥热\n- 汗：汗少，皮肤干燥\n- 睡眠：一般，夜尿1-2次\n\n【查体】\n舌红，苔薄黄少津。脉浮涩。腹满，按之软，不拒按。四肢温，皮肤干燥。\n\n【问诊选择】\n二便 / 饮食 / 胸腹 / 寒热 / 诱因",
+    "question": {
+      "mode": "formula",
+      "options": [
+        {
+          "id": "ma-zi-ren-wan",
+          "name": "麻子仁丸",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "xiao-cheng-qi-tang",
+          "name": "小承气汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "tiao-wei-cheng-qi-tang",
+          "name": "调胃承气汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "da-cheng-qi-tang",
+          "name": "大承气汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "bai-hu-tang",
+          "name": "白虎汤",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-247",
+      "correct_formula_id": "ma-zi-ren-wan",
+      "correct_article_number": 247,
+      "correct_article_text": "趺阳脉浮而涩，浮则胃气强，涩则小便数，浮涩相搏，大便则硬，其脾为约，麻子仁丸主之。",
+      "correct_formula_name": "麻子仁丸",
+      "correct_herbs": [
+        "麻子仁",
+        "芍药",
+        "枳实",
+        "大黄",
+        "厚朴",
+        "杏仁"
+      ]
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "大便硬",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "小便数",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "腹满",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-04_二便",
+          "level": "l1"
+        },
+        {
+          "symptom": "口干",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-05_饮食",
+          "level": "l1"
+        },
+        {
+          "symptom": "舌红少津",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "浮涩脉",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "按之软",
+          "in_patient": true,
+          "in_source": false,
+          "note": "排除实热腑实的鉴别体征"
+        },
+        {
+          "symptom": "无腹痛拒按",
+          "in_patient": true,
+          "in_source": false,
+          "note": "排除大承气汤证"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "大便硬+小便数",
+          "includes": [
+            "article-247"
+          ],
+          "reason": "脾约证的典型表现：胃强脾弱，津液偏渗膀胱，不能还肠润下"
+        },
+        {
+          "symptom": "腹满+按之软+无腹痛拒按",
+          "excludes": [
+            "da-cheng-qi-tang",
+            "xiao-cheng-qi-tang"
+          ],
+          "reason": "大/小承气汤均为阳明腑实，腹满硬痛拒按，与脾约之按之软不同"
+        },
+        {
+          "symptom": "口干渴+喜冷饮",
+          "excludes": [
+            "bai-hu-tang"
+          ],
+          "reason": "白虎汤为阳明经证大热大渴大汗，但无便秘；本患者虽有口渴但无大热大汗"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "02_汗出",
+          "reason": "未追问汗出情况，错失确认阳明经证/腑证鉴别",
+          "impact": "低"
+        },
+        {
+          "direction": "09_旧病",
+          "reason": "未追问既往是否有过误治史，可排除其他病因",
+          "impact": "低"
+        }
+      ]
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-yin-chen-hao-tang-fm-2-20260622-145148",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-236",
+    "source_classic": "伤寒论",
+    "chapter": "阳明病篇",
+    "patient": {
+      "name": "张先生",
+      "age": 32,
+      "gender": "男",
+      "occupation": "互联网公司产品经理",
+      "background": "平时久坐办公，有轻微脂肪肝，最近出差较多饮食不规律",
+      "persona_id": "intellectual-young-adult"
+    },
+    "chief_complaint": {
+      "text": "大夫，我这情况可能有点麻烦。大概一周前开始，我同事说我脸发黄，眼睛也黄。我自己照镜子一看，确实，眼白都黄了。然后皮肤也开始变黄，尤其是手上很明显。还有，我小便颜色特别深，像浓茶一样。上厕所小便也不太顺，尿得慢，量也不多。特别渴，总想喝水，喝水也不解渴。头上出汗挺多的，但身上其他地方没汗。上次出差回来就这样了，可能是吃了不干净的东西？",
+      "revealed_symptoms": [
+        "身黄",
+        "小便不利",
+        "口渴"
+      ],
+      "l0_symptoms": [
+        "身黄",
+        "小便不利",
+        "口渴"
+      ],
+      "directness": "moderate",
+      "word_count": 212
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "有点发热，但也不是高烧。体温大概在37.5到38度左右，下午比较明显。不怕冷，还觉得燥热。",
+          "revealed_symptoms": [
+            "微热",
+            "不恶寒",
+            "燥热"
+          ],
+          "sample_question": "您觉得怕冷吗？有没有发烧？"
+        },
+        "l2": {
+          "trigger_question": "发热是持续的还是一阵一阵的？",
+          "text": "下午比较明显，上午还好。有点像低热，但人觉得烦躁。",
+          "revealed_symptoms": [
+            "午后发热",
+            "烦躁"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我查了体温调定点理论，怀疑是炎症反应导致的，要不要做血常规？",
+          "type": "半懂术语",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "无汗",
+          "盗汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头上出汗很多，特别是吃饭或者稍微动一下的时候。但身上其他地方没有汗，皮肤干干的。",
+          "revealed_symptoms": [
+            "头汗出",
+            "身无汗"
+          ],
+          "sample_question": "您出汗多吗？"
+        },
+        "l2": {
+          "trigger_question": "头汗是到脖子为止还是全身都有？",
+          "text": "就到脖子，脖子以下就没有汗了。很奇怪，我查了资料，这叫'剂颈而还'吧？",
+          "revealed_symptoms": [
+            "剂颈而还"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是交感神经过度兴奋导致局部出汗，可能和压力有关。",
+          "type": "过度分析",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "头晕"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头有点昏沉，不重。身体有点困重，四肢没劲。肚子胀满。",
+          "revealed_symptoms": [
+            "头晕",
+            "身困重",
+            "腹满"
+          ],
+          "sample_question": "您有头痛、头晕吗？"
+        },
+        "l2": {
+          "trigger_question": "肚子胀是饭前还是饭后？",
+          "text": "整天都胀，不吃饭也胀。按上去有点硬，但也不是特别痛。",
+          "revealed_symptoms": [
+            "腹满"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我觉得可能是肝功能异常，查了AST ALT可能升高。",
+          "type": "半懂术语",
+          "misleading_symptom": "错误诊断"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "便秘"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "小便特别黄，颜色深，尿得费劲，量不多。大便也干，两三天一次，但不是特别硬。",
+          "revealed_symptoms": [
+            "小便不利",
+            "小便黄",
+            "大便难"
+          ],
+          "sample_question": "您大小便怎么样？"
+        },
+        "l2": {
+          "trigger_question": "大便颜色正常吗？",
+          "text": "颜色偏淡，有点灰白色的感觉。尿的颜色很浓，像浓茶。",
+          "revealed_symptoms": [
+            "大便色淡"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是胆总管结石，梗阻性黄疸。要不要做个B超？",
+          "type": "网络诊断",
+          "misleading_symptom": "错误诊断"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "食欲",
+          "口渴",
+          "饮食"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "口渴得厉害，喝水也不解渴。总想喝很多水。食欲还行，但觉得嘴里苦。",
+          "revealed_symptoms": [
+            "口渴",
+            "口苦"
+          ],
+          "sample_question": "您口干吗？想喝水吗？"
+        },
+        "l2": {
+          "trigger_question": "您喜欢喝热水还是凉水？",
+          "text": "喜欢喝凉水，喝冰的觉得舒服。但喝多了胃也不舒服。",
+          "revealed_symptoms": [
+            "喜冷饮"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我查了一下，这是'消渴'的表现，应该按糖尿病治。",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹胀",
+          "腹痛"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "肚子胀满，按上去不太舒服。胸口不闷。",
+          "revealed_symptoms": [
+            "腹满"
+          ],
+          "sample_question": "您肚子胀吗？"
+        },
+        "l2": {
+          "trigger_question": "肚子胀是硬还是软？",
+          "text": "有点偏硬，但按上去不太痛。不是那种绞痛。",
+          "revealed_symptoms": [
+            "按之偏硬"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是腹水，会不会是肝硬化？",
+          "type": "恐惧联想",
+          "misleading_symptom": "错误诊断"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "目赤",
+          "眼花"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "眼睛黄得很明显，眼白全是黄的。看东西有点花，但不严重。没有耳鸣。",
+          "revealed_symptoms": [
+            "目黄",
+            "眼花"
+          ],
+          "sample_question": "您眼睛和耳朵有什么不舒服？"
+        },
+        "l2": {
+          "trigger_question": "眼睛黄是最近才开始的吗？",
+          "text": "大概一周左右，越来越明显。一开始没那么黄。",
+          "revealed_symptoms": [
+            "黄疸进行性加重"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是溶血性黄疸，可能和红细胞破坏有关。",
+          "type": "半懂术语",
+          "misleading_symptom": "错误诊断"
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "睡眠"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "睡眠不太好，因为口渴，半夜要起来喝水。有点烦躁，入睡慢一点。",
+          "revealed_symptoms": [
+            "夜尿",
+            "烦躁",
+            "入睡难"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "半夜起来是口渴还是小便？",
+          "text": "两个都有。口干了就喝水，喝水了就想尿。",
+          "revealed_symptoms": [
+            "夜渴",
+            "夜尿频"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是睡眠呼吸暂停导致夜间缺氧，引起黄疸。",
+          "type": "逻辑自洽但错误",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往史",
+          "手术",
+          "慢性病"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "以前没什么大病。之前体检说有轻度脂肪肝，肝功能一直正常。没有乙肝。",
+          "revealed_symptoms": [
+            "轻度脂肪肝"
+          ],
+          "sample_question": "您以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "您有没有接触过肝炎患者？",
+          "text": "没有明确接触。最近出差在南方，饮食可能不太卫生。",
+          "revealed_symptoms": [
+            "饮食不洁史"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我查了一下，黄疸型肝炎是甲肝或戊肝，我应该查一下抗体。",
+          "type": "网络诊断",
+          "misleading_symptom": "错误诊断"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "诱因",
+          "加重",
+          "缓解"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "大概是出差回来一周后开始的。出差的时候吃了很多油腻的东西，还有酒。回来后觉得不舒服，过了几天就开始黄了。",
+          "revealed_symptoms": [
+            "饮食不节",
+            "饮酒"
+          ],
+          "sample_question": "您这个病是怎么引起的？"
+        },
+        "l2": {
+          "trigger_question": "吃了什么会加重？",
+          "text": "吃油腻的就更恶心，也吃不了多少。吃点清淡的还行。",
+          "revealed_symptoms": [
+            "油腻加重"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是出差期间吃了某种药物导致的药物性肝损伤。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "正常",
+        "tongue_color": "红",
+        "coating": "黄腻",
+        "special": "目黄身黄，肤色鲜明如橘"
+      },
+      "auscultation": {
+        "voice": "正常",
+        "breath": "略粗",
+        "cough": "无",
+        "odor": "无特殊"
+      },
+      "palpation": {
+        "pulse_position": "沉",
+        "pulse_rate": "数",
+        "pulse_shape": "滑",
+        "pulse_force": "有力",
+        "composite": "沉滑数"
+      },
+      "pressing": {
+        "abdomen": "腹满，按之偏硬，无拒按",
+        "limbs": "温",
+        "skin": "身黄鲜明，干燥"
+      }
+    },
+    "case_summary": "【主诉】\n张先生，32岁，互联网公司产品经理。一周来身黄、目黄、小便黄，伴口渴、腹满。\n\n【现病史】\n- 身黄：皮肤及巩膜黄染，鲜明如橘，进行性加重\n- 小便：小便不利，色深如浓茶，量少\n- 汗出：但头汗出，身无汗，剂颈而还\n- 口渴：大渴引饮，喜冷饮，饮不解渴\n- 发热：午后低热，体温37.5-38℃\n- 腹满：腹部胀满，按之偏硬，无拒按\n- 大便：干，二三日一行，色偏淡\n- 饮食：口苦，厌油腻\n- 睡眠：夜渴起夜，入睡稍难\n\n【查体】\n目黄身黄鲜明。舌红苔黄腻。脉沉滑数。腹满，按之偏硬。四肢温。\n\n【问诊选择】\n二便 / 饮食 / 头身 / 寒热 / 诱因",
+    "question": {
+      "mode": "formula",
+      "options": [
+        {
+          "id": "yin-chen-hao-tang",
+          "name": "茵陈蒿汤",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "da-cheng-qi-tang",
+          "name": "大承气汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "ma-zi-ren-wan",
+          "name": "麻子仁丸",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "tiao-wei-cheng-qi-tang",
+          "name": "调胃承气汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "bai-hu-tang",
+          "name": "白虎汤",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-236",
+      "correct_formula_id": "yin-chen-hao-tang",
+      "correct_article_number": 236,
+      "correct_article_text": "阳明病，发热汗出者，此为热越，不能发黄也。但头汗出，身无汗，剂颈而还，小便不利，渴引水浆者，此为瘀热在里，身必发黄，茵陈蒿汤主之。",
+      "correct_formula_name": "茵陈蒿汤",
+      "correct_herbs": [
+        "茵陈蒿",
+        "栀子",
+        "大黄"
+      ]
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "身黄",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "小便不利",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "口渴",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "头汗出",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-02_汗出",
+          "level": "l1"
+        },
+        {
+          "symptom": "身无汗",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-02_汗出",
+          "level": "l1"
+        },
+        {
+          "symptom": "腹满",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-03_头身",
+          "level": "l1"
+        },
+        {
+          "symptom": "大便难",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-04_二便",
+          "level": "l1"
+        },
+        {
+          "symptom": "舌红苔黄腻",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "脉沉滑数",
+          "in_patient": true,
+          "in_source": false,
+          "note": "条文未详述脉象，但湿热内盛多见滑数"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "但头汗出+身无汗+剂颈而还",
+          "includes": [
+            "article-236"
+          ],
+          "reason": "湿热郁蒸，不能外越，仅头汗出，为茵陈蒿汤特征性表现"
+        },
+        {
+          "symptom": "身黄鲜明+小便不利",
+          "includes": [
+            "article-236"
+          ],
+          "reason": "阳黄特征：湿热瘀结在里，小便不利则湿热不得下泄"
+        },
+        {
+          "symptom": "身黄+腹满+大便难",
+          "excludes": [
+            "da-cheng-qi-tang",
+            "tiao-wei-cheng-qi-tang",
+            "ma-zi-ren-wan"
+          ],
+          "reason": "大承气/调胃承气/麻子仁丸均无'身黄'主症，且茵陈蒿汤无腹满硬痛拒按"
+        },
+        {
+          "symptom": "口渴引饮",
+          "excludes": [
+            "bai-hu-tang"
+          ],
+          "reason": "白虎汤为阳明经证大热大渴大汗，但无黄疸、无小便不利、无头汗"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "07_耳目",
+          "reason": "已确认目黄，但未追问发黄的时间演变和是否有瘙痒",
+          "impact": "低"
+        },
+        {
+          "direction": "09_旧病",
+          "reason": "未追问是否有既往肝病史或乙肝接触史，排除病毒性肝炎",
+          "impact": "中"
+        }
+      ]
+    }
+  }
+]

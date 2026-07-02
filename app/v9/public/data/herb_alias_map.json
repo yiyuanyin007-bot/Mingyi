@@ -1,0 +1,1487 @@
+{
+  "alias_to_standard": {
+    "生甘草": "甘草",
+    "炙甘草": "甘草",
+    "甘草": "甘草",
+    "白芍": "芍药",
+    "赤芍": "芍药",
+    "杭白芍": "芍药",
+    "炒白芍": "芍药",
+    "芍药": "芍药",
+    "制半夏": "半夏",
+    "姜半夏": "半夏",
+    "法半夏": "半夏",
+    "清半夏": "半夏",
+    "半夏": "半夏",
+    "枳壳": "枳实",
+    "炒枳壳": "枳实",
+    "枳实": "枳实",
+    "制大黄": "大黄",
+    "生大黄": "大黄",
+    "酒大黄": "大黄",
+    "大黄": "大黄",
+    "制附子": "附子",
+    "黑顺片": "附子",
+    "白附片": "附子",
+    "炮附子": "附子",
+    "附子": "附子",
+    "生姜": "干姜",
+    "炮姜": "干姜",
+    "生姜片": "干姜",
+    "干姜": "干姜",
+    "红枣": "大枣",
+    "黑枣": "大枣",
+    "大枣": "大枣",
+    "肉桂": "桂枝",
+    "桂心": "桂枝",
+    "桂枝": "桂枝",
+    "苦杏仁": "杏仁",
+    "北杏仁": "杏仁",
+    "光杏仁": "杏仁",
+    "杏仁": "杏仁",
+    "炙麻黄": "麻黄",
+    "生麻黄": "麻黄",
+    "麻黄绒": "麻黄",
+    "麻黄": "麻黄",
+    "北柴胡": "柴胡",
+    "南柴胡": "柴胡",
+    "软柴胡": "柴胡",
+    "柴胡": "柴胡",
+    "子芩": "黄芩",
+    "条芩": "黄芩",
+    "黄芩": "黄芩",
+    "白茯苓": "茯苓",
+    "赤茯苓": "茯苓",
+    "茯神": "茯苓",
+    "茯苓皮": "茯苓",
+    "茯苓": "茯苓",
+    "生白术": "白术",
+    "炒白术": "白术",
+    "焦白术": "白术",
+    "于术": "白术",
+    "白术": "白术",
+    "北五味": "五味子",
+    "南五味": "五味子",
+    "五味子": "五味子",
+    "北细辛": "细辛",
+    "辽细辛": "细辛",
+    "细辛": "细辛",
+    "栀子": "山栀",
+    "山栀子": "山栀",
+    "焦栀子": "山栀",
+    "山栀": "山栀",
+    "牡丹皮": "丹皮",
+    "丹皮": "丹皮",
+    "川厚朴": "厚朴",
+    "姜厚朴": "厚朴",
+    "厚朴": "厚朴",
+    "紫苏叶": "苏叶",
+    "紫苏": "苏叶",
+    "苏叶": "苏叶",
+    "知母": "知母",
+    "石膏": "石膏",
+    "粳米": "粳米",
+    "芒硝": "芒硝",
+    "甘遂": "甘遂",
+    "龙骨": "龙骨",
+    "牡蛎": "牡蛎",
+    "猪苓": "猪苓",
+    "泽泻": "泽泻",
+    "黄连": "黄连",
+    "黄柏": "黄柏",
+    "连翘": "连翘",
+    "桃仁": "桃仁",
+    "党参": "人参",
+    "太子参": "人参",
+    "生晒参": "人参",
+    "人参": "人参",
+    "桔梗": "桔梗",
+    "青皮": "青皮",
+    "陈皮": "陈皮"
+  },
+  "standard_to_aliases": {
+    "甘草": [
+      "生甘草",
+      "炙甘草",
+      "甘草"
+    ],
+    "芍药": [
+      "白芍",
+      "赤芍",
+      "杭白芍",
+      "炒白芍"
+    ],
+    "半夏": [
+      "制半夏",
+      "姜半夏",
+      "法半夏",
+      "清半夏"
+    ],
+    "枳实": [
+      "枳壳",
+      "炒枳壳"
+    ],
+    "大黄": [
+      "制大黄",
+      "生大黄",
+      "酒大黄"
+    ],
+    "附子": [
+      "制附子",
+      "黑顺片",
+      "白附片",
+      "炮附子"
+    ],
+    "干姜": [
+      "生姜",
+      "炮姜",
+      "生姜片"
+    ],
+    "大枣": [
+      "红枣",
+      "黑枣"
+    ],
+    "桂枝": [
+      "肉桂",
+      "桂心"
+    ],
+    "杏仁": [
+      "苦杏仁",
+      "北杏仁",
+      "光杏仁"
+    ],
+    "麻黄": [
+      "炙麻黄",
+      "生麻黄",
+      "麻黄绒"
+    ],
+    "柴胡": [
+      "北柴胡",
+      "南柴胡",
+      "软柴胡"
+    ],
+    "黄芩": [
+      "子芩",
+      "条芩"
+    ],
+    "茯苓": [
+      "白茯苓",
+      "赤茯苓",
+      "茯神",
+      "茯苓皮"
+    ],
+    "白术": [
+      "生白术",
+      "炒白术",
+      "焦白术",
+      "于术"
+    ],
+    "五味子": [
+      "北五味",
+      "南五味"
+    ],
+    "细辛": [
+      "北细辛",
+      "辽细辛"
+    ],
+    "山栀": [
+      "栀子",
+      "山栀子",
+      "焦栀子"
+    ],
+    "丹皮": [
+      "牡丹皮"
+    ],
+    "厚朴": [
+      "川厚朴",
+      "姜厚朴"
+    ],
+    "苏叶": [
+      "紫苏叶",
+      "紫苏"
+    ],
+    "知母": [
+      "知母"
+    ],
+    "石膏": [
+      "石膏"
+    ],
+    "粳米": [
+      "粳米"
+    ],
+    "芒硝": [
+      "芒硝"
+    ],
+    "甘遂": [
+      "甘遂"
+    ],
+    "龙骨": [
+      "龙骨"
+    ],
+    "牡蛎": [
+      "牡蛎"
+    ],
+    "猪苓": [
+      "猪苓"
+    ],
+    "泽泻": [
+      "泽泻"
+    ],
+    "黄连": [
+      "黄连"
+    ],
+    "黄柏": [
+      "黄柏"
+    ],
+    "连翘": [
+      "连翘"
+    ],
+    "桃仁": [
+      "桃仁"
+    ],
+    "人参": [
+      "党参",
+      "太子参",
+      "生晒参"
+    ],
+    "桔梗": [
+      "桔梗"
+    ],
+    "青皮": [
+      "青皮"
+    ],
+    "陈皮": [
+      "陈皮"
+    ]
+  },
+  "herb_class_map": {
+    "麻黄": {
+      "class_name": "麻黄剂/解表剂",
+      "main_series": "麻黄汤",
+      "all_series": [
+        "麻黄汤",
+        "葛根汤",
+        "大青龙汤",
+        "小青龙汤",
+        "桂枝麻黄各半汤",
+        "桂枝二越婢一汤",
+        "葛根加半夏汤"
+      ],
+      "count": 8
+    },
+    "铅丹": {
+      "class_name": "铅丹相关方",
+      "main_series": "柴胡加龙骨牡蛎汤",
+      "all_series": [
+        "柴胡加龙骨牡蛎汤"
+      ],
+      "count": 1
+    },
+    "甘草": {
+      "class_name": "基础药（多方可含）",
+      "main_series": "桂枝汤",
+      "all_series": [
+        "桂枝汤",
+        "麻黄汤",
+        "葛根汤",
+        "小柴胡汤",
+        "大青龙汤",
+        "小青龙汤",
+        "桂枝加附子汤",
+        "桂枝麻黄各半汤",
+        "桂枝二越婢一汤",
+        "葛根加半夏汤",
+        "葛根黄芩黄连汤",
+        "四逆汤",
+        "白虎汤",
+        "调胃承气汤",
+        "柴胡加芒硝汤",
+        "栀子甘草豉汤",
+        "茯苓四逆汤",
+        "桃核承气汤",
+        "白虎加人参汤"
+      ],
+      "count": 24
+    },
+    "知母": {
+      "class_name": "白虎剂/清热剂",
+      "main_series": "白虎汤",
+      "all_series": [
+        "白虎汤",
+        "白虎加人参汤"
+      ],
+      "count": 2
+    },
+    "虻虫": {
+      "class_name": "虻虫相关方",
+      "main_series": "抵当汤",
+      "all_series": [
+        "抵当汤"
+      ],
+      "count": 1
+    },
+    "猪苓": {
+      "class_name": "五苓剂/利水剂",
+      "main_series": "五苓散",
+      "all_series": [
+        "五苓散"
+      ],
+      "count": 1
+    },
+    "柴胡": {
+      "class_name": "柴胡剂",
+      "main_series": "小柴胡汤",
+      "all_series": [
+        "小柴胡汤",
+        "大柴胡汤",
+        "柴胡加龙骨牡蛎汤",
+        "柴胡加芒硝汤"
+      ],
+      "count": 4
+    },
+    "粳米": {
+      "class_name": "白虎剂",
+      "main_series": "白虎汤",
+      "all_series": [
+        "白虎汤",
+        "白虎加人参汤"
+      ],
+      "count": 2
+    },
+    "茯苓": {
+      "class_name": "五苓剂/利水剂",
+      "main_series": "五苓散",
+      "all_series": [
+        "五苓散",
+        "真武汤",
+        "柴胡加龙骨牡蛎汤",
+        "茯苓四逆汤"
+      ],
+      "count": 4
+    },
+    "生姜": {
+      "class_name": "和胃剂/解表剂",
+      "main_series": "桂枝汤",
+      "all_series": [
+        "桂枝汤",
+        "葛根汤",
+        "小柴胡汤",
+        "大青龙汤",
+        "桂枝加附子汤",
+        "桂枝麻黄各半汤",
+        "桂枝二越婢一汤",
+        "葛根加半夏汤",
+        "真武汤",
+        "大柴胡汤",
+        "柴胡加龙骨牡蛎汤",
+        "柴胡加芒硝汤",
+        "栀子生姜豉汤"
+      ],
+      "count": 17
+    },
+    "石膏": {
+      "class_name": "白虎剂/清热剂",
+      "main_series": "麻黄汤",
+      "all_series": [
+        "麻黄汤",
+        "大青龙汤",
+        "桂枝二越婢一汤",
+        "白虎汤",
+        "白虎加人参汤"
+      ],
+      "count": 5
+    },
+    "大枣": {
+      "class_name": "基础药（多方可含）",
+      "main_series": "桂枝汤",
+      "all_series": [
+        "桂枝汤",
+        "葛根汤",
+        "小柴胡汤",
+        "大青龙汤",
+        "桂枝加附子汤",
+        "桂枝麻黄各半汤",
+        "桂枝二越婢一汤",
+        "葛根加半夏汤",
+        "大柴胡汤",
+        "柴胡加龙骨牡蛎汤",
+        "柴胡加芒硝汤"
+      ],
+      "count": 15
+    },
+    "桃仁": {
+      "class_name": "活血剂",
+      "main_series": "桃核承气汤",
+      "all_series": [
+        "桃核承气汤",
+        "抵当汤"
+      ],
+      "count": 2
+    },
+    "桂枝": {
+      "class_name": "桂枝剂/解表剂",
+      "main_series": "桂枝汤",
+      "all_series": [
+        "桂枝汤",
+        "麻黄汤",
+        "葛根汤",
+        "大青龙汤",
+        "小青龙汤",
+        "桂枝加附子汤",
+        "桂枝麻黄各半汤",
+        "桂枝二越婢一汤",
+        "葛根加半夏汤",
+        "五苓散",
+        "柴胡加龙骨牡蛎汤",
+        "桃核承气汤"
+      ],
+      "count": 16
+    },
+    "白术": {
+      "class_name": "五苓剂/健脾剂",
+      "main_series": "五苓散",
+      "all_series": [
+        "五苓散",
+        "真武汤"
+      ],
+      "count": 2
+    },
+    "水蛭": {
+      "class_name": "水蛭相关方",
+      "main_series": "抵当汤",
+      "all_series": [
+        "抵当汤"
+      ],
+      "count": 1
+    },
+    "胶饴": {
+      "class_name": "胶饴相关方",
+      "main_series": "桂枝汤",
+      "all_series": [
+        "桂枝汤"
+      ],
+      "count": 1
+    },
+    "泽泻": {
+      "class_name": "五苓剂/利水剂",
+      "main_series": "五苓散",
+      "all_series": [
+        "五苓散"
+      ],
+      "count": 1
+    },
+    "黄连": {
+      "class_name": "清热剂/泻心剂",
+      "main_series": "葛根黄芩黄连汤",
+      "all_series": [
+        "葛根黄芩黄连汤"
+      ],
+      "count": 1
+    },
+    "枳实": {
+      "class_name": "承气剂/柴胡剂",
+      "main_series": "大承气汤",
+      "all_series": [
+        "大承气汤",
+        "大柴胡汤",
+        "栀子厚朴汤"
+      ],
+      "count": 3
+    },
+    "黄芩": {
+      "class_name": "柴胡剂/清热剂",
+      "main_series": "小柴胡汤",
+      "all_series": [
+        "小柴胡汤",
+        "葛根黄芩黄连汤",
+        "大柴胡汤",
+        "柴胡加龙骨牡蛎汤",
+        "柴胡加芒硝汤"
+      ],
+      "count": 5
+    },
+    "栀子": {
+      "class_name": "栀子类方",
+      "main_series": "栀子豉汤",
+      "all_series": [
+        "栀子豉汤",
+        "栀子甘草豉汤",
+        "栀子生姜豉汤",
+        "栀子厚朴汤",
+        "栀子干姜汤"
+      ],
+      "count": 5
+    },
+    "香豉": {
+      "class_name": "香豉类方",
+      "main_series": "栀子豉汤",
+      "all_series": [
+        "栀子豉汤",
+        "栀子甘草豉汤",
+        "栀子生姜豉汤"
+      ],
+      "count": 3
+    },
+    "细辛": {
+      "class_name": "温肺剂/解表剂",
+      "main_series": "小青龙汤",
+      "all_series": [
+        "小青龙汤"
+      ],
+      "count": 1
+    },
+    "大黄": {
+      "class_name": "承气剂/柴胡剂",
+      "main_series": "大承气汤",
+      "all_series": [
+        "大承气汤",
+        "调胃承气汤",
+        "大柴胡汤",
+        "柴胡加龙骨牡蛎汤",
+        "桃核承气汤",
+        "抵当汤"
+      ],
+      "count": 6
+    },
+    "半夏": {
+      "class_name": "柴胡剂/和胃剂",
+      "main_series": "小柴胡汤",
+      "all_series": [
+        "小柴胡汤",
+        "小青龙汤",
+        "葛根加半夏汤",
+        "大柴胡汤",
+        "柴胡加龙骨牡蛎汤",
+        "柴胡加芒硝汤"
+      ],
+      "count": 6
+    },
+    "芒硝": {
+      "class_name": "承气剂/泻下剂",
+      "main_series": "大承气汤",
+      "all_series": [
+        "大承气汤",
+        "调胃承气汤",
+        "柴胡加芒硝汤",
+        "桃核承气汤"
+      ],
+      "count": 4
+    },
+    "芍药": {
+      "class_name": "柴胡剂/桂枝剂",
+      "main_series": "桂枝汤",
+      "all_series": [
+        "桂枝汤",
+        "葛根汤",
+        "小青龙汤",
+        "桂枝加附子汤",
+        "桂枝麻黄各半汤",
+        "桂枝二越婢一汤",
+        "葛根加半夏汤",
+        "真武汤",
+        "大柴胡汤"
+      ],
+      "count": 12
+    },
+    "杏仁": {
+      "class_name": "麻黄剂/止咳剂",
+      "main_series": "麻黄汤",
+      "all_series": [
+        "麻黄汤",
+        "桂枝汤",
+        "大青龙汤",
+        "桂枝麻黄各半汤"
+      ],
+      "count": 5
+    },
+    "厚朴": {
+      "class_name": "栀子剂/承气剂",
+      "main_series": "大承气汤",
+      "all_series": [
+        "大承气汤",
+        "桂枝汤",
+        "栀子厚朴汤"
+      ],
+      "count": 3
+    },
+    "五味子": {
+      "class_name": "敛肺剂",
+      "main_series": "小青龙汤",
+      "all_series": [
+        "小青龙汤"
+      ],
+      "count": 1
+    },
+    "干姜": {
+      "class_name": "四逆剂/温中剂",
+      "main_series": "小青龙汤",
+      "all_series": [
+        "小青龙汤",
+        "四逆汤",
+        "栀子干姜汤",
+        "干姜附子汤",
+        "茯苓四逆汤"
+      ],
+      "count": 5
+    },
+    "人参": {
+      "class_name": "补益剂/白虎剂",
+      "main_series": "小柴胡汤",
+      "all_series": [
+        "小柴胡汤",
+        "柴胡加龙骨牡蛎汤",
+        "柴胡加芒硝汤",
+        "茯苓四逆汤",
+        "白虎加人参汤"
+      ],
+      "count": 5
+    },
+    "龙骨": {
+      "class_name": "柴胡剂/安神剂",
+      "main_series": "柴胡加龙骨牡蛎汤",
+      "all_series": [
+        "柴胡加龙骨牡蛎汤"
+      ],
+      "count": 1
+    },
+    "牡蛎": {
+      "class_name": "柴胡剂/安神剂",
+      "main_series": "柴胡加龙骨牡蛎汤",
+      "all_series": [
+        "柴胡加龙骨牡蛎汤"
+      ],
+      "count": 1
+    },
+    "葛根": {
+      "class_name": "葛根剂/解表剂",
+      "main_series": "葛根汤",
+      "all_series": [
+        "葛根汤",
+        "桂枝汤",
+        "葛根加半夏汤",
+        "葛根黄芩黄连汤"
+      ],
+      "count": 4
+    },
+    "附子": {
+      "class_name": "四逆剂/温阳剂",
+      "main_series": "桂枝加附子汤",
+      "all_series": [
+        "桂枝加附子汤",
+        "真武汤",
+        "四逆汤",
+        "干姜附子汤",
+        "茯苓四逆汤"
+      ],
+      "count": 5
+    }
+  },
+  "herb_to_cards": {
+    "桂枝": [
+      {
+        "id": "gui-zhi-tang",
+        "name": "桂枝汤"
+      },
+      {
+        "id": "ma-huang-tang",
+        "name": "麻黄汤"
+      },
+      {
+        "id": "ge-gen-tang",
+        "name": "葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-ge-gen-tang",
+        "name": "桂枝加葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-houpo-xingzi-tang",
+        "name": "桂枝加厚朴杏子汤"
+      },
+      {
+        "id": "gui-zhi-qu-shaoyao-tang",
+        "name": "桂枝去芍药汤"
+      },
+      {
+        "id": "xiao-jian-zhong-tang",
+        "name": "小建中汤"
+      },
+      {
+        "id": "da-qing-long-tang",
+        "name": "大青龙汤"
+      },
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      },
+      {
+        "id": "gui-zhi-jia-fu-zi-tang",
+        "name": "桂枝加附子汤"
+      },
+      {
+        "id": "gui-zhi-ma-huang-ge-ban-tang",
+        "name": "桂枝麻黄各半汤"
+      },
+      {
+        "id": "gui-zhi-er-yue-bi-yi-tang",
+        "name": "桂枝二越婢一汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      },
+      {
+        "id": "wu-ling-san",
+        "name": "五苓散"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "tao-he-cheng-qi-tang",
+        "name": "桃核承气汤"
+      }
+    ],
+    "芍药": [
+      {
+        "id": "gui-zhi-tang",
+        "name": "桂枝汤"
+      },
+      {
+        "id": "ge-gen-tang",
+        "name": "葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-ge-gen-tang",
+        "name": "桂枝加葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-houpo-xingzi-tang",
+        "name": "桂枝加厚朴杏子汤"
+      },
+      {
+        "id": "xiao-jian-zhong-tang",
+        "name": "小建中汤"
+      },
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      },
+      {
+        "id": "gui-zhi-jia-fu-zi-tang",
+        "name": "桂枝加附子汤"
+      },
+      {
+        "id": "gui-zhi-ma-huang-ge-ban-tang",
+        "name": "桂枝麻黄各半汤"
+      },
+      {
+        "id": "gui-zhi-er-yue-bi-yi-tang",
+        "name": "桂枝二越婢一汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      },
+      {
+        "id": "zhen-wu-tang",
+        "name": "真武汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      }
+    ],
+    "甘草": [
+      {
+        "id": "gui-zhi-tang",
+        "name": "桂枝汤"
+      },
+      {
+        "id": "ma-huang-tang",
+        "name": "麻黄汤"
+      },
+      {
+        "id": "ge-gen-tang",
+        "name": "葛根汤"
+      },
+      {
+        "id": "xiao-chai-hu-tang",
+        "name": "小柴胡汤"
+      },
+      {
+        "id": "gui-zhi-jia-ge-gen-tang",
+        "name": "桂枝加葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-houpo-xingzi-tang",
+        "name": "桂枝加厚朴杏子汤"
+      },
+      {
+        "id": "gui-zhi-qu-shaoyao-tang",
+        "name": "桂枝去芍药汤"
+      },
+      {
+        "id": "ma-huang-xing-ren-gan-cao-shi-gao-tang",
+        "name": "麻黄杏仁甘草石膏汤"
+      },
+      {
+        "id": "xiao-jian-zhong-tang",
+        "name": "小建中汤"
+      },
+      {
+        "id": "da-qing-long-tang",
+        "name": "大青龙汤"
+      },
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      },
+      {
+        "id": "gui-zhi-jia-fu-zi-tang",
+        "name": "桂枝加附子汤"
+      },
+      {
+        "id": "gui-zhi-ma-huang-ge-ban-tang",
+        "name": "桂枝麻黄各半汤"
+      },
+      {
+        "id": "gui-zhi-er-yue-bi-yi-tang",
+        "name": "桂枝二越婢一汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      },
+      {
+        "id": "ge-gen-huang-qin-huang-lian-tang",
+        "name": "葛根黄芩黄连汤"
+      },
+      {
+        "id": "si-ni-tang",
+        "name": "四逆汤"
+      },
+      {
+        "id": "bai-hu-tang",
+        "name": "白虎汤"
+      },
+      {
+        "id": "tiao-wei-cheng-qi-tang",
+        "name": "调胃承气汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      },
+      {
+        "id": "zhi-zi-gan-cao-chi-tang",
+        "name": "栀子甘草豉汤"
+      },
+      {
+        "id": "fu-ling-si-ni-tang",
+        "name": "茯苓四逆汤"
+      },
+      {
+        "id": "tao-he-cheng-qi-tang",
+        "name": "桃核承气汤"
+      },
+      {
+        "id": "bai-hu-jia-ren-shen-tang",
+        "name": "白虎加人参汤"
+      }
+    ],
+    "生姜": [
+      {
+        "id": "gui-zhi-tang",
+        "name": "桂枝汤"
+      },
+      {
+        "id": "ge-gen-tang",
+        "name": "葛根汤"
+      },
+      {
+        "id": "xiao-chai-hu-tang",
+        "name": "小柴胡汤"
+      },
+      {
+        "id": "gui-zhi-jia-ge-gen-tang",
+        "name": "桂枝加葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-houpo-xingzi-tang",
+        "name": "桂枝加厚朴杏子汤"
+      },
+      {
+        "id": "gui-zhi-qu-shaoyao-tang",
+        "name": "桂枝去芍药汤"
+      },
+      {
+        "id": "xiao-jian-zhong-tang",
+        "name": "小建中汤"
+      },
+      {
+        "id": "da-qing-long-tang",
+        "name": "大青龙汤"
+      },
+      {
+        "id": "gui-zhi-jia-fu-zi-tang",
+        "name": "桂枝加附子汤"
+      },
+      {
+        "id": "gui-zhi-ma-huang-ge-ban-tang",
+        "name": "桂枝麻黄各半汤"
+      },
+      {
+        "id": "gui-zhi-er-yue-bi-yi-tang",
+        "name": "桂枝二越婢一汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      },
+      {
+        "id": "zhen-wu-tang",
+        "name": "真武汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      },
+      {
+        "id": "zhi-zi-sheng-jiang-chi-tang",
+        "name": "栀子生姜豉汤"
+      }
+    ],
+    "大枣": [
+      {
+        "id": "gui-zhi-tang",
+        "name": "桂枝汤"
+      },
+      {
+        "id": "ge-gen-tang",
+        "name": "葛根汤"
+      },
+      {
+        "id": "xiao-chai-hu-tang",
+        "name": "小柴胡汤"
+      },
+      {
+        "id": "gui-zhi-jia-ge-gen-tang",
+        "name": "桂枝加葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-houpo-xingzi-tang",
+        "name": "桂枝加厚朴杏子汤"
+      },
+      {
+        "id": "gui-zhi-qu-shaoyao-tang",
+        "name": "桂枝去芍药汤"
+      },
+      {
+        "id": "xiao-jian-zhong-tang",
+        "name": "小建中汤"
+      },
+      {
+        "id": "da-qing-long-tang",
+        "name": "大青龙汤"
+      },
+      {
+        "id": "gui-zhi-jia-fu-zi-tang",
+        "name": "桂枝加附子汤"
+      },
+      {
+        "id": "gui-zhi-ma-huang-ge-ban-tang",
+        "name": "桂枝麻黄各半汤"
+      },
+      {
+        "id": "gui-zhi-er-yue-bi-yi-tang",
+        "name": "桂枝二越婢一汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      }
+    ],
+    "麻黄": [
+      {
+        "id": "ma-huang-tang",
+        "name": "麻黄汤"
+      },
+      {
+        "id": "ge-gen-tang",
+        "name": "葛根汤"
+      },
+      {
+        "id": "ma-huang-xing-ren-gan-cao-shi-gao-tang",
+        "name": "麻黄杏仁甘草石膏汤"
+      },
+      {
+        "id": "da-qing-long-tang",
+        "name": "大青龙汤"
+      },
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      },
+      {
+        "id": "gui-zhi-ma-huang-ge-ban-tang",
+        "name": "桂枝麻黄各半汤"
+      },
+      {
+        "id": "gui-zhi-er-yue-bi-yi-tang",
+        "name": "桂枝二越婢一汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      }
+    ],
+    "杏仁": [
+      {
+        "id": "ma-huang-tang",
+        "name": "麻黄汤"
+      },
+      {
+        "id": "gui-zhi-jia-houpo-xingzi-tang",
+        "name": "桂枝加厚朴杏子汤"
+      },
+      {
+        "id": "ma-huang-xing-ren-gan-cao-shi-gao-tang",
+        "name": "麻黄杏仁甘草石膏汤"
+      },
+      {
+        "id": "da-qing-long-tang",
+        "name": "大青龙汤"
+      },
+      {
+        "id": "gui-zhi-ma-huang-ge-ban-tang",
+        "name": "桂枝麻黄各半汤"
+      }
+    ],
+    "葛根": [
+      {
+        "id": "ge-gen-tang",
+        "name": "葛根汤"
+      },
+      {
+        "id": "gui-zhi-jia-ge-gen-tang",
+        "name": "桂枝加葛根汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      },
+      {
+        "id": "ge-gen-huang-qin-huang-lian-tang",
+        "name": "葛根黄芩黄连汤"
+      }
+    ],
+    "大黄": [
+      {
+        "id": "da-cheng-qi-tang",
+        "name": "大承气汤"
+      },
+      {
+        "id": "tiao-wei-cheng-qi-tang",
+        "name": "调胃承气汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "tao-he-cheng-qi-tang",
+        "name": "桃核承气汤"
+      },
+      {
+        "id": "di-dang-tang",
+        "name": "抵当汤"
+      }
+    ],
+    "厚朴": [
+      {
+        "id": "da-cheng-qi-tang",
+        "name": "大承气汤"
+      },
+      {
+        "id": "gui-zhi-jia-houpo-xingzi-tang",
+        "name": "桂枝加厚朴杏子汤"
+      },
+      {
+        "id": "zhi-zi-hou-po-tang",
+        "name": "栀子厚朴汤"
+      }
+    ],
+    "枳实": [
+      {
+        "id": "da-cheng-qi-tang",
+        "name": "大承气汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      },
+      {
+        "id": "zhi-zi-hou-po-tang",
+        "name": "栀子厚朴汤"
+      }
+    ],
+    "芒硝": [
+      {
+        "id": "da-cheng-qi-tang",
+        "name": "大承气汤"
+      },
+      {
+        "id": "tiao-wei-cheng-qi-tang",
+        "name": "调胃承气汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      },
+      {
+        "id": "tao-he-cheng-qi-tang",
+        "name": "桃核承气汤"
+      }
+    ],
+    "柴胡": [
+      {
+        "id": "xiao-chai-hu-tang",
+        "name": "小柴胡汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      }
+    ],
+    "黄芩": [
+      {
+        "id": "xiao-chai-hu-tang",
+        "name": "小柴胡汤"
+      },
+      {
+        "id": "ge-gen-huang-qin-huang-lian-tang",
+        "name": "葛根黄芩黄连汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      }
+    ],
+    "人参": [
+      {
+        "id": "xiao-chai-hu-tang",
+        "name": "小柴胡汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      },
+      {
+        "id": "fu-ling-si-ni-tang",
+        "name": "茯苓四逆汤"
+      },
+      {
+        "id": "bai-hu-jia-ren-shen-tang",
+        "name": "白虎加人参汤"
+      }
+    ],
+    "半夏": [
+      {
+        "id": "xiao-chai-hu-tang",
+        "name": "小柴胡汤"
+      },
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      },
+      {
+        "id": "ge-gen-jia-ban-xia-tang",
+        "name": "葛根加半夏汤"
+      },
+      {
+        "id": "da-chai-hu-tang",
+        "name": "大柴胡汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "chai-hu-jia-mang-xiao-tang",
+        "name": "柴胡加芒硝汤"
+      }
+    ],
+    "石膏": [
+      {
+        "id": "ma-huang-xing-ren-gan-cao-shi-gao-tang",
+        "name": "麻黄杏仁甘草石膏汤"
+      },
+      {
+        "id": "da-qing-long-tang",
+        "name": "大青龙汤"
+      },
+      {
+        "id": "gui-zhi-er-yue-bi-yi-tang",
+        "name": "桂枝二越婢一汤"
+      },
+      {
+        "id": "bai-hu-tang",
+        "name": "白虎汤"
+      },
+      {
+        "id": "bai-hu-jia-ren-shen-tang",
+        "name": "白虎加人参汤"
+      }
+    ],
+    "胶饴": [
+      {
+        "id": "xiao-jian-zhong-tang",
+        "name": "小建中汤"
+      }
+    ],
+    "细辛": [
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      }
+    ],
+    "干姜": [
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      },
+      {
+        "id": "si-ni-tang",
+        "name": "四逆汤"
+      },
+      {
+        "id": "zhi-zi-gan-jiang-tang",
+        "name": "栀子干姜汤"
+      },
+      {
+        "id": "gan-jiang-fu-zi-tang",
+        "name": "干姜附子汤"
+      },
+      {
+        "id": "fu-ling-si-ni-tang",
+        "name": "茯苓四逆汤"
+      }
+    ],
+    "五味子": [
+      {
+        "id": "xiao-qing-long-tang",
+        "name": "小青龙汤"
+      }
+    ],
+    "附子": [
+      {
+        "id": "gui-zhi-jia-fu-zi-tang",
+        "name": "桂枝加附子汤"
+      },
+      {
+        "id": "zhen-wu-tang",
+        "name": "真武汤"
+      },
+      {
+        "id": "si-ni-tang",
+        "name": "四逆汤"
+      },
+      {
+        "id": "gan-jiang-fu-zi-tang",
+        "name": "干姜附子汤"
+      },
+      {
+        "id": "fu-ling-si-ni-tang",
+        "name": "茯苓四逆汤"
+      }
+    ],
+    "黄连": [
+      {
+        "id": "ge-gen-huang-qin-huang-lian-tang",
+        "name": "葛根黄芩黄连汤"
+      }
+    ],
+    "猪苓": [
+      {
+        "id": "wu-ling-san",
+        "name": "五苓散"
+      }
+    ],
+    "泽泻": [
+      {
+        "id": "wu-ling-san",
+        "name": "五苓散"
+      }
+    ],
+    "白术": [
+      {
+        "id": "wu-ling-san",
+        "name": "五苓散"
+      },
+      {
+        "id": "zhen-wu-tang",
+        "name": "真武汤"
+      }
+    ],
+    "茯苓": [
+      {
+        "id": "wu-ling-san",
+        "name": "五苓散"
+      },
+      {
+        "id": "zhen-wu-tang",
+        "name": "真武汤"
+      },
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      },
+      {
+        "id": "fu-ling-si-ni-tang",
+        "name": "茯苓四逆汤"
+      }
+    ],
+    "知母": [
+      {
+        "id": "bai-hu-tang",
+        "name": "白虎汤"
+      },
+      {
+        "id": "bai-hu-jia-ren-shen-tang",
+        "name": "白虎加人参汤"
+      }
+    ],
+    "粳米": [
+      {
+        "id": "bai-hu-tang",
+        "name": "白虎汤"
+      },
+      {
+        "id": "bai-hu-jia-ren-shen-tang",
+        "name": "白虎加人参汤"
+      }
+    ],
+    "龙骨": [
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      }
+    ],
+    "铅丹": [
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      }
+    ],
+    "牡蛎": [
+      {
+        "id": "chai-hu-jia-long-gu-mu-li-tang",
+        "name": "柴胡加龙骨牡蛎汤"
+      }
+    ],
+    "栀子": [
+      {
+        "id": "zhi-zi-chi-tang",
+        "name": "栀子豉汤"
+      },
+      {
+        "id": "zhi-zi-gan-cao-chi-tang",
+        "name": "栀子甘草豉汤"
+      },
+      {
+        "id": "zhi-zi-sheng-jiang-chi-tang",
+        "name": "栀子生姜豉汤"
+      },
+      {
+        "id": "zhi-zi-hou-po-tang",
+        "name": "栀子厚朴汤"
+      },
+      {
+        "id": "zhi-zi-gan-jiang-tang",
+        "name": "栀子干姜汤"
+      }
+    ],
+    "香豉": [
+      {
+        "id": "zhi-zi-chi-tang",
+        "name": "栀子豉汤"
+      },
+      {
+        "id": "zhi-zi-gan-cao-chi-tang",
+        "name": "栀子甘草豉汤"
+      },
+      {
+        "id": "zhi-zi-sheng-jiang-chi-tang",
+        "name": "栀子生姜豉汤"
+      }
+    ],
+    "桃仁": [
+      {
+        "id": "tao-he-cheng-qi-tang",
+        "name": "桃核承气汤"
+      },
+      {
+        "id": "di-dang-tang",
+        "name": "抵当汤"
+      }
+    ],
+    "水蛭": [
+      {
+        "id": "di-dang-tang",
+        "name": "抵当汤"
+      }
+    ],
+    "虻虫": [
+      {
+        "id": "di-dang-tang",
+        "name": "抵当汤"
+      }
+    ]
+  }
+}

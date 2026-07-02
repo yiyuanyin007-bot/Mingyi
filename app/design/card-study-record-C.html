@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡片学习记录 - 版本C：侧边迷你版</title>
+<style>
+:root {
+  --bg: #f5f5f0;
+  --bg-panel: #fff;
+  --bg-hover: #faf9f6;
+  --border: #e8e4df;
+  --text: #2a2a28;
+  --text-secondary: #6b6863;
+  --text-muted: #9a9590;
+  --accent: #b45309;
+  --accent-bg: #fef3c7;
+  --success: #22c55e;
+  --success-bg: #dcfce7;
+  --danger: #ef4444;
+  --danger-bg: #fee2e2;
+  --warning: #f59e0b;
+  --warning-bg: #fef3c7;
+}
+body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif; background: var(--bg); padding: 40px 24px; margin: 0; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 32px; }
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+/* 版本C：卡片内部双列布局 */
+.card-list-item {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  display: flex;
+  gap: 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  min-height: 120px;
+}
+.card-list-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* 左侧：卡片主内容 */
+.card-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0; /* 防止溢出 */
+}
+.card-name { font-size: 16px; font-weight: 600; color: var(--text); }
+.card-desc { font-size: 12px; color: var(--text-secondary); }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  padding: 2px 8px; border-radius: 10px; font-size: 11px;
+  background: var(--bg); color: var(--text-secondary);
+  border: 1px solid var(--border); cursor: pointer;
+}
+
+/* 右侧：迷你学习面板 */
+.card-mini-panel {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* 竖向进度条 */
+.mini-bar-container {
+  width: 8px;
+  height: 48px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.mini-bar-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 4px;
+  transition: height 0.3s ease;
+}
+.mini-bar-fill.mastered-6 { height: 100%; background: var(--success); }
+.mini-bar-fill.mastered-5 { height: 83%; background: var(--success); }
+.mini-bar-fill.mastered-4 { height: 67%; background: var(--success); }
+.mini-bar-fill.mastered-3 { height: 50%; background: var(--warning); }
+.mini-bar-fill.mastered-2 { height: 33%; background: var(--warning); }
+.mini-bar-fill.mastered-1 { height: 17%; background: var(--warning); }
+.mini-bar-fill.mastered-0 { height: 0%; background: transparent; }
+
+/* 掌握数 */
+.mini-score {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+.mini-score.all { color: var(--success); }
+.mini-score.none { color: var(--text-muted); }
+
+/* 时间提示 */
+.mini-time {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+.mini-time.review-today { color: var(--danger); font-weight: 600; }
+
+/* 错题数 */
+.mini-wrong {
+  font-size: 10px;
+  color: var(--danger);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 悬停时显示tooltip */
+.mini-tooltip {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--text);
+  color: white;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+.mini-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-left-color: var(--text);
+}
+.card-mini-panel:hover .mini-tooltip {
+  opacity: 1;
+}
+
+/* 未学习状态的特殊样式 */
+.card-mini-panel.unlearned {
+  opacity: 0.5;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>卡片学习记录 · 版本C：侧边迷你版</h1>
+  <div class="subtitle">平衡简洁与信息。卡片右侧竖向进度条 + 关键指标。悬停显示详细提示。</div>
+
+  <div class="card-list">
+
+    <!-- 卡片1：已掌握较多 -->
+    <div class="card-list-item">
+      <div class="card-main">
+        <div class="card-name">桂枝汤</div>
+        <div class="card-desc">太阳中风主方</div>
+        <div class="card-tags">
+          <span class="tag">太阳病</span><span class="tag">解表剂</span><span class="tag">风伤卫</span>
+        </div>
+      </div>
+      <div class="card-mini-panel">
+        <div class="mini-tooltip">已掌握 3/6 · 上次学习 2天前 · 今天复习</div>
+        <div class="mini-bar-container">
+          <div class="mini-bar-fill mastered-3"></div>
+        </div>
+        <div class="mini-score">3/6</div>
+        <div class="mini-time review-today">今天复习</div>
+      </div>
+    </div>
+
+    <!-- 卡片2：有错题 -->
+    <div class="card-list-item">
+      <div class="card-main">
+        <div class="card-name">桂枝加葛根汤</div>
+        <div class="card-desc">太阳中风兼项背强痛</div>
+        <div class="card-tags">
+          <span class="tag">太阳病</span><span class="tag">项背强几几</span><span class="tag">汗出</span>
+        </div>
+      </div>
+      <div class="card-mini-panel">
+        <div class="mini-tooltip">已掌握 1/6 · 上次学习 5天前 · 2条错题 · 3天后复习</div>
+        <div class="mini-bar-container">
+          <div class="mini-bar-fill mastered-1"></div>
+        </div>
+        <div class="mini-score">1/6</div>
+        <div class="mini-wrong">💡 2</div>
+        <div class="mini-time">3天后</div>
+      </div>
+    </div>
+
+    <!-- 卡片3：未学习 -->
+    <div class="card-list-item">
+      <div class="card-main">
+        <div class="card-name">小建中汤</div>
+        <div class="card-desc">虚劳里急</div>
+        <div class="card-tags">
+          <span class="tag">太阴病</span><span class="tag">补益剂</span><span class="tag">腹痛</span>
+        </div>
+      </div>
+      <div class="card-mini-panel unlearned">
+        <div class="mini-tooltip">尚未学习</div>
+        <div class="mini-bar-container">
+          <div class="mini-bar-fill mastered-0"></div>
+        </div>
+        <div class="mini-score none">0/6</div>
+        <div class="mini-time">未学习</div>
+      </div>
+    </div>
+
+    <!-- 卡片4：全部掌握 -->
+    <div class="card-list-item">
+      <div class="card-main">
+        <div class="card-name">麻黄汤</div>
+        <div class="card-desc">太阳伤寒主方</div>
+        <div class="card-tags">
+          <span class="tag">太阳病</span><span class="tag">解表剂</span><span class="tag">寒伤营</span>
+        </div>
+      </div>
+      <div class="card-mini-panel">
+        <div class="mini-tooltip">全部掌握 6/6 · 上次学习 1天前 · 7天后复习</div>
+        <div class="mini-bar-container">
+          <div class="mini-bar-fill mastered-6"></div>
+        </div>
+        <div class="mini-score all">6/6</div>
+        <div class="mini-time">7天后</div>
+      </div>
+    </div>
+
+    <!-- 卡片5：混合 -->
+    <div class="card-list-item">
+      <div class="card-main">
+        <div class="card-name">大承气汤</div>
+        <div class="card-desc">阳明腑实重证</div>
+        <div class="card-tags">
+          <span class="tag">阳明病</span><span class="tag">攻下剂</span><span class="tag">重证</span>
+        </div>
+      </div>
+      <div class="card-mini-panel">
+        <div class="mini-tooltip">已掌握 4/6 · 上次学习 今天 · 2天后复习</div>
+        <div class="mini-bar-container">
+          <div class="mini-bar-fill mastered-4"></div>
+        </div>
+        <div class="mini-score">4/6</div>
+        <div class="mini-time">2天后</div>
+      </div>
+    </div>
+
+    <!-- 卡片6：学习中 -->
+    <div class="card-list-item">
+      <div class="card-main">
+        <div class="card-name">小柴胡汤</div>
+        <div class="card-desc">少阳病主方</div>
+        <div class="card-tags">
+          <span class="tag">少阳病</span><span class="tag">和解剂</span><span class="tag">枢机之剂</span>
+        </div>
+      </div>
+      <div class="card-mini-panel">
+        <div class="mini-tooltip">已掌握 2/6 · 上次学习 4天前 · 1条错题 · 今天复习</div>
+        <div class="mini-bar-container">
+          <div class="mini-bar-fill mastered-2"></div>
+        </div>
+        <div class="mini-score">2/6</div>
+        <div class="mini-wrong">💡 1</div>
+        <div class="mini-time review-today">今天复习</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+[
+  {
+    "name": "桂枝汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "麻黄汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "葛根汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "大青龙汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "小青龙汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "桂枝加葛根汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "桂枝加厚朴杏子汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "桂枝去芍药汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "桂枝加附子汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "桂枝麻黄各半汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "桂枝二越婢一汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "麻黄杏仁甘草石膏汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "麻杏甘石汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "葛根加半夏汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "葛根黄芩黄连汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "小柴胡汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "大柴胡汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "柴胡加芒硝汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "柴胡加龙骨牡蛎汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "栀子豉汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "栀子甘草豉汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "栀子生姜豉汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "栀子厚朴汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "栀子干姜汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "五苓散",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "真武汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "四逆汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "干姜附子汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "茯苓四逆汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "桃核承气汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "抵当汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "小建中汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "大承气汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "调胃承气汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "白虎加人参汤",
+    "in_cards": true,
+    "priority": "高"
+  },
+  {
+    "name": "白虎汤",
+    "in_cards": true,
+    "priority": "高"
+  }
+]

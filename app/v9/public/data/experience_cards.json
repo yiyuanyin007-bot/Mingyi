@@ -1,0 +1,104 @@
+[
+  {
+    "id": "gui-zhi-tang_exp-001",
+    "type": "experience_card",
+    "parent_formula_id": "gui-zhi-tang",
+    "source_text_id": "gui-zhi-tang-src-001",
+    "title": "桂枝汤治汗出恶风一例",
+    "source": "个人医案",
+    "source_type": "个人医案",
+    "topic": "临床应用",
+    "content": "患者表现为汗出、恶风、脉浮缓，予桂枝汤原方。服后汗出减少，恶风减轻。",
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [],
+      "reference_source": "个人临床"
+    },
+    "efficacy": {
+      "subjective_effective": true,
+      "objective_change": [
+        "汗出减少",
+        "恶风减轻"
+      ],
+      "confidence_level": "中"
+    },
+    "unlock_level": 1,
+    "tags": [
+      "桂枝汤",
+      "汗出",
+      "恶风"
+    ],
+    "created_at": "2026-06-13T11:35:24.520535",
+    "updated_at": "2026-06-13T11:35:24.520535"
+  },
+  {
+    "id": "si-ni-tang_exp-001",
+    "type": "experience_card",
+    "parent_formula_id": "si-ni-tang",
+    "source_text_id": "si-ni-tang-src-001",
+    "title": "误下后下利清谷救里案（倪海厦讲解）",
+    "source": "倪海厦《人纪·伤寒论》讲解",
+    "source_type": "后世讲解/案例",
+    "topic": "临床应用",
+    "content": "患者外感发热、头痛、身体疼痛，医误汗/误下后表证虽解，而里阳大虚，遂下利清谷不止，吃进去什么拉什么，脉沉微，四肢厥冷，冷甚则吐出的气都是冷的，精神萎靡。此属急当救里，予四逆汤（生附子、干姜、炙甘草）回阳救逆。待利止、手足温、脉回，再据表证未净者救表，宜用桂枝汤。",
+    "lineage": {
+      "base_formula": "四逆汤",
+      "variant_path": [],
+      "reference_source": "后世讲解"
+    },
+    "efficacy": {
+      "subjective_effective": true,
+      "objective_change": [
+        "下利清谷止",
+        "手足转温",
+        "脉由沉微渐回"
+      ],
+      "confidence_level": "中"
+    },
+    "unlock_level": 1,
+    "tags": [
+      "四逆汤",
+      "误治",
+      "下利清谷",
+      "救里",
+      "回阳救逆"
+    ],
+    "created_at": "2026-06-14T02:24:11.164323+00:00",
+    "updated_at": "2026-06-14T02:24:11.164323+00:00"
+  },
+  {
+    "id": "si-ni-tang_exp-002",
+    "type": "experience_card",
+    "parent_formula_id": "si-ni-tang",
+    "source_text_id": "si-ni-tang-src-001",
+    "title": "寒热夹杂胃病用四逆汤合三黄泻心汤（黄煌言论）",
+    "source": "黄煌经方言论",
+    "source_type": "后世经验/言论",
+    "topic": "合方应用",
+    "content": "黄煌临床遇寒热夹杂的胃病，常以四逆汤合三黄泻心汤为主方。四逆汤温里回阳，三黄泻心汤清上焦郁热，寒热并用，适用于胃中寒热错杂、舌苔白腻而口苦、脘腹冷痛或灼热并见者。",
+    "lineage": {
+      "base_formula": "四逆汤",
+      "variant_path": [
+        "合三黄泻心汤"
+      ],
+      "reference_source": "后世经验"
+    },
+    "efficacy": {
+      "subjective_effective": true,
+      "objective_change": [
+        "胃脘冷热错杂症状改善"
+      ],
+      "confidence_level": "中"
+    },
+    "unlock_level": 2,
+    "tags": [
+      "四逆汤",
+      "三黄泻心汤",
+      "寒热夹杂",
+      "胃病",
+      "合方"
+    ],
+    "created_at": "2026-06-14T02:24:11.164323+00:00",
+    "updated_at": "2026-06-14T02:24:11.164323+00:00"
+  }
+]

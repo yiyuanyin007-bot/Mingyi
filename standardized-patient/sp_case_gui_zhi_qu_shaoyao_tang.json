@@ -1,0 +1,524 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "sp-011-ty-21",
+  "mode": "article",
+  "difficulty": 3,
+  "difficulty_config": {
+    "inquiry_slots": 3,
+    "l2_allowance_per_direction": 0,
+    "l3_noise_probability": 0.5,
+    "distractor_count": 4,
+    "distractor_level": "hard",
+    "physical_exam_completeness": "full",
+    "chief_complaint_directness": "implicit"
+  },
+  "source_article": "SHL-ty-21",
+  "source_classic": "伤寒论",
+  "chapter": "太阳病篇",
+  "patient": {
+    "name": "刘先生",
+    "age": 45,
+    "gender": "男",
+    "occupation": "长途货车司机",
+    "background": "体格壮实，三天前因怕冷发热去诊所看病，被开了泻药（大黄类），服药后腹泻数次，随后症状加重，对前医极度不满",
+    "persona_id": "skeptical-patient"
+  },
+  "chief_complaint": {
+    "text": "大夫，我跟您说，我之前就是有点怕冷、身上发热，开车时吹了风觉得不舒服。结果上礼拜去那个诊所，那个医生给我开了泻药，说通通便就好了。我吃了以后拉了三四次，然后这胸口就开始不对劲了，闷得慌，像有块石头压着，喘气都不顺。身上还是热乎乎的，出着汗，风一吹就起鸡皮疙瘩。我现在是真不敢随便吃药了，你们中医不会也给我开泻药吧？我就是胸口太难受了才来的。",
+    "revealed_symptoms": [
+      "发热",
+      "恶风",
+      "汗出",
+      "下后"
+    ],
+    "l0_symptoms": [
+      "发热",
+      "恶风",
+      "汗出",
+      "下后"
+    ],
+    "directness": "implicit",
+    "word_count": 175
+  },
+  "inquiries": {
+    "01_寒热": {
+      "direction_id": "01_寒热",
+      "direction_name": "寒热",
+      "keywords": [
+        "怕冷",
+        "发热",
+        "寒热往来"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        3
+      ],
+      "l1": {
+        "text": "身上热乎乎的，量体温也就37度8到38度2，不是高烧，但一直不退。风一吹就起鸡皮疙瘩，觉得冷，缩着脖子不敢吹风。汗出了之后更觉得凉。",
+        "revealed_symptoms": [
+          "发热",
+          "恶风"
+        ],
+        "sample_question": "怕冷吗？发烧吗？"
+      },
+      "l2": {
+        "trigger_question": "什么时候最热？什么时候最冷？",
+        "text": "身上一直热乎乎的，不算特别烫。汗出了之后、风吹过来的时候最觉得冷。没有忽冷忽热那种。",
+        "revealed_symptoms": [
+          "汗后恶寒"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "你们是不是也要给我开泻药？上回那个大夫说我体内有火，要泻火，结果泻完更难受了。你们不会也这样吧？",
+        "type": "质疑医生",
+        "misleading_symptom": "情绪干扰"
+      }
+    },
+    "02_汗出": {
+      "direction_id": "02_汗出",
+      "direction_name": "汗出",
+      "keywords": [
+        "汗量",
+        "汗后感",
+        "盗汗",
+        "自汗"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        3
+      ],
+      "l1": {
+        "text": "汗挺多的，坐着不动也冒汗，衣服领口都湿了。擦了又有，止不住。汗出了之后觉得身上发凉，没力气。",
+        "revealed_symptoms": [
+          "汗出",
+          "汗后畏寒"
+        ],
+        "sample_question": "出汗多吗？什么时候出汗？"
+      },
+      "l2": {
+        "trigger_question": "汗后舒服吗？",
+        "text": "汗出了之后更觉得冷，没力气，像虚脱了一样。而且擦了汗又有，止不住的。",
+        "revealed_symptoms": [
+          "汗后畏寒",
+          "汗漏不止"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "我听说出汗多就是体虚，是不是该补补？上回那个大夫说我是实热，要泻，结果泻完汗更多了。你们到底怎么看？",
+        "type": "质疑医生",
+        "misleading_symptom": "错误归因"
+      }
+    },
+    "03_头身": {
+      "direction_id": "03_头身",
+      "direction_name": "头身",
+      "keywords": [
+        "头痛",
+        "项背",
+        "四肢",
+        "胸胁"
+      ],
+      "available": false,
+      "required_for_difficulty": [],
+      "l1": {
+        "text": "",
+        "revealed_symptoms": [],
+        "sample_question": ""
+      },
+      "l2": {
+        "trigger_question": "",
+        "text": "",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    },
+    "04_二便": {
+      "direction_id": "04_二便",
+      "direction_name": "二便",
+      "keywords": [
+        "小便",
+        "大便",
+        "颜色",
+        "次数"
+      ],
+      "available": false,
+      "required_for_difficulty": [],
+      "l1": {
+        "text": "",
+        "revealed_symptoms": [],
+        "sample_question": ""
+      },
+      "l2": {
+        "trigger_question": "",
+        "text": "",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    },
+    "05_饮食": {
+      "direction_id": "05_饮食",
+      "direction_name": "饮食",
+      "keywords": [
+        "胃口",
+        "口渴",
+        "喜冷/热",
+        "呕吐"
+      ],
+      "available": false,
+      "required_for_difficulty": [],
+      "l1": {
+        "text": "",
+        "revealed_symptoms": [],
+        "sample_question": ""
+      },
+      "l2": {
+        "trigger_question": "",
+        "text": "",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    },
+    "06_胸腹": {
+      "direction_id": "06_胸腹",
+      "direction_name": "胸腹",
+      "keywords": [
+        "胸闷",
+        "心悸",
+        "腹胀",
+        "腹痛"
+      ],
+      "available": true,
+      "required_for_difficulty": [
+        3
+      ],
+      "l1": {
+        "text": "胸口闷闷的，像有什么压着，喘不上气的感觉。不是疼，就是闷，难受得很。这个症状是吃了泻药之后才出现的，以前从来没有过。",
+        "revealed_symptoms": [
+          "胸满"
+        ],
+        "sample_question": "胸口闷吗？胀吗？"
+      },
+      "l2": {
+        "trigger_question": "按压胸口会舒服还是更难受？",
+        "text": "按不按都一样闷，不是按上去疼那种。就是觉得胸口堵得慌，气不顺。",
+        "revealed_symptoms": [
+          "胸满非按痛"
+        ]
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "我这胸口闷是不是心脏有问题啊？用不用去做心电图？上回那个大夫说我没事，结果越治越重。你们要是看不了就直说！",
+        "type": "质疑医生",
+        "misleading_symptom": "情绪干扰"
+      }
+    },
+    "07_耳目": {
+      "direction_id": "07_耳目",
+      "direction_name": "耳目",
+      "keywords": [
+        "耳鸣",
+        "听力",
+        "目眩",
+        "视力"
+      ],
+      "available": false,
+      "required_for_difficulty": [],
+      "l1": {
+        "text": "",
+        "revealed_symptoms": [],
+        "sample_question": ""
+      },
+      "l2": {
+        "trigger_question": "",
+        "text": "",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    },
+    "08_睡眠": {
+      "direction_id": "08_睡眠",
+      "direction_name": "睡眠",
+      "keywords": [
+        "入睡",
+        "多梦",
+        "易醒",
+        "烦躁"
+      ],
+      "available": false,
+      "required_for_difficulty": [],
+      "l1": {
+        "text": "",
+        "revealed_symptoms": [],
+        "sample_question": ""
+      },
+      "l2": {
+        "trigger_question": "",
+        "text": "",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    },
+    "09_旧病": {
+      "direction_id": "09_旧病",
+      "direction_name": "旧病",
+      "keywords": [
+        "既往",
+        "家族",
+        "用药史"
+      ],
+      "available": false,
+      "required_for_difficulty": [],
+      "l1": {
+        "text": "",
+        "revealed_symptoms": [],
+        "sample_question": ""
+      },
+      "l2": {
+        "trigger_question": "",
+        "text": "",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    },
+    "10_诱因": {
+      "direction_id": "10_诱因",
+      "direction_name": "诱因",
+      "keywords": [
+        "饮食",
+        "受寒",
+        "情绪",
+        "劳累"
+      ],
+      "available": false,
+      "required_for_difficulty": [],
+      "l1": {
+        "text": "",
+        "revealed_symptoms": [],
+        "sample_question": ""
+      },
+      "l2": {
+        "trigger_question": "",
+        "text": "",
+        "revealed_symptoms": []
+      },
+      "l3_noise": {
+        "probability": 0.5,
+        "triggered": false,
+        "text": "",
+        "type": ""
+      }
+    }
+  },
+  "physical_exam": {
+    "completeness": "full",
+    "inspection": {
+      "tongue_body": "正常",
+      "tongue_color": "淡红",
+      "coating": "薄白",
+      "special": ""
+    },
+    "auscultation": {
+      "voice": "正常，语速偏快",
+      "breath": "稍促",
+      "cough": "无",
+      "odor": "无"
+    },
+    "palpation": {
+      "pulse_position": "浮",
+      "pulse_rate": "促",
+      "pulse_shape": "数而时一止",
+      "pulse_force": "无力",
+      "composite": "脉促"
+    },
+    "pressing": {
+      "abdomen": "柔软，无压痛",
+      "limbs": "温",
+      "skin": "湿润，有汗"
+    }
+  },
+  "case_summary": "【主诉】\n刘先生，45岁，长途货车司机。3天前因外感风寒（怕冷发热）就诊于某诊所，误用泻药（大黄类）后腹泻数次，症状加重。\n\n【现病史】\n- 误治史：被前医误用泻药，下之后症状加重\n- 发热：体温37.8-38.2℃，持续不退\n- 恶风：风吹即起鸡皮疙瘩，不敢吹风\n- 汗出：自汗不止，动则加重，汗后觉凉\n- 胸满：胸口闷闷的，像有东西压着，为下后新出现的核心症状\n\n【查体】\n舌淡红，苔薄白。脉促（浮数而时一止，无力）。腹软，无压痛。四肢温，肌肤湿润有汗。\n\n【问诊选择】\n寒热 / 汗出 / 胸腹（难度3：仅可选3个方向）",
+  "question": {
+    "mode": "article",
+    "options": [
+      {
+        "id": "SHL-ty-21",
+        "label": "第21条",
+        "snippet": "太阳病，下之后，脉促胸满者，桂枝去芍药汤主之。",
+        "is_correct": true,
+        "distractor_type": "correct"
+      },
+      {
+        "id": "SHL-ty-12",
+        "label": "第12条",
+        "snippet": "太阳中风，阳浮而阴弱，阳浮者热自发，阴弱者汗自出，啬啬恶寒，淅淅恶风，翕翕发热，鼻鸣干呕者，桂枝汤主之。",
+        "is_correct": false,
+        "distractor_type": "same_formula_variant"
+      },
+      {
+        "id": "SHL-ty-208",
+        "label": "第208条",
+        "snippet": "阳明病，脉迟，虽汗出不恶寒者，其身必重，短气腹满而喘，有潮热者，此外欲解，可攻里也。手足濈然汗出者，此大便已硬也，大承气汤主之。",
+        "is_correct": false,
+        "distractor_type": "different_disease_similar_symptoms"
+      },
+      {
+        "id": "SHL-ty-96",
+        "label": "第96条",
+        "snippet": "伤寒五六日，中风，往来寒热，胸胁苦满，嘿嘿不欲饮食，心烦喜呕，或胸中烦而不呕，或渴，或腹中痛，或胁下痞硬，或心下悸、小便不利，或不渴、身有微热，或咳者，小柴胡汤主之。",
+        "is_correct": false,
+        "distractor_type": "different_disease_similar_symptoms"
+      },
+      {
+        "id": "SHL-ty-35",
+        "label": "第35条",
+        "snippet": "太阳病，头痛发热，身疼腰痛，骨节疼痛，恶风，无汗而喘者，麻黄汤主之。",
+        "is_correct": false,
+        "distractor_type": "same_disease_different_formula"
+      }
+    ]
+  },
+  "answer_key": {
+    "correct_article_id": "SHL-ty-21",
+    "correct_formula_id": "gui-zhi-qu-shaoyao-tang",
+    "correct_article_number": 21,
+    "correct_article_text": "太阳病，下之后，脉促胸满者，桂枝去芍药汤主之。",
+    "correct_formula_name": "桂枝去芍药汤",
+    "correct_herbs": [
+      "桂枝",
+      "甘草",
+      "生姜",
+      "大枣"
+    ]
+  },
+  "reference_analysis": {
+    "captured_vs_source": [
+      {
+        "symptom": "下后",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0",
+        "key": true
+      },
+      {
+        "symptom": "发热",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0"
+      },
+      {
+        "symptom": "恶风",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0"
+      },
+      {
+        "symptom": "汗出",
+        "in_patient": true,
+        "in_source": true,
+        "source": "chief_complaint",
+        "level": "l0"
+      },
+      {
+        "symptom": "胸满",
+        "in_patient": true,
+        "in_source": true,
+        "source": "inquiry-06_胸腹",
+        "level": "l1",
+        "key": true
+      },
+      {
+        "symptom": "脉促",
+        "in_patient": true,
+        "in_source": true,
+        "source": "physical_exam",
+        "level": "physical",
+        "key": true
+      }
+    ],
+    "key_differentials": [
+      {
+        "symptom": "胸满+脉促",
+        "excludes": [
+          "SHL-ty-12"
+        ],
+        "reason": "桂枝汤（第12条）无胸满、脉促，本证因误下后胸阳受损，故见胸满脉促，为去芍药之关键指征"
+      },
+      {
+        "symptom": "无里实",
+        "excludes": [
+          "SHL-ty-208"
+        ],
+        "reason": "大承气汤（第208条）为阳明里实，腹满硬痛、大便硬、潮热，本证腹软无压痛、无潮热，无里实可攻"
+      },
+      {
+        "symptom": "无往来寒热",
+        "excludes": [
+          "SHL-ty-96"
+        ],
+        "reason": "小柴胡汤（第96条）核心为往来寒热、胸胁苦满，本证无寒热往来，属太阳病误治而非少阳病"
+      },
+      {
+        "symptom": "有汗+胸满",
+        "excludes": [
+          "SHL-ty-35"
+        ],
+        "reason": "麻黄汤（第35条）为无汗而喘，且无胸满，本证有汗、有胸满，直接排除"
+      }
+    ],
+    "missed_opportunities": [
+      {
+        "direction": "10_诱因",
+        "reason": "未选择诱因方向，错失确认误治细节（泻药种类、腹泻次数）的机会",
+        "impact": "中"
+      },
+      {
+        "direction": "03_头身",
+        "reason": "未选择头身方向，错失确认是否有头痛、项背强痛等太阳经证的机会",
+        "impact": "低"
+      },
+      {
+        "direction": "09_旧病",
+        "reason": "未选择旧病方向，错失确认既往体质及用药史的机会",
+        "impact": "低"
+      }
+    ]
+  }
+}

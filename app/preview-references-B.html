@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>版本B：结构化经验式 - 大柴胡汤参考资料</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; padding: 20px; line-height: 1.7; }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 22px; margin-bottom: 8px; color: #1a1a2e; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .version-badge { display: inline-block; background: #fff3e0; color: #e65100; padding: 4px 12px; border-radius: 4px; font-size: 12px; margin-bottom: 16px; }
+  .section { margin-bottom: 32px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a1a2e; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 20px; }
+  .exp-card { background: linear-gradient(135deg, #fff8e1 0%, #fff 100%); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #ffe082; }
+  .exp-card-header { font-weight: 700; font-size: 15px; color: #5d4037; margin-bottom: 12px; }
+  .exp-card-body { font-size: 14px; color: #4e342e; }
+  .exp-card-body ul { margin-left: 20px; }
+  .exp-card-body li { margin-bottom: 6px; }
+  .exp-card-body .highlight { background: #fff176; padding: 1px 4px; border-radius: 3px; font-weight: 600; }
+  .case-card { background: #fff; border-radius: 12px; padding: 0; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
+  .case-patient { background: linear-gradient(90deg, #e8eaf6 0%, #f3e5f5 100%); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+  .case-patient-avatar { width: 40px; height: 40px; border-radius: 50%; background: #5c6bc0; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+  .case-patient-info { flex: 1; }
+  .case-patient-name { font-weight: 600; font-size: 14px; color: #1a1a2e; }
+  .case-patient-tags { font-size: 12px; color: #666; margin-top: 2px; }
+  .case-body { padding: 16px 20px; }
+  .case-symptoms { font-size: 14px; color: #333; line-height: 1.8; margin-bottom: 12px; }
+  .case-symptoms .symptom-tag { display: inline-block; background: #ffebee; color: #c62828; font-size: 12px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; margin-bottom: 4px; }
+  .case-prescription { background: #f1f8e9; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; font-size: 13px; color: #33691e; border-left: 3px solid #8bc34a; }
+  .case-prescription-label { font-weight: 700; font-size: 12px; color: #558b2f; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .case-outcome { background: #e8f5e9; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #1b5e20; border-left: 3px solid #4caf50; }
+  .case-outcome-label { font-weight: 700; font-size: 12px; color: #2e7d32; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .case-footer { padding: 10px 20px; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+  .case-footer .source { font-size: 12px; color: #888; }
+  .case-footer a { font-size: 12px; color: #1976d2; text-decoration: none; }
+  .formula-highlight { font-weight: 700; color: #1565c0; }
+  .nav { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 8px; }
+  .nav a { background: #1a1a2e; color: #fff; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; }
+  .nav a.active { background: #e65100; }
+</style>
+</head>
+<body>
+<div class="container">
+  <span class="version-badge">版本B：结构化经验式（内容重组）</span>
+  <h1>大柴胡汤 · 经验与医案</h1>
+  <p class="subtitle">改进点：言论拆分为"经验要点"，医案拆分为"患者画像+处方+疗效"</p>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">💡</span> 经验要点（从黄煌言论提炼）</div>
+
+    <div class="exp-card">
+      <div class="exp-card-header">大柴胡汤体质特征</div>
+      <div class="exp-card-body">
+        <ul>
+          <li>患者多为<strong>形体壮实</strong>或<strong>中等偏实</strong>体型，肌肉结实</li>
+          <li>常见<strong>上腹部充实抵抗</strong>，按压有不适感</li>
+          <li>多伴有<strong>便秘或大便偏干</strong></li>
+          <li>可见<strong>口苦、烦躁</strong>等少阳郁热表现</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-card-header">加减应用经验</div>
+      <div class="exp-card-body">
+        <ul>
+          <li><strong>支气管哮喘</strong>：加<span class="highlight">桂枝茯苓丸</span>、<span class="highlight">桔梗</span>（排痰散）</li>
+          <li><strong>胰胆感染</strong>：加<span class="highlight">黄连</span>（增强清热之力）</li>
+          <li><strong>乳腺疾病</strong>：加<span class="highlight">青皮</span>、<span class="highlight">陈皮</span>（疏肝理气）</li>
+          <li><strong>高血压/高脂血症/动脉硬化</strong>（见面潮红、便秘）：加<span class="highlight">桂枝茯苓丸</span></li>
+          <li><strong>合方</strong>：常与三黄泻心汤、桂枝茯苓丸、半夏厚朴汤、猪苓汤合用</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-card-header">辨证关键</div>
+      <div class="exp-card-body">
+        <ul>
+          <li>把握"<strong>实</strong>"字：形体充实、腹部充实、便秘</li>
+          <li>把握"<strong>热</strong>"字：口苦、烦躁、面红、目赤</li>
+          <li>把握"<strong>郁</strong>"字：胸胁苦满、情绪不畅</li>
+          <li>黄煌："大柴胡汤是<strong>排痰方</strong>，不是外科排脓方"——粘稠液体即痰</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">🏥</span> 临床医案 (5)</div>
+
+    <div class="case-card">
+      <div class="case-patient">
+        <div class="case-patient-avatar">37</div>
+        <div class="case-patient-info">
+          <div class="case-patient-name">眩晕频发案</div>
+          <div class="case-patient-tags">女性 · 37岁 · 形体壮实 · 大柴胡汤合三黄泻心汤</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-symptoms">
+          <span class="symptom-tag">眩晕</span>
+          <span class="symptom-tag">目睛充血</span>
+          <span class="symptom-tag">口唇疱疹</span>
+          <span class="symptom-tag">肩膀酸痛</span>
+          <span class="symptom-tag">胃中烧灼</span>
+          <span class="symptom-tag">喜苦食</span>
+          <br><br>
+          眩晕频发，每于接触枕头时发作。目睛充血，口唇易疱疹，肩膀酸痛，烦躁心慌，胃中不适有烧灼感，左少腹按之疼痛，喜苦食。
+        </div>
+        <div class="case-prescription">
+          <div class="case-prescription-label">📋 处方</div>
+          <span class="formula-highlight">柴胡12g</span>，<span class="formula-highlight">黄芩10g</span>，制半夏10g，<span class="formula-highlight">枳壳12g</span>，<span class="formula-highlight">白芍12g</span>，制大黄6g，<span class="formula-highlight">黄连3g</span>，干姜5g，红枣20g
+        </div>
+        <div class="case-outcome">
+          <div class="case-outcome-label">✅ 疗效</div>
+          药后舒适，诸症明显好转，眩晕仅秋天小有一次，头痛未作
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="source">黄煌 · 2007</span>
+        <a href="extracted/黄煌教授经方沙龙/cleaned/医案/黄煌教授医案_眩晕频发案.md" target="_blank">查看原文</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-patient">
+        <div class="case-patient-avatar">85</div>
+        <div class="case-patient-info">
+          <div class="case-patient-name">长期咳嗽咯痰不爽案</div>
+          <div class="case-patient-tags">女性 · 85岁 · 肺纤维化 · 大柴胡汤合桂枝茯苓丸</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-symptoms">
+          <span class="symptom-tag">咳嗽</span>
+          <span class="symptom-tag">脓痰</span>
+          <span class="symptom-tag">气喘</span>
+          <span class="symptom-tag">口干苦</span>
+          <span class="symptom-tag">下肢浮肿</span>
+          <span class="symptom-tag">抽筋</span>
+          <br><br>
+          形体充实，肺纤维化、风湿性关节炎、胆囊结石手术史。长期咳嗽，脓痰咯出不爽，走路后气喘，头背部僵痛，口干苦，腹胀，两腿乏力，下肢浮肿，时有抽筋。
+        </div>
+        <div class="case-prescription">
+          <div class="case-prescription-label">📋 处方</div>
+          <span class="formula-highlight">柴胡6g</span>，<span class="formula-highlight">黄芩6g</span>，制半夏6g，枳壳10g，赤芍10g，肉桂6g，桃仁6g，丹皮6g，茯苓12g，制大黄3g，干姜5g，红枣15g
+        </div>
+        <div class="case-outcome">
+          <div class="case-outcome-label">✅ 疗效</div>
+          药后一周咯痰即有好转，量减少而咯出转畅，口干好转，两腿较前有力，下肢浮肿轻微，大便通畅，睡眠可
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="source">黄煌 · 2007</span>
+        <a href="extracted/黄煌教授经方沙龙/cleaned/医案/黄煌教授医案_长期咳嗽咯痰不爽案.md" target="_blank">查看原文</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-patient">
+        <div class="case-patient-avatar">63</div>
+        <div class="case-patient-info">
+          <div class="case-patient-name">荤食寒冷过敏案</div>
+          <div class="case-patient-tags">女性 · 63岁 · 肌肉结实 · 大柴胡汤合桂枝茯苓丸合半夏厚朴汤</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-symptoms">
+          <span class="symptom-tag">皮肤过敏</span>
+          <span class="symptom-tag">怕冷</span>
+          <span class="symptom-tag">头汗</span>
+          <span class="symptom-tag">喷嚏</span>
+          <span class="symptom-tag">大便干</span>
+          <br><br>
+          不能吃荤食及蒜、葱等，皮肤过敏。头部怕冷，头汗多，晨起打喷嚏、流鼻涕，咽喉不适，老有饥饿感，大便干，睡眠不佳。
+        </div>
+        <div class="case-prescription">
+          <div class="case-prescription-label">📋 处方</div>
+          <span class="formula-highlight">大柴胡汤合桂枝茯苓丸合半夏厚朴汤</span>
+        </div>
+        <div class="case-outcome">
+          <div class="case-outcome-label">✅ 疗效</div>
+          药后怕冷明显好转，已可穿短袖吹空调，饥饿感、晨起喷嚏、流鼻涕、鼻子不通好转，大便通畅，咽喉舒适
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="source">黄煌 · 2007</span>
+        <a href="extracted/黄煌教授经方沙龙/cleaned/医案/黄煌教授医案_荤食寒冷过敏案.md" target="_blank">查看原文</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-patient">
+        <div class="case-patient-avatar">56</div>
+        <div class="case-patient-info">
+          <div class="case-patient-name">强直性脊柱炎肾盂肾炎案</div>
+          <div class="case-patient-tags">女性 · 56岁 · 体格较充实 · 大柴胡汤合猪苓汤</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-symptoms">
+          <span class="symptom-tag">关节痛</span>
+          <span class="symptom-tag">下肢浮肿</span>
+          <span class="symptom-tag">尿频</span>
+          <span class="symptom-tag">血尿</span>
+          <span class="symptom-tag">入睡困难</span>
+          <br><br>
+          强直性脊柱炎20余年，全身关节不适，腰部酸重僵硬，下肢浮肿，尿频尿不尽，夜尿多，易有血尿，入睡困难。
+        </div>
+        <div class="case-prescription">
+          <div class="case-prescription-label">📋 处方</div>
+          <span class="formula-highlight">柴胡20g</span>，<span class="formula-highlight">黄芩20g</span>，生甘草6g，黄柏6g，山栀10g，党参12g，制半夏12g，茯苓20g，猪苓20g，连翘40g，泽泻20g，干姜10g，红枣15g
+        </div>
+        <div class="case-outcome">
+          <div class="case-outcome-label">✅ 疗效</div>
+          药后关节疼痛缓解，小便次数减少，尿道刺激征不明显，下肢浮肿好转
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="source">黄煌 · 2007</span>
+        <a href="extracted/黄煌教授经方沙龙/cleaned/医案/黄煌教授医案_强直性脊柱炎_肾盂肾炎案.md" target="_blank">查看原文</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-patient">
+        <div class="case-patient-avatar">49</div>
+        <div class="case-patient-info">
+          <div class="case-patient-name">三叉神经痛案</div>
+          <div class="case-patient-tags">女性 · 49岁 · 中等偏实 · 大柴胡汤加黄连</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-symptoms">
+          <span class="symptom-tag">三叉神经痛</span>
+          <span class="symptom-tag">高血压</span>
+          <span class="symptom-tag">身热汗出</span>
+          <span class="symptom-tag">经前乳胀</span>
+          <span class="symptom-tag">便秘</span>
+          <br><br>
+          三叉神经痛3月余，疼痛难忍需打止痛针，血压160/90mmHg。身热汗出，腹部按之充实，经前乳胀，痛经，大便偏干。
+        </div>
+        <div class="case-prescription">
+          <div class="case-prescription-label">📋 处方</div>
+          <span class="formula-highlight">柴胡10g</span>，<span class="formula-highlight">黄芩15g</span>，制半夏15g，枳壳15g，白芍15g，制大黄6g，<span class="formula-highlight">黄连5g</span>，干姜6g，红枣20g
+        </div>
+        <div class="case-outcome">
+          <div class="case-outcome-label">✅ 疗效</div>
+          药后疼痛好转，身热汗出减少，一月后能喝冷果汁，头痛不显，偶尔牙根疼痛，大便畅
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="source">黄煌 · 2007</span>
+        <a href="extracted/黄煌教授经方沙龙/cleaned/医案/黄煌教授医案_三叉神经痛案.md" target="_blank">查看原文</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="/app/preview-references-A.html">版本A</a>
+  <a href="/app/preview-references-B.html" class="active">版本B</a>
+  <a href="/app/preview-references-C.html">版本C</a>
+</div>
+</body>
+</html>

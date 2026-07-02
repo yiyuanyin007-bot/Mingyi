@@ -1,0 +1,62 @@
+body {/*基本页面内容*/
+	font-size: 12px;
+}
+p {/*段落*/
+	text-indent: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	line-height: 18px;
+}
+p.y0 {/*段落:药剂类的段落不缩进*/
+	text-indent: 0px;
+	clear: both;
+}
+.font_red {/*字体:红色*/
+	color: #FF6600;
+	margin: 0px;
+	padding: 0px;
+}
+.font_blue {/*字体:蓝色*/
+	color: #003366;
+	font-size: 12px;
+	font-weight: lighter;
+}
+.font_gray {/*字体:颜色*/
+	color: #666666;
+}
+.font_gray a{/*字体:颜色*/
+	color: #666666;
+}
+.font_shangbiao {/*字体:上标*/
+	font-size: 83%;
+	vertical-align: top;
+}
+.font_xiabiao {/*字体:下标*/
+	font-size: 83%;
+	vertical-align: bottom;
+}
+img {
+	margin: 5px;
+	border: 1px solid #CCCCCC;
+	padding: 1px;
+}
+td {
+	font-size: 12px;
+}
+em {
+	background-color: #FFFFCC;
+	border: 1px dashed #FFCC66;
+	font-style: normal;
+}
+h1 {
+	font-size: 14px;
+	line-height: 30px;
+	font-weight: bold;
+}
+p a {
+	color: #000000;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #FF3300;
+	text-decoration: none;
+}

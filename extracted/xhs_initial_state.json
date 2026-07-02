@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "data": {
+    "type": "string",
+    "value": "Converting circular structure to JSON\n    --> starting at object with constructor 'eh'\n    |     property 'dep' -> object with constructor '$'\n    --- property 'computed' closes the circle"
+  }
+}

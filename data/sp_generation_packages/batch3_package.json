@@ -1,0 +1,106 @@
+[
+  {
+    "formula_id": "xiao-cheng-qi-tang",
+    "formula_name": "小承气汤",
+    "source_chapter": "阳明病篇",
+    "necessary": [
+      "大便硬",
+      "谵语"
+    ],
+    "common": [
+      "多汗",
+      "腹满",
+      "潮热",
+      "脉滑而疾"
+    ],
+    "excluding": [
+      "痞满燥实坚俱重",
+      "四肢厥冷"
+    ],
+    "herbs": [
+      "大黄",
+      "厚朴",
+      "枳实"
+    ],
+    "source_article": null
+  },
+  {
+    "formula_id": "wu-zhu-yu-tang",
+    "formula_name": "吴茱萸汤",
+    "source_chapter": "阳明病篇",
+    "necessary": [
+      "食谷欲呕",
+      "吐涎沫"
+    ],
+    "common": [
+      "头痛",
+      "手足逆冷",
+      "烦躁",
+      "下利"
+    ],
+    "excluding": [
+      "实热呕吐",
+      "痰饮呕吐"
+    ],
+    "herbs": [
+      "吴茱萸",
+      "人参",
+      "生姜",
+      "大枣"
+    ],
+    "source_article": null
+  },
+  {
+    "formula_id": "ma-zi-ren-wan",
+    "formula_name": "麻子仁丸",
+    "source_chapter": "阳明病篇",
+    "necessary": [
+      "大便硬",
+      "小便数"
+    ],
+    "common": [
+      "腹满",
+      "口干",
+      "舌红少津"
+    ],
+    "excluding": [
+      "实热腑实",
+      "冷秘"
+    ],
+    "herbs": [
+      "麻子仁",
+      "芍药",
+      "枳实",
+      "大黄",
+      "厚朴",
+      "杏仁"
+    ],
+    "source_article": null
+  },
+  {
+    "formula_id": "yin-chen-hao-tang",
+    "formula_name": "茵陈蒿汤",
+    "source_chapter": "阳明病篇",
+    "necessary": [
+      "身黄",
+      "小便不利",
+      "口渴"
+    ],
+    "common": [
+      "头汗出",
+      "腹满",
+      "大便难",
+      "舌红苔黄腻"
+    ],
+    "excluding": [
+      "寒湿黄疸",
+      "虚黄"
+    ],
+    "herbs": [
+      "茵陈蒿",
+      "栀子",
+      "大黄"
+    ],
+    "source_article": null
+  }
+]

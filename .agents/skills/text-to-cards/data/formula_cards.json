@@ -1,0 +1,6183 @@
+[
+  {
+    "id": "gui-zhi-tang",
+    "type": "formula_card",
+    "name": "桂枝汤",
+    "formula_name": "桂枝汤",
+    "role": "主方",
+    "desc": "太阳中风主方",
+    "tags": [
+      "太阳病",
+      "解表剂",
+      "风伤卫",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T11:35:24.520535",
+    "updated_at": "2026-06-13T11:35:24.520535",
+    "data": {
+      "source_text": "太阳病，头痛，发热，汗出，恶风，桂枝汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "汗出",
+            "恶风"
+          ],
+          "common": [
+            "头痛",
+            "发热",
+            "脉浮缓"
+          ],
+          "excluding": [
+            "无汗",
+            "脉浮紧"
+          ]
+        },
+        "pathology": "风邪袭表，营卫不和",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          }
+        ],
+        "usage": "以水七升，微火煮取三升，去滓，适寒温，服一升",
+        "contraindications": [
+          "无汗",
+          "脉浮紧（麻黄汤证）"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "芍药"
+        ],
+        "core_combinations": "桂枝、芍药",
+        "core_rationale": "桂枝解肌发表、芍药敛阴和营，二者一散一收，调和营卫，为全方核心药对。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10056069/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [
+        "gui-zhi-jia-ge-gen-tang",
+        "gui-zhi-jia-houpo-xingzi-tang",
+        "gui-zhi-qu-shaoyao-tang"
+      ],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [
+      "gui-zhi-tang_exp-001"
+    ],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ma-huang-tang",
+    "type": "formula_card",
+    "name": "麻黄汤",
+    "formula_name": "麻黄汤",
+    "role": "主方",
+    "desc": "太阳伤寒主方",
+    "tags": [
+      "太阳病",
+      "解表剂",
+      "寒伤营",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ma-huang-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "麻黄汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T11:35:24.520535",
+    "updated_at": "2026-06-13T11:35:24.520535",
+    "data": {
+      "source_text": "太阳病，头痛发热，身疼腰痛，骨节疼痛，恶风，无汗而喘者，麻黄汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "无汗",
+            "喘"
+          ],
+          "common": [
+            "头痛发热",
+            "身疼腰痛",
+            "骨节疼痛",
+            "恶风",
+            "脉浮紧"
+          ],
+          "excluding": [
+            "汗出",
+            "脉浮缓"
+          ]
+        },
+        "pathology": "寒邪束表，营卫闭塞，肺气不宣",
+        "herbs": [
+          {
+            "name": "麻黄",
+            "dosage": "三两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "二两"
+          },
+          {
+            "name": "杏仁",
+            "dosage": "七十枚"
+          },
+          {
+            "name": "甘草",
+            "dosage": "一两"
+          }
+        ],
+        "usage": "以水九升，先煮麻黄减二升，去上沫，内诸药，煮取二升半，去滓，温服八合",
+        "contraindications": [
+          "汗出",
+          "脉浮缓（桂枝汤证）"
+        ],
+        "core_herbs": [
+          "麻黄",
+          "桂枝",
+          "杏仁"
+        ],
+        "core_combinations": "麻黄、桂枝、杏仁",
+        "core_rationale": "麻黄发汗解表、宣肺平喘，桂枝助麻黄发汗，杏仁降肺气平喘，三药共奏辛温发汗、宣肺平喘之功。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ge-gen-tang",
+    "type": "formula_card",
+    "name": "葛根汤",
+    "formula_name": "葛根汤",
+    "role": "主方",
+    "desc": "太阳阳明合病",
+    "tags": [
+      "太阳病",
+      "太阳阳明合病",
+      "项背强痛",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ge-gen-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "葛根汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T11:35:24.520535",
+    "updated_at": "2026-06-13T11:35:24.520535",
+    "data": {
+      "source_text": "太阳病，项背强几几，无汗恶风，葛根汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "项背强痛",
+            "无汗",
+            "恶风"
+          ],
+          "common": [
+            "头痛",
+            "发热"
+          ],
+          "excluding": [
+            "汗出"
+          ]
+        },
+        "pathology": "太阳阳明合病，津液不升，经脉失养",
+        "herbs": [
+          {
+            "name": "葛根",
+            "dosage": "四两"
+          },
+          {
+            "name": "麻黄",
+            "dosage": "三两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "二两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          }
+        ],
+        "usage": "以水一斗，先煮麻黄、葛根减二升，去白沫，内诸药，煮取三升，去滓，温服一升",
+        "contraindications": [
+          "汗出（用桂枝加葛根汤）"
+        ],
+        "core_herbs": [
+          "葛根",
+          "麻黄",
+          "桂枝"
+        ],
+        "core_combinations": "葛根、麻黄、桂枝",
+        "core_rationale": "葛根升津液、舒筋脉，麻黄、桂枝发汗解表，三药合用治太阳阳明合病、项背强几几。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10044655/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "da-cheng-qi-tang",
+    "type": "formula_card",
+    "name": "大承气汤",
+    "formula_name": "大承气汤",
+    "role": "主方",
+    "desc": "阳明腑实重证",
+    "tags": [
+      "阳明病",
+      "攻下剂",
+      "重证",
+      "阳明病篇"
+    ],
+    "source_chapter": "阳明病篇",
+    "source_text_ids": [
+      "da-cheng-qi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "大承气汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T11:35:24.520535",
+    "updated_at": "2026-06-13T11:35:24.520535",
+    "data": {
+      "source_text": "阳明病，谵语，潮热，大便硬，大承气汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "大便硬",
+            "潮热"
+          ],
+          "common": [
+            "谵语",
+            "绕脐痛",
+            "手足濈然汗出"
+          ],
+          "excluding": [
+            "表证未解",
+            "津液内竭之便秘"
+          ]
+        },
+        "pathology": "阳明腑实，燥屎内结，热结肠腑",
+        "herbs": [
+          {
+            "name": "大黄",
+            "dosage": "四两"
+          },
+          {
+            "name": "厚朴",
+            "dosage": "半斤"
+          },
+          {
+            "name": "枳实",
+            "dosage": "五枚"
+          },
+          {
+            "name": "芒硝",
+            "dosage": "三合"
+          }
+        ],
+        "usage": "以水一斗，先煮二物取五升，去滓，内大黄煮取二升，去滓，内芒硝，更上微火一两沸，分温再服。得下，余勿服。",
+        "contraindications": [
+          "表证未解",
+          "津液内竭之便秘"
+        ],
+        "core_herbs": [
+          "大黄",
+          "芒硝",
+          "厚朴",
+          "枳实"
+        ],
+        "core_combinations": "大黄、芒硝、厚朴、枳实",
+        "core_rationale": "大黄、芒硝泻热通便，厚朴、枳实行气散结，四药相配峻下热结，为阳明腑实重剂。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "xiao-chai-hu-tang",
+    "type": "formula_card",
+    "name": "小柴胡汤",
+    "formula_name": "小柴胡汤",
+    "role": "主方",
+    "desc": "少阳病主方",
+    "tags": [
+      "少阳病",
+      "和解剂",
+      "枢机之剂",
+      "少阳病篇"
+    ],
+    "source_chapter": "少阳病篇",
+    "source_text_ids": [
+      "xiao-chai-hu-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "小柴胡汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T11:35:24.520535",
+    "updated_at": "2026-06-13T11:35:24.520535",
+    "data": {
+      "source_text": "伤寒五六日，中风，往来寒热，胸胁苦满，默默不欲饮食，心烦喜呕，小柴胡汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "往来寒热",
+            "胸胁苦满"
+          ],
+          "common": [
+            "默默不欲饮食",
+            "心烦喜呕"
+          ],
+          "excluding": [
+            "纯少阳证见阳明里实"
+          ]
+        },
+        "pathology": "少阳枢机不利，正邪分争",
+        "herbs": [
+          {
+            "name": "柴胡",
+            "dosage": "半斤"
+          },
+          {
+            "name": "黄芩",
+            "dosage": "三两"
+          },
+          {
+            "name": "人参",
+            "dosage": "三两"
+          },
+          {
+            "name": "半夏",
+            "dosage": "半升"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "甘草",
+            "dosage": "三两"
+          }
+        ],
+        "usage": "以水一斗二升，煮取六升，去滓，再煎取三升，温服一升，日三服",
+        "contraindications": [
+          "纯少阳证见阳明里实（需合方）"
+        ],
+        "core_herbs": [
+          "柴胡",
+          "黄芩"
+        ],
+        "core_combinations": "柴胡、黄芩",
+        "core_rationale": "柴胡透解少阳半表之邪，黄芩清泄少阳半里之热，二者相伍和解少阳，为方中君药核心。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》",
+          "知乎/黄煌观点"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10044655/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "gui-zhi-jia-ge-gen-tang",
+    "type": "formula_card",
+    "name": "桂枝加葛根汤",
+    "formula_name": "桂枝加葛根汤",
+    "role": "主方",
+    "desc": "太阳中风兼项背强痛",
+    "tags": [
+      "太阳病",
+      "项背强几几",
+      "汗出",
+      "恶风",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-jia-ge-gen-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [
+        "加葛根"
+      ],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T15:10:31.615472",
+    "updated_at": "2026-06-13T15:10:31.615472",
+    "data": {
+      "source_text": "太阳病，项背强几几，反汗出恶风者，桂枝加葛根汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "项背强几几",
+            "汗出",
+            "恶风"
+          ],
+          "common": [
+            "发热",
+            "头痛",
+            "脉浮缓"
+          ],
+          "excluding": [
+            "无汗"
+          ]
+        },
+        "pathology": "太阳中风，津液不升，经脉失养",
+        "herbs": [
+          {
+            "name": "葛根",
+            "dosage": "四两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          }
+        ],
+        "usage": "以水一斗，先煮葛根减二升，去上沫，内诸药，煮取三升，去滓，温服一升。覆取微似汗，不须啜粥。",
+        "contraindications": [
+          "无汗项背强（葛根汤证）"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "芍药",
+          "葛根"
+        ],
+        "core_combinations": "桂枝、芍药、葛根",
+        "core_rationale": "在桂枝汤调和营卫基础上加葛根升津液、舒筋脉，核心变为桂枝芍药调营卫 + 葛根升津。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "gui-zhi-jia-houpo-xingzi-tang",
+    "type": "formula_card",
+    "name": "桂枝加厚朴杏子汤",
+    "formula_name": "桂枝加厚朴杏子汤",
+    "role": "主方",
+    "desc": "太阳中风兼肺气上逆微喘",
+    "tags": [
+      "太阳病",
+      "下之后",
+      "微喘",
+      "表未解",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-jia-houpo-xingzi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [
+        "加厚朴",
+        "加杏仁"
+      ],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T15:10:31.615472",
+    "updated_at": "2026-06-13T15:10:31.615472",
+    "data": {
+      "source_text": "太阳病，下之微喘者，表未解故也，桂枝加厚朴杏子汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "汗出",
+            "恶风",
+            "微喘"
+          ],
+          "common": [
+            "发热",
+            "头痛",
+            "脉浮缓"
+          ],
+          "excluding": [
+            "无汗而喘",
+            "喘甚热盛"
+          ]
+        },
+        "pathology": "太阳中风，表未解，肺气上逆",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "厚朴",
+            "dosage": "二两"
+          },
+          {
+            "name": "杏仁",
+            "dosage": "五十枚"
+          }
+        ],
+        "usage": "煮法同桂枝汤，温服一升，覆取微似汗。",
+        "contraindications": [
+          "肺热实喘",
+          "无汗表实"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "芍药",
+          "厚朴",
+          "杏仁"
+        ],
+        "core_combinations": "桂枝、芍药、厚朴、杏仁",
+        "core_rationale": "桂枝汤调和营卫以解表，厚朴、杏仁降气平喘，核心为解表与降气平喘并举。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "gui-zhi-qu-shaoyao-tang",
+    "type": "formula_card",
+    "name": "桂枝去芍药汤",
+    "formula_name": "桂枝去芍药汤",
+    "role": "主方",
+    "desc": "太阳中风误下后胸阳不振",
+    "tags": [
+      "太阳病",
+      "误下",
+      "脉促",
+      "胸满",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-qu-shaoyao-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [
+        "去芍药"
+      ],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T15:10:31.615472",
+    "updated_at": "2026-06-13T15:10:31.615472",
+    "data": {
+      "source_text": "太阳病，下之后，脉促胸满者，桂枝去芍药汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "脉促",
+            "胸满"
+          ],
+          "common": [
+            "汗出",
+            "恶风",
+            "发热"
+          ],
+          "excluding": [
+            "胸满腹痛",
+            "胸满烦惊"
+          ]
+        },
+        "pathology": "太阳中风，误下伤阳，胸阳不振",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          }
+        ],
+        "usage": "煮法同桂枝汤，温服一升。",
+        "contraindications": [
+          "阴虚火旺",
+          "胸满属实"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "甘草",
+          "生姜",
+          "大枣"
+        ],
+        "core_combinations": "桂枝、甘草、生姜、大枣",
+        "core_rationale": "去芍药之酸收，保留桂枝、甘草、姜枣辛甘化阳、温通心阳，主治胸满、脉促。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [
+        "gui-zhi-qu-shaoyao-jia-fuzi-tang"
+      ],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ma-huang-xing-ren-gan-cao-shi-gao-tang",
+    "type": "formula_card",
+    "name": "麻黄杏仁甘草石膏汤",
+    "formula_name": "麻黄杏仁甘草石膏汤",
+    "role": "主方",
+    "desc": "邪热壅肺之汗出而喘",
+    "tags": [
+      "太阳病",
+      "汗出",
+      "喘",
+      "无大热",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ma-huang-xing-ren-gan-cao-shi-gao-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "麻黄汤",
+      "variant_path": [
+        "去桂枝",
+        "加石膏"
+      ],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T15:10:31.615472",
+    "updated_at": "2026-06-13T15:10:31.615472",
+    "data": {
+      "source_text": "发汗后，不可更行桂枝汤。汗出而喘，无大热者，可与麻黄杏仁甘草石膏汤。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "汗出",
+            "喘",
+            "无大热"
+          ],
+          "common": [
+            "口渴",
+            "咳痰黄",
+            "脉浮数"
+          ],
+          "excluding": [
+            "无汗而喘",
+            "表虚汗出恶风"
+          ]
+        },
+        "pathology": "邪热壅肺，肺失宣降",
+        "herbs": [
+          {
+            "name": "麻黄",
+            "dosage": "四两"
+          },
+          {
+            "name": "杏仁",
+            "dosage": "五十个"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "石膏",
+            "dosage": "半斤"
+          }
+        ],
+        "usage": "以水七升，煮麻黄减二升，去上沫，内诸药，煮取二升，去滓，温服一升。",
+        "contraindications": [
+          "表虚汗出恶风",
+          "无热喘证"
+        ],
+        "core_herbs": [
+          "麻黄",
+          "石膏",
+          "杏仁"
+        ],
+        "core_combinations": "麻黄、石膏、杏仁",
+        "core_rationale": "麻黄宣肺平喘，石膏清泄肺热，杏仁降肺气，三药共成辛凉宣泄、清肺平喘之法。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10044655/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "xiao-jian-zhong-tang",
+    "type": "formula_card",
+    "name": "小建中汤",
+    "formula_name": "小建中汤",
+    "role": "主方",
+    "desc": "中焦虚寒、气血两虚之里急",
+    "tags": [
+      "太阳病",
+      "心中悸",
+      "烦",
+      "腹中痛",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "xiao-jian-zhong-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [
+        "倍芍药",
+        "加饴糖"
+      ],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T15:10:31.615472",
+    "updated_at": "2026-06-13T15:10:31.615472",
+    "data": {
+      "source_text": "伤寒二三日，心中悸而烦者，小建中汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "心中悸",
+            "烦",
+            "腹中痛"
+          ],
+          "common": [
+            "面色萎黄",
+            "食欲不振",
+            "四肢酸痛",
+            "手足烦热"
+          ],
+          "excluding": [
+            "实热腹痛",
+            "食积腹痛"
+          ]
+        },
+        "pathology": "中焦虚寒，气血两虚，化源不足",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "芍药",
+            "dosage": "六两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "胶饴",
+            "dosage": "一升"
+          }
+        ],
+        "usage": "以水七升，煮取三升，去滓，内饴，更上微火消解，温服一升，日三服。",
+        "contraindications": [
+          "湿热中满",
+          "实热腹痛",
+          "呕吐酸腐"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "芍药",
+          "胶饴"
+        ],
+        "core_combinations": "桂枝、芍药、胶饴",
+        "core_rationale": "桂枝、芍药调和阴阳，胶饴温中补虚、缓急止痛，为温中补虚之核心。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10038899/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "da-qing-long-tang",
+    "type": "formula_card",
+    "name": "大青龙汤",
+    "formula_name": "大青龙汤",
+    "role": "主方",
+    "desc": "表寒里热，不汗出烦躁",
+    "tags": [
+      "太阳病",
+      "解表清里",
+      "烦躁",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "da-qing-long-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "大青龙汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "太阳中风，脉浮紧，发热恶寒，身疼痛，不汗出而烦躁者，大青龙汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "不汗出",
+            "烦躁",
+            "身疼痛",
+            "发热恶寒"
+          ],
+          "common": [
+            "脉浮紧",
+            "恶风寒",
+            "口渴"
+          ],
+          "excluding": [
+            "汗出",
+            "脉微弱",
+            "但热不寒"
+          ]
+        },
+        "pathology": "风寒外束，阳气闭郁，里有郁热",
+        "herbs": [
+          {
+            "name": "麻黄",
+            "dosage": "六两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "二两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "杏仁",
+            "dosage": "四十枚"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十枚"
+          },
+          {
+            "name": "石膏",
+            "dosage": "如鸡子大"
+          }
+        ],
+        "usage": "以水九升，先煮麻黄减二升，去上沫，内诸药，煮取三升，去滓，温服一升，取微似汗。汗出多者，温粉粉之。",
+        "contraindications": [
+          "脉微弱、汗出恶风者不可服",
+          "少阴证身重烦躁者禁用"
+        ],
+        "core_herbs": [
+          "麻黄",
+          "桂枝",
+          "石膏"
+        ],
+        "core_combinations": "麻黄、桂枝、石膏",
+        "core_rationale": "麻黄、桂枝辛温发汗解表，石膏清泄里热，三者体现外散风寒、内清里热之大法。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10044655/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "xiao-qing-long-tang",
+    "type": "formula_card",
+    "name": "小青龙汤",
+    "formula_name": "小青龙汤",
+    "role": "主方",
+    "desc": "外寒内饮，咳喘主方",
+    "tags": [
+      "太阳病",
+      "解表化饮",
+      "咳喘",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "xiao-qing-long-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "小青龙汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "伤寒表不解，心下有水气，干呕发热而咳，或渴，或利，或噎，或小便不利、少腹满，或喘者，小青龙汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "发热而咳",
+            "心下有水气"
+          ],
+          "common": [
+            "干呕",
+            "或渴",
+            "或利",
+            "或噎",
+            "小便不利",
+            "少腹满",
+            "喘"
+          ],
+          "excluding": [
+            "汗出恶风",
+            "热盛口渴",
+            "痰黄黏稠"
+          ]
+        },
+        "pathology": "风寒束表，水饮内停，水寒射肺",
+        "herbs": [
+          {
+            "name": "麻黄",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "细辛",
+            "dosage": "三两"
+          },
+          {
+            "name": "干姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "三两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "半夏",
+            "dosage": "半升"
+          },
+          {
+            "name": "五味子",
+            "dosage": "半升"
+          }
+        ],
+        "usage": "以水一斗，先煮麻黄减二升，去上沫，内诸药，煮取三升，去滓，温服一升。",
+        "contraindications": [
+          "阴虚火旺",
+          "痰热咳喘",
+          "汗出表虚"
+        ],
+        "core_herbs": [
+          "麻黄",
+          "桂枝",
+          "干姜",
+          "细辛",
+          "五味子"
+        ],
+        "core_combinations": "麻黄、桂枝、干姜、细辛、五味子",
+        "core_rationale": "麻黄、桂枝外散风寒，干姜、细辛温化水饮，五味子敛肺止咳，外散内温、开合相济。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》",
+          "知乎/黄煌观点（姜辛味为核心）"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "gui-zhi-jia-fu-zi-tang",
+    "type": "formula_card",
+    "name": "桂枝加附子汤",
+    "formula_name": "桂枝加附子汤",
+    "role": "主方",
+    "desc": "表虚漏汗，卫阳不固",
+    "tags": [
+      "太阳病",
+      "固阳解表",
+      "漏汗",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-jia-fu-zi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝加附子汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "太阳病，发汗，遂漏不止，其人恶风，小便难，四肢微急，难以屈伸者，桂枝加附子汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "发汗漏不止",
+            "恶风"
+          ],
+          "common": [
+            "小便难",
+            "四肢微急",
+            "难以屈伸"
+          ],
+          "excluding": [
+            "高热汗出",
+            "阳明热盛",
+            "阴虚火旺"
+          ]
+        },
+        "pathology": "卫阳虚弱，腠理不固，津液外泄",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "三两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "附子",
+            "dosage": "一枚"
+          }
+        ],
+        "usage": "以水七升，煮取三升，去滓，温服一升。",
+        "contraindications": [
+          "阳明实热",
+          "阴虚火旺",
+          "汗出而热不退"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "附子"
+        ],
+        "core_combinations": "桂枝、附子",
+        "core_rationale": "桂枝汤调和营卫以固表，附子回阳固表止汗，核心为解表温阳、固表止汗。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "gui-zhi-ma-huang-ge-ban-tang",
+    "type": "formula_card",
+    "name": "桂枝麻黄各半汤",
+    "formula_name": "桂枝麻黄各半汤",
+    "role": "主方",
+    "desc": "表郁轻证，寒热如疟",
+    "tags": [
+      "太阳病",
+      "小汗方",
+      "表郁",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-ma-huang-ge-ban-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝麻黄各半汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "太阳病，得之八九日，如疟状，发热恶寒，热多寒少，其人不呕，清便欲自可，一日二三度发，身必痒，宜桂枝麻黄各半汤。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "发热恶寒如疟",
+            "热多寒少",
+            "身痒"
+          ],
+          "common": [
+            "一日二三度发",
+            "面色有热色",
+            "无汗或少汗"
+          ],
+          "excluding": [
+            "呕",
+            "下利",
+            "脉微弱",
+            "大汗出"
+          ]
+        },
+        "pathology": "表郁日久，小邪不解，营卫不畅",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "一两十六铢"
+          },
+          {
+            "name": "芍药",
+            "dosage": "一两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "一两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "一两"
+          },
+          {
+            "name": "麻黄",
+            "dosage": "一两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "四枚"
+          },
+          {
+            "name": "杏仁",
+            "dosage": "二十四枚"
+          }
+        ],
+        "usage": "以水五升，先煮麻黄一二沸，去上沫，内诸药，煮取一升八合，去滓，分温再服。",
+        "contraindications": [
+          "大汗出",
+          "里热盛",
+          "阴阳俱虚"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "麻黄"
+        ],
+        "core_combinations": "桂枝、麻黄",
+        "core_rationale": "取桂枝汤与麻黄汤各半量，微发其汗，桂枝、麻黄并用为调和营卫、小发汗之关键。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "gui-zhi-er-yue-bi-yi-tang",
+    "type": "formula_card",
+    "name": "桂枝二越婢一汤",
+    "formula_name": "桂枝二越婢一汤",
+    "role": "主方",
+    "desc": "表郁化热，轻证解肌清里",
+    "tags": [
+      "太阳病",
+      "小汗方",
+      "表郁化热",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-er-yue-bi-yi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝二越婢一汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "太阳病，发热恶寒，热多寒少，脉微弱者，此无阳也，不可发汗，宜桂枝二越婢一汤。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "发热恶寒",
+            "热多寒少"
+          ],
+          "common": [
+            "脉微弱",
+            "微烦渴",
+            "无汗或少汗"
+          ],
+          "excluding": [
+            "但热不寒",
+            "大汗出",
+            "脉浮紧无汗"
+          ]
+        },
+        "pathology": "表邪郁遏，已有化热之势，正虚邪轻",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "十八铢"
+          },
+          {
+            "name": "芍药",
+            "dosage": "十八铢"
+          },
+          {
+            "name": "麻黄",
+            "dosage": "十八铢"
+          },
+          {
+            "name": "甘草",
+            "dosage": "十八铢"
+          },
+          {
+            "name": "大枣",
+            "dosage": "四枚"
+          },
+          {
+            "name": "生姜",
+            "dosage": "一两二铢"
+          },
+          {
+            "name": "石膏",
+            "dosage": "二十四铢"
+          }
+        ],
+        "usage": "以水五升，煮麻黄一二沸，去上沫，内诸药，煮取二升，去滓，温服一升。",
+        "contraindications": [
+          "脉微弱无阳者慎用",
+          "大汗出",
+          "阳明大热"
+        ],
+        "core_herbs": [
+          "桂枝",
+          "麻黄",
+          "石膏"
+        ],
+        "core_combinations": "桂枝、麻黄、石膏",
+        "core_rationale": "桂枝、麻黄微发其汗，石膏清泄里热，主治表郁里热之轻证。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ge-gen-jia-ban-xia-tang",
+    "type": "formula_card",
+    "name": "葛根加半夏汤",
+    "formula_name": "葛根加半夏汤",
+    "role": "主方",
+    "desc": "二阳合病，不下利但呕",
+    "tags": [
+      "太阳病",
+      "太阳阳明合病",
+      "呕吐",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ge-gen-jia-ban-xia-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "葛根加半夏汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "太阳与阳明合病，不下利但呕者，葛根加半夏汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "不下利",
+            "但呕"
+          ],
+          "common": [
+            "发热恶寒",
+            "无汗",
+            "项背强痛"
+          ],
+          "excluding": [
+            "下利",
+            "汗出恶风",
+            "阳明里实"
+          ]
+        },
+        "pathology": "二阳合病，表邪内迫阳明胃，胃气上逆",
+        "herbs": [
+          {
+            "name": "葛根",
+            "dosage": "四两"
+          },
+          {
+            "name": "麻黄",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "二两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "二两"
+          },
+          {
+            "name": "半夏",
+            "dosage": "半升"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          }
+        ],
+        "usage": "以水一斗，先煮麻黄、葛根减二升，去白沫，内诸药，煮取三升，去滓，温服一升。",
+        "contraindications": [
+          "胃阴不足",
+          "津液亏虚",
+          "汗出表虚"
+        ],
+        "core_herbs": [
+          "葛根",
+          "麻黄",
+          "半夏"
+        ],
+        "core_combinations": "葛根、麻黄、半夏",
+        "core_rationale": "在葛根汤升津解表基础上加半夏降逆和胃，核心为解表升津 + 降逆止呕。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ge-gen-huang-qin-huang-lian-tang",
+    "type": "formula_card",
+    "name": "葛根黄芩黄连汤",
+    "formula_name": "葛根黄芩黄连汤",
+    "role": "主方",
+    "desc": "表邪内陷，里热下利",
+    "tags": [
+      "太阳病",
+      "协热利",
+      "里热下利",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ge-gen-huang-qin-huang-lian-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "葛根黄芩黄连汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "太阳病，桂枝证，医反下之，利遂不止，脉促者，表未解也；喘而汗出者，葛根黄芩黄连汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "下利不止",
+            "喘而汗出",
+            "脉促"
+          ],
+          "common": [
+            "发热",
+            "口渴",
+            "肛门灼热",
+            "利下臭秽"
+          ],
+          "excluding": [
+            "虚寒下利",
+            "手足厥冷",
+            "脉微细"
+          ]
+        },
+        "pathology": "表邪内陷，阳明肠热，升降失常",
+        "herbs": [
+          {
+            "name": "葛根",
+            "dosage": "半斤"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "黄芩",
+            "dosage": "三两"
+          },
+          {
+            "name": "黄连",
+            "dosage": "三两"
+          }
+        ],
+        "usage": "以水八升，先煮葛根减二升，内诸药，煮取二升，去滓，分温再服。",
+        "contraindications": [
+          "脾胃虚寒",
+          "寒湿下利",
+          "阳虚滑脱"
+        ],
+        "core_herbs": [
+          "葛根",
+          "黄芩",
+          "黄连"
+        ],
+        "core_combinations": "葛根、黄芩、黄连",
+        "core_rationale": "葛根升阳止利解表，黄芩、黄连清热燥湿止利，三药共成解表清里之核心。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "wu-ling-san",
+    "type": "formula_card",
+    "name": "五苓散",
+    "formula_name": "五苓散",
+    "role": "主方",
+    "desc": "太阳蓄水，化气利水",
+    "tags": [
+      "太阳病",
+      "蓄水证",
+      "水逆",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "wu-ling-san-src-001"
+    ],
+    "lineage": {
+      "base_formula": "五苓散",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "太阳病，发汗后，若脉浮，小便不利，微热消渴者，五苓散主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "小便不利",
+            "消渴",
+            "脉浮",
+            "微热"
+          ],
+          "common": [
+            "烦渴",
+            "水入则吐",
+            "头痛发热"
+          ],
+          "excluding": [
+            "阳明大热烦渴",
+            "小便自利",
+            "津液大伤"
+          ]
+        },
+        "pathology": "膀胱蓄水，气化不利，津液不布",
+        "herbs": [
+          {
+            "name": "猪苓",
+            "dosage": "十八铢"
+          },
+          {
+            "name": "泽泻",
+            "dosage": "一两六铢"
+          },
+          {
+            "name": "白术",
+            "dosage": "十八铢"
+          },
+          {
+            "name": "茯苓",
+            "dosage": "十八铢"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "半两"
+          }
+        ],
+        "usage": "为散，以白饮和服方寸匕，日三服，多饮暖水，汗出愈。",
+        "contraindications": [
+          "津液大伤而无水饮",
+          "阴虚火旺",
+          "小便自利而渴"
+        ],
+        "core_herbs": [
+          "泽泻",
+          "茯苓",
+          "猪苓",
+          "白术",
+          "桂枝"
+        ],
+        "core_combinations": "泽泻、茯苓、猪苓、白术、桂枝",
+        "core_rationale": "泽泻、茯苓、猪苓利水渗湿，白术健脾，桂枝温阳化气，五药共奏利水渗湿、温阳化气。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10035309/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "zhen-wu-tang",
+    "type": "formula_card",
+    "name": "真武汤",
+    "formula_name": "真武汤",
+    "role": "主方",
+    "desc": "少阴阳虚水泛",
+    "tags": [
+      "少阴病",
+      "阳虚水泛",
+      "太阳病变证",
+      "少阴病篇"
+    ],
+    "source_chapter": "少阴病篇",
+    "source_text_ids": [
+      "zhen-wu-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "真武汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "少阴病，二三日不已，至四五日，腹痛，小便不利，四肢沉重疼痛，自下利者，此为有水气。其人或咳，或小便利，或下利，或呕者，真武汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "腹痛",
+            "小便不利",
+            "四肢沉重疼痛",
+            "自下利"
+          ],
+          "common": [
+            "或咳",
+            "或呕",
+            "畏寒肢冷",
+            "水肿"
+          ],
+          "excluding": [
+            "实热壅滞",
+            "小便短赤涩痛",
+            "阳明燥结"
+          ]
+        },
+        "pathology": "脾肾阳虚，水湿内停，水气泛滥",
+        "herbs": [
+          {
+            "name": "茯苓",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "白术",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "附子",
+            "dosage": "一枚"
+          }
+        ],
+        "usage": "以水八升，煮取三升，去滓，温服七合，日三服。",
+        "contraindications": [
+          "阴虚火旺",
+          "实热证",
+          "津液亏虚"
+        ],
+        "core_herbs": [
+          "附子",
+          "茯苓",
+          "白术"
+        ],
+        "core_combinations": "附子、茯苓、白术",
+        "core_rationale": "附子温肾助阳，茯苓、白术健脾利水，三药为温阳利水之核心。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10026723/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "si-ni-tang",
+    "type": "formula_card",
+    "name": "四逆汤",
+    "formula_name": "四逆汤",
+    "role": "主方",
+    "desc": "回阳救逆第一方",
+    "tags": [
+      "少阴病",
+      "回阳救逆",
+      "阴寒",
+      "少阴病篇"
+    ],
+    "source_chapter": "少阴病篇",
+    "source_text_ids": [
+      "si-ni-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "四逆汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-14T02:24:11.164323+00:00",
+    "data": {
+      "source_text": "少阴病，脉沉者，急温之，宜四逆汤。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "脉沉",
+            "四肢厥逆",
+            "恶寒"
+          ],
+          "common": [
+            "下利清谷",
+            "呕吐",
+            "但欲寐",
+            "身痛"
+          ],
+          "excluding": [
+            "热厥",
+            "四肢厥冷而胸腹灼热",
+            "口渴引饮"
+          ]
+        },
+        "pathology": "少阴阳衰，阴寒内盛，阳气欲脱",
+        "herbs": [
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "干姜",
+            "dosage": "一两半"
+          },
+          {
+            "name": "附子",
+            "dosage": "一枚"
+          }
+        ],
+        "usage": "以水三升，煮取一升二合，去滓，分温再服。",
+        "contraindications": [
+          "热厥",
+          "真热假寒",
+          "阴虚火旺"
+        ],
+        "core_herbs": [
+          "附子",
+          "干姜",
+          "甘草"
+        ],
+        "core_combinations": "附子、干姜、甘草",
+        "core_rationale": "附子回阳救逆，干姜温中散寒，甘草调和诸药、缓姜附燥烈，三药为回阳救逆基础。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "references": [
+          {
+            "id": "si-ni-tang-ref-001",
+            "type": "药证",
+            "title": "黄煌论附子药证与四逆汤方根",
+            "author": "黄煌",
+            "source": "《五十味药证·附子》（v2 重排版）",
+            "source_path": "extracted/黄煌教授经方沙龙/cleaned/五十味药证/黄煌教授五十味药证_附子_v2.md",
+            "summary": "附子主治脉沉微、恶寒、四肢厥冷；与干姜、甘草同用即四逆汤方根，回阳救逆。生附子去皮用于回阳救逆，甘草可与附子生物碱结合而减毒。",
+            "segment_ids": [
+              "1",
+              "2",
+              "6",
+              "8"
+            ],
+            "tags": [
+              "附子",
+              "四逆汤",
+              "方根",
+              "回阳救逆"
+            ]
+          },
+          {
+            "id": "si-ni-tang-ref-002",
+            "type": "方解",
+            "title": "黄煌论四逆汤常用配方与加减",
+            "author": "黄煌",
+            "source": "《五十味药证·附子》（v2 重排版）",
+            "source_path": "extracted/黄煌教授经方沙龙/cleaned/五十味药证/黄煌教授五十味药证_附子_v2.md",
+            "summary": "四逆汤常用附子10g、干姜3g、甘草3g；多用于休克、消化道疾病、心血管疾病、关节炎及小儿腹泻。临床常加味：合茵陈五苓散治面色晦黄，合麻黄附子细辛汤治风湿性关节炎/心动过缓，合四君子汤治肿瘤患者食欲不振，加黄连治口腔溃疡，加肉桂治腹冷痛、心动悸。",
+            "segment_ids": [
+              "3"
+            ],
+            "tags": [
+              "四逆汤",
+              "配方",
+              "加减",
+              "临床应用"
+            ]
+          },
+          {
+            "id": "si-ni-tang-ref-003",
+            "type": "药证",
+            "title": "黄煌论干姜在四逆汤中的作用",
+            "author": "黄煌",
+            "source": "《五十味药证·干姜》（v2 重排版）",
+            "source_path": "extracted/黄煌教授经方沙龙/cleaned/五十味药证/黄煌教授五十味药证_干姜_v2.md",
+            "summary": "干姜主消化系统症状（呕吐、舌苔白腻、腹胀满），与附子、甘草同用主治下利清谷、汗出厥冷、脉沉微；四逆汤、通脉四逆汤皆由干姜甘草汤加附子而来。",
+            "segment_ids": [
+              "12",
+              "13",
+              "14"
+            ],
+            "tags": [
+              "干姜",
+              "四逆汤",
+              "药证",
+              "消化系统"
+            ]
+          },
+          {
+            "id": "si-ni-tang-ref-004",
+            "type": "言论",
+            "title": "黄煌：寒热夹杂胃病常用四逆汤合三黄泻心汤",
+            "author": "黄煌",
+            "source": "《黄煌经方言论整理版》（v2 重排版）",
+            "source_path": "extracted/黄煌教授经方沙龙/cleaned/经方言论/黄煌经方言论整理版_十分实用_v2.md",
+            "summary": "黄煌指出，遇寒热夹杂的胃病，四逆汤合三黄泻心汤是常用方；遇寒热夹杂的关节炎，则麻黄附子细辛汤合黄连解毒汤常用。",
+            "segment_ids": [
+              "17"
+            ],
+            "tags": [
+              "四逆汤",
+              "三黄泻心汤",
+              "寒热夹杂",
+              "胃病"
+            ]
+          },
+          {
+            "id": "si-ni-tang-ref-005",
+            "type": "鉴别",
+            "title": "黄煌论四逆散与当归四逆汤手足冷的鉴别",
+            "author": "黄煌",
+            "source": "《黄煌经方言论整理版》（v2 重排版）",
+            "source_path": "extracted/黄煌教授经方沙龙/cleaned/经方言论/黄煌经方言论整理版_十分实用_v2.md",
+            "summary": "四逆散证手足冷由心理压力大、紧张导致，特点为冷而不痛；当归四逆汤证是血管舒缩功能病变，特点为又冷又痛。",
+            "segment_ids": [
+              "19"
+            ],
+            "tags": [
+              "四逆汤",
+              "四逆散",
+              "当归四逆汤",
+              "鉴别"
+            ]
+          },
+          {
+            "id": "si-ni-tang-ref-006",
+            "type": "讲解",
+            "title": "倪海厦论四逆汤主证：误治后里虚寒、下利清谷",
+            "author": "倪海厦",
+            "source": "《人纪·伤寒论》讲解（四逆汤专题清洗稿）",
+            "source_path": "extracted/pilot_si_ni_tang/倪海厦-四逆汤相关讲解.md",
+            "summary": "外感误汗/误下后，表证虽解而里阳大虚，症见下利清谷不止、脉沉微、四肢厥冷（冷甚则吐气亦冷），急当救里，宜四逆汤。",
+            "segment_ids": [
+              "37",
+              "38"
+            ],
+            "tags": [
+              "四逆汤",
+              "误治",
+              "下利清谷",
+              "救里"
+            ]
+          },
+          {
+            "id": "si-ni-tang-ref-007",
+            "type": "讲解",
+            "title": "倪海厦论四逆汤药物与救逆时机",
+            "author": "倪海厦",
+            "source": "《人纪·伤寒论》讲解（四逆汤专题清洗稿）",
+            "source_path": "extracted/pilot_si_ni_tang/倪海厦-四逆汤相关讲解.md",
+            "summary": "四逆汤用生附子回阳救逆，炮附子走表。生附子去皮破八片，与炙甘草、干姜同煮。霍乱、疟疾、上吐下泻等急症可用四逆汤回阳，四逆汤又称『回阳汤』。",
+            "segment_ids": [
+              "36"
+            ],
+            "tags": [
+              "四逆汤",
+              "生附子",
+              "炮附子",
+              "救逆"
+            ]
+          },
+          {
+            "id": "si-ni-tang-ref-008",
+            "type": "鉴别",
+            "title": "倪海厦论通脉四逆汤与茯苓四逆汤的鉴别",
+            "author": "倪海厦",
+            "source": "《人纪·伤寒论》讲解（四逆汤专题清洗稿）",
+            "source_path": "extracted/pilot_si_ni_tang/倪海厦-四逆汤相关讲解.md",
+            "summary": "通脉四逆汤主治里寒外热、汗出而厥、下利清谷、脉微欲绝；茯苓四逆汤主治大吐大下后极虚、胃中停水、哕（打嗝）烦躁，加茯苓利水、人参益气。",
+            "segment_ids": [
+              "23",
+              "24",
+              "25",
+              "34",
+              "35"
+            ],
+            "tags": [
+              "四逆汤",
+              "通脉四逆汤",
+              "茯苓四逆汤",
+              "鉴别"
+            ]
+          }
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [
+      "si-ni-tang_exp-001",
+      "si-ni-tang_exp-002"
+    ],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "bai-hu-tang",
+    "type": "formula_card",
+    "name": "白虎汤",
+    "formula_name": "白虎汤",
+    "role": "主方",
+    "desc": "阳明气分大热",
+    "tags": [
+      "阳明病",
+      "清气分热",
+      "大汗大渴",
+      "阳明病篇"
+    ],
+    "source_chapter": "阳明病篇",
+    "source_text_ids": [
+      "bai-hu-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "白虎汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "伤寒脉滑而厥者，里有热，白虎汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "身大热",
+            "大汗出",
+            "大烦渴",
+            "脉洪大"
+          ],
+          "common": [
+            "面赤",
+            "气粗",
+            "恶热",
+            "舌燥"
+          ],
+          "excluding": [
+            "表证未解",
+            "无大热",
+            "脉浮紧",
+            "阳虚发热"
+          ]
+        },
+        "pathology": "阳明气分热盛，津伤燥热",
+        "herbs": [
+          {
+            "name": "石膏",
+            "dosage": "一斤"
+          },
+          {
+            "name": "知母",
+            "dosage": "六两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "粳米",
+            "dosage": "六合"
+          }
+        ],
+        "usage": "以水一斗，煮米熟汤成，去滓，温服一升，日三服。",
+        "contraindications": [
+          "表证未解",
+          "阳虚发热",
+          "真寒假热",
+          "湿温身热不扬"
+        ],
+        "core_herbs": [
+          "石膏",
+          "知母"
+        ],
+        "core_combinations": "石膏、知母",
+        "core_rationale": "石膏辛甘大寒清热生津，知母苦寒质润滋阴润燥，二者相须为用，清气分大热。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10044655/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "tiao-wei-cheng-qi-tang",
+    "type": "formula_card",
+    "name": "调胃承气汤",
+    "formula_name": "调胃承气汤",
+    "role": "主方",
+    "desc": "和胃泄热，润燥软坚",
+    "tags": [
+      "阳明病",
+      "攻下剂",
+      "胃实初结",
+      "阳明病篇"
+    ],
+    "source_chapter": "阳明病篇",
+    "source_text_ids": [
+      "tiao-wei-cheng-qi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "调胃承气汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "发汗后恶寒者，虚故也。不恶寒，但热者，实也，当和胃气，与调胃承气汤。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "不恶寒但热",
+            "蒸蒸发热",
+            "心烦"
+          ],
+          "common": [
+            "谵语",
+            "口渴",
+            "大便硬"
+          ],
+          "excluding": [
+            "恶寒",
+            "表证未解",
+            "虚寒",
+            "孕妇"
+          ]
+        },
+        "pathology": "阳明燥热初结，胃腑不和，腑实未甚",
+        "herbs": [
+          {
+            "name": "大黄",
+            "dosage": "四两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "芒硝",
+            "dosage": "半升"
+          }
+        ],
+        "usage": "以水三升，煮大黄、甘草取一升，去滓，内芒硝，更上火微煮令沸，少少温服之。",
+        "contraindications": [
+          "表证未解",
+          "脾胃虚寒",
+          "孕妇",
+          "津亏肠燥无热"
+        ],
+        "core_herbs": [
+          "大黄",
+          "芒硝"
+        ],
+        "core_combinations": "大黄、芒硝",
+        "core_rationale": "大黄泻下攻积，芒硝软坚润燥，二药配伍泻热通便、软坚润燥，为缓下热结之核心。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "da-chai-hu-tang",
+    "type": "formula_card",
+    "name": "大柴胡汤",
+    "formula_name": "大柴胡汤",
+    "role": "主方",
+    "desc": "少阳阳明合病，和解攻里",
+    "tags": [
+      "少阳病",
+      "少阳阳明合病",
+      "和解攻里",
+      "少阳病篇"
+    ],
+    "source_chapter": "少阳病篇",
+    "source_text_ids": [
+      "da-chai-hu-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "大柴胡汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "呕不止，心下急，郁郁微烦者，为未解也，与大柴胡汤，下之则愈。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "呕不止",
+            "心下急",
+            "郁郁微烦",
+            "往来寒热"
+          ],
+          "common": [
+            "胸胁苦满",
+            "便秘或下利",
+            "苔黄",
+            "口苦"
+          ],
+          "excluding": [
+            "纯少阳证",
+            "太阴虚寒",
+            "阳明腑实燥结甚者"
+          ]
+        },
+        "pathology": "少阳枢机不利，胆胃热实，兼阳明里实",
+        "herbs": [
+          {
+            "name": "柴胡",
+            "dosage": "半斤"
+          },
+          {
+            "name": "黄芩",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "半夏",
+            "dosage": "半升"
+          },
+          {
+            "name": "生姜",
+            "dosage": "五两"
+          },
+          {
+            "name": "枳实",
+            "dosage": "四枚"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "大黄",
+            "dosage": "二两"
+          }
+        ],
+        "usage": "以水一斗二升，煮取六升，去滓再煎，温服一升，日三服。",
+        "contraindications": [
+          "脾胃虚寒",
+          "少阳纯证无里实",
+          "孕妇"
+        ],
+        "core_herbs": [
+          "柴胡",
+          "黄芩",
+          "大黄",
+          "枳实"
+        ],
+        "core_combinations": "柴胡、黄芩、大黄、枳实",
+        "core_rationale": "柴胡、黄芩和解少阳，大黄、枳实内泻阳明热结，体现和解与通下并用。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ],
+        "core_source_urls": [
+          "https://www.jingfangpai.cn/p/10044655/"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "chai-hu-jia-long-gu-mu-li-tang",
+    "type": "formula_card",
+    "name": "柴胡加龙骨牡蛎汤",
+    "formula_name": "柴胡加龙骨牡蛎汤",
+    "role": "主方",
+    "desc": "少阳不和，痰热烦惊",
+    "tags": [
+      "少阳病",
+      "烦惊",
+      "痰热",
+      "少阳病篇"
+    ],
+    "source_chapter": "少阳病篇",
+    "source_text_ids": [
+      "chai-hu-jia-long-gu-mu-li-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "柴胡加龙骨牡蛎汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "伤寒八九日，下之，胸满烦惊，小便不利，谵语，一身尽重，不可转侧者，柴胡加龙骨牡蛎汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "胸满烦惊",
+            "小便不利",
+            "谵语",
+            "一身尽重"
+          ],
+          "common": [
+            "往来寒热",
+            "惊悸",
+            "失眠",
+            "胸胁苦满"
+          ],
+          "excluding": [
+            "纯阳明腑实",
+            "纯阴虚火旺",
+            "太阴虚寒"
+          ]
+        },
+        "pathology": "少阳不和，痰热内扰，心神不宁，三焦不利",
+        "herbs": [
+          {
+            "name": "柴胡",
+            "dosage": "四两"
+          },
+          {
+            "name": "龙骨",
+            "dosage": "一两半"
+          },
+          {
+            "name": "黄芩",
+            "dosage": "一两半"
+          },
+          {
+            "name": "生姜",
+            "dosage": "一两半"
+          },
+          {
+            "name": "铅丹",
+            "dosage": "一两半"
+          },
+          {
+            "name": "人参",
+            "dosage": "一两半"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "一两半"
+          },
+          {
+            "name": "茯苓",
+            "dosage": "一两半"
+          },
+          {
+            "name": "半夏",
+            "dosage": "二合半"
+          },
+          {
+            "name": "大黄",
+            "dosage": "二两"
+          },
+          {
+            "name": "牡蛎",
+            "dosage": "一两半"
+          },
+          {
+            "name": "大枣",
+            "dosage": "六枚"
+          }
+        ],
+        "usage": "以水八升，煮取四升，内大黄切如棋子，更煮一二沸，去滓，温服一升。",
+        "contraindications": [
+          "脾胃虚寒",
+          "孕妇",
+          "无痰热者慎用"
+        ],
+        "core_herbs": [
+          "柴胡",
+          "龙骨",
+          "牡蛎",
+          "黄芩"
+        ],
+        "core_combinations": "柴胡、龙骨、牡蛎、黄芩",
+        "core_rationale": "柴胡、黄芩和解少阳，龙骨、牡蛎重镇安神，为和解泻热、重镇安神之核心。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "zhi-zi-chi-tang",
+    "type": "formula_card",
+    "name": "栀子豉汤",
+    "formula_name": "栀子豉汤",
+    "role": "主方",
+    "desc": "清宣胸膈，除虚烦",
+    "tags": [
+      "太阳病变证",
+      "虚烦",
+      "胸膈热",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "zhi-zi-chi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "栀子豉汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:01:41.289352+00:00",
+    "updated_at": "2026-06-13T22:01:41.289352+00:00",
+    "data": {
+      "source_text": "发汗吐下后，虚烦不得眠，若剧者，必反复颠倒，心中懊憹，栀子豉汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "虚烦不得眠",
+            "心中懊憹"
+          ],
+          "common": [
+            "反复颠倒",
+            "胸中窒",
+            "心中结痛",
+            "按之心下濡"
+          ],
+          "excluding": [
+            "实热烦躁",
+            "痰湿内扰",
+            "阳明腑实"
+          ]
+        },
+        "pathology": "热扰胸膈，气机不畅，虚烦不宁",
+        "herbs": [
+          {
+            "name": "栀子",
+            "dosage": "十四枚"
+          },
+          {
+            "name": "香豉",
+            "dosage": "四合"
+          }
+        ],
+        "usage": "以水四升，先煮栀子得二升半，内豉煮取一升半，去滓，分二服，温进一服。",
+        "contraindications": [
+          "脾胃虚寒",
+          "大便溏泄",
+          "无热象者"
+        ],
+        "core_herbs": [
+          "栀子",
+          "香豉"
+        ],
+        "core_combinations": "栀子、香豉",
+        "core_rationale": "栀子清泄三焦郁热，香豉宣郁除烦，二者一清一宣，清热除烦。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "chai-hu-jia-mang-xiao-tang",
+    "type": "formula_card",
+    "name": "柴胡加芒硝汤",
+    "formula_name": "柴胡加芒硝汤",
+    "role": "主方",
+    "desc": "少阳兼阳明里实，和解泻热",
+    "tags": [
+      "少阳病",
+      "少阳阳明合病",
+      "和解泻热",
+      "少阳病篇"
+    ],
+    "source_chapter": "少阳病篇",
+    "source_text_ids": [
+      "chai-hu-jia-mang-xiao-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "柴胡加芒硝汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "伤寒十三日，不解，胸胁满而呕，日晡所发潮热，已而微利。此本柴胡证，下之以不得利，今反利者，知医以丸药下之，此非其治也。潮热者，实也。先宜服小柴胡汤以解外，后以柴胡加芒硝汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "胸胁满而呕",
+            "日晡所发潮热",
+            "已而微利"
+          ],
+          "common": [
+            "寒热往来",
+            "心烦",
+            "口苦",
+            "腹满拒按",
+            "大便微利"
+          ],
+          "excluding": [
+            "纯少阳证无里实",
+            "阳明腑实燥结甚",
+            "虚寒"
+          ]
+        },
+        "pathology": "少阳枢机不利，兼阳明里实，误下后邪热内结",
+        "herbs": [
+          {
+            "name": "柴胡",
+            "dosage": "二两十六铢"
+          },
+          {
+            "name": "黄芩",
+            "dosage": "一两"
+          },
+          {
+            "name": "人参",
+            "dosage": "一两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "一两（炙）"
+          },
+          {
+            "name": "生姜",
+            "dosage": "一两（切）"
+          },
+          {
+            "name": "半夏",
+            "dosage": "二十铢（洗）"
+          },
+          {
+            "name": "大枣",
+            "dosage": "四枚（擘）"
+          },
+          {
+            "name": "芒硝",
+            "dosage": "二两"
+          }
+        ],
+        "usage": "上八味，以水四升，煮取二升，去滓，内芒硝，更煮微沸，分温再服，不解更作。",
+        "contraindications": [
+          "脾胃虚寒",
+          "孕妇",
+          "少阳纯证无里实",
+          "芒硝泻下过度"
+        ],
+        "core_herbs": [
+          "柴胡",
+          "黄芩",
+          "芒硝"
+        ],
+        "core_combinations": "柴胡、黄芩、芒硝",
+        "core_rationale": "小柴胡汤和解少阳，加芒硝泻热通便，核心为和解少阳兼泻热润燥。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "zhi-zi-gan-cao-chi-tang",
+    "type": "formula_card",
+    "name": "栀子甘草豉汤",
+    "formula_name": "栀子甘草豉汤",
+    "role": "主方",
+    "desc": "虚烦少气，清热除烦益气",
+    "tags": [
+      "太阳病变证",
+      "虚烦",
+      "少气",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "zhi-zi-gan-cao-chi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "栀子甘草豉汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "发汗吐下后，虚烦不得眠，若剧者，必反复颠倒，心中懊憹，栀子豉汤主之；若少气者，栀子甘草豉汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "发汗吐下后",
+            "虚烦不得眠",
+            "少气"
+          ],
+          "common": [
+            "心中懊憹",
+            "反复颠倒",
+            "胸中窒",
+            "口干"
+          ],
+          "excluding": [
+            "实热烦躁",
+            "痰湿内扰",
+            "阳明腑实",
+            "无热象"
+          ]
+        },
+        "pathology": "热扰胸膈，兼有气虚，气机不畅",
+        "herbs": [
+          {
+            "name": "栀子",
+            "dosage": "十四枚（擘）"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "香豉",
+            "dosage": "四合（绵裹）"
+          }
+        ],
+        "usage": "上三味，以水四升，先煮栀子取二升半，内甘草、香豉，煮取一升半，去滓，分二服，温进一服。得吐者，止后服。",
+        "contraindications": [
+          "脾胃虚寒",
+          "大便溏泄",
+          "无热象者"
+        ],
+        "core_herbs": [
+          "栀子",
+          "香豉",
+          "甘草"
+        ],
+        "core_combinations": "栀子、香豉、甘草",
+        "core_rationale": "栀子豉汤清热除烦，加甘草益气和中，适用于虚烦兼少气。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "zhi-zi-sheng-jiang-chi-tang",
+    "type": "formula_card",
+    "name": "栀子生姜豉汤",
+    "formula_name": "栀子生姜豉汤",
+    "role": "主方",
+    "desc": "虚烦兼呕，清热和胃止呕",
+    "tags": [
+      "太阳病变证",
+      "虚烦",
+      "呕吐",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "zhi-zi-sheng-jiang-chi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "栀子生姜豉汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "发汗吐下后，虚烦不得眠，若剧者，必反复颠倒，心中懊憹，栀子豉汤主之；若呕者，栀子生姜豉汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "发汗吐下后",
+            "虚烦不得眠",
+            "呕"
+          ],
+          "common": [
+            "心中懊憹",
+            "反复颠倒",
+            "胸中窒",
+            "胃脘不和"
+          ],
+          "excluding": [
+            "实热呕吐",
+            "寒湿呕吐",
+            "无热象"
+          ]
+        },
+        "pathology": "热扰胸膈，胃气上逆",
+        "herbs": [
+          {
+            "name": "栀子",
+            "dosage": "十四枚（擘）"
+          },
+          {
+            "name": "生姜",
+            "dosage": "五两"
+          },
+          {
+            "name": "香豉",
+            "dosage": "四合（绵裹）"
+          }
+        ],
+        "usage": "上三味，以水四升，先煮栀子、生姜取二升半，内豉，煮取一升半，去滓，分二服，温进一服。得吐者，止后服。",
+        "contraindications": [
+          "脾胃虚寒",
+          "胃阴不足",
+          "无热象者"
+        ],
+        "core_herbs": [
+          "栀子",
+          "香豉",
+          "生姜"
+        ],
+        "core_combinations": "栀子、香豉、生姜",
+        "core_rationale": "栀子豉汤清热除烦，加生姜和胃止呕，适用于虚烦兼呕。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "zhi-zi-hou-po-tang",
+    "type": "formula_card",
+    "name": "栀子厚朴汤",
+    "formula_name": "栀子厚朴汤",
+    "role": "主方",
+    "desc": "心烦腹满，清宣郁热行气",
+    "tags": [
+      "太阳病变证",
+      "心烦",
+      "腹满",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "zhi-zi-hou-po-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "栀子厚朴汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "伤寒下后，心烦腹满，卧起不安者，栀子厚朴汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "心烦",
+            "腹满",
+            "卧起不安"
+          ],
+          "common": [
+            "下后余热",
+            "胸闷",
+            "按之软",
+            "苔黄"
+          ],
+          "excluding": [
+            "阳明腑实燥结",
+            "虚寒腹胀",
+            "痰湿壅滞"
+          ]
+        },
+        "pathology": "下后余热留扰胸膈与腹，气机壅滞",
+        "herbs": [
+          {
+            "name": "栀子",
+            "dosage": "十四枚（擘）"
+          },
+          {
+            "name": "厚朴",
+            "dosage": "四两（炙，去皮）"
+          },
+          {
+            "name": "枳实",
+            "dosage": "四枚（水浸，炙令黄）"
+          }
+        ],
+        "usage": "上三味，以水三升半，煮取一升半，去滓，分二服，温进一服。得吐者，止后服。",
+        "contraindications": [
+          "脾胃虚寒",
+          "大便溏泄",
+          "阳明腑实"
+        ],
+        "core_herbs": [
+          "栀子",
+          "厚朴",
+          "枳实"
+        ],
+        "core_combinations": "栀子、厚朴、枳实",
+        "core_rationale": "栀子清热除烦，厚朴、枳实行气消满，核心为清热除烦、行气除满。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "zhi-zi-gan-jiang-tang",
+    "type": "formula_card",
+    "name": "栀子干姜汤",
+    "formula_name": "栀子干姜汤",
+    "role": "主方",
+    "desc": "上焦余热，中焦虚寒，寒热并用",
+    "tags": [
+      "太阳病变证",
+      "寒热错杂",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "zhi-zi-gan-jiang-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "栀子干姜汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "伤寒，医以丸药大下之，身热不去，微烦者，栀子干姜汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "身热不去",
+            "微烦",
+            "丸药大下后"
+          ],
+          "common": [
+            "下后脾胃虚寒",
+            "心下痞",
+            "腹痛",
+            "便溏"
+          ],
+          "excluding": [
+            "阳明大热",
+            "实热烦躁",
+            "阴虚火旺"
+          ]
+        },
+        "pathology": "上焦余热未清，中焦脾胃虚寒，寒热错杂",
+        "herbs": [
+          {
+            "name": "栀子",
+            "dosage": "十四枚（擘）"
+          },
+          {
+            "name": "干姜",
+            "dosage": "二两"
+          }
+        ],
+        "usage": "上二味，以水三升半，煮取一升半，去滓，分二服，温进一服。得吐者，止后服。",
+        "contraindications": [
+          "纯实热证",
+          "阴虚火旺",
+          "无脾胃虚寒者"
+        ],
+        "core_herbs": [
+          "栀子",
+          "干姜"
+        ],
+        "core_combinations": "栀子、干姜",
+        "core_rationale": "栀子清上焦热，干姜温中散寒，寒热并用，清上温中。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "gan-jiang-fu-zi-tang",
+    "type": "formula_card",
+    "name": "干姜附子汤",
+    "formula_name": "干姜附子汤",
+    "role": "主方",
+    "desc": "阳气暴虚，阴寒内盛，急救回阳",
+    "tags": [
+      "太阳病",
+      "阳虚",
+      "急救回阳",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gan-jiang-fu-zi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "干姜附子汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "下之后，复发汗，昼日烦躁不得眠，夜而安静，不呕不渴，无表证，脉沉微，身无大热者，干姜附子汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "昼日烦躁不得眠",
+            "夜而安静",
+            "脉沉微",
+            "身无大热"
+          ],
+          "common": [
+            "下后复发汗",
+            "不呕不渴",
+            "无表证",
+            "四肢厥冷"
+          ],
+          "excluding": [
+            "热厥",
+            "阳明热盛",
+            "少阳证",
+            "表证未解"
+          ]
+        },
+        "pathology": "阳气暴虚，阴寒内盛，虚阳与阴争",
+        "herbs": [
+          {
+            "name": "干姜",
+            "dosage": "一两"
+          },
+          {
+            "name": "附子",
+            "dosage": "一枚（生用，去皮，切八片）"
+          }
+        ],
+        "usage": "上二味，以水三升，煮取一升，去滓顿服。",
+        "contraindications": [
+          "热厥",
+          "真热假寒",
+          "阴虚火旺",
+          "孕妇"
+        ],
+        "core_herbs": [
+          "干姜",
+          "附子"
+        ],
+        "core_combinations": "干姜、附子",
+        "core_rationale": "附子回阳救逆，干姜温中散寒，二药辛热同用，单刀直入、急救回阳。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "fu-ling-si-ni-tang",
+    "type": "formula_card",
+    "name": "茯苓四逆汤",
+    "formula_name": "茯苓四逆汤",
+    "role": "主方",
+    "desc": "回阳益阴，宁心安神",
+    "tags": [
+      "少阴病",
+      "阴阳两虚",
+      "烦躁",
+      "少阴病篇"
+    ],
+    "source_chapter": "少阴病篇",
+    "source_text_ids": [
+      "fu-ling-si-ni-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "茯苓四逆汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "发汗，若下之，病仍不解，烦躁者，茯苓四逆汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "发汗或下后",
+            "病仍不解",
+            "烦躁"
+          ],
+          "common": [
+            "四肢厥逆",
+            "恶寒",
+            "脉微细",
+            "心悸"
+          ],
+          "excluding": [
+            "实热烦躁",
+            "阴虚火旺",
+            "痰热扰心"
+          ]
+        },
+        "pathology": "阴阳两虚，阳虚为主，水饮内停，心神不宁",
+        "herbs": [
+          {
+            "name": "茯苓",
+            "dosage": "四两"
+          },
+          {
+            "name": "人参",
+            "dosage": "一两"
+          },
+          {
+            "name": "附子",
+            "dosage": "一枚（生用，去皮，破八片）"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两（炙）"
+          },
+          {
+            "name": "干姜",
+            "dosage": "一两半"
+          }
+        ],
+        "usage": "上五味，以水五升，煮取三升，去滓，温服七合，日三服。",
+        "contraindications": [
+          "实热证",
+          "阴虚火旺",
+          "津液大伤而无阳虚"
+        ],
+        "core_herbs": [
+          "附子",
+          "干姜",
+          "茯苓",
+          "人参"
+        ],
+        "core_combinations": "附子、干姜、茯苓、人参",
+        "core_rationale": "四逆汤回阳救逆，加茯苓利水宁心、人参益气生津，主治阳虚厥逆兼烦躁。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "tao-he-cheng-qi-tang",
+    "type": "formula_card",
+    "name": "桃核承气汤",
+    "formula_name": "桃核承气汤",
+    "role": "主方",
+    "desc": "下焦蓄血，逐瘀泻热",
+    "tags": [
+      "太阳病",
+      "蓄血证",
+      "逐瘀泻热",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "tao-he-cheng-qi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桃核承气汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "太阳病不解，热结膀胱，其人如狂，血自下，下者愈。其外不解者，尚未可攻，当先解其外；外解已，但少腹急结者，乃可攻之，宜桃核承气汤。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "少腹急结",
+            "其人如狂",
+            "小便自利",
+            "热结膀胱"
+          ],
+          "common": [
+            "烦躁谵语",
+            "至夜发热",
+            "经血紫黑",
+            "大便不通"
+          ],
+          "excluding": [
+            "小便不利",
+            "血虚无瘀",
+            "孕妇",
+            "表证未解"
+          ]
+        },
+        "pathology": "瘀热互结下焦，血蓄膀胱",
+        "herbs": [
+          {
+            "name": "桃仁",
+            "dosage": "五十个（去皮尖）"
+          },
+          {
+            "name": "大黄",
+            "dosage": "四两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "二两（去皮）"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两（炙）"
+          },
+          {
+            "name": "芒硝",
+            "dosage": "二两"
+          }
+        ],
+        "usage": "上五味，以水七升，煮取二升半，去滓，内芒硝，更上火，微沸下火，先食温服五合，日三服，当微利。",
+        "contraindications": [
+          "表证未解",
+          "孕妇",
+          "血虚无瘀",
+          "脾胃虚弱"
+        ],
+        "core_herbs": [
+          "桃仁",
+          "大黄",
+          "桂枝",
+          "芒硝"
+        ],
+        "core_combinations": "桃仁、大黄、桂枝、芒硝",
+        "core_rationale": "桃仁活血破瘀，大黄、芒硝泻热通便，桂枝温通血脉，逐瘀泻热、下焦蓄血。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "di-dang-tang",
+    "type": "formula_card",
+    "name": "抵当汤",
+    "formula_name": "抵当汤",
+    "role": "主方",
+    "desc": "下焦蓄血重证，破血逐瘀",
+    "tags": [
+      "太阳病",
+      "蓄血重证",
+      "破血逐瘀",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "di-dang-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "抵当汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "太阳病，六七日，表证仍在，脉微而沉，反不结胸，其人发狂者，以热在下焦，少腹当硬满，小便自利者，下血乃愈。所以然者，以太阳随经，瘀热在里故也，抵当汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "少腹硬满",
+            "其人发狂",
+            "小便自利",
+            "脉微而沉"
+          ],
+          "common": [
+            "身黄",
+            "善忘",
+            "大便色黑易解",
+            "少腹拒按"
+          ],
+          "excluding": [
+            "小便不利",
+            "血虚体弱",
+            "孕妇",
+            "出血倾向"
+          ]
+        },
+        "pathology": "瘀热互结下焦血分，蓄血重证",
+        "herbs": [
+          {
+            "name": "水蛭",
+            "dosage": "三十个（熬）"
+          },
+          {
+            "name": "虻虫",
+            "dosage": "三十个（去翅足，熬）"
+          },
+          {
+            "name": "桃仁",
+            "dosage": "二十个（去皮尖）"
+          },
+          {
+            "name": "大黄",
+            "dosage": "三两（酒洗）"
+          }
+        ],
+        "usage": "上四味，以水五升，煮取三升，去滓，温服一升。不下更服。",
+        "contraindications": [
+          "孕妇",
+          "血虚体弱",
+          "出血倾向",
+          "脾胃虚寒",
+          "表证未解"
+        ],
+        "core_herbs": [
+          "水蛭",
+          "虻虫",
+          "大黄",
+          "桃仁"
+        ],
+        "core_combinations": "水蛭、虻虫、大黄、桃仁",
+        "core_rationale": "水蛭、虻虫破血逐瘀，大黄、桃仁泻热化瘀，四药共成破血下瘀峻剂。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "bai-hu-jia-ren-shen-tang",
+    "type": "formula_card",
+    "name": "白虎加人参汤",
+    "formula_name": "白虎加人参汤",
+    "role": "主方",
+    "desc": "阳明气分热盛，气津两伤",
+    "tags": [
+      "阳明病",
+      "气津两伤",
+      "大汗大渴",
+      "阳明病篇"
+    ],
+    "source_chapter": "阳明病篇",
+    "source_text_ids": [
+      "bai-hu-jia-ren-shen-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "白虎加人参汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T22:21:08.944323+00:00",
+    "updated_at": "2026-06-13T22:21:08.944323+00:00",
+    "data": {
+      "source_text": "服桂枝汤，大汗出后，大烦渴不解，脉洪大者，白虎加人参汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "大汗出",
+            "大烦渴不解",
+            "脉洪大"
+          ],
+          "common": [
+            "身大热",
+            "口舌干燥",
+            "时时恶风",
+            "欲饮水数升",
+            "背微恶寒"
+          ],
+          "excluding": [
+            "表证未解",
+            "无大热",
+            "脉浮紧",
+            "阳虚发热",
+            "真寒假热"
+          ]
+        },
+        "pathology": "阳明气分热盛，气津两伤",
+        "herbs": [
+          {
+            "name": "石膏",
+            "dosage": "一斤（碎）"
+          },
+          {
+            "name": "知母",
+            "dosage": "六两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两（炙）"
+          },
+          {
+            "name": "粳米",
+            "dosage": "六合"
+          },
+          {
+            "name": "人参",
+            "dosage": "三两"
+          }
+        ],
+        "usage": "上五味，以水一斗，煮米熟汤成，去滓，温服一升，日三服。",
+        "contraindications": [
+          "表证未解",
+          "阳虚发热",
+          "真寒假热",
+          "脾胃虚寒",
+          "湿温身热不扬"
+        ],
+        "core_herbs": [
+          "石膏",
+          "知母",
+          "人参"
+        ],
+        "core_combinations": "石膏、知母、人参",
+        "core_rationale": "白虎汤清气分大热，加人参益气生津，主治热盛津伤、大烦渴不解。",
+        "core_sources": [
+          "《伤寒论》",
+          "《医宗金鉴·删补名医方论》"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  }
+]

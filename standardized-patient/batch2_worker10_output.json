@@ -1,0 +1,1745 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-gui-zhi-fu-zi-tang-fm-2-20260621-072502",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-174",
+    "source_classic": "伤寒论",
+    "chapter": "太阳病篇",
+    "patient": {
+      "name": "王女士",
+      "age": 65,
+      "gender": "女",
+      "occupation": "退休教师",
+      "background": "住在老小区，平时喜欢散步，最近一周下雨天受凉后发病",
+      "persona_id": "talkative-elderly-female"
+    },
+    "chief_complaint": {
+      "text": "大夫啊，我跟你说，这事要从上礼拜三开始讲起。那天我去接孙子放学，刚下完雨，地上湿漉漉的，我鞋子都湿了。回来第二天就开始浑身疼，不是那种酸疼，是疼得翻不了身。晚上睡觉想翻个身，疼得直哼哼，我儿子说我在床上哼了一晚上。我不吐，也不渴，就是疼。我邻居说可能是类风湿，吓得我赶紧来了。您说这不会是什么大病吧？",
+      "revealed_symptoms": [
+        "身体疼烦",
+        "不能自转侧",
+        "不呕",
+        "不渴"
+      ],
+      "l0_symptoms": [
+        "身体疼烦",
+        "不能自转侧",
+        "不呕",
+        "不渴"
+      ],
+      "directness": "moderate",
+      "word_count": 186
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不冷也不热，就是疼。没发烧，体温量过了，正常的。",
+          "revealed_symptoms": [
+            "不发热"
+          ],
+          "sample_question": "您怕冷吗？发烧吗？"
+        },
+        "l2": {
+          "trigger_question": "有没有觉得怕冷或者怕风？",
+          "text": "没有怕冷，也没有怕风。就是疼得厉害，别的都还好。",
+          "revealed_symptoms": [
+            "不恶寒",
+            "不恶风"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我觉得是风湿，以前也有人说我是风湿，吃了点风湿骨痛片，不管用。",
+          "type": "自我用药",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "无汗",
+          "盗汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "汗？不多，我这两天也没怎么动，就躺着，没怎么出汗。",
+          "revealed_symptoms": [
+            "汗出不明显"
+          ],
+          "sample_question": "您出汗多吗？"
+        },
+        "l2": {
+          "trigger_question": "动一动或者吃饭后有没有出汗？",
+          "text": "吃饭后稍微出一点，不多。就是疼，没心思管出汗的事。",
+          "revealed_symptoms": [
+            "微汗"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我儿媳妇说让我多盖被子出出汗就好了，捂了一晚上，也没见好。",
+          "type": "错误归因",
+          "misleading_symptom": "不当发汗"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "项背强痛",
+          "关节痛"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "浑身都疼，特别是肩膀、后背、胳膊腿，哪哪都疼。翻身都翻不了，得让我儿子帮忙。晚上睡觉想换个姿势，疼得直哼哼。",
+          "revealed_symptoms": [
+            "身体疼烦",
+            "不能自转侧"
+          ],
+          "sample_question": "您哪里疼？"
+        },
+        "l2": {
+          "trigger_question": "是酸疼还是刺痛？按上去更疼吗？",
+          "text": "不是酸疼，是疼得钻心。按上去也疼，但不像那种碰不得的刺痛。就是翻身、动一下都疼得厉害。",
+          "revealed_symptoms": [
+            "疼烦"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是颈椎病，之前拍片子说颈椎增生，但以前也没这么疼过。",
+          "type": "错误归因",
+          "misleading_symptom": "颈椎病"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "便秘",
+          "腹泻"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "大便正常，一天一次。小便也没问题，挺通畅的。",
+          "revealed_symptoms": [
+            "二便正常"
+          ],
+          "sample_question": "您大便小便正常吗？"
+        },
+        "l2": {
+          "trigger_question": "大便硬不硬？小便多不多？",
+          "text": "大便不干不稀，正常的。小便也正常，不多不少。",
+          "revealed_symptoms": [
+            "大便正常",
+            "小便自利"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我喝了好多水，想排排毒，也没见好。",
+          "type": "自我用药",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "胃口",
+          "呕吐",
+          "恶心",
+          "口渴"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "胃口还行，就是疼得吃不下太多。不恶心，也不想吐。",
+          "revealed_symptoms": [
+            "不呕",
+            "不渴"
+          ],
+          "sample_question": "您胃口怎么样？有恶心呕吐吗？"
+        },
+        "l2": {
+          "trigger_question": "口渴吗？想喝水吗？",
+          "text": "不渴，不想喝水。就是疼，没心思吃饭喝水。",
+          "revealed_symptoms": [
+            "不渴"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我儿媳妇给我炖了骨头汤，说以形补形，喝了两天也没见好。",
+          "type": "偏方经验",
+          "misleading_symptom": "错误食疗"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹胀",
+          "腹痛",
+          "心下痞"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "胸口不闷，肚子也不胀，就是身上疼。肚子软软的，按下去也不疼。",
+          "revealed_symptoms": [
+            "胸腹无异常"
+          ],
+          "sample_question": "您胸口或肚子有不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "肚子按上去软还是硬？",
+          "text": "肚子软软的，按下去也不疼。就是身上疼得厉害。",
+          "revealed_symptoms": [
+            "腹软"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是不是内脏出问题了，这疼得这么厉害。",
+          "type": "恐惧联想",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "耳聋",
+          "目眩",
+          "目赤"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "耳朵不鸣，眼睛也不花。视力听力都还好。",
+          "revealed_symptoms": [],
+          "sample_question": "您耳朵眼睛有不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "有没有头晕眼花？",
+          "text": "没有头晕，没有眼花。就是疼。",
+          "revealed_symptoms": []
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "没有，耳朵眼睛都好。",
+          "type": "无关细节",
+          "misleading_symptom": ""
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "易醒",
+          "嗜睡"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "睡不好，疼得睡不着。好不容易睡着了，翻个身又疼醒了。一晚上醒好几次。",
+          "revealed_symptoms": [
+            "睡眠差"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "晚上疼得厉害吗？",
+          "text": "晚上更疼，特别是想翻身的时候，疼得直哼哼。我儿子说我在床上哼了一晚上。",
+          "revealed_symptoms": [
+            "夜间疼痛加重"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我吃了点安眠药，还是睡不着，这疼太厉害了。",
+          "type": "自我用药",
+          "misleading_symptom": ""
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往史",
+          "慢性病",
+          "手术史",
+          "过敏史"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "平时身体还行，就是关节不太好，有点老毛病。没有糖尿病，没有高血压。",
+          "revealed_symptoms": [],
+          "sample_question": "您以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "关节老毛病是什么情况？",
+          "text": "就是膝盖不太好，下雨天有点酸。但从没这么疼过。",
+          "revealed_symptoms": [
+            "关节旧疾"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我有骨质疏松，吃了钙片，也不管用。",
+          "type": "错误归因",
+          "misleading_symptom": "骨质疏松"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "受凉",
+          "饮食",
+          "劳累",
+          "情绪"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "就是那天去接孙子，刚下完雨，地上湿漉漉的，我鞋子都湿了。回来第二天就这样了。",
+          "revealed_symptoms": [
+            "外感湿邪"
+          ],
+          "sample_question": "您发病前有什么诱因吗？"
+        },
+        "l2": {
+          "trigger_question": "当时有没有觉得冷？",
+          "text": "当时没觉得冷，就是鞋子湿了。回来后也没觉得冷，就是第二天开始疼。",
+          "revealed_symptoms": [
+            "湿邪侵袭"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "肯定是湿气太重了，我邻居说让我拔拔罐，我还没去呢。",
+          "type": "偏方经验",
+          "misleading_symptom": "湿邪"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "正常",
+        "tongue_color": "淡",
+        "coating": "薄白",
+        "special": ""
+      },
+      "auscultation": {
+        "voice": "正常，略带疲惫",
+        "breath": "正常",
+        "cough": "无",
+        "odor": "无"
+      },
+      "palpation": {
+        "pulse_position": "浮",
+        "pulse_rate": "虚",
+        "pulse_shape": "涩",
+        "pulse_force": "无力",
+        "composite": "浮虚而涩"
+      },
+      "pressing": {
+        "abdomen": "柔软，喜按",
+        "limbs": "多处压痛",
+        "skin": "正常"
+      }
+    },
+    "case_summary": "【主诉】\n王女士，65岁，退休教师。一周前雨后接孙子放学，鞋子湿后起病。\n\n【现病史】\n- 身体疼烦：全身疼痛，以肩背、四肢为主，疼痛剧烈，烦扰不安\n- 不能自转侧：翻身困难，需他人协助，夜间疼痛加重影响睡眠\n- 不呕不渴：无恶心呕吐，无口渴，饮食尚可\n- 二便正常\n\n【查体】\n舌淡苔白。脉浮虚而涩。身体多处压痛，肌肉紧张。腹部柔软，喜按。\n\n【问诊选择】\n头身 / 睡眠 / 诱因 / 饮食 / 寒热",
+    "question": {
+      "mode": "formula",
+      "herbs_preview": "桂枝、附子、生姜、大枣、甘草",
+      "symptom_hint": "风湿相搏，身体疼烦，不能自转侧，不呕不渴，脉浮虚而涩",
+      "options": [
+        {
+          "id": "gui-zhi-fu-zi-tang",
+          "name": "桂枝附子汤",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "gan-cao-fu-zi-tang",
+          "name": "甘草附子汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "gui-zhi-fu-zi-tang-qu-gui-jia-bai-zhu",
+          "name": "桂枝附子去桂加白术汤",
+          "is_correct": false,
+          "distractor_type": "same_formula_variant"
+        },
+        {
+          "id": "ma-huang-tang",
+          "name": "麻黄汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "gui-zhi-jia-fu-zi-tang",
+          "name": "桂枝加附子汤",
+          "is_correct": false,
+          "distractor_type": "incorrect_herb_composition"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-174",
+      "correct_formula_id": "gui-zhi-fu-zi-tang",
+      "correct_article_number": 174,
+      "correct_article_text": "伤寒八九日，风湿相搏，身体疼烦，不能自转侧，不呕不渴，脉浮虚而涩者，桂枝附子汤主之。若其人大便硬，小便自利者，去桂加白术汤主之。",
+      "correct_formula_name": "桂枝附子汤",
+      "correct_herbs": [
+        "桂枝",
+        "附子",
+        "生姜",
+        "大枣",
+        "甘草"
+      ]
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "身体疼烦",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "不能自转侧",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "不呕",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "不渴",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "脉浮虚而涩",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "舌淡苔白",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "大便硬",
+          "in_patient": false,
+          "in_source": true,
+          "note": "患者大便正常，非去桂加白术汤证"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "不呕不渴",
+          "excludes": [
+            "xiao-chai-hu-tang",
+            "ban-xia-xie-xin-tang"
+          ],
+          "reason": "不呕排除少阳病，不渴排除阳明病"
+        },
+        {
+          "symptom": "脉浮虚而涩",
+          "excludes": [
+            "ma-huang-tang"
+          ],
+          "reason": "麻黄汤为表实证，脉浮紧，患者脉浮虚而涩为表阳虚"
+        },
+        {
+          "symptom": "身体疼烦不能自转侧",
+          "includes": [
+            "gui-zhi-fu-zi-tang"
+          ],
+          "reason": "桂枝附子汤主风湿相搏于肌肉，身体疼烦不能自转侧为其核心症状"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "04_二便",
+          "reason": "未深入追问大便硬度与小便情况，错失去桂加白术汤鉴别点",
+          "impact": "中"
+        }
+      ]
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-gan-cao-fu-zi-tang-fm-2-20260621-072502",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-175",
+    "source_classic": "伤寒论",
+    "chapter": "太阳病篇",
+    "patient": {
+      "name": "李先生",
+      "age": 68,
+      "gender": "男",
+      "occupation": "退休工人",
+      "background": "有风湿病史十余年，平日关节不适，近日天气转凉后症状加重",
+      "persona_id": "silent-elderly-male"
+    },
+    "chief_complaint": {
+      "text": "大夫，我骨头疼。特别是膝盖、手指关节，疼得伸不直也弯不了。一碰就更疼。我出虚汗，走几步就喘。小便也少，身上有点肿。这几天风大，不敢出门，风一吹就更难受。以前也有，但这次最厉害。",
+      "revealed_symptoms": [
+        "骨节疼烦",
+        "掣痛不得屈伸",
+        "汗出短气",
+        "小便不利",
+        "恶风不欲去衣",
+        "身微肿"
+      ],
+      "l0_symptoms": [
+        "骨节疼烦",
+        "掣痛不得屈伸",
+        "汗出短气",
+        "小便不利",
+        "恶风不欲去衣",
+        "身微肿"
+      ],
+      "directness": "moderate",
+      "word_count": 168
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "怕冷，风一吹就疼得更厉害。不敢出门，风大的时候更难受。",
+          "revealed_symptoms": [
+            "恶风",
+            "恶寒"
+          ],
+          "sample_question": "您怕冷吗？"
+        },
+        "l2": {
+          "trigger_question": "是全身怕冷还是某个部位？",
+          "text": "全身都怕风，特别是关节。风一吹关节就疼。不想脱衣服，觉得冷。",
+          "revealed_symptoms": [
+            "恶风不欲去衣"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老了就这样，骨头疼正常，不用看。",
+          "type": "归因于年龄",
+          "misleading_symptom": "年龄因素"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "无汗",
+          "盗汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "出虚汗，稍微动一下就出汗。汗后更觉得没力气。",
+          "revealed_symptoms": [
+            "汗出短气"
+          ],
+          "sample_question": "您出汗吗？"
+        },
+        "l2": {
+          "trigger_question": "汗是白天出还是晚上出？",
+          "text": "白天动一动就出。不是晚上盗汗。出完汗更喘，更没力气。",
+          "revealed_symptoms": [
+            "动则汗出",
+            "汗后气短"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "不出汗，老了不出汗。",
+          "type": "拒绝承认",
+          "misleading_symptom": ""
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "项背强痛",
+          "关节痛"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "骨节疼，膝盖、手指、肩膀都疼。伸不直也弯不了。一碰就更疼。",
+          "revealed_symptoms": [
+            "骨节疼烦",
+            "掣痛不得屈伸",
+            "近之则痛剧"
+          ],
+          "sample_question": "您哪里疼？"
+        },
+        "l2": {
+          "trigger_question": "是关节里面疼还是肌肉疼？",
+          "text": "关节里面疼，像有什么东西在里面扯着。按上去更疼，不敢碰。",
+          "revealed_symptoms": [
+            "掣痛"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "就是老毛病，风湿，吃了好多药都不管用。",
+          "type": "既往失败",
+          "misleading_symptom": ""
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "便秘",
+          "腹泻"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "小便少，尿不出来多少。大便还行。",
+          "revealed_symptoms": [
+            "小便不利"
+          ],
+          "sample_question": "您小便正常吗？"
+        },
+        "l2": {
+          "trigger_question": "小便少是尿不出来还是不想尿？",
+          "text": "尿得少，尿得费劲。不是不想尿，是尿不出来多少。",
+          "revealed_symptoms": [
+            "小便不利",
+            "尿少"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "喝水也不多，喝多了肚子胀。",
+          "type": "轻描淡写",
+          "misleading_symptom": ""
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "胃口",
+          "呕吐",
+          "恶心",
+          "口渴"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "吃得下，但没胃口。不恶心，不吐。",
+          "revealed_symptoms": [
+            "不呕"
+          ],
+          "sample_question": "您胃口怎么样？"
+        },
+        "l2": {
+          "trigger_question": "口渴吗？",
+          "text": "不渴。就是疼，没心思吃。",
+          "revealed_symptoms": [
+            "不渴"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "吃不吃都行，不在乎。",
+          "type": "拒绝承认",
+          "misleading_symptom": ""
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹胀",
+          "腹痛",
+          "心下痞"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不胸闷，肚子也不胀。心口不堵。",
+          "revealed_symptoms": [],
+          "sample_question": "您胸口肚子有不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "肚子按上去软还是硬？",
+          "text": "肚子软软的。不疼。",
+          "revealed_symptoms": [
+            "腹软"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "没有",
+          "type": "无关细节",
+          "misleading_symptom": ""
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "耳聋",
+          "目眩",
+          "目赤"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "耳朵眼睛都好。",
+          "revealed_symptoms": [],
+          "sample_question": "您耳朵眼睛有不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "有没有头晕？",
+          "text": "没有。",
+          "revealed_symptoms": []
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "没有",
+          "type": "无关细节",
+          "misleading_symptom": ""
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "易醒",
+          "嗜睡"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "睡得不好，疼得睡不着。一晚上醒好几次。",
+          "revealed_symptoms": [
+            "睡眠差"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "晚上疼得厉害吗？",
+          "text": "晚上疼得厉害，特别是翻身的时候。",
+          "revealed_symptoms": [
+            "夜间疼痛加重"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老了睡得少，正常。",
+          "type": "归因于年龄",
+          "misleading_symptom": ""
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往史",
+          "慢性病",
+          "手术史",
+          "过敏史"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "有风湿，老毛病了。十年了。",
+          "revealed_symptoms": [
+            "风湿病史"
+          ],
+          "sample_question": "您以前有什么病？"
+        },
+        "l2": {
+          "trigger_question": "以前怎么治疗的？",
+          "text": "吃了好多药，没看好。贴膏药，也没用。",
+          "revealed_symptoms": [
+            "治疗失败史"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "以前看过，吃了很多药，没看好。",
+          "type": "既往失败",
+          "misleading_symptom": ""
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "受凉",
+          "饮食",
+          "劳累",
+          "情绪"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "前几天刮风，凉到了。天冷了，关节就不行。",
+          "revealed_symptoms": [
+            "外感风寒湿邪"
+          ],
+          "sample_question": "您发病前有什么诱因？"
+        },
+        "l2": {
+          "trigger_question": "是突然加重还是慢慢加重？",
+          "text": "突然加重的。前几天刮风，第二天就疼得厉害了。",
+          "revealed_symptoms": [
+            "外感诱发"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "天气原因，每年这时候都这样。",
+          "type": "归因于年龄",
+          "misleading_symptom": ""
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "正常",
+        "tongue_color": "淡",
+        "coating": "薄白",
+        "special": ""
+      },
+      "auscultation": {
+        "voice": "低沉，略带喘息",
+        "breath": "稍促",
+        "cough": "无",
+        "odor": "无"
+      },
+      "palpation": {
+        "pulse_position": "浮",
+        "pulse_rate": "虚",
+        "pulse_shape": "涩",
+        "pulse_force": "无力",
+        "composite": "浮虚而涩"
+      },
+      "pressing": {
+        "abdomen": "柔软，喜按",
+        "limbs": "关节肿胀，压痛明显",
+        "skin": "下肢微肿"
+      }
+    },
+    "case_summary": "【主诉】\n李先生，68岁，退休工人。风湿病史十余年，近日天气转凉后加重。\n\n【现病史】\n- 骨节疼烦：膝关节、手指关节、肩关节疼痛剧烈\n- 掣痛不得屈伸：关节屈伸不利，活动受限，按之更痛\n- 汗出短气：动则汗出，气短乏力\n- 小便不利：尿量减少，排尿不畅\n- 恶风不欲去衣：畏风畏寒，不愿减少衣物\n- 身微肿：下肢轻度浮肿\n\n【查体】\n舌淡苔白。脉浮虚而涩。关节肿胀，压痛明显。下肢微肿。腹部柔软。\n\n【问诊选择】\n头身 / 二便 / 汗出 / 旧病 / 诱因",
+    "question": {
+      "mode": "formula",
+      "herbs_preview": "甘草、附子、白术、桂枝",
+      "symptom_hint": "风湿相搏，骨节疼烦，掣痛不得屈伸，汗出短气，小便不利，恶风不欲去衣，身微肿",
+      "options": [
+        {
+          "id": "gan-cao-fu-zi-tang",
+          "name": "甘草附子汤",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "gui-zhi-fu-zi-tang",
+          "name": "桂枝附子汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "gui-zhi-fu-zi-tang-qu-gui-jia-bai-zhu",
+          "name": "桂枝附子去桂加白术汤",
+          "is_correct": false,
+          "distractor_type": "same_formula_variant"
+        },
+        {
+          "id": "zhen-wu-tang",
+          "name": "真武汤",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        },
+        {
+          "id": "gui-zhi-tang",
+          "name": "桂枝汤",
+          "is_correct": false,
+          "distractor_type": "incorrect_herb_composition"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-175",
+      "correct_formula_id": "gan-cao-fu-zi-tang",
+      "correct_article_number": 175,
+      "correct_article_text": "风湿相搏，骨节疼烦，掣痛不得屈伸，近之则痛剧，汗出短气，小便不利，恶风不欲去衣，或身微肿者，甘草附子汤主之。",
+      "correct_formula_name": "甘草附子汤",
+      "correct_herbs": [
+        "甘草",
+        "附子",
+        "白术",
+        "桂枝"
+      ]
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "骨节疼烦",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "掣痛不得屈伸",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "汗出短气",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "小便不利",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "恶风不欲去衣",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "身微肿",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "脉浮虚而涩",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "舌淡苔白",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "骨节疼烦掣痛不得屈伸",
+          "excludes": [
+            "gui-zhi-fu-zi-tang"
+          ],
+          "reason": "桂枝附子汤为风湿相搏于肌肉，身体疼烦不能自转侧；甘草附子汤为风湿相搏于关节，骨节疼烦掣痛不得屈伸"
+        },
+        {
+          "symptom": "汗出短气小便不利身微肿",
+          "includes": [
+            "gan-cao-fu-zi-tang",
+            "zhen-wu-tang"
+          ],
+          "reason": "表里俱虚，阳虚水停之象，为甘草附子汤与真武汤共有症状，但甘草附子汤以骨节疼痛为主，真武汤以四肢沉重水肿为主"
+        },
+        {
+          "symptom": "恶风不欲去衣",
+          "excludes": [
+            "gui-zhi-tang"
+          ],
+          "reason": "桂枝汤为太阳中风表虚，汗出恶风；本例为风湿相搏，表里俱虚，恶风不欲去衣，病机不同"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "01_寒热",
+          "reason": "未深入追问是否发热，排除表证发热",
+          "impact": "低"
+        }
+      ]
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-huang-qin-jia-ban-xia-sheng-jiang-tang-fm-2-20260621-072502",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-172",
+    "source_classic": "伤寒论",
+    "chapter": "太阳病篇",
+    "patient": {
+      "name": "张女士",
+      "age": 42,
+      "gender": "女",
+      "occupation": "超市收银员",
+      "background": "平时饮食不规律，工作压力大。前几天与朋友聚餐吃烧烤后发病",
+      "persona_id": "anxious-middle-aged-female"
+    },
+    "chief_complaint": {
+      "text": "大夫，我拉肚子三天了，一天跑五六次厕所，大便都是稀的，有时候跟水一样。肚子还疼，一疼就想拉。最烦的是还吐，吃什么吐什么，连水都喝不下去。嘴里发苦，肛门火辣辣的。我在网上查了，说是急性肠胃炎，吃了黄连素，也没见好。您说这会不会是肠炎啊？要不要紧？",
+      "revealed_symptoms": [
+        "下利",
+        "呕吐",
+        "腹痛",
+        "口苦",
+        "肛门灼热"
+      ],
+      "l0_symptoms": [
+        "下利",
+        "呕吐",
+        "腹痛",
+        "口苦",
+        "肛门灼热"
+      ],
+      "directness": "moderate",
+      "word_count": 194
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "身上有点热，但量体温也就37度5左右。不是高烧，就是觉得热乎乎的。",
+          "revealed_symptoms": [
+            "微热"
+          ],
+          "sample_question": "您发烧吗？"
+        },
+        "l2": {
+          "trigger_question": "是一阵热一阵冷还是一直热？",
+          "text": "一直有点热，不是一阵一阵的。身上热乎乎的，额头摸着有点烫。",
+          "revealed_symptoms": [
+            "翕翕发热"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我觉得是发烧，吃了退烧药也没用。",
+          "type": "自我用药",
+          "misleading_symptom": "错误用药"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "无汗",
+          "盗汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "汗不多，就是拉肚子拉得没力气。没觉得特别出汗。",
+          "revealed_symptoms": [
+            "汗出不明显"
+          ],
+          "sample_question": "您出汗多吗？"
+        },
+        "l2": {
+          "trigger_question": "有没有觉得汗后发冷？",
+          "text": "没有，汗不多。就是拉肚子拉得虚了。",
+          "revealed_symptoms": []
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "没有",
+          "type": "无关细节",
+          "misleading_symptom": ""
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "项背强痛",
+          "关节痛"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头有点昏，身上没力气。走路都发软。",
+          "revealed_symptoms": [
+            "头昏",
+            "乏力"
+          ],
+          "sample_question": "您头疼吗？身上疼吗？"
+        },
+        "l2": {
+          "trigger_question": "是全身没劲还是某个部位？",
+          "text": "全身没劲，腿软。不是某个地方疼。",
+          "revealed_symptoms": [
+            "全身乏力"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是脱水了，喝了好多淡盐水。",
+          "type": "网络诊断",
+          "misleading_symptom": "脱水"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "便秘",
+          "腹泻"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "拉肚子，一天五六次，稀的，有时候像水。大便臭，颜色黄。肛门火辣辣的。小便少。",
+          "revealed_symptoms": [
+            "下利",
+            "肛门灼热",
+            "小便不利"
+          ],
+          "sample_question": "您大便怎么样？"
+        },
+        "l2": {
+          "trigger_question": "拉肚子的时候肚子疼吗？拉完有没有缓解？",
+          "text": "一疼就想拉，拉的时候肚子疼。拉完稍微好一点，但过一会儿又疼又拉。肛门火辣辣的。",
+          "revealed_symptoms": [
+            "腹痛",
+            "利下臭秽",
+            "肛门灼热"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我吃了蒙脱石散，也没用，还是拉。",
+          "type": "自我用药",
+          "misleading_symptom": "西药止泻"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "胃口",
+          "呕吐",
+          "恶心",
+          "口渴"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "吃不下，吃了就吐。闻到油腻味就恶心。连水都喝不下去。胃里翻江倒海的。",
+          "revealed_symptoms": [
+            "呕吐",
+            "恶心",
+            "不欲饮食"
+          ],
+          "sample_question": "您胃口怎么样？有恶心呕吐吗？"
+        },
+        "l2": {
+          "trigger_question": "吐的是什么？",
+          "text": "吃什么吐什么。刚吃下去就吐出来了。胃里没东西了就干呕。",
+          "revealed_symptoms": [
+            "食入即吐",
+            "干呕"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我网上查了，说应该喝粥养胃，喝了白粥也吐。",
+          "type": "网络诊断",
+          "misleading_symptom": "错误食疗"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹胀",
+          "腹痛",
+          "心下痞"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "肚子疼，肚脐周围，一疼就想拉。拉完稍微好一点。肚子咕噜咕噜响。",
+          "revealed_symptoms": [
+            "腹痛",
+            "肠鸣"
+          ],
+          "sample_question": "您肚子疼吗？"
+        },
+        "l2": {
+          "trigger_question": "按上去更疼吗？",
+          "text": "按上去疼，但不是那种硬邦邦的疼。肚子软软的，就是疼。",
+          "revealed_symptoms": [
+            "腹软",
+            "压痛"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是阑尾炎，但是右边不疼。",
+          "type": "网络诊断",
+          "misleading_symptom": "阑尾炎"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "耳聋",
+          "目眩",
+          "目赤"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "耳朵不鸣，眼睛有点花。",
+          "revealed_symptoms": [],
+          "sample_question": "您耳朵眼睛有不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "有没有头晕？",
+          "text": "有点头昏，没力气。不是天旋地转。",
+          "revealed_symptoms": [
+            "头昏"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "没有",
+          "type": "无关细节",
+          "misleading_symptom": ""
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "易醒",
+          "嗜睡"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "睡不好，肚子疼醒了要上厕所。一晚上起来好几次。",
+          "revealed_symptoms": [
+            "睡眠差"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "是不是疼醒的？",
+          "text": "是，肚子疼就醒，醒了就要上厕所。",
+          "revealed_symptoms": [
+            "痛醒"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "没有",
+          "type": "无关细节",
+          "misleading_symptom": ""
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往史",
+          "慢性病",
+          "手术史",
+          "过敏史"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "以前胃不太好，但没这么严重。没做过手术。",
+          "revealed_symptoms": [
+            "胃病史"
+          ],
+          "sample_question": "您以前有什么病？"
+        },
+        "l2": {
+          "trigger_question": "胃不好是什么情况？",
+          "text": "就是偶尔胃疼，吃点药就好了。没吐过。",
+          "revealed_symptoms": [
+            "胃病史"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "去年体检说我肠胃功能紊乱。",
+          "type": "网络诊断",
+          "misleading_symptom": ""
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "受凉",
+          "饮食",
+          "劳累",
+          "情绪"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "前几天吃了烧烤，第二天就开始拉肚子。还喝了冰啤酒。",
+          "revealed_symptoms": [
+            "饮食不节"
+          ],
+          "sample_question": "您发病前吃了什么？"
+        },
+        "l2": {
+          "trigger_question": "是吃完马上不舒服还是第二天？",
+          "text": "第二天开始的。当天没事，第二天一早就拉肚子。",
+          "revealed_symptoms": [
+            "食积化热"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "肯定是食物中毒，我同事吃的少就没事。",
+          "type": "错误归因",
+          "misleading_symptom": "食物中毒"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "正常",
+        "tongue_color": "红",
+        "coating": "黄",
+        "special": ""
+      },
+      "auscultation": {
+        "voice": "略嘶哑",
+        "breath": "稍促",
+        "cough": "无",
+        "odor": "口气重"
+      },
+      "palpation": {
+        "pulse_position": "浮",
+        "pulse_rate": "数",
+        "pulse_shape": "滑",
+        "pulse_force": "有力",
+        "composite": "浮数"
+      },
+      "pressing": {
+        "abdomen": "柔软，脐周压痛",
+        "limbs": "温",
+        "skin": "温热"
+      }
+    },
+    "case_summary": "【主诉】\n张女士，42岁，超市收银员。腹泻呕吐三天，近日加重。\n\n【现病史】\n- 下利：腹泻一日五六次，大便稀溏，色黄臭秽，肛门灼热\n- 呕吐：食入即吐，饮水亦吐，胃中嘈杂\n- 腹痛：脐周疼痛，痛则欲泻，泻后稍缓\n- 口苦：口中苦味明显\n- 微热：体温37.5℃左右，身热不扬\n\n【查体】\n舌红苔黄。脉浮数。腹部柔软，脐周压痛。皮肤温热。\n\n【问诊选择】\n二便 / 饮食 / 胸腹 / 诱因 / 寒热",
+    "question": {
+      "mode": "formula",
+      "herbs_preview": "黄芩、芍药、甘草、大枣、半夏、生姜",
+      "symptom_hint": "太阳与少阳合病，下利呕吐，腹痛口苦，肛门灼热，舌红苔黄",
+      "options": [
+        {
+          "id": "huang-qin-jia-ban-xia-sheng-jiang-tang",
+          "name": "黄芩加半夏生姜汤",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "huang-qin-tang",
+          "name": "黄芩汤",
+          "is_correct": false,
+          "distractor_type": "same_formula_variant"
+        },
+        {
+          "id": "ge-gen-huang-qin-huang-lian-tang",
+          "name": "葛根芩连汤",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "ban-xia-xie-xin-tang",
+          "name": "半夏泻心汤",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        },
+        {
+          "id": "sheng-jiang-xie-xin-tang",
+          "name": "生姜泻心汤",
+          "is_correct": false,
+          "distractor_type": "incorrect_herb_composition"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-172",
+      "correct_formula_id": "huang-qin-jia-ban-xia-sheng-jiang-tang",
+      "correct_article_number": 172,
+      "correct_article_text": "太阳与少阳合病，自下利者，与黄芩汤；若呕者，黄芩加半夏生姜汤主之。",
+      "correct_formula_name": "黄芩加半夏生姜汤",
+      "correct_herbs": [
+        "黄芩",
+        "芍药",
+        "甘草",
+        "大枣",
+        "半夏",
+        "生姜"
+      ]
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "下利",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "呕吐",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "腹痛",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "口苦",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "肛门灼热",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "舌红苔黄",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "脉浮数",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "呕吐",
+          "excludes": [
+            "huang-qin-tang"
+          ],
+          "reason": "黄芩汤仅有下利，无呕吐；本例有呕吐，当用黄芩加半夏生姜汤"
+        },
+        {
+          "symptom": "下利呕吐腹痛口苦",
+          "excludes": [
+            "ge-gen-huang-qin-huang-lian-tang"
+          ],
+          "reason": "葛根芩连汤为协热下利，喘而汗出，无呕吐；本例有呕吐，为太阳少阳合病"
+        },
+        {
+          "symptom": "腹软脐周压痛",
+          "excludes": [
+            "ban-xia-xie-xin-tang",
+            "sheng-jiang-xie-xin-tang"
+          ],
+          "reason": "半夏泻心汤、生姜泻心汤均有心下痞硬，本例腹软，无痞满"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "03_头身",
+          "reason": "未追问有无往来寒热，错失太阳少阳合病确认",
+          "impact": "中"
+        }
+      ]
+    }
+  }
+]

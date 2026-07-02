@@ -1,0 +1,144 @@
+{
+  "packages": [
+    {
+      "formula_id": "da-chai-hu-tang",
+      "formula_name": "大柴胡汤",
+      "formula_herbs": [
+        "柴胡",
+        "黄芩",
+        "芍药",
+        "半夏",
+        "生姜",
+        "枳实",
+        "大枣",
+        "大黄"
+      ],
+      "chapter": "少阳病篇",
+      "source_article": {
+        "id": "SHL-sy-103",
+        "article_number": 103,
+        "text": "太阳病，过经十余日，反二三下之，后四五日，柴胡证仍在者，先与小柴胡汤。呕不止，心下急，郁郁微烦者，为未解也，与大柴胡汤，下之则愈。",
+        "difficulty": 2,
+        "status": "confirmed"
+      },
+      "symptom_pool": [
+        "呕不止",
+        "心下急",
+        "郁郁微烦",
+        "往来寒热",
+        "胸胁苦满",
+        "便秘或下利",
+        "苔黄",
+        "口苦"
+      ],
+      "clue_map": {
+        "呕不止": "吐个不停，吃什么吐什么",
+        "心下急": "胃这里又胀又急，堵得慌",
+        "郁郁微烦": "心里闷闷的，烦，想发火又发不出来",
+        "便秘或下利": "要么大便不通，要么拉肚子",
+        "苔黄": "（查体呈现：苔黄）",
+        "口苦": "嘴里苦，像吃了黄连"
+      },
+      "symptom_expressions": {
+        "呕不止": {
+          "category": "饮食类",
+          "subcategory": "呕吐/恶心",
+          "expressions": [
+            "吐个不停，吃什么吐什么"
+          ]
+        },
+        "心下急": {
+          "category": "胸腹类",
+          "subcategory": "腹胀/腹痛",
+          "expressions": [
+            "胃这里又胀又急，堵得慌"
+          ]
+        },
+        "郁郁微烦": {
+          "category": "未知",
+          "subcategory": "未知",
+          "expressions": [],
+          "missing": true
+        },
+        "往来寒热": {
+          "category": "寒热类",
+          "subcategory": "寒热往来",
+          "expressions": [
+            "一会儿热一会儿冷，像打摆子"
+          ]
+        },
+        "胸胁苦满": {
+          "category": "胸腹类",
+          "subcategory": "腹胀/腹痛",
+          "expressions": [
+            "胸胁苦满（患者表达待补充）"
+          ]
+        },
+        "便秘或下利": {
+          "category": "未知",
+          "subcategory": "未知",
+          "expressions": [],
+          "missing": true
+        },
+        "苔黄": {
+          "category": "未知",
+          "subcategory": "未知",
+          "expressions": [],
+          "missing": true
+        },
+        "口苦": {
+          "category": "其他",
+          "subcategory": "其他",
+          "expressions": [
+            "口苦（患者表达待补充）"
+          ]
+        }
+      },
+      "recommended_persona": "intellectual-young-adult",
+      "distractor_candidates": [
+        {
+          "type": "same_disease_different_formula",
+          "article_id": "SHL-sy-96",
+          "formula_id": "xiao-chai-hu-tang",
+          "text": "伤寒五六日，中风，往来寒热，胸胁苦满，默默不欲饮食，心烦喜呕，或胸中烦而不呕，或渴，或腹中痛，或胁下痞硬，或心下悸，小便不利，或不渴，身有微热，或咳者，小柴胡汤主之。",
+          "article_number": 96,
+          "difficulty": 1
+        },
+        {
+          "type": "same_disease_different_formula",
+          "article_id": "SHL-sy-104",
+          "formula_id": "chai-hu-jia-mang-xiao-tang",
+          "text": "伤寒十三日，不解，胸胁满而呕，日晡所发潮热，已而微利。此本柴胡证，下之以不得利，今反利者，知医以丸药下之，此非其治也。潮热者，实也。先宜服小柴胡汤以解外，后以柴胡加芒硝汤主之。",
+          "article_number": 104,
+          "difficulty": 3
+        },
+        {
+          "type": "same_disease_different_formula",
+          "article_id": "SHL-sy-107",
+          "formula_id": "chai-hu-jia-long-gu-mu-li-tang",
+          "text": "伤寒八九日，下之，胸满烦惊，小便不利，谵语，一身尽重，不可转侧者，柴胡加龙骨牡蛎汤主之。",
+          "article_number": 107,
+          "difficulty": 3
+        },
+        {
+          "type": "same_formula_variant",
+          "article_id": "SHL-sy-103",
+          "formula_id": "da-chai-hu-tang",
+          "text": "太阳病，过经十余日，反二三下之，后四五日，柴胡证仍在者，先与小柴胡汤。呕不止，心下急，郁郁微烦者，为未解也，与大柴胡汤，下之则愈。",
+          "article_number": 103,
+          "difficulty": 2
+        }
+      ],
+      "all_related_entries": [
+        {
+          "id": "SHL-sy-103",
+          "article_number": 103,
+          "difficulty": 2
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "total": 1,
+  "error_count": 0
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "name": "麻黄汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "葛根汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "大承气汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "小柴胡汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桂枝加葛根汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桂枝加厚朴杏子汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桂枝去芍药汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "麻黄杏仁甘草石膏汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "小建中汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "大青龙汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "小青龙汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桂枝加附子汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桂枝麻黄各半汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桂枝二越婢一汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "葛根加半夏汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "葛根黄芩黄连汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "五苓散",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "真武汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "白虎汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "调胃承气汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "大柴胡汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "柴胡加龙骨牡蛎汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "栀子豉汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "柴胡加芒硝汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "栀子甘草豉汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "栀子生姜豉汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "栀子厚朴汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "栀子干姜汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "干姜附子汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "茯苓四逆汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桃核承气汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "抵当汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "白虎加人参汤",
+    "score": 80,
+    "src_ids": 1,
+    "exp_ids": 0,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "桂枝汤",
+    "score": 90,
+    "src_ids": 1,
+    "exp_ids": 1,
+    "has_core_urls": true,
+    "has_article_num": false,
+    "has_core_rationale": true
+  },
+  {
+    "name": "四逆汤",
+    "score": 90,
+    "src_ids": 1,
+    "exp_ids": 2,
+    "has_core_urls": false,
+    "has_article_num": false,
+    "has_core_rationale": true
+  }
+]

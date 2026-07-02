@@ -1,0 +1,2360 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-zhu-ling-tang-fm-2-20260622-150000",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-319",
+    "source_classic": "伤寒论",
+    "chapter": "少阴病篇",
+    "patient": {
+      "name": "刘女士",
+      "age": 48,
+      "gender": "女",
+      "occupation": "办公室文员",
+      "background": "近一周因腹泻就医，此前曾在社区诊所输液两天未见好转",
+      "persona_id": "anxious-middle-aged-female"
+    },
+    "chief_complaint": {
+      "text": "大夫，我这拉肚子都七八天了，怎么也好不了。一开始觉得就是吃坏肚子了，吃了些止泻药也不管用。现在肚子还隐隐作痛，老觉得口渴，喝水也不解渴。最难受的是晚上睡不着，心里烦得很，翻来覆去，躺下也烦坐起来也烦。我这是不是得了什么大病？会不会是肠炎啊？",
+      "revealed_symptoms": [
+        "下利",
+        "渴",
+        "心烦不得眠",
+        "腹痛"
+      ],
+      "l0_symptoms": [
+        "下利",
+        "渴",
+        "心烦不得眠",
+        "腹痛"
+      ],
+      "directness": "moderate",
+      "word_count": 158
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不怕冷，也不觉得发烧。但我自己摸着身上热乎乎的，心里觉得烦躁，像有一团火在烧。",
+          "revealed_symptoms": [
+            "虚烦"
+          ],
+          "sample_question": "您怕冷吗？发烧吗？"
+        },
+        "l2": {
+          "trigger_question": "那您觉得身上热是从里面往外热还是外面热？",
+          "text": "是从里面往外热，像从骨头里蒸出来的，但又不是发烧那种烫。手心也热，但脚不热。",
+          "revealed_symptoms": [
+            "手足心热"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我查了网上，说长期低烧可能是结核，我这不是结核吧？",
+          "type": "恐惧联想",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "盗汗",
+          "自汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "汗不多，但有时候晚上睡不着的时候觉得手心有点汗，湿乎乎的。",
+          "revealed_symptoms": [
+            "手足汗出"
+          ],
+          "sample_question": "您出汗吗？白天还是晚上出汗多？"
+        },
+        "l2": {
+          "trigger_question": "出汗的时候觉得身上更舒服还是更难受？",
+          "text": "出汗也不觉得舒服，出完汗还是烦，身上黏糊糊的。",
+          "revealed_symptoms": [
+            "汗出不烦不解"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我买了补气血的药在吃，好像也没什么用。",
+          "type": "自我用药",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "四肢"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头不痛，但觉得昏沉沉的，没精神。身上也不痛，就是觉得没力气。",
+          "revealed_symptoms": [
+            "头昏",
+            "乏力"
+          ],
+          "sample_question": "您头痛吗？身上痛不痛？"
+        },
+        "l2": {
+          "trigger_question": "四肢感觉怎么样？",
+          "text": "手脚不凉，但手心脚心发热，觉得燥得慌。",
+          "revealed_symptoms": [
+            "手足心热"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我颈椎一直不好，这次头晕是不是颈椎病犯了？",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "腹泻"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "拉肚子快十天了，一天三四次，拉出来的像水一样，有时候带点黏液。小便特别少，颜色黄，喝了水也不怎么尿。",
+          "revealed_symptoms": [
+            "下利",
+            "小便不利",
+            "小便黄"
+          ],
+          "sample_question": "您大便怎么样？小便呢？"
+        },
+        "l2": {
+          "trigger_question": "拉肚子之前肚子疼不疼？拉完肚子是不是轻松一些？",
+          "text": "拉之前肚子有点痛，但拉完也不轻松，还是胀胀的。有时候觉得里急后重，想拉拉不干净。",
+          "revealed_symptoms": [
+            "腹痛",
+            "里急后重"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我去药店买了蒙脱石散和益生菌，吃了好几天了。",
+          "type": "自我用药",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "胃口",
+          "口渴",
+          "恶心"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "吃不下饭，看到饭就烦。口渴得厉害，但喝不了多少，喝多了觉得胃里不舒服。有时候有点恶心，但又吐不出来。",
+          "revealed_symptoms": [
+            "不欲饮食",
+            "口渴",
+            "恶心",
+            "干呕"
+          ],
+          "sample_question": "您胃口怎么样？口渴吗？"
+        },
+        "l2": {
+          "trigger_question": "想喝热水还是凉水？",
+          "text": "想喝温水，但喝了也不解渴，越喝越渴。",
+          "revealed_symptoms": [
+            "消渴"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是上火了，昨天吃了牛黄解毒片，好像更拉了。",
+          "type": "自我用药",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹痛",
+          "腹胀"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "胸口不闷，但心里烦。肚子隐隐作痛，小肚子下面胀胀的，像有水一样。按上去软软的，不硬。",
+          "revealed_symptoms": [
+            "心烦",
+            "腹痛",
+            "少腹满"
+          ],
+          "sample_question": "您胸闷吗？肚子怎么样？"
+        },
+        "l2": {
+          "trigger_question": "肚子按上去痛吗？喜欢按还是不让按？",
+          "text": "按上去不太痛，不是那种硬痛。按了也没觉得舒服，也没觉得更难受。",
+          "revealed_symptoms": [
+            "按之软"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我网上查了，说肚子有水声可能是肝硬化腹水，吓死我了。",
+          "type": "恐惧联想",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "耳聋",
+          "目眩"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "耳朵还好，眼睛也不花。但有时候觉得头晕，站起来的时候有点晕。",
+          "revealed_symptoms": [
+            "头晕"
+          ],
+          "sample_question": "您耳朵和眼睛有什么不舒服吗？"
+        },
+        "l2": {
+          "trigger_question": "头晕是持续的还是一阵一阵的？",
+          "text": "一阵一阵的，特别是站起来或者转身的时候。",
+          "revealed_symptoms": [
+            "体位性头晕"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我怀疑是不是血压低了，自己量了血压有点偏低。",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "易醒"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "根本睡不着，一到晚上就烦得厉害。躺下去翻来覆去，脑子里嗡嗡的。有时候好不容易睡着了，一会儿又醒了，醒了就更睡不着了。",
+          "revealed_symptoms": [
+            "心烦不得眠",
+            "烦躁不得眠",
+            "易醒"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "睡不着的时候心里想什么？",
+          "text": "什么都不想也烦，像心里有一团火在烧，坐也不是躺也不是。",
+          "revealed_symptoms": [
+            "虚烦",
+            "反复颠倒"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我吃了褪黑素和安眠药，还是睡不着，这是不是焦虑症啊？",
+          "type": "自我用药",
+          "misleading_symptom": "情绪归因"
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往病史",
+          "慢性病"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "以前身体还可以，但体质一直偏瘦。容易口干，特别是秋天和冬天。没有高血压糖尿病这些。",
+          "revealed_symptoms": [
+            "素体阴虚"
+          ],
+          "sample_question": "您以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "以前有没有类似拉肚子的情况？",
+          "text": "偶尔有过，但从来没有这么久了。以前也就是一两天就好。",
+          "revealed_symptoms": [
+            "病程长"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我表姐也是长期腹泻，后来查出来是肠易激综合征，我这是不是也一样？",
+          "type": "网络诊断",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "发病原因",
+          "受凉",
+          "饮食"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "记不太清楚了。好像就是之前工作比较忙，累着了，然后就开始拉肚子。没有吃特别的东西，也没吹空调着凉。",
+          "revealed_symptoms": [
+            "劳累"
+          ],
+          "sample_question": "发病前有什么诱因吗？"
+        },
+        "l2": {
+          "trigger_question": "发病前有没有用过什么药？",
+          "text": "没有，就是之前身体有点不舒服，自己也没管。后来拉肚子才去看的医生。",
+          "revealed_symptoms": [
+            "无明确误治"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我觉得就是那段时间压力大，工作太多导致的。",
+          "type": "情绪归因",
+          "misleading_symptom": "错误归因"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "瘦",
+        "tongue_color": "红",
+        "coating": "少苔",
+        "special": "舌体偏瘦，舌面干燥少津"
+      },
+      "auscultation": {
+        "voice": "语声低微，略带焦虑",
+        "breath": "正常",
+        "cough": "偶咳",
+        "odor": "无特殊"
+      },
+      "palpation": {
+        "pulse_position": "沉",
+        "pulse_rate": "数",
+        "pulse_shape": "细",
+        "pulse_force": "无力",
+        "composite": "沉细数"
+      },
+      "pressing": {
+        "abdomen": "腹部柔软，脐下轻压痛，无反跳痛",
+        "limbs": "手足温，但手心偏热",
+        "skin": "肌肤微润，肤温正常"
+      }
+    },
+    "case_summary": "【主诉】\n刘女士，48岁，办公室文员。腹泻七八日，伴口渴、心烦失眠。\n\n【现病史】\n- 下利：腹泻七八日，日三四次，如水样，偶有黏液\n- 渴：口渴明显，饮水不解，喜温水\n- 心烦不得眠：夜间烦躁难寐，反复颠倒\n- 腹痛：腹部隐痛，脐下轻压痛\n- 小便不利：小便短少色黄\n- 恶心：偶有恶心，但无呕吐\n\n【查体】\n舌红瘦少苔。脉沉细数。腹部柔软，脐下轻压痛。手足温，手心偏热。\n\n【问诊选择】\n二便 / 饮食 / 睡眠 / 寒热 / 胸腹",
+    "question": {
+      "mode": "formula",
+      "options": [
+        {
+          "id": "zhu-ling-tang",
+          "name": "猪苓汤",
+          "herbs_preview": "猪苓、茯苓、阿胶、滑石、泽泻",
+          "symptom_hint": "利水清热养阴，适用于阴虚水热互结证",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "wu-ling-san",
+          "name": "五苓散",
+          "herbs_preview": "猪苓、茯苓、泽泻、白术、桂枝",
+          "symptom_hint": "利水渗湿，适用于蓄水证，无阴虚内热",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "zhen-wu-tang",
+          "name": "真武汤",
+          "herbs_preview": "茯苓、芍药、白术、生姜、附子",
+          "symptom_hint": "温阳利水，适用于阳虚水泛，无阴虚心烦",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "huang-lian-e-jiao-tang",
+          "name": "黄连阿胶汤",
+          "herbs_preview": "黄连、黄芩、阿胶、鸡子黄、芍药",
+          "symptom_hint": "滋阴降火，适用于阴虚火旺，无水湿下利",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        },
+        {
+          "id": "li-zhong-wan",
+          "name": "理中丸",
+          "herbs_preview": "人参、干姜、白术、甘草",
+          "symptom_hint": "温中祛寒，适用于脾胃虚寒，无阴虚内热",
+          "is_correct": false,
+          "distractor_type": "incorrect_herb_composition"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-319",
+      "correct_formula_id": "zhu-ling-tang",
+      "correct_formula_name": "猪苓汤",
+      "correct_herbs": [
+        "猪苓",
+        "茯苓",
+        "阿胶",
+        "滑石",
+        "泽泻"
+      ],
+      "correct_article_text": "少阴病，下利六七日，咳而呕渴，心烦不得眠者，猪苓汤主之。"
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "下利",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "渴",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "心烦不得眠",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "咳",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "呕",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-05_饮食",
+          "level": "l1"
+        },
+        {
+          "symptom": "小便不利",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-04_二便",
+          "level": "l1"
+        },
+        {
+          "symptom": "舌红少苔",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "心烦不得眠",
+          "includes": [
+            "zhu-ling-tang",
+            "huang-lian-e-jiao-tang"
+          ],
+          "reason": "猪苓汤与黄连阿胶汤均有心烦不得眠，但猪苓汤兼有水湿下利、小便不利"
+        },
+        {
+          "symptom": "下利",
+          "excludes": [
+            "huang-lian-e-jiao-tang"
+          ],
+          "reason": "黄连阿胶汤无下利，以此排除"
+        },
+        {
+          "symptom": "小便不利",
+          "includes": [
+            "zhu-ling-tang",
+            "wu-ling-san",
+            "zhen-wu-tang"
+          ],
+          "reason": "水湿内停三方均有小便不利，但猪苓汤独有阴虚心烦"
+        },
+        {
+          "symptom": "舌红少苔",
+          "includes": [
+            "zhu-ling-tang",
+            "huang-lian-e-jiao-tang"
+          ],
+          "reason": "阴虚证的舌象，排除阳虚五苓散/真武汤/理中丸"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "03_头身",
+          "reason": "未追问手足心热，错失确认阴虚内热",
+          "impact": "中"
+        },
+        {
+          "direction": "09_旧病",
+          "reason": "未追问既往体质，错失确认阴虚基础",
+          "impact": "低"
+        }
+      ]
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-tong-mai-si-ni-tang-fm-2-20260622-150000",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-317",
+    "source_classic": "伤寒论",
+    "chapter": "少阴病篇",
+    "patient": {
+      "name": "老张",
+      "age": 65,
+      "gender": "男",
+      "occupation": "退休工人",
+      "background": "独居老人，三天前开始腹泻，今日症状加重",
+      "persona_id": "silent-elderly-male"
+    },
+    "chief_complaint": {
+      "text": "（声音低弱，眼神无神）大夫……我拉肚子三天了……拉出来的跟水一样，还有那种没消化的东西，菜叶子什么的。手脚冰凉……一点温度都没有，从手肘到手腕都是凉的。肚子一阵阵地痛……咕噜咕噜响。不想说话……没力气……坐着就想闭上眼。您看看……这要紧吗？",
+      "revealed_symptoms": [
+        "下利清谷",
+        "手足厥逆",
+        "腹痛",
+        "但欲寐"
+      ],
+      "l0_symptoms": [
+        "下利清谷",
+        "手足厥逆",
+        "腹痛",
+        "但欲寐"
+      ],
+      "directness": "moderate",
+      "word_count": 148
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "（停顿）……不冷。",
+          "revealed_symptoms": [
+            "身反不恶寒"
+          ],
+          "sample_question": "您怕冷吗？"
+        },
+        "l2": {
+          "trigger_question": "不冷？那您觉得身上热吗？",
+          "text": "也不热。就是没力气，不想动。",
+          "revealed_symptoms": [
+            "无大热"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "（声音更低）老了就这样，没什么大事。",
+          "type": "轻描淡写",
+          "misleading_symptom": "拒绝承认"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "盗汗",
+          "自汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不出汗。身上干干的。",
+          "revealed_symptoms": [
+            "无汗"
+          ],
+          "sample_question": "您出汗吗？"
+        },
+        "l2": {
+          "trigger_question": "额头或者后背也不出汗？",
+          "text": "都不出。皮肤干。",
+          "revealed_symptoms": [
+            "皮肤干燥"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我年轻时也不爱出汗。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "四肢"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头有点昏。身上没劲。",
+          "revealed_symptoms": [
+            "头昏",
+            "乏力"
+          ],
+          "sample_question": "您头痛吗？身上怎么样？"
+        },
+        "l2": {
+          "trigger_question": "手脚一直这么凉吗？",
+          "text": "一直凉。从肘到腕都是凉的。",
+          "revealed_symptoms": [
+            "手足厥逆"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "血压低，一直血压低。",
+          "type": "隐瞒病史",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "腹泻"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "拉肚子三天了。拉出来的都是水样的，还有没消化的东西。小便少。",
+          "revealed_symptoms": [
+            "下利清谷",
+            "小便不利"
+          ],
+          "sample_question": "您大便怎么样？"
+        },
+        "l2": {
+          "trigger_question": "肚子痛吗？拉之前痛还是拉之后痛？",
+          "text": "拉之前痛。拉完也不轻松。肚脐周围痛。",
+          "revealed_symptoms": [
+            "腹痛",
+            "绕脐痛"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "（停顿）以前有过，吃了黄连素就好了。",
+          "type": "自我用药",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "胃口",
+          "口渴",
+          "恶心"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不想吃。看到饭就烦。不想喝水。",
+          "revealed_symptoms": [
+            "不欲饮食",
+            "不渴"
+          ],
+          "sample_question": "您吃饭怎么样？"
+        },
+        "l2": {
+          "trigger_question": "胃里有没有恶心想吐？",
+          "text": "有时候想吐，但又吐不出来。干呕。",
+          "revealed_symptoms": [
+            "干呕"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "（摆手）没什么，过两天就好了。",
+          "type": "轻描淡写",
+          "misleading_symptom": "拒绝承认"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹痛",
+          "腹胀"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "肚子痛。肚脐周围。不胀。",
+          "revealed_symptoms": [
+            "腹痛",
+            "绕脐痛"
+          ],
+          "sample_question": "您肚子怎么样？"
+        },
+        "l2": {
+          "trigger_question": "按上去痛得厉害吗？",
+          "text": "按上去软。不按也痛。",
+          "revealed_symptoms": [
+            "按之软"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老胃病了，习惯了。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "耳聋",
+          "目眩"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "嗓子有点痛。不严重。",
+          "revealed_symptoms": [
+            "咽痛"
+          ],
+          "sample_question": "您耳朵和嗓子怎么样？"
+        },
+        "l2": {
+          "trigger_question": "嗓子是干痛还是有痰？",
+          "text": "干痛。",
+          "revealed_symptoms": [
+            "咽干痛"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "可能是感冒了，嗓子发炎。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "易醒"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "老想睡觉。昏昏沉沉的。睡不醒。",
+          "revealed_symptoms": [
+            "但欲寐"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "白天也困吗？",
+          "text": "白天也困。坐着就想闭眼。",
+          "revealed_symptoms": [
+            "精神萎靡"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老年人睡得都多。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往病史",
+          "慢性病"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "有高血压。以前身体还行。",
+          "revealed_symptoms": [
+            "高血压病史"
+          ],
+          "sample_question": "您以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "以前有过这种拉肚子的情况吗？",
+          "text": "没有。这是第一次这么严重。",
+          "revealed_symptoms": [
+            "急性起病"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "（沉默）……",
+          "type": "隐瞒病史",
+          "misleading_symptom": "隐瞒病史"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "发病原因",
+          "受凉",
+          "饮食"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "三天前吃了点凉的东西。然后就开始拉肚子。",
+          "revealed_symptoms": [
+            "饮食寒凉"
+          ],
+          "sample_question": "发病前有什么诱因？"
+        },
+        "l2": {
+          "trigger_question": "之前有没有感冒或者受凉？",
+          "text": "没有。就是吃了凉的。",
+          "revealed_symptoms": [
+            "无外感"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "大概是西瓜吃多了。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "胖",
+        "tongue_color": "淡",
+        "coating": "白",
+        "special": "面色苍白，两颧泛红（面色赤）"
+      },
+      "auscultation": {
+        "voice": "语声低微，断续",
+        "breath": "微弱",
+        "cough": "无",
+        "odor": "无特殊"
+      },
+      "palpation": {
+        "pulse_position": "沉",
+        "pulse_rate": "迟",
+        "pulse_shape": "微",
+        "pulse_force": "欲绝",
+        "composite": "脉微欲绝"
+      },
+      "pressing": {
+        "abdomen": "腹软，脐周轻压痛，无反跳痛",
+        "limbs": "手足厥冷，从肘腕以下皆冷",
+        "skin": "皮肤干燥，肤温低"
+      }
+    },
+    "case_summary": "【主诉】\n老张，65岁，退休工人。腹泻三天，拉稀水及不消化物，手足冰冷。\n\n【现病史】\n- 下利清谷：腹泻三日，便稀水，夹不消化物\n- 手足厥逆：四肢冰冷，从肘腕以下皆冷\n- 身反不恶寒：自觉不冷\n- 腹痛：脐周隐痛\n- 干呕：偶有恶心干呕\n- 咽痛：咽喉干痛\n- 精神萎靡：昏昏欲睡，语声低微\n\n【查体】\n面色苍白，两颧泛红。舌淡胖苔白。脉微欲绝。腹软，脐周轻压痛。手足厥冷。\n\n【问诊选择】\n寒热 / 二便 / 饮食 / 睡眠 / 头身",
+    "question": {
+      "mode": "formula",
+      "options": [
+        {
+          "id": "tong-mai-si-ni-tang",
+          "name": "通脉四逆汤",
+          "herbs_preview": "甘草、附子、干姜、葱白",
+          "symptom_hint": "回阳通脉，适用于阴盛格阳、真寒假热证",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "si-ni-tang",
+          "name": "四逆汤",
+          "herbs_preview": "甘草、干姜、附子",
+          "symptom_hint": "回阳救逆，适用于少阴寒化、阳气虚衰",
+          "is_correct": false,
+          "distractor_type": "same_formula_variant"
+        },
+        {
+          "id": "bai-tong-tang",
+          "name": "白通汤",
+          "herbs_preview": "葱白、干姜、附子",
+          "symptom_hint": "破阴回阳，适用于戴阳证，无身反不恶寒",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "fu-zi-tang",
+          "name": "附子汤",
+          "herbs_preview": "附子、茯苓、人参、白术、芍药",
+          "symptom_hint": "温阳化湿，适用于阳虚湿盛，无下利清谷",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        },
+        {
+          "id": "gan-jiang-fu-zi-tang",
+          "name": "干姜附子汤",
+          "herbs_preview": "干姜、附子",
+          "symptom_hint": "回阳救逆，适用于阳气暴脱，药简力专",
+          "is_correct": false,
+          "distractor_type": "incorrect_herb_composition"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-317",
+      "correct_formula_id": "tong-mai-si-ni-tang",
+      "correct_formula_name": "通脉四逆汤",
+      "correct_herbs": [
+        "甘草",
+        "附子",
+        "干姜",
+        "葱白"
+      ],
+      "correct_article_text": "少阴病，下利清谷，里寒外热，手足厥逆，脉微欲绝，身反不恶寒，其人面色赤，或腹痛，或干呕，或咽痛，或利止脉不出者，通脉四逆汤主之。"
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "下利清谷",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "手足厥逆",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "身反不恶寒",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-01_寒热",
+          "level": "l1"
+        },
+        {
+          "symptom": "面色赤",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "腹痛",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "干呕",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-05_饮食",
+          "level": "l2"
+        },
+        {
+          "symptom": "咽痛",
+          "in_patient": true,
+          "in_source": true,
+          "source": "inquiry-07_耳目",
+          "level": "l1"
+        },
+        {
+          "symptom": "脉微欲绝",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "身反不恶寒",
+          "includes": [
+            "tong-mai-si-ni-tang"
+          ],
+          "reason": "四逆汤/白通汤证均有明显恶寒，本患者不恶寒是阴盛格阳特征"
+        },
+        {
+          "symptom": "面色赤",
+          "includes": [
+            "tong-mai-si-ni-tang",
+            "bai-tong-tang"
+          ],
+          "reason": "戴阳/格阳均见面赤，但白通汤无下利清谷及脉微欲绝之危候"
+        },
+        {
+          "symptom": "下利清谷",
+          "includes": [
+            "tong-mai-si-ni-tang"
+          ],
+          "reason": "四逆汤证可见下利，但不一定清谷；附子汤无下利"
+        },
+        {
+          "symptom": "脉微欲绝",
+          "includes": [
+            "tong-mai-si-ni-tang"
+          ],
+          "reason": "脉微欲绝是阳气将脱之危候，通脉四逆汤所独有"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "03_头身",
+          "reason": "未追问四肢冰凉范围，错失确认厥逆程度",
+          "impact": "中"
+        },
+        {
+          "direction": "09_旧病",
+          "reason": "未追问既往阳虚体质，错失确认少阴基础",
+          "impact": "低"
+        }
+      ]
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-tao-hua-tang-fm-2-20260622-150000",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-306",
+    "source_classic": "伤寒论",
+    "chapter": "少阴病篇",
+    "patient": {
+      "name": "老王",
+      "age": 68,
+      "gender": "男",
+      "occupation": "退休农民",
+      "background": "长期独居，饮食不规律，近四五日腹泻加重",
+      "persona_id": "silent-elderly-male"
+    },
+    "chief_complaint": {
+      "text": "（声音微弱，面色萎黄）大夫……我拉肚子四五天了……拉出来的东西里有血……还有那种黏糊糊的、像鼻涕一样的东西，颜色暗红暗红的。肚子一直痛……咕噜咕噜响，老是想拉又拉不干净。觉得没力气……站都站不稳，腿软得厉害。",
+      "revealed_symptoms": [
+        "下利便脓血",
+        "腹痛",
+        "里急后重",
+        "乏力"
+      ],
+      "l0_symptoms": [
+        "下利便脓血",
+        "腹痛",
+        "里急后重",
+        "乏力"
+      ],
+      "directness": "moderate",
+      "word_count": 146
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "怕冷。盖被子还觉得冷。",
+          "revealed_symptoms": [
+            "恶寒"
+          ],
+          "sample_question": "您怕冷吗？"
+        },
+        "l2": {
+          "trigger_question": "是一直冷还是一阵一阵的？",
+          "text": "一直冷。特别是肚子和后背。",
+          "revealed_symptoms": [
+            "背恶寒"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "人老了，火力不足，正常。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "盗汗",
+          "自汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不出汗。身上冷。",
+          "revealed_symptoms": [
+            "无汗"
+          ],
+          "sample_question": "您出汗吗？"
+        },
+        "l2": {
+          "trigger_question": "手心脚心出汗吗？",
+          "text": "都不出。干干的。",
+          "revealed_symptoms": [
+            "皮肤干燥"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我本来就汗少。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "四肢"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头不昏。身上没劲。手脚凉。",
+          "revealed_symptoms": [
+            "乏力",
+            "手足寒"
+          ],
+          "sample_question": "您头痛吗？身上怎么样？"
+        },
+        "l2": {
+          "trigger_question": "手脚凉到什么程度？",
+          "text": "从膝盖以下都凉。手也是，腕子以下都是凉的。",
+          "revealed_symptoms": [
+            "四肢不温"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "冬天都这样，不是病。",
+          "type": "轻描淡写",
+          "misleading_symptom": "拒绝承认"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "腹泻"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "拉肚子四五天了。一天五六次。拉出来的有红的有白的，像脓一样。还有血丝。肚子疼，想拉又拉不干净。",
+          "revealed_symptoms": [
+            "下利便脓血",
+            "里急后重",
+            "腹痛"
+          ],
+          "sample_question": "您大便怎么样？"
+        },
+        "l2": {
+          "trigger_question": "大便臭不臭？颜色是鲜红还是暗红？",
+          "text": "不太臭。颜色暗红。不是鲜红色。",
+          "revealed_symptoms": [
+            "血色暗红"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "可能是痔疮犯了，以前也有过便血。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "胃口",
+          "口渴",
+          "恶心"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不想吃。看到饭就恶心。不渴。",
+          "revealed_symptoms": [
+            "不欲饮食",
+            "不渴"
+          ],
+          "sample_question": "您吃饭怎么样？"
+        },
+        "l2": {
+          "trigger_question": "想喝热水还是凉水？",
+          "text": "想喝热的。温水。",
+          "revealed_symptoms": [
+            "喜热饮"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "可能吃坏肚子了，昨天吃了剩菜。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹痛",
+          "腹胀"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "肚子疼。肚脐下面痛。按着舒服一点。不胀。",
+          "revealed_symptoms": [
+            "腹痛",
+            "喜按"
+          ],
+          "sample_question": "您肚子怎么样？"
+        },
+        "l2": {
+          "trigger_question": "肚子里面有没有咕噜咕噜响？",
+          "text": "有。像有水在响。",
+          "revealed_symptoms": [
+            "肠鸣"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老毛病了，胃一直不好。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "耳聋",
+          "目眩"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "耳朵还好。眼睛有点花。不晕。",
+          "revealed_symptoms": [
+            "眼花"
+          ],
+          "sample_question": "您耳朵和眼睛怎么样？"
+        },
+        "l2": {
+          "trigger_question": "眼花是最近才有的吗？",
+          "text": "以前也有。老花了。",
+          "revealed_symptoms": [
+            "老花眼"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "年龄大了，眼花正常。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "易醒"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "想睡。睡不着。肚子一痛就醒了。",
+          "revealed_symptoms": [
+            "腹痛影响睡眠"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "白天能补觉吗？",
+          "text": "白天也睡不着。肚子老响。",
+          "revealed_symptoms": [
+            "肠鸣影响睡眠"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老年人本来睡得就少。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往病史",
+          "慢性病"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "以前身体还行。就是胃一直不好。容易拉肚子。",
+          "revealed_symptoms": [
+            "脾胃虚寒病史"
+          ],
+          "sample_question": "您以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "以前拉肚子也便血吗？",
+          "text": "以前没有血。这次才有。",
+          "revealed_symptoms": [
+            "首次便血"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "（沉默）……",
+          "type": "隐瞒病史",
+          "misleading_symptom": "隐瞒病史"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "发病原因",
+          "受凉",
+          "饮食"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "前几天吃了点凉的。然后就开始拉肚子。",
+          "revealed_symptoms": [
+            "饮食寒凉"
+          ],
+          "sample_question": "发病前有什么诱因？"
+        },
+        "l2": {
+          "trigger_question": "之前有没有着凉？",
+          "text": "没有。就是吃了凉的。",
+          "revealed_symptoms": [
+            "无外感"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "可能是凉啤酒喝多了。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "胖",
+        "tongue_color": "淡",
+        "coating": "白",
+        "special": "舌体胖大，边有齿痕"
+      },
+      "auscultation": {
+        "voice": "语声低微，无力",
+        "breath": "微弱",
+        "cough": "无",
+        "odor": "无特殊"
+      },
+      "palpation": {
+        "pulse_position": "沉",
+        "pulse_rate": "迟",
+        "pulse_shape": "弱",
+        "pulse_force": "无力",
+        "composite": "沉迟无力"
+      },
+      "pressing": {
+        "abdomen": "腹软，脐下压痛，喜按，无反跳痛",
+        "limbs": "手足冰冷，从肘腕以下皆冷",
+        "skin": "皮肤干燥，肤温低"
+      }
+    },
+    "case_summary": "【主诉】\n老王，68岁，退休农民。腹泻四五日，便脓血，伴腹痛、乏力。\n\n【现病史】\n- 下利便脓血：腹泻四五日，日五六次，便中夹暗红色脓血\n- 腹痛：脐下隐痛，喜按\n- 里急后重：想拉拉不干净\n- 畏寒：怕冷，喜热饮\n- 四肢不温：手足冰冷\n- 精神萎靡：语声低微，乏力明显\n\n【查体】\n舌淡胖苔白。脉沉迟无力。腹软，脐下压痛，喜按。手足冰冷。\n\n【问诊选择】\n二便 / 寒热 / 饮食 / 胸腹 / 头身",
+    "question": {
+      "mode": "formula",
+      "options": [
+        {
+          "id": "tao-hua-tang",
+          "name": "桃花汤",
+          "herbs_preview": "赤石脂、干姜、粳米",
+          "symptom_hint": "温涩固脱，适用于虚寒下利便脓血",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "si-ni-tang",
+          "name": "四逆汤",
+          "herbs_preview": "甘草、干姜、附子",
+          "symptom_hint": "回阳救逆，适用于少阴寒化，无便脓血",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "bai-tou-weng-tang",
+          "name": "白头翁汤",
+          "herbs_preview": "白头翁、黄连、黄柏、秦皮",
+          "symptom_hint": "清热解毒凉血，适用于热毒血痢，无虚寒证",
+          "is_correct": false,
+          "distractor_type": "same_symptom_opposite_pathology"
+        },
+        {
+          "id": "li-zhong-wan",
+          "name": "理中丸",
+          "herbs_preview": "人参、干姜、白术、甘草",
+          "symptom_hint": "温中祛寒，适用于脾胃虚寒，无便脓血",
+          "is_correct": false,
+          "distractor_type": "incorrect_herb_composition"
+        },
+        {
+          "id": "zhen-wu-tang",
+          "name": "真武汤",
+          "herbs_preview": "茯苓、芍药、白术、生姜、附子",
+          "symptom_hint": "温阳利水，适用于阳虚水泛，无下利脓血",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-306",
+      "correct_formula_id": "tao-hua-tang",
+      "correct_formula_name": "桃花汤",
+      "correct_herbs": [
+        "赤石脂",
+        "干姜",
+        "粳米"
+      ],
+      "correct_article_text": "少阴病，下利便脓血者，桃花汤主之。"
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "下利便脓血",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "腹痛",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "里急后重",
+          "in_patient": true,
+          "in_source": false,
+          "note": "原文306条未提及，但307条有下利不止"
+        },
+        {
+          "symptom": "舌淡苔白",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "脉弱",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "喜按",
+          "in_patient": true,
+          "in_source": false,
+          "note": "虚寒证特征，原文未明确提及"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "下利便脓血",
+          "includes": [
+            "tao-hua-tang",
+            "bai-tou-weng-tang"
+          ],
+          "reason": "桃花汤与白头翁汤均见便脓血，但桃花汤为虚寒，白头翁汤为实热"
+        },
+        {
+          "symptom": "舌淡苔白",
+          "includes": [
+            "tao-hua-tang"
+          ],
+          "reason": "虚寒舌象，排除实热白头翁汤"
+        },
+        {
+          "symptom": "喜按",
+          "includes": [
+            "tao-hua-tang",
+            "li-zhong-wan"
+          ],
+          "reason": "虚寒喜按，实热拒按"
+        },
+        {
+          "symptom": "血色暗红",
+          "includes": [
+            "tao-hua-tang"
+          ],
+          "reason": "暗红色为虚寒，鲜红色为实热，排除白头翁汤"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "09_旧病",
+          "reason": "未追问既往脾胃虚寒史，错失确认体质基础",
+          "impact": "中"
+        },
+        {
+          "direction": "08_睡眠",
+          "reason": "未追问腹痛与睡眠关系，错失确认里急后重程度",
+          "impact": "低"
+        }
+      ]
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "session_id": "sp-bai-tong-tang-fm-2-20260622-150000",
+    "mode": "formula",
+    "difficulty": 2,
+    "difficulty_config": {
+      "inquiry_slots": 5,
+      "l2_allowance_per_direction": 1,
+      "l3_noise_probability": 0.3,
+      "distractor_count": 4,
+      "distractor_level": "medium",
+      "physical_exam_completeness": "full",
+      "chief_complaint_directness": "moderate"
+    },
+    "source_article": "article-314",
+    "source_classic": "伤寒论",
+    "chapter": "少阴病篇",
+    "patient": {
+      "name": "老李",
+      "age": 62,
+      "gender": "男",
+      "occupation": "退休司机",
+      "background": "昨日开始出现腹泻，今日加重，面色苍白",
+      "persona_id": "silent-elderly-male"
+    },
+    "chief_complaint": {
+      "text": "（声音低弱，面色㿠白）大夫……我拉肚子……一天好几次……都是水样的。手脚冰凉……像冰块一样，从手腕到胳膊肘都是凉的。脸上发热……额头摸着却不烫。没力气……不想说话……坐着就想闭眼睛。您给看看……是不是要输点液？",
+      "revealed_symptoms": [
+        "下利",
+        "手足厥逆",
+        "面色赤",
+        "但欲寐"
+      ],
+      "l0_symptoms": [
+        "下利",
+        "手足厥逆",
+        "面色赤",
+        "但欲寐"
+      ],
+      "directness": "moderate",
+      "word_count": 138
+    },
+    "inquiries": {
+      "01_寒热": {
+        "direction_id": "01_寒热",
+        "direction_name": "寒热",
+        "keywords": [
+          "怕冷",
+          "发热",
+          "寒热往来"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不冷。但脸上发热。",
+          "revealed_symptoms": [
+            "身反不恶寒",
+            "面色赤"
+          ],
+          "sample_question": "您怕冷吗？"
+        },
+        "l2": {
+          "trigger_question": "脸上热是发烧吗？",
+          "text": "不是发烧。就是觉得脸上热，但额头摸着不烫。",
+          "revealed_symptoms": [
+            "面热非发热"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "可能是高血压，脸一直红。",
+          "type": "隐瞒病史",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "02_汗出": {
+        "direction_id": "02_汗出",
+        "direction_name": "汗出",
+        "keywords": [
+          "出汗",
+          "盗汗",
+          "自汗"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不出汗。",
+          "revealed_symptoms": [
+            "无汗"
+          ],
+          "sample_question": "您出汗吗？"
+        },
+        "l2": {
+          "trigger_question": "手心出汗吗？",
+          "text": "不出。干干的。",
+          "revealed_symptoms": [
+            "皮肤干燥"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "我汗少，天生的。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "03_头身": {
+        "direction_id": "03_头身",
+        "direction_name": "头身",
+        "keywords": [
+          "头痛",
+          "身痛",
+          "四肢"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "头不昏。身上没劲。手脚冰凉。",
+          "revealed_symptoms": [
+            "乏力",
+            "手足厥逆"
+          ],
+          "sample_question": "您头痛吗？身上怎么样？"
+        },
+        "l2": {
+          "trigger_question": "手脚一直这么凉吗？",
+          "text": "昨天开始凉的。越来越凉。",
+          "revealed_symptoms": [
+            "手足厥逆进行性加重"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "天冷了，手脚凉正常。",
+          "type": "轻描淡写",
+          "misleading_symptom": "拒绝承认"
+        }
+      },
+      "04_二便": {
+        "direction_id": "04_二便",
+        "direction_name": "二便",
+        "keywords": [
+          "大便",
+          "小便",
+          "腹泻"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "拉肚子。一天六七次。水样的。小便少。",
+          "revealed_symptoms": [
+            "下利",
+            "小便不利"
+          ],
+          "sample_question": "您大便怎么样？"
+        },
+        "l2": {
+          "trigger_question": "肚子疼吗？",
+          "text": "有一点。不是很厉害。",
+          "revealed_symptoms": [
+            "轻微腹痛"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "昨天吃了冷面，可能吃坏肚子了。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "05_饮食": {
+        "direction_id": "05_饮食",
+        "direction_name": "饮食",
+        "keywords": [
+          "胃口",
+          "口渴",
+          "恶心"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "不想吃。不渴。",
+          "revealed_symptoms": [
+            "不欲饮食",
+            "不渴"
+          ],
+          "sample_question": "您吃饭怎么样？"
+        },
+        "l2": {
+          "trigger_question": "胃里有没有恶心？",
+          "text": "没有恶心。就是想睡觉。",
+          "revealed_symptoms": [
+            "无恶心"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "没胃口，老了都这样。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "06_胸腹": {
+        "direction_id": "06_胸腹",
+        "direction_name": "胸腹",
+        "keywords": [
+          "胸闷",
+          "腹痛",
+          "腹胀"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "肚子有点痛。不胀。按上去软。",
+          "revealed_symptoms": [
+            "轻微腹痛",
+            "按之软"
+          ],
+          "sample_question": "您肚子怎么样？"
+        },
+        "l2": {
+          "trigger_question": "喜欢按着还是不喜欢？",
+          "text": "按着舒服一点。",
+          "revealed_symptoms": [
+            "喜按"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老胃病，不碍事。",
+          "type": "轻描淡写",
+          "misleading_symptom": "拒绝承认"
+        }
+      },
+      "07_耳目": {
+        "direction_id": "07_耳目",
+        "direction_name": "耳目",
+        "keywords": [
+          "耳鸣",
+          "耳聋",
+          "目眩"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "耳朵还好。头不晕。",
+          "revealed_symptoms": [
+            "无头晕"
+          ],
+          "sample_question": "您耳朵和头有什么不舒服？"
+        },
+        "l2": {
+          "trigger_question": "眼睛有没有花？",
+          "text": "有一点。老花了。",
+          "revealed_symptoms": [
+            "老花眼"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "年龄大了，眼花正常。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "08_睡眠": {
+        "direction_id": "08_睡眠",
+        "direction_name": "睡眠",
+        "keywords": [
+          "失眠",
+          "多梦",
+          "易醒"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "想睡觉。老想睡觉。",
+          "revealed_symptoms": [
+            "但欲寐"
+          ],
+          "sample_question": "您睡眠怎么样？"
+        },
+        "l2": {
+          "trigger_question": "白天也想睡吗？",
+          "text": "白天也想睡。坐着就想闭眼。",
+          "revealed_symptoms": [
+            "精神萎靡"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "老年人睡得都多。",
+          "type": "归因于年龄",
+          "misleading_symptom": "错误归因"
+        }
+      },
+      "09_旧病": {
+        "direction_id": "09_旧病",
+        "direction_name": "旧病",
+        "keywords": [
+          "既往病史",
+          "慢性病"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "以前身体还行。就是血压有点高。",
+          "revealed_symptoms": [
+            "高血压病史"
+          ],
+          "sample_question": "您以前有什么病吗？"
+        },
+        "l2": {
+          "trigger_question": "以前有过这种拉肚子的情况吗？",
+          "text": "没有。这是第一次。",
+          "revealed_symptoms": [
+            "急性起病"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "（沉默）……",
+          "type": "隐瞒病史",
+          "misleading_symptom": "隐瞒病史"
+        }
+      },
+      "10_诱因": {
+        "direction_id": "10_诱因",
+        "direction_name": "诱因",
+        "keywords": [
+          "发病原因",
+          "受凉",
+          "饮食"
+        ],
+        "available": true,
+        "required_for_difficulty": [
+          1,
+          2,
+          3
+        ],
+        "l1": {
+          "text": "昨天吃了点凉的。今天就拉肚子了。",
+          "revealed_symptoms": [
+            "饮食寒凉"
+          ],
+          "sample_question": "发病前有什么诱因？"
+        },
+        "l2": {
+          "trigger_question": "之前有没有感冒？",
+          "text": "没有。就是吃了凉的。",
+          "revealed_symptoms": [
+            "无外感"
+          ]
+        },
+        "l3_noise": {
+          "probability": 0.3,
+          "triggered": false,
+          "text": "凉啤酒喝多了。",
+          "type": "错误归因",
+          "misleading_symptom": "错误归因"
+        }
+      }
+    },
+    "physical_exam": {
+      "completeness": "full",
+      "inspection": {
+        "tongue_body": "胖",
+        "tongue_color": "淡",
+        "coating": "白",
+        "special": "面色苍白，两颧泛红（戴阳）"
+      },
+      "auscultation": {
+        "voice": "语声低微，断续",
+        "breath": "微弱",
+        "cough": "无",
+        "odor": "无特殊"
+      },
+      "palpation": {
+        "pulse_position": "沉",
+        "pulse_rate": "迟",
+        "pulse_shape": "微",
+        "pulse_force": "无力",
+        "composite": "脉沉微"
+      },
+      "pressing": {
+        "abdomen": "腹软，无压痛，无反跳痛",
+        "limbs": "手足厥冷，从肘腕以下皆冷",
+        "skin": "皮肤干燥，肤温低"
+      }
+    },
+    "case_summary": "【主诉】\n老李，62岁，退休司机。腹泻一日，手足冰冷，面部发热但自觉不热。\n\n【现病史】\n- 下利：腹泻一日，日六七次，水样便\n- 手足厥逆：四肢冰冷，进行性加重\n- 面色赤：面色苍白，两颧泛红（戴阳）\n- 身反不恶寒：自觉不冷，但四肢厥冷\n- 精神萎靡：语声低微，昏昏欲睡\n- 不欲饮食：无食欲，不渴\n\n【查体】\n面色苍白，两颧泛红。舌淡胖苔白。脉沉微。腹软，无压痛。手足厥冷。\n\n【问诊选择】\n寒热 / 二便 / 饮食 / 睡眠 / 头身",
+    "question": {
+      "mode": "formula",
+      "options": [
+        {
+          "id": "bai-tong-tang",
+          "name": "白通汤",
+          "herbs_preview": "葱白、干姜、附子",
+          "symptom_hint": "破阴回阳，通阳散寒，适用于戴阳证",
+          "is_correct": true,
+          "distractor_type": "correct"
+        },
+        {
+          "id": "si-ni-tang",
+          "name": "四逆汤",
+          "herbs_preview": "甘草、干姜、附子",
+          "symptom_hint": "回阳救逆，适用于少阴寒化，无戴阳",
+          "is_correct": false,
+          "distractor_type": "same_formula_variant"
+        },
+        {
+          "id": "tong-mai-si-ni-tang",
+          "name": "通脉四逆汤",
+          "herbs_preview": "甘草、附子、干姜、葱白",
+          "symptom_hint": "回阳通脉，适用于阴盛格阳，有下利清谷、脉微欲绝",
+          "is_correct": false,
+          "distractor_type": "same_disease_different_formula"
+        },
+        {
+          "id": "gan-jiang-fu-zi-tang",
+          "name": "干姜附子汤",
+          "herbs_preview": "干姜、附子",
+          "symptom_hint": "回阳救逆，适用于阳气暴脱，无戴阳",
+          "is_correct": false,
+          "distractor_type": "incorrect_herb_composition"
+        },
+        {
+          "id": "fu-zi-tang",
+          "name": "附子汤",
+          "herbs_preview": "附子、茯苓、人参、白术、芍药",
+          "symptom_hint": "温阳化湿，适用于阳虚湿盛，无下利",
+          "is_correct": false,
+          "distractor_type": "different_disease_similar_symptoms"
+        }
+      ]
+    },
+    "answer_key": {
+      "correct_article_id": "article-314",
+      "correct_formula_id": "bai-tong-tang",
+      "correct_formula_name": "白通汤",
+      "correct_herbs": [
+        "葱白",
+        "干姜",
+        "附子"
+      ],
+      "correct_article_text": "少阴病，下利，白通汤主之。"
+    },
+    "reference_analysis": {
+      "captured_vs_source": [
+        {
+          "symptom": "下利",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "手足厥逆",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "面色赤",
+          "in_patient": true,
+          "in_source": true,
+          "source": "chief_complaint",
+          "level": "l0"
+        },
+        {
+          "symptom": "脉微",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        },
+        {
+          "symptom": "舌淡苔白",
+          "in_patient": true,
+          "in_source": true,
+          "source": "physical_exam",
+          "level": "physical"
+        }
+      ],
+      "key_differentials": [
+        {
+          "symptom": "面色赤",
+          "includes": [
+            "bai-tong-tang",
+            "tong-mai-si-ni-tang"
+          ],
+          "reason": "戴阳/格阳均见面赤，但通脉四逆汤有下利清谷、脉微欲绝之危候"
+        },
+        {
+          "symptom": "下利",
+          "excludes": [
+            "fu-zi-tang",
+            "gan-jiang-fu-zi-tang"
+          ],
+          "reason": "附子汤、干姜附子汤无下利，以此排除"
+        },
+        {
+          "symptom": "身反不恶寒",
+          "includes": [
+            "bai-tong-tang",
+            "tong-mai-si-ni-tang"
+          ],
+          "reason": "戴阳/格阳特征，四逆汤证有明显恶寒"
+        },
+        {
+          "symptom": "脉微",
+          "includes": [
+            "bai-tong-tang",
+            "si-ni-tang",
+            "tong-mai-si-ni-tang"
+          ],
+          "reason": "少阴寒化均见脉微，需结合其他症状鉴别"
+        }
+      ],
+      "missed_opportunities": [
+        {
+          "direction": "09_旧病",
+          "reason": "未追问既往阳虚病史，错失确认少阴基础",
+          "impact": "中"
+        },
+        {
+          "direction": "04_二便",
+          "reason": "未追问大便是否清谷，错失确认病情严重程度",
+          "impact": "低"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>版本C：经验-案例对照式 - 大柴胡汤参考资料</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; padding: 20px; line-height: 1.7; }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 22px; margin-bottom: 8px; color: #1a1a2e; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .version-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 4px; font-size: 12px; margin-bottom: 16px; }
+  .section { margin-bottom: 32px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a1a2e; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .section-title .icon { font-size: 20px; }
+
+  /* 经验卡片 */
+  .exp-card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-left: 4px solid #ff9800; }
+  .exp-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .exp-num { width: 32px; height: 32px; border-radius: 50%; background: #ff9800; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+  .exp-title { font-weight: 700; font-size: 15px; color: #1a1a2e; }
+  .exp-summary { font-size: 15px; color: #333; font-weight: 500; margin-bottom: 14px; padding: 10px 14px; background: #fff8e1; border-radius: 8px; border-left: 3px solid #ff9800; }
+  .exp-points { margin-bottom: 14px; }
+  .exp-point { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 14px; color: #444; }
+  .exp-point::before { content: "▸"; color: #ff9800; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .exp-formula { background: #e3f2fd; border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; font-size: 14px; color: #1565c0; border-left: 3px solid #2196f3; }
+  .exp-formula-label { font-weight: 700; font-size: 12px; color: #1976d2; margin-bottom: 6px; }
+  .exp-formula .herb { font-weight: 700; color: #0d47a1; }
+  .exp-formula .dosage { color: #546e7a; font-size: 12px; }
+  .exp-toggle { font-size: 13px; color: #1976d2; cursor: pointer; display: flex; align-items: center; gap: 4px; margin-top: 8px; }
+  .exp-toggle::after { content: "▼"; font-size: 10px; }
+  .exp-toggle.open::after { content: "▲"; }
+
+  /* 案例卡片（嵌套在经验下方） */
+  .case-nested { background: #fafafa; border-radius: 10px; padding: 16px 20px; margin-top: 12px; border: 1px dashed #e0e0e0; }
+  .case-nested-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .case-nested-label { font-size: 12px; font-weight: 700; color: #fff; background: #4caf50; padding: 2px 8px; border-radius: 4px; }
+  .case-nested-title { font-size: 14px; font-weight: 600; color: #333; }
+  .case-patient-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .case-patient-tag { font-size: 12px; background: #e8eaf6; color: #3f51b5; padding: 3px 10px; border-radius: 20px; }
+  .case-symptoms-mini { font-size: 13px; color: #555; margin-bottom: 10px; line-height: 1.7; }
+  .case-symptoms-mini .sym { display: inline-block; background: #ffebee; color: #c62828; font-size: 11px; padding: 1px 6px; border-radius: 3px; margin-right: 3px; }
+  .case-rx-mini { font-size: 13px; color: #33691e; background: #f1f8e9; padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border-left: 2px solid #8bc34a; }
+  .case-rx-mini .rx-herb { font-weight: 700; color: #2e7d32; }
+  .case-outcome-mini { font-size: 13px; color: #1b5e20; background: #e8f5e9; padding: 8px 12px; border-radius: 6px; border-left: 2px solid #4caf50; }
+
+  .nav { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 8px; }
+  .nav a { background: #1a1a2e; color: #fff; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; }
+  .nav a.active { background: #2e7d32; }
+</style>
+</head>
+<body>
+<div class="container">
+  <span class="version-badge">版本C：经验-案例对照式（最贴近"经验"感觉）</span>
+  <h1>大柴胡汤 · 经验与案例对照</h1>
+  <p class="subtitle">改进点：每条经验=【总结】+【辨证要点】+【方子】，下方紧接对应案例</p>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">📚</span> 经验与案例</div>
+
+    <!-- 经验1 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-num">1</div>
+        <div class="exp-title">大柴胡汤合三黄泻心汤治眩晕</div>
+      </div>
+      <div class="exp-summary">形体壮实者眩晕频发，伴目赤、口苦、胃热，大柴胡汤合三黄泻心汤可清少阳郁热、泻心胃之火。</div>
+      <div class="exp-points">
+        <div class="exp-point">眩晕每于接触枕头时发作（体位性眩晕）</div>
+        <div class="exp-point">目睛充血、口唇疱疹、喜苦食 = 少阳郁热+胃热</div>
+        <div class="exp-point">形体壮实、腹部充实 = 大柴胡汤体质</div>
+      </div>
+      <div class="exp-formula">
+        <div class="exp-formula-label">📋 方子</div>
+        <span class="herb">柴胡</span><span class="dosage">12g</span>，<span class="herb">黄芩</span><span class="dosage">10g</span>，制半夏<span class="dosage">10g</span>，<span class="herb">枳壳</span><span class="dosage">12g</span>，<span class="herb">白芍</span><span class="dosage">12g</span>，制大黄<span class="dosage">6g</span>，<span class="herb">黄连</span><span class="dosage">3g</span>，干姜<span class="dosage">5g</span>，红枣<span class="dosage">20g</span>
+      </div>
+
+      <div class="case-nested">
+        <div class="case-nested-header">
+          <span class="case-nested-label">对应案例</span>
+          <span class="case-nested-title">眩晕频发案</span>
+        </div>
+        <div class="case-patient-row">
+          <span class="case-patient-tag">37岁 · 女性</span>
+          <span class="case-patient-tag">形体壮实</span>
+          <span class="case-patient-tag">大柴胡汤合三黄泻心汤</span>
+        </div>
+        <div class="case-symptoms-mini">
+          <span class="sym">眩晕</span><span class="sym">目赤</span><span class="sym">口唇疱疹</span><span class="sym">胃烧灼</span><span class="sym">喜苦食</span>
+          <br>眩晕频发，每于接触枕头时发作。目睛充血，口唇易疱疹，肩膀酸痛，烦躁心慌，胃中不适有烧灼感，左少腹按之疼痛，喜苦食。
+        </div>
+        <div class="case-rx-mini">
+          <span class="rx-herb">处方同上方</span> → 药后舒适，诸症明显好转，眩晕仅秋天小有一次，头痛未作
+        </div>
+      </div>
+    </div>
+
+    <!-- 经验2 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-num">2</div>
+        <div class="exp-title">大柴胡汤合桂枝茯苓丸治咳痰</div>
+      </div>
+      <div class="exp-summary">老年形体充实者，肺纤维化伴咳痰不爽，大柴胡汤合桂枝茯苓丸可排痰化瘀、改善循环。</div>
+      <div class="exp-points">
+        <div class="exp-point">老年+形体充实+肺纤维化 = 痰瘀互结</div>
+        <div class="exp-point">脓痰咯出不爽、走路气喘 = 痰阻气机</div>
+        <div class="exp-point">下肢浮肿、时有抽筋 = 血瘀水停</div>
+      </div>
+      <div class="exp-formula">
+        <div class="exp-formula-label">📋 方子</div>
+        <span class="herb">柴胡</span><span class="dosage">6g</span>，<span class="herb">黄芩</span><span class="dosage">6g</span>，制半夏<span class="dosage">6g</span>，枳壳<span class="dosage">10g</span>，赤芍<span class="dosage">10g</span>，肉桂<span class="dosage">6g</span>，桃仁<span class="dosage">6g</span>，丹皮<span class="dosage">6g</span>，茯苓<span class="dosage">12g</span>，制大黄<span class="dosage">3g</span>，干姜<span class="dosage">5g</span>，红枣<span class="dosage">15g</span>
+      </div>
+
+      <div class="case-nested">
+        <div class="case-nested-header">
+          <span class="case-nested-label">对应案例</span>
+          <span class="case-nested-title">长期咳嗽咯痰不爽案</span>
+        </div>
+        <div class="case-patient-row">
+          <span class="case-patient-tag">85岁 · 女性</span>
+          <span class="case-patient-tag">形体充实</span>
+          <span class="case-patient-tag">大柴胡汤合桂枝茯苓丸</span>
+        </div>
+        <div class="case-symptoms-mini">
+          <span class="sym">咳嗽</span><span class="sym">脓痰</span><span class="sym">气喘</span><span class="sym">口干苦</span><span class="sym">下肢浮肿</span>
+          <br>形体充实，肺纤维化、风湿性关节炎、胆囊结石手术史。长期咳嗽，脓痰咯出不爽，走路后气喘，头背部僵痛，口干苦，腹胀，两腿乏力，下肢浮肿，时有抽筋。
+        </div>
+        <div class="case-rx-mini">
+          <span class="rx-herb">处方同上方</span> → 药后一周咯痰即有好转，量减少而咯出转畅，口干好转，两腿较前有力，下肢浮肿轻微，大便通畅，睡眠可
+        </div>
+      </div>
+    </div>
+
+    <!-- 经验3 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-num">3</div>
+        <div class="exp-title">大柴胡汤合方治过敏与寒证</div>
+      </div>
+      <div class="exp-summary">肌肉结实者荤食寒冷过敏，大柴胡汤合桂枝茯苓丸、半夏厚朴汤可解少阳郁热、化饮除湿。</div>
+      <div class="exp-points">
+        <div class="exp-point">肌肉结实 = 大柴胡汤体质</div>
+        <div class="exp-point">不能吃荤食、皮肤过敏 = 湿热内蕴</div>
+        <div class="exp-point">头汗多、晨起喷嚏 = 水饮上逆</div>
+      </div>
+      <div class="exp-formula">
+        <div class="exp-formula-label">📋 方子</div>
+        <span class="herb">大柴胡汤合桂枝茯苓丸合半夏厚朴汤</span>（具体剂量需根据患者调整）
+      </div>
+
+      <div class="case-nested">
+        <div class="case-nested-header">
+          <span class="case-nested-label">对应案例</span>
+          <span class="case-nested-title">荤食寒冷过敏案</span>
+        </div>
+        <div class="case-patient-row">
+          <span class="case-patient-tag">63岁 · 女性</span>
+          <span class="case-patient-tag">肌肉结实</span>
+          <span class="case-patient-tag">三方正合</span>
+        </div>
+        <div class="case-symptoms-mini">
+          <span class="sym">皮肤过敏</span><span class="sym">怕冷</span><span class="sym">头汗</span><span class="sym">喷嚏</span><span class="sym">大便干</span>
+          <br>不能吃荤食及蒜、葱等，皮肤过敏。头部怕冷，头汗多，晨起打喷嚏、流鼻涕，咽喉不适，老有饥饿感，大便干，睡眠不佳。
+        </div>
+        <div class="case-rx-mini">
+          <span class="rx-herb">大柴胡汤合桂枝茯苓丸合半夏厚朴汤</span> → 药后怕冷明显好转，已可穿短袖吹空调，饥饿感、晨起喷嚏、流鼻涕、鼻子不通好转，大便通畅，咽喉舒适
+        </div>
+      </div>
+    </div>
+
+    <!-- 经验4 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-num">4</div>
+        <div class="exp-title">大柴胡汤合猪苓汤治关节痛伴水湿</div>
+      </div>
+      <div class="exp-summary">强直性脊柱炎伴肾盂肾炎、下肢浮肿者，大柴胡汤合猪苓汤可清少阳湿热、利水消肿。</div>
+      <div class="exp-points">
+        <div class="exp-point">关节痛+下肢浮肿+尿频 = 湿热下注</div>
+        <div class="exp-point">夜尿多、易血尿 = 肾阴不足、热伤血络</div>
+        <div class="exp-point">体格充实、舌红 = 实热证</div>
+      </div>
+      <div class="exp-formula">
+        <div class="exp-formula-label">📋 方子</div>
+        <span class="herb">柴胡</span><span class="dosage">20g</span>，<span class="herb">黄芩</span><span class="dosage">20g</span>，生甘草<span class="dosage">6g</span>，黄柏<span class="dosage">6g</span>，山栀<span class="dosage">10g</span>，党参<span class="dosage">12g</span>，制半夏<span class="dosage">12g</span>，茯苓<span class="dosage">20g</span>，猪苓<span class="dosage">20g</span>，连翘<span class="dosage">40g</span>，泽泻<span class="dosage">20g</span>，干姜<span class="dosage">10g</span>，红枣<span class="dosage">15g</span>
+      </div>
+
+      <div class="case-nested">
+        <div class="case-nested-header">
+          <span class="case-nested-label">对应案例</span>
+          <span class="case-nested-title">强直性脊柱炎肾盂肾炎案</span>
+        </div>
+        <div class="case-patient-row">
+          <span class="case-patient-tag">56岁 · 女性</span>
+          <span class="case-patient-tag">体格较充实</span>
+          <span class="case-patient-tag">大柴胡汤合猪苓汤</span>
+        </div>
+        <div class="case-symptoms-mini">
+          <span class="sym">关节痛</span><span class="sym">下肢浮肿</span><span class="sym">尿频</span><span class="sym">血尿</span><span class="sym">失眠</span>
+          <br>强直性脊柱炎20余年，全身关节不适，腰部酸重僵硬，下肢浮肿，尿频尿不尽，夜尿多，易有血尿，入睡困难。
+        </div>
+        <div class="case-rx-mini">
+          <span class="rx-herb">处方同上方</span> → 药后关节疼痛缓解，小便次数减少，尿道刺激征不明显，下肢浮肿好转
+        </div>
+      </div>
+    </div>
+
+    <!-- 经验5 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-num">5</div>
+        <div class="exp-title">大柴胡汤加黄连治三叉神经痛</div>
+      </div>
+      <div class="exp-summary">中等偏实体型伴高血压、三叉神经痛者，大柴胡汤加黄连可清少阳郁热、泻火止痛。</div>
+      <div class="exp-points">
+        <div class="exp-point">三叉神经痛+高血压 = 肝阳上亢、少阳郁热</div>
+        <div class="exp-point">身热汗出、腹部充实 = 大柴胡汤证</div>
+        <div class="exp-point">经前乳胀、痛经 = 肝郁气滞</div>
+      </div>
+      <div class="exp-formula">
+        <div class="exp-formula-label">📋 方子</div>
+        <span class="herb">柴胡</span><span class="dosage">10g</span>，<span class="herb">黄芩</span><span class="dosage">15g</span>，制半夏<span class="dosage">15g</span>，枳壳<span class="dosage">15g</span>，白芍<span class="dosage">15g</span>，制大黄<span class="dosage">6g</span>，<span class="herb">黄连</span><span class="dosage">5g</span>，干姜<span class="dosage">6g</span>，红枣<span class="dosage">20g</span>
+      </div>
+
+      <div class="case-nested">
+        <div class="case-nested-header">
+          <span class="case-nested-label">对应案例</span>
+          <span class="case-nested-title">三叉神经痛案</span>
+        </div>
+        <div class="case-patient-row">
+          <span class="case-patient-tag">49岁 · 女性</span>
+          <span class="case-patient-tag">中等偏实</span>
+          <span class="case-patient-tag">大柴胡汤加黄连</span>
+        </div>
+        <div class="case-symptoms-mini">
+          <span class="sym">三叉神经痛</span><span class="sym">高血压</span><span class="sym">身热汗出</span><span class="sym">经前乳胀</span><span class="sym">便秘</span>
+          <br>三叉神经痛3月余，疼痛难忍需打止痛针，血压160/90mmHg。身热汗出，腹部按之充实，经前乳胀，痛经，大便偏干。
+        </div>
+        <div class="case-rx-mini">
+          <span class="rx-herb">处方同上方</span> → 药后疼痛好转，身热汗出减少，一月后能喝冷果汁，头痛不显，偶尔牙根疼痛，大便畅
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">📜</span> 条文讲解</div>
+    <div class="exp-card" style="border-left-color: #9c27b0;">
+      <div class="exp-header">
+        <div class="exp-num" style="background: #9c27b0;">条</div>
+        <div class="exp-title">伤寒论第165条</div>
+      </div>
+      <div class="exp-summary" style="background: #f3e5f5; border-left-color: #9c27b0;">伤寒发热、汗出不解，心中痞硬、呕吐而下利者，大柴胡汤主之。</div>
+      <div class="exp-points">
+        <div class="exp-point">本条论述<strong>少阳阳明同病</strong>的证治</div>
+        <div class="exp-point">"心中痞硬"=少阳枢机不利，"呕吐而下利"=胆热犯胃、传导失常</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="/app/preview-references-A.html">版本A</a>
+  <a href="/app/preview-references-B.html">版本B</a>
+  <a href="/app/preview-references-C.html" class="active">版本C</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "id": "gui-zhi-tang",
+  "type": "formula_card",
+  "formula_name": "桂枝汤",
+  "role": "主方",
+  "tags": ["桂枝汤", "主方", "条文", "太阳病篇"],
+  "source_chapter": "太阳病篇",
+  "created_at": "2026-06-11T00:00:00",
+  "updated_at": "2026-06-11T00:00:00",
+  "data": {
+    "source_text": "太阳病，头痛，发热，汗出，恶风，桂枝汤主之。",
+    "symptoms": ["头痛", "发热", "汗出", "恶风", "脉浮缓"],
+    "pathology": "风邪袭表，营卫不和",
+    "herbs": [
+      {"name": "桂枝", "dosage": "三两"},
+      {"name": "芍药", "dosage": "三两"},
+      {"name": "甘草", "dosage": "二两"},
+      {"name": "生姜", "dosage": "三两"},
+      {"name": "大枣", "dosage": "十二枚"}
+    ],
+    "usage": "以水七升，微火煮取三升，去滓，适寒温，服一升",
+    "contraindications": ["无汗", "脉浮紧（麻黄汤证）"],
+    "variants": ["gui-zhi-jia-ge-gen-tang", "gui-zhi-qu-shaoyao-jia-fuzi-tang"],
+    "allow_multiple": false,
+    "mapping_note": ""
+  },
+  "experiences": [],
+  "mastery": {
+    "0→1": {"label": "方名→症状", "level": 4, "status": "已掌握", "last_result": "right", "last_review": "2026-06-10", "streak_right": 3, "streak_wrong": 0, "total_rights": 15, "total_wrongs": 3, "history": []},
+    "1→0": {"label": "症状→方名", "level": 4, "status": "已掌握", "last_result": "right", "last_review": "2026-06-10", "streak_right": 2, "streak_wrong": 1, "total_rights": 12, "total_wrongs": 5, "history": []},
+    "0→2": {"label": "方名→药物", "level": 5, "status": "已掌握", "last_result": "right", "last_review": "2026-06-09", "streak_right": 5, "streak_wrong": 0, "total_rights": 20, "total_wrongs": 2, "history": []},
+    "2→0": {"label": "药物→方名", "level": 2, "status": "正在学习", "last_result": "wrong", "last_review": "2026-06-11", "streak_right": 0, "streak_wrong": 1, "total_rights": 5, "total_wrongs": 8, "history": []},
+    "0→3": {"label": "方名→用法", "level": 3, "status": "正在学习", "last_result": "wrong", "last_review": "2026-06-11", "streak_right": 0, "streak_wrong": 1, "total_rights": 8, "total_wrongs": 6, "history": []},
+    "3→0": {"label": "用法→方名", "level": 0, "status": "未知", "last_result": null, "last_review": null, "streak_right": 0, "streak_wrong": 0, "total_rights": 0, "total_wrongs": 0, "history": []},
+    "0→4": {"label": "方名→病机", "level": 0, "status": "未知", "last_result": null, "last_review": null, "streak_right": 0, "streak_wrong": 0, "total_rights": 0, "total_wrongs": 0, "history": []},
+    "4→0": {"label": "病机→方名", "level": 0, "status": "未知", "last_result": null, "last_review": null, "streak_right": 0, "streak_wrong": 0, "total_rights": 0, "total_wrongs": 0, "history": []}
+  }
+}

@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《伤寒论》方剂训练 · MVP v8</title>
+<style>
+:root {
+  --bg-body: #fafafa;
+  --bg-panel: #ffffff;
+  --bg-card: #f5f5f5;
+  --bg-hover: #eeeeee;
+  --border: #e0e0e0;
+  --text-primary: #212121;
+  --text-secondary: #616161;
+  --text-muted: #9e9e9e;
+  --accent: #455a64;
+  --accent-bg: #eceff1;
+  --success: #546e7a;
+  --error: #78909c;
+  --shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] {
+  --bg-body: #121212;
+  --bg-panel: #1e1e1e;
+  --bg-card: #252525;
+  --bg-hover: #2d2d2d;
+  --border: #333333;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-muted: #757575;
+  --accent: #90a4ae;
+  --accent-bg: #263238;
+  --success: #90a4ae;
+  --error: #b0bec5;
+  --shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-body);
+  color: var(--text-primary);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 顶部栏 */
+.topbar {
+  height: 52px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+}
+.topbar-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.topbar-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.15s;
+}
+.topbar-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.theme-btn {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 主内容区 */
+.main {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.view {
+  display: none;
+  height: 100%;
+  overflow-y: auto;
+  padding: 24px;
+  animation: fadeIn 0.2s ease;
+}
+.view.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 仪表盘 */
+.dashboard-header {
+  max-width: 720px;
+  margin: 0 auto 24px;
+}
+.dashboard-title { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+.dashboard-desc { font-size: 13px; color: var(--text-secondary); }
+.card-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card-list-item {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-list-item:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+.card-list-main { flex: 1; }
+.card-list-name { font-size: 16px; font-weight: 600; }
+.card-list-desc { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+.card-list-tags { display: flex; gap: 6px; margin-top: 8px; }
+.tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.progress-dots { display: flex; gap: 4px; }
+.progress-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.progress-dot.done { background: var(--accent); }
+
+/* 学习视图 - 单栏 */
+.learn-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.back-link {
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.back-link:hover { color: var(--accent); }
+.learn-header { margin-bottom: 24px; }
+.learn-name { font-size: 26px; font-weight: 700; }
+.learn-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+
+.section {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+.section-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.source-text {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text-primary);
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+}
+
+.symptom-group { margin-bottom: 12px; }
+.symptom-group:last-child { margin-bottom: 0; }
+.symptom-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.symptom-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.symptom-item {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.symptom-item.necessary {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.symptom-item.excluding {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.herbs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+}
+.herb-item {
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.herb-name { font-size: 15px; font-weight: 600; }
+.herb-dose { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+
+.experience-box {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 8px;
+}
+.experience-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.experience-content { font-size: 13px; line-height: 1.7; color: var(--text-secondary); }
+.efficacy-tags { display: flex; gap: 6px; margin-top: 10px; }
+
+.action-bar {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.btn-primary {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-secondary {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: var(--bg-hover); }
+
+/* 考试视图 - 双栏 */
+.exam-layout {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  height: 100%;
+}
+.exam-question {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+}
+.exam-question-title {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.exam-question-body {
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 500;
+}
+.exam-question-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 16px;
+}
+.exam-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.exam-option {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.15s;
+  text-align: left;
+}
+.exam-option:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+.exam-option.selected {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+.exam-option.correct {
+  border-color: var(--success);
+  background: rgba(84,110,122,0.12);
+}
+.exam-option.wrong {
+  border-color: var(--error);
+  background: rgba(120,144,156,0.12);
+}
+.exam-feedback {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  display: none;
+}
+.exam-feedback.show { display: block; }
+
+.exam-progress {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.exam-nav {
+  max-width: 900px;
+  margin: 20px auto 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 统计视图 */
+.stats-grid {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+.stat-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+}
+.stat-value { font-size: 28px; font-weight: 700; color: var(--accent); }
+.stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title">《伤寒论》方剂训练 · MVP v8</div>
+  <div class="topbar-actions">
+    <button class="topbar-btn" id="btnStats" onclick="goToStats()">统计</button>
+    <button class="topbar-btn" id="btnDashboard" onclick="goToDashboard()">卡片</button>
+    <button class="theme-btn" id="btnTheme" onclick="toggleTheme()" title="切换主题">🌙</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- 仪表盘 -->
+  <div class="view active" id="viewDashboard">
+    <div class="dashboard-header">
+      <div class="dashboard-title">选择一张卡片开始学习</div>
+      <div class="dashboard-desc">当前为 Level 0（小白模式），仅展示原文标准与基础禁忌。</div>
+    </div>
+    <div class="card-list" id="cardList"></div>
+  </div>
+
+  <!-- 学习视图 -->
+  <div class="view" id="viewLearn">
+    <div class="learn-container" id="learnContainer"></div>
+  </div>
+
+  <!-- 考试视图 -->
+  <div class="view" id="viewExam">
+    <div class="exam-progress" id="examProgress"></div>
+    <div class="exam-layout">
+      <div class="exam-question">
+        <div class="exam-question-title">题目</div>
+        <div class="exam-question-body" id="examQuestion"></div>
+        <div class="exam-question-hint" id="examHint"></div>
+      </div>
+      <div>
+        <div class="exam-options" id="examOptions"></div>
+        <div class="exam-feedback" id="examFeedback"></div>
+        <div class="exam-nav" id="examNav"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 统计视图 -->
+  <div class="view" id="viewStats">
+    <div class="dashboard-header">
+      <div class="dashboard-title">学习统计</div>
+      <div class="dashboard-desc">本页面数据仅保存在当前会话中。</div>
+    </div>
+    <div class="stats-grid" id="statsGrid"></div>
+  </div>
+</div>
+
+<script>
+// 数据注入点
+const CARDS = [
+  {
+    "id": "gui-zhi-tang",
+    "type": "formula_card",
+    "name": "桂枝汤",
+    "formula_name": "桂枝汤",
+    "role": "主方",
+    "desc": "太阳中风主方",
+    "tags": [
+      "太阳病",
+      "解表剂",
+      "风伤卫",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T09:57:55.803914",
+    "updated_at": "2026-06-13T09:57:55.803914",
+    "data": {
+      "source_text": "太阳病，头痛，发热，汗出，恶风，桂枝汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "汗出",
+            "恶风"
+          ],
+          "common": [
+            "头痛",
+            "发热",
+            "脉浮缓"
+          ],
+          "excluding": [
+            "无汗",
+            "脉浮紧"
+          ]
+        },
+        "pathology": "风邪袭表，营卫不和",
+        "herbs": [
+          {
+            "name": "桂枝",
+            "dosage": "三两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "三两"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          }
+        ],
+        "usage": "以水七升，微火煮取三升，去滓，适寒温，服一升",
+        "contraindications": [
+          "无汗",
+          "脉浮紧（麻黄汤证）"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [
+        "gui-zhi-jia-ge-gen-tang",
+        "gui-zhi-jia-houpo-xingzi-tang",
+        "gui-zhi-qu-shaoyao-tang"
+      ],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [
+      "gui-zhi-tang_exp-001"
+    ],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ma-huang-tang",
+    "type": "formula_card",
+    "name": "麻黄汤",
+    "formula_name": "麻黄汤",
+    "role": "主方",
+    "desc": "太阳伤寒主方",
+    "tags": [
+      "太阳病",
+      "解表剂",
+      "寒伤营",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ma-huang-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "麻黄汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T09:57:55.803914",
+    "updated_at": "2026-06-13T09:57:55.803914",
+    "data": {
+      "source_text": "太阳病，头痛发热，身疼腰痛，骨节疼痛，恶风，无汗而喘者，麻黄汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "无汗",
+            "喘"
+          ],
+          "common": [
+            "头痛发热",
+            "身疼腰痛",
+            "骨节疼痛",
+            "恶风",
+            "脉浮紧"
+          ],
+          "excluding": [
+            "汗出",
+            "脉浮缓"
+          ]
+        },
+        "pathology": "寒邪束表，营卫闭塞，肺气不宣",
+        "herbs": [
+          {
+            "name": "麻黄",
+            "dosage": "三两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "二两"
+          },
+          {
+            "name": "杏仁",
+            "dosage": "七十枚"
+          },
+          {
+            "name": "甘草",
+            "dosage": "一两"
+          }
+        ],
+        "usage": "以水九升，先煮麻黄减二升，去上沫，内诸药，煮取二升半，去滓，温服八合",
+        "contraindications": [
+          "汗出",
+          "脉浮缓（桂枝汤证）"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ge-gen-tang",
+    "type": "formula_card",
+    "name": "葛根汤",
+    "formula_name": "葛根汤",
+    "role": "主方",
+    "desc": "太阳阳明合病",
+    "tags": [
+      "太阳病",
+      "太阳阳明合病",
+      "项背强痛",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ge-gen-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "葛根汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T09:57:55.803914",
+    "updated_at": "2026-06-13T09:57:55.803914",
+    "data": {
+      "source_text": "太阳病，项背强几几，无汗恶风，葛根汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "项背强痛",
+            "无汗",
+            "恶风"
+          ],
+          "common": [
+            "头痛",
+            "发热"
+          ],
+          "excluding": [
+            "汗出"
+          ]
+        },
+        "pathology": "太阳阳明合病，津液不升，经脉失养",
+        "herbs": [
+          {
+            "name": "葛根",
+            "dosage": "四两"
+          },
+          {
+            "name": "麻黄",
+            "dosage": "三两"
+          },
+          {
+            "name": "桂枝",
+            "dosage": "二两"
+          },
+          {
+            "name": "芍药",
+            "dosage": "二两"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "甘草",
+            "dosage": "二两"
+          }
+        ],
+        "usage": "以水一斗，先煮麻黄、葛根减二升，去白沫，内诸药，煮取三升，去滓，温服一升",
+        "contraindications": [
+          "汗出（用桂枝加葛根汤）"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "da-cheng-qi-tang",
+    "type": "formula_card",
+    "name": "大承气汤",
+    "formula_name": "大承气汤",
+    "role": "主方",
+    "desc": "阳明腑实重证",
+    "tags": [
+      "阳明病",
+      "攻下剂",
+      "重证",
+      "阳明病篇"
+    ],
+    "source_chapter": "阳明病篇",
+    "source_text_ids": [
+      "da-cheng-qi-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "大承气汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T09:57:55.803914",
+    "updated_at": "2026-06-13T09:57:55.803914",
+    "data": {
+      "source_text": "阳明病，谵语，潮热，大便硬，大承气汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "大便硬",
+            "潮热"
+          ],
+          "common": [
+            "谵语",
+            "绕脐痛",
+            "手足濈然汗出"
+          ],
+          "excluding": [
+            "表证未解",
+            "津液内竭之便秘"
+          ]
+        },
+        "pathology": "阳明腑实，燥屎内结，热结肠腑",
+        "herbs": [
+          {
+            "name": "大黄",
+            "dosage": "四两"
+          },
+          {
+            "name": "厚朴",
+            "dosage": "半斤"
+          },
+          {
+            "name": "枳实",
+            "dosage": "五枚"
+          },
+          {
+            "name": "芒硝",
+            "dosage": "三合"
+          }
+        ],
+        "usage": "以水一斗，先煮二物取五升，去滓，内大黄煮取二升，去滓，内芒硝，更上微火一两沸，分温再服。得下，余勿服。",
+        "contraindications": [
+          "表证未解",
+          "津液内竭之便秘"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "xiao-chai-hu-tang",
+    "type": "formula_card",
+    "name": "小柴胡汤",
+    "formula_name": "小柴胡汤",
+    "role": "主方",
+    "desc": "少阳病主方",
+    "tags": [
+      "少阳病",
+      "和解剂",
+      "枢机之剂",
+      "少阳病篇"
+    ],
+    "source_chapter": "少阳病篇",
+    "source_text_ids": [
+      "xiao-chai-hu-tang-src-001"
+    ],
+    "lineage": {
+      "base_formula": "小柴胡汤",
+      "variant_path": [],
+      "reference_source": "伤寒论原文"
+    },
+    "created_at": "2026-06-13T09:57:55.803914",
+    "updated_at": "2026-06-13T09:57:55.803914",
+    "data": {
+      "source_text": "伤寒五六日，中风，往来寒热，胸胁苦满，默默不欲饮食，心烦喜呕，小柴胡汤主之。",
+      "canonical": {
+        "symptom_profile": {
+          "necessary": [
+            "往来寒热",
+            "胸胁苦满"
+          ],
+          "common": [
+            "默默不欲饮食",
+            "心烦喜呕"
+          ],
+          "excluding": [
+            "纯少阳证见阳明里实"
+          ]
+        },
+        "pathology": "少阳枢机不利，正邪分争",
+        "herbs": [
+          {
+            "name": "柴胡",
+            "dosage": "半斤"
+          },
+          {
+            "name": "黄芩",
+            "dosage": "三两"
+          },
+          {
+            "name": "人参",
+            "dosage": "三两"
+          },
+          {
+            "name": "半夏",
+            "dosage": "半升"
+          },
+          {
+            "name": "生姜",
+            "dosage": "三两"
+          },
+          {
+            "name": "大枣",
+            "dosage": "十二枚"
+          },
+          {
+            "name": "甘草",
+            "dosage": "三两"
+          }
+        ],
+        "usage": "以水一斗二升，煮取六升，去滓，再煎取三升，温服一升，日三服",
+        "contraindications": [
+          "纯少阳证见阳明里实（需合方）"
+        ]
+      },
+      "empirical_distribution": {
+        "symptom_frequency": {},
+        "note": "MVP 阶段为空，后续由临床数据填充"
+      },
+      "variants": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→usage": {
+        "label": "方名→煎服法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→contra": {
+        "label": "方名→禁忌",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  }
+];
+const EXPERIENCES = [
+  {
+    "id": "gui-zhi-tang_exp-001",
+    "type": "experience_card",
+    "parent_formula_id": "gui-zhi-tang",
+    "source_text_id": "gui-zhi-tang-src-001",
+    "title": "桂枝汤治汗出恶风一例",
+    "source": "个人医案",
+    "source_type": "个人医案",
+    "topic": "临床应用",
+    "content": "患者表现为汗出、恶风、脉浮缓，予桂枝汤原方。服后汗出减少，恶风减轻。",
+    "lineage": {
+      "base_formula": "桂枝汤",
+      "variant_path": [],
+      "reference_source": "个人临床"
+    },
+    "efficacy": {
+      "subjective_effective": true,
+      "objective_change": [
+        "汗出减少",
+        "恶风减轻"
+      ],
+      "confidence_level": "中"
+    },
+    "unlock_level": 1,
+    "tags": [
+      "桂枝汤",
+      "汗出",
+      "恶风"
+    ],
+    "created_at": "2026-06-13T09:57:55.803914",
+    "updated_at": "2026-06-13T09:57:55.803914"
+  }
+];
+const SOURCE_CARDS = [
+  {
+    "id": "gui-zhi-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "太阳病篇",
+    "article_number": "待补充",
+    "text": "太阳病，头痛，发热，汗出，恶风，桂枝汤主之。",
+    "mentioned_formulas": [
+      "桂枝汤"
+    ],
+    "symptoms": [
+      "汗出",
+      "恶风",
+      "头痛",
+      "发热",
+      "脉浮缓"
+    ],
+    "key_conclusion": "桂枝汤主之。"
+  },
+  {
+    "id": "ma-huang-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "太阳病篇",
+    "article_number": "待补充",
+    "text": "太阳病，头痛发热，身疼腰痛，骨节疼痛，恶风，无汗而喘者，麻黄汤主之。",
+    "mentioned_formulas": [
+      "麻黄汤"
+    ],
+    "symptoms": [
+      "无汗",
+      "喘",
+      "头痛发热",
+      "身疼腰痛",
+      "骨节疼痛",
+      "恶风",
+      "脉浮紧"
+    ],
+    "key_conclusion": "麻黄汤主之。"
+  },
+  {
+    "id": "ge-gen-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "太阳病篇",
+    "article_number": "待补充",
+    "text": "太阳病，项背强几几，无汗恶风，葛根汤主之。",
+    "mentioned_formulas": [
+      "葛根汤"
+    ],
+    "symptoms": [
+      "项背强痛",
+      "无汗",
+      "恶风",
+      "头痛",
+      "发热"
+    ],
+    "key_conclusion": "葛根汤主之。"
+  },
+  {
+    "id": "da-cheng-qi-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "阳明病篇",
+    "article_number": "待补充",
+    "text": "阳明病，谵语，潮热，大便硬，大承气汤主之。",
+    "mentioned_formulas": [
+      "大承气汤"
+    ],
+    "symptoms": [
+      "大便硬",
+      "潮热",
+      "谵语",
+      "绕脐痛",
+      "手足濈然汗出"
+    ],
+    "key_conclusion": "大承气汤主之。"
+  },
+  {
+    "id": "xiao-chai-hu-tang-src-001",
+    "type": "source_card",
+    "source": "伤寒论",
+    "chapter": "少阳病篇",
+    "article_number": "待补充",
+    "text": "伤寒五六日，中风，往来寒热，胸胁苦满，默默不欲饮食，心烦喜呕，小柴胡汤主之。",
+    "mentioned_formulas": [
+      "小柴胡汤"
+    ],
+    "symptoms": [
+      "往来寒热",
+      "胸胁苦满",
+      "默默不欲饮食",
+      "心烦喜呕"
+    ],
+    "key_conclusion": "小柴胡汤主之。"
+  }
+];
+
+const state = {
+  page: 'dashboard',
+  activeCardId: null,
+  exam: {
+    questions: [],
+    current: 0,
+    answers: [],
+    finished: false
+  },
+  stats: {
+    total: 0,
+    right: 0,
+    wrong: 0
+  }
+};
+
+function slugToName(id) {
+  const c = CARDS.find(x => x.id === id);
+  return c ? c.name : id;
+}
+
+function getCard(id) { return CARDS.find(c => c.id === id); }
+function getExperience(id) { return EXPERIENCES.find(e => e.id === id); }
+
+function switchView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
+  state.page = name;
+}
+
+function goToDashboard() {
+  state.activeCardId = null;
+  switchView('dashboard');
+  renderDashboard();
+}
+
+function goToStats() {
+  switchView('stats');
+  renderStats();
+}
+
+function goToLearn(cardId) {
+  state.activeCardId = cardId;
+  switchView('learn');
+  renderLearn();
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('btnTheme').textContent = isDark ? '🌙' : '☀️';
+}
+
+// 渲染仪表盘
+function renderDashboard() {
+  const container = document.getElementById('cardList');
+  container.innerHTML = CARDS.map(card => {
+    const m = card.mastery || {};
+    const done = Object.values(m).filter(x => x && x.status === '已掌握').length;
+    const total = Object.keys(m).length;
+    return `
+      <div class="card-list-item" onclick="goToLearn('${card.id}')">
+        <div class="card-list-main">
+          <div class="card-list-name">${card.name}</div>
+          <div class="card-list-desc">${card.desc}</div>
+          <div class="card-list-tags">
+            ${card.tags.slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+        </div>
+        <div class="progress-dots">
+          ${Array.from({length: total}, (_, i) => `<div class="progress-dot ${i < done ? 'done' : ''}"></div>`).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// 渲染学习视图
+function renderLearn() {
+  const card = getCard(state.activeCardId);
+  if (!card) return;
+  const c = card.data.canonical;
+  const profile = c.symptom_profile || {};
+  const exp = (card.experience_ids || []).map(getExperience).filter(Boolean)[0];
+
+  document.getElementById('learnContainer').innerHTML = `
+    <div class="back-link" onclick="goToDashboard()">← 返回卡片列表</div>
+    <div class="learn-header">
+      <div class="learn-name">${card.name}</div>
+      <div class="learn-tags">
+        ${card.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">原文条文</div>
+      <div class="source-text">${card.data.source_text || '暂无'}</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">症状谱</div>
+      <div class="symptom-group">
+        <div class="symptom-label">必要症（出现此方才成立）</div>
+        <div class="symptom-items">
+          ${(profile.necessary || []).map(s => `<span class="symptom-item necessary">${s}</span>`).join('') || '<span class="symptom-item">暂无</span>'}
+        </div>
+      </div>
+      <div class="symptom-group">
+        <div class="symptom-label">常见症（可出现也可不出现）</div>
+        <div class="symptom-items">
+          ${(profile.common || []).map(s => `<span class="symptom-item">${s}</span>`).join('') || '<span class="symptom-item">暂无</span>'}
+        </div>
+      </div>
+      <div class="symptom-group">
+        <div class="symptom-label">排除症（出现则排除此方）</div>
+        <div class="symptom-items">
+          ${(profile.excluding || []).map(s => `<span class="symptom-item excluding">${s}</span>`).join('') || '<span class="symptom-item">暂无</span>'}
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">药物组成</div>
+      <div class="herbs-grid">
+        ${c.herbs.map(h => `
+          <div class="herb-item">
+            <div class="herb-name">${h.name}</div>
+            <div class="herb-dose">${h.dosage}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">病机</div>
+      <div class="section-body">${c.pathology}</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">禁忌</div>
+      <div class="section-body">${c.contraindications.join('、') || '无明确禁忌'}</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">煎服法</div>
+      <div class="section-body">${c.usage}</div>
+    </div>
+
+    ${exp ? `
+    <div class="section">
+      <div class="section-title">经验记录</div>
+      <div class="experience-box">
+        <div class="experience-title">${exp.title}</div>
+        <div class="experience-content">${exp.content}</div>
+        <div class="efficacy-tags">
+          <span class="tag">主观有效：${exp.efficacy.subjective_effective ? '是' : '否'}</span>
+          <span class="tag">客观变化：${exp.efficacy.objective_change.join('、') || '无'}</span>
+          <span class="tag">置信度：${exp.efficacy.confidence_level}</span>
+        </div>
+      </div>
+    </div>
+    ` : ''}
+
+    <div class="action-bar">
+      <button class="btn-primary" onclick="startExam('${card.id}')">开始测试</button>
+      <button class="btn-secondary" onclick="goToDashboard()">返回</button>
+    </div>
+  `;
+}
+
+// 生成考试题
+function generateQuestions(cardId) {
+  const card = getCard(cardId);
+  if (!card) return [];
+  const c = card.data.canonical;
+  const profile = c.symptom_profile || {};
+  const allSymptoms = [...(profile.necessary || []), ...(profile.common || [])];
+  const questions = [];
+
+  // 0→1: 方名→症状
+  const necessaryJoined = (profile.necessary || []).join('、');
+  questions.push({
+    type: '0→1',
+    text: `${card.name}的必要症状包括哪些？`,
+    correct: necessaryJoined,
+    options: generateOptions(cardId, '0→1', necessaryJoined)
+  });
+
+  // 1→0: 症状→方名
+  if (allSymptoms.length > 0) {
+    questions.push({
+      type: '1→0',
+      text: `患者出现 ${allSymptoms.slice(0, 2).join('、')}，最可能选哪个方？`,
+      correct: card.id,
+      options: generateOptions(cardId, '1→0')
+    });
+  }
+
+  // 0→2: 方名→药物
+  if (c.herbs.length > 0) {
+    questions.push({
+      type: '0→2',
+      text: `${card.name}包含以下哪味药？`,
+      correct: [c.herbs[0].name],
+      options: generateOptions(cardId, '0→2', c.herbs[0].name)
+    });
+  }
+
+  // 0→contra: 方名→禁忌
+  if (c.contraindications.length > 0) {
+    questions.push({
+      type: '0→contra',
+      text: `${card.name}的禁忌是什么？`,
+      correct: [c.contraindications[0]],
+      options: generateOptions(cardId, '0→contra', c.contraindications[0])
+    });
+  }
+
+  return questions;
+}
+
+function generateOptions(cardId, type, correctValue) {
+  const others = CARDS.filter(c => c.id !== cardId);
+  const shuffled = others.sort(() => Math.random() - 0.5).slice(0, 3);
+  const opts = [];
+
+  for (const c of [getCard(cardId), ...shuffled]) {
+    const canonical = c.data.canonical;
+    const profile = canonical.symptom_profile || {};
+    if (type === '0→1') {
+      opts.push({ id: c.id, label: (profile.necessary || []).join('、') || '无' });
+    } else if (type === '1→0') {
+      opts.push({ id: c.id, label: c.name });
+    } else if (type === '0→2') {
+      const herbs = canonical.herbs.map(h => h.name);
+      opts.push({ id: c.id, label: herbs[0] || '无' });
+    } else if (type === '0→contra') {
+      opts.push({ id: c.id, label: canonical.contraindications[0] || '无' });
+    }
+  }
+
+  return opts.sort(() => Math.random() - 0.5);
+}
+
+function startExam(cardId) {
+  state.activeCardId = cardId;
+  state.exam.questions = generateQuestions(cardId);
+  state.exam.current = 0;
+  state.exam.answers = [];
+  state.exam.finished = false;
+  switchView('exam');
+  renderExam();
+}
+
+function renderExam() {
+  const q = state.exam.questions[state.exam.current];
+  if (!q) return;
+
+  document.getElementById('examProgress').textContent =
+    `题目 ${state.exam.current + 1} / ${state.exam.questions.length}`;
+  document.getElementById('examQuestion').textContent = q.text;
+  document.getElementById('examHint').textContent = `类型：${q.type}`;
+
+  const optsContainer = document.getElementById('examOptions');
+  optsContainer.innerHTML = q.options.map((opt, idx) => `
+    <button class="exam-option" id="opt-${idx}" onclick="selectOption(${idx})">
+      ${opt.label}
+    </button>
+  `).join('');
+
+  document.getElementById('examFeedback').className = 'exam-feedback';
+  document.getElementById('examFeedback').innerHTML = '';
+  document.getElementById('examNav').innerHTML = '';
+}
+
+function selectOption(idx) {
+  if (state.exam.finished) return;
+  const q = state.exam.questions[state.exam.current];
+  const selected = q.options[idx];
+  const isCorrect = q.type === '1→0'
+    ? selected.id === q.correct
+    : selected.label === q.correct;
+
+  state.exam.answers.push({ question: q, selected, isCorrect });
+  state.exam.finished = true;
+  state.stats.total++;
+  if (isCorrect) state.stats.right++; else state.stats.wrong++;
+
+  // 更新掌握度
+  const card = getCard(state.activeCardId);
+  if (card && card.mastery && card.mastery[q.type]) {
+    const m = card.mastery[q.type];
+    if (isCorrect) {
+      m.streak_right++;
+      m.streak_wrong = 0;
+      m.total_rights++;
+      m.last_result = 'right';
+      if (m.streak_right >= 3) {
+        m.status = '已掌握';
+        m.level = Math.min(5, m.level + 1);
+        m.streak_right = 0;
+      } else {
+        m.status = '正在学习';
+      }
+    } else {
+      m.streak_wrong++;
+      m.streak_right = 0;
+      m.total_wrongs++;
+      m.last_result = 'wrong';
+      if (m.streak_wrong >= 2) {
+        m.level = Math.max(0, m.level - 1);
+        m.status = m.level >= 3 ? '正在学习' : '已遗忘';
+        m.streak_wrong = 0;
+      }
+    }
+    m.last_review = new Date().toISOString();
+  }
+
+  // UI 反馈
+  q.options.forEach((opt, i) => {
+    const btn = document.getElementById(`opt-${i}`);
+    const optCorrect = q.type === '1→0'
+      ? opt.id === q.correct
+      : q.correct.includes(opt.label);
+    if (optCorrect) btn.classList.add('correct');
+    if (i === idx && !optCorrect) btn.classList.add('wrong');
+    btn.disabled = true;
+  });
+
+  const fb = document.getElementById('examFeedback');
+  fb.className = 'exam-feedback show';
+  fb.innerHTML = isCorrect
+    ? `<strong>回答正确。</strong> ${q.type === '1→0' ? '该症状组合指向' + slugToName(q.correct) : ''}`
+    : `<strong>回答错误。</strong> 正确答案是：${q.correct}`;
+
+  const nav = document.getElementById('examNav');
+  if (state.exam.current < state.exam.questions.length - 1) {
+    nav.innerHTML = `<button class="btn-primary" onclick="nextQuestion()">下一题</button>`;
+  } else {
+    nav.innerHTML = `<button class="btn-primary" onclick="finishExam()">完成</button>`;
+  }
+}
+
+function nextQuestion() {
+  state.exam.current++;
+  state.exam.finished = false;
+  renderExam();
+}
+
+function finishExam() {
+  goToLearn(state.activeCardId);
+}
+
+function renderStats() {
+  const totalCards = CARDS.length;
+  const mastered = CARDS.reduce((sum, c) => {
+    return sum + Object.values(c.mastery || {}).filter(m => m.status === '已掌握').length;
+  }, 0);
+  const totalVectors = CARDS.reduce((sum, c) => sum + Object.keys(c.mastery || {}).length, 0);
+
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card"><div class="stat-value">${totalCards}</div><div class="stat-label">方剂卡</div></div>
+    <div class="stat-card"><div class="stat-value">${state.stats.total}</div><div class="stat-label">本次会话答题数</div></div>
+    <div class="stat-card"><div class="stat-value">${state.stats.right}</div><div class="stat-label">正确</div></div>
+    <div class="stat-card"><div class="stat-value">${state.stats.wrong}</div><div class="stat-label">错误</div></div>
+    <div class="stat-card"><div class="stat-value">${mastered}/${totalVectors}</div><div class="stat-label">已掌握向量</div></div>
+  `;
+}
+
+// 初始化
+renderDashboard();
+</script>
+
+</body>
+</html>

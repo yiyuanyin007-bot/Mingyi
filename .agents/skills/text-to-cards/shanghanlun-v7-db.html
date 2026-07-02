@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《伤寒论》训练系统 v7 · DB版</title>
+<style>
+/* [复用 v6] 主题变量与基础样式 */
+[data-theme="light"] {
+  --bg-body: #f0f4f8;
+  --bg-panel: #ffffff;
+  --bg-card: #f8fafc;
+  --bg-hover: #e2e8f0;
+  --bg-active: #dbeafe;
+  --border: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --accent: #0ea5e9;
+  --accent-bg: #e0f2fe;
+  --green: #16a34a;
+  --green-bg: #dcfce7;
+  --red: #dc2626;
+  --red-bg: #fee2e2;
+  --yellow: #ca8a04;
+  --yellow-bg: #fef9c3;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+  --bg-body: #0f172a;
+  --bg-panel: #1e293b;
+  --bg-card: #334155;
+  --bg-hover: #475569;
+  --bg-active: #1e3a5f;
+  --border: #475569;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #38bdf8;
+  --accent-bg: #0c4a6e;
+  --green: #22c55e;
+  --green-bg: #14532d;
+  --red: #ef4444;
+  --red-bg: #7f1d1d;
+  --yellow: #eab308;
+  --yellow-bg: #713f12;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-body);
+  color: var(--text-primary);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* [复用 v6] 顶部栏 */
+.topbar {
+  height: 48px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: var(--shadow);
+  z-index: 100;
+  flex-shrink: 0;
+}
+.topbar-title { font-size: 15px; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+.topbar-actions { display: flex; gap: 8px; align-items: center; }
+.topbar-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.topbar-btn:hover { background: var(--bg-hover); }
+.topbar-btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.topbar-btn.accent:hover { opacity: 0.9; }
+.theme-btn {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.theme-btn:hover { background: var(--bg-hover); }
+
+/* [v7 新写] 三栏固定布局 */
+.main-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 220px 1fr 280px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+/* [复用 v6] 左栏 */
+.left-panel {
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.panel-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.card-item {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+  background: var(--bg-card);
+}
+.card-item:hover { background: var(--bg-hover); border-color: var(--border); }
+.card-item.active { background: var(--bg-active); border-color: var(--accent); }
+.card-item.selected { background: var(--accent-bg); border-color: var(--accent); }
+.card-item-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.card-item-desc { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+.card-item-progress { display: flex; gap: 3px; margin-top: 5px; }
+.progress-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+.progress-dot.done { background: var(--green); }
+.progress-dot.partial { background: var(--yellow); }
+
+/* [v7 新写] 模式标签 */
+.mode-indicator {
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mode-indicator.formula { background: var(--accent-bg); border: 1px solid var(--accent); color: var(--accent); }
+.mode-indicator.clinical { background: var(--green-bg); border: 1px solid var(--green); color: var(--green); }
+.mode-indicator:hover { opacity: 0.85; }
+.mode-badge { font-weight: 600; }
+.mode-hint { font-size: 10px; opacity: 0.8; }
+
+/* [复用 v6] 中栏 */
+.center-panel {
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.center-panel > .view-section { display: none; }
+.center-panel > .view-section.active { display: block; animation: fadeIn 0.25s ease; }
+
+/* [复用 v6] 卡片详情 */
+.card-detail-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.card-detail-name { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+.back-link {
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--accent); }
+.card-detail-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 16px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-title::before {
+  content: '';
+  width: 3px; height: 14px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.detail-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.herbs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 8px;
+}
+.herb-item {
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.herb-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.herb-dose { font-size: 11px; color: var(--text-secondary); }
+
+/* [v7 新写] 学习提示 */
+.learn-hint {
+  margin-top: 20px;
+  padding: 12px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--accent);
+}
+.learn-hint kbd {
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent);
+  font-family: inherit;
+  font-size: 10px;
+}
+
+/* [复用 v6] 艾宾浩斯复习仪表盘 */
+.review-dashboard { padding: 12px; overflow-y: auto; height: 100%; }
+.review-section { margin-bottom: 16px; }
+.review-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.review-section-title.overdue { color: var(--red); }
+.review-section-title.today { color: var(--yellow); }
+.review-section-title.future { color: var(--green); }
+.review-card {
+  background: var(--bg-card);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.review-card:hover { background: var(--bg-hover); border-color: var(--accent); }
+.review-card.overdue { border-left: 3px solid var(--red); }
+.review-card.today { border-left: 3px solid var(--yellow); }
+.review-card.future { border-left: 3px solid var(--green); }
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.review-card-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.review-card-vector {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.review-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.review-card-strength { display: flex; align-items: center; gap: 6px; }
+.review-strength-bar {
+  width: 60px;
+  height: 4px;
+  background: var(--bg-hover);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.review-strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+.review-btn {
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s;
+  width: 100%;
+}
+.review-btn:hover { background: var(--accent); color: #fff; }
+
+/* [复用 v6] 右栏 */
+.right-panel {
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mastery-grid { display: flex; flex-direction: column; gap: 8px; }
+.mastery-vector {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.mastery-vector-name { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.mastery-vector-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+.mastery-vector-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s, background 0.3s;
+}
+.mastery-vector-status { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+/* [复用 v6] 底部快捷键提示 */
+.shortcut-bar {
+  height: 28px;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+.shortcut-item { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 3px; }
+.shortcut-kbd {
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* [v7 新写] 考试占位界面（P0 仅做结构） */
+.exam-placeholder {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+.exam-placeholder-icon { font-size: 48px; margin-bottom: 16px; }
+.exam-placeholder-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary); }
+
+/* [复用 v6] 动画与滚动条 */
+.mode-fade { animation: fadeIn 0.25s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- [v7 新写] 顶部栏 -->
+<div class="topbar">
+  <div class="topbar-title">《伤寒论》训练系统 v7 · DB版</div>
+  <div class="topbar-actions">
+    <button class="topbar-btn" id="btnStartExam" onclick="onStartExamClick()">
+      <span id="btnStartExamIcon">📝</span> <span id="btnStartExamLabel">全向量考试</span>
+    </button>
+    <button class="theme-btn" id="btnTheme" onclick="toggleTheme()" title="切换白天/夜间模式">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </div>
+</div>
+
+<!-- [v7 新写] 主内容区 -->
+<div class="main-container" id="mainContainer">
+
+  <!-- 左栏 -->
+  <div class="left-panel" id="leftPanel">
+    <div class="panel-title">📚 方剂卡片</div>
+    <div class="mode-indicator formula" id="modeIndicator" onclick="toggleExamMode()">
+      <span class="mode-badge" id="modeBadge">📋 方剂模式</span>
+      <span class="mode-hint">按 Tab 切换</span>
+    </div>
+    <div id="leftContent"></div>
+  </div>
+
+  <!-- 中栏 -->
+  <div class="center-panel" id="centerPanel">
+    <!-- 仪表盘视图 -->
+    <div class="view-section active" id="viewDashboard">
+      <div class="card-detail-header">
+        <div class="card-detail-name">📅 艾宾浩斯复习仪表盘</div>
+        <div class="card-detail-tags"><span class="tag">P0</span><span class="tag">待接入真实掌握度</span></div>
+      </div>
+      <div id="reviewDashboardWrapper">
+        <div class="review-dashboard" id="reviewDashboard">
+          <div class="review-section" id="reviewOverdue">
+            <div class="review-section-title overdue">🔴 已逾期：<span id="overdueCount">0</span> 张</div>
+          </div>
+          <div class="review-section" id="reviewToday">
+            <div class="review-section-title today">🟡 今日待复习：<span id="todayCount">0</span> 张</div>
+          </div>
+          <div class="review-section" id="reviewFuture">
+            <div class="review-section-title future">🟢 未来7天：<span id="futureCount">0</span> 张</div>
+          </div>
+        </div>
+      </div>
+      <div class="learn-hint">
+        💡 按 <kbd>空格</kbd> 或 <kbd>Enter</kbd> 开始考试；按 <kbd>Tab</kbd> 切换方剂/临床模式。
+        临床模式下点击卡片可选择主方，系统自动补齐相似方。
+      </div>
+    </div>
+
+    <!-- 学习详情视图 -->
+    <div class="view-section" id="viewLearn">
+      <div class="card-detail-header">
+        <div class="back-link" onclick="goToDashboard()">← 返回仪表盘（ESC）</div>
+        <div class="card-detail-name" id="detailName">桂枝汤</div>
+        <div class="card-detail-tags" id="detailTags"></div>
+      </div>
+      <div class="section-title">📖 原文条文</div>
+      <div class="detail-text" id="detailText"></div>
+      <div class="section-title">🌿 药物组成</div>
+      <div class="herbs-grid" id="detailHerbs"></div>
+      <div class="section-title">🔍 辨证要点</div>
+      <div class="detail-text" id="detailDiagnosis"></div>
+      <div class="section-title">⚠️ 禁忌</div>
+      <div class="detail-text" id="detailContraindications"></div>
+      <div class="section-title" id="confusableTitle" style="display:none;">🔀 易混方</div>
+      <div class="detail-text" id="detailConfusable" style="display:none;"></div>
+      <div class="learn-hint" id="learnHint">
+        💡 当前为<b>方剂模式</b>，按 <kbd>空格</kbd> 或 <kbd>Enter</kbd> 开始全向量考试；按 <kbd>Tab</kbd> 切换为临床模式；按 <kbd>ESC</kbd> 返回仪表盘。
+      </div>
+    </div>
+
+    <!-- 考试视图（P0 仅占位） -->
+    <div class="view-section" id="viewExam">
+      <div class="exam-placeholder">
+        <div class="exam-placeholder-icon">📝</div>
+        <div class="exam-placeholder-title">考试界面</div>
+        <p>方剂/临床模式考试将在 P1 阶段实现。</p>
+        <p style="margin-top:12px;font-size:12px;">当前模式：<span id="examModePlaceholder">formula</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右栏 -->
+  <div class="right-panel" id="rightPanel">
+    <div class="panel-title" id="rightPanelTitle">🎯 掌握度</div>
+    <div id="rightPanelContent">
+      <div style="font-size:12px;color:var(--text-muted);padding:8px 0;">
+        选择卡片后显示掌握度。
+      </div>
+    </div>
+    <!-- [调试] 状态显示，定位问题后移除 -->
+    <div style="margin-top:auto;padding:8px;background:var(--bg-card);border-radius:6px;border:1px solid var(--border);font-size:10px;color:var(--text-muted);font-family:monospace;white-space:pre-wrap;" id="debugState"></div>
+  </div>
+
+</div>
+
+<!-- [复用 v6] 底部快捷键提示 -->
+<div class="shortcut-bar" id="shortcutBar">
+  <div class="shortcut-item"><span class="shortcut-kbd">空格</span> 确认/前进</div>
+  <div class="shortcut-item"><span class="shortcut-kbd">Enter</span> 提交/确认</div>
+  <div class="shortcut-item"><span class="shortcut-kbd">ESC</span> 取消/返回</div>
+  <div class="shortcut-item"><span class="shortcut-kbd">Tab</span> 切换模式</div>
+</div>
+
+<script>
+// ========== [v7 新写] 常量与数据 ==========
+
+const ALL_VECTOR_IDS = ['0→1', '1→0', '0→2', '2→0', '0→3', '3→0', '0→4', '4→0'];
+
+const VECTOR_LABEL = {
+  '0→1': '方名→症状',
+  '1→0': '症状→方名',
+  '0→2': '方名→药物',
+  '2→0': '药物→方名',
+  '0→3': '方名→用法',
+  '3→0': '用法→方名',
+  '0→4': '方名→病机',
+  '4→0': '病机→方名'
+};
+
+const STATUS_DISPLAY = {
+  '未知': { pct: 0, color: 'var(--red)' },
+  '从未掌握': { pct: 10, color: 'var(--red)' },
+  '正在学习': { pct: 45, color: 'var(--yellow)' },
+  '已掌握': { pct: 80, color: 'var(--green)' },
+  '已遗忘': { pct: 20, color: 'var(--red)' }
+};
+
+function createEmptyMastery() {
+  const mastery = {};
+  ALL_VECTOR_IDS.forEach(vid => {
+    mastery[vid] = {
+      label: VECTOR_LABEL[vid],
+      level: 0,
+      status: '未知',
+      last_result: null,
+      last_review: null,
+      streak_right: 0,
+      streak_wrong: 0,
+      total_rights: 0,
+      total_wrongs: 0,
+      history: []
+    };
+  });
+  return mastery;
+}
+
+// [复用 v6] CARDS 数据数组，已按 v3.0 格式扩展（向量用数字 ID，增加 mastery、source_text、pathology 等）
+const CARDS = [
+  {
+    "id": "gui-zhi-tang",
+    "type": "formula_card",
+    "name": "桂枝汤",
+    "formula_name": "桂枝汤",
+    "role": "主方",
+    "desc": "太阳中风主方",
+    "tags": [
+      "太阳病",
+      "解表剂",
+      "风伤卫",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "gui-zhi-tang-src-001"
+    ],
+    "created_at": "2026-06-13T09:40:55.532179",
+    "updated_at": "2026-06-13T09:40:55.532179",
+    "data": {
+      "core_symptoms": [
+        "汗出",
+        "恶风",
+        "脉浮缓"
+      ],
+      "secondary_symptoms": [
+        "头痛",
+        "发热"
+      ],
+      "symptoms": [
+        "汗出",
+        "恶风",
+        "脉浮缓",
+        "头痛",
+        "发热"
+      ],
+      "pathology": "风邪袭表，营卫不和",
+      "herbs": [
+        {
+          "name": "桂枝",
+          "dosage": "三两"
+        },
+        {
+          "name": "芍药",
+          "dosage": "三两"
+        },
+        {
+          "name": "甘草",
+          "dosage": "二两"
+        },
+        {
+          "name": "生姜",
+          "dosage": "三两"
+        },
+        {
+          "name": "大枣",
+          "dosage": "十二枚"
+        }
+      ],
+      "usage": "以水七升，微火煮取三升，去滓，适寒温，服一升",
+      "contraindications": [
+        "无汗",
+        "脉浮紧（麻黄汤证）"
+      ],
+      "source_text": "太阳病，头痛，发热，汗出，恶风，桂枝汤主之。",
+      "variants": [
+        "gui-zhi-jia-ge-gen-tang",
+        "gui-zhi-jia-houpo-xingzi-tang",
+        "gui-zhi-qu-shaoyao-tang"
+      ],
+      "confusable_formulas": [
+        "ge-gen-tang",
+        "ma-huang-tang"
+      ],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→3": {
+        "label": "方名→用法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "3→0": {
+        "label": "用法→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→4": {
+        "label": "方名→病机",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "4→0": {
+        "label": "病机→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ma-huang-tang",
+    "type": "formula_card",
+    "name": "麻黄汤",
+    "formula_name": "麻黄汤",
+    "role": "主方",
+    "desc": "太阳伤寒主方",
+    "tags": [
+      "太阳病",
+      "解表剂",
+      "寒伤营",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ma-huang-tang-src-001"
+    ],
+    "created_at": "2026-06-13T09:40:55.532179",
+    "updated_at": "2026-06-13T09:40:55.532179",
+    "data": {
+      "core_symptoms": [
+        "无汗而喘",
+        "脉浮紧"
+      ],
+      "secondary_symptoms": [
+        "头痛发热",
+        "身疼腰痛",
+        "骨节疼痛",
+        "恶风"
+      ],
+      "symptoms": [
+        "无汗而喘",
+        "脉浮紧",
+        "头痛发热",
+        "身疼腰痛",
+        "骨节疼痛",
+        "恶风"
+      ],
+      "pathology": "寒邪束表，营卫闭塞，肺气不宣",
+      "herbs": [
+        {
+          "name": "麻黄",
+          "dosage": "三两"
+        },
+        {
+          "name": "桂枝",
+          "dosage": "二两"
+        },
+        {
+          "name": "杏仁",
+          "dosage": "七十枚"
+        },
+        {
+          "name": "甘草",
+          "dosage": "一两"
+        }
+      ],
+      "usage": "以水九升，先煮麻黄减二升，去上沫，内诸药，煮取二升半，去滓，温服八合",
+      "contraindications": [
+        "汗出",
+        "脉浮缓（桂枝汤证）"
+      ],
+      "source_text": "太阳病，头痛发热，身疼腰痛，骨节疼痛，恶风，无汗而喘者，麻黄汤主之。",
+      "variants": [
+        "ma-huang-jia-zhu-tang",
+        "ma-huang-xingren-yiyi-gancao-tang"
+      ],
+      "confusable_formulas": [
+        "ge-gen-tang",
+        "gui-zhi-tang"
+      ],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→3": {
+        "label": "方名→用法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "3→0": {
+        "label": "用法→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→4": {
+        "label": "方名→病机",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "4→0": {
+        "label": "病机→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "ge-gen-tang",
+    "type": "formula_card",
+    "name": "葛根汤",
+    "formula_name": "葛根汤",
+    "role": "主方",
+    "desc": "太阳阳明合病",
+    "tags": [
+      "太阳病",
+      "太阳阳明合病",
+      "项背强痛",
+      "太阳病篇"
+    ],
+    "source_chapter": "太阳病篇",
+    "source_text_ids": [
+      "ge-gen-tang-src-001"
+    ],
+    "created_at": "2026-06-13T09:40:55.532179",
+    "updated_at": "2026-06-13T09:40:55.532179",
+    "data": {
+      "core_symptoms": [
+        "项背强痛",
+        "无汗",
+        "恶风"
+      ],
+      "secondary_symptoms": [
+        "太阳病"
+      ],
+      "symptoms": [
+        "项背强痛",
+        "无汗",
+        "恶风",
+        "太阳病"
+      ],
+      "pathology": "太阳阳明合病，津液不升，经脉失养",
+      "herbs": [
+        {
+          "name": "葛根",
+          "dosage": "四两"
+        },
+        {
+          "name": "麻黄",
+          "dosage": "三两"
+        },
+        {
+          "name": "桂枝",
+          "dosage": "二两"
+        },
+        {
+          "name": "芍药",
+          "dosage": "二两"
+        },
+        {
+          "name": "生姜",
+          "dosage": "三两"
+        },
+        {
+          "name": "大枣",
+          "dosage": "十二枚"
+        },
+        {
+          "name": "甘草",
+          "dosage": "二两"
+        }
+      ],
+      "usage": "以水一斗，先煮麻黄、葛根减二升，去白沫，内诸药，煮取三升，去滓，温服一升",
+      "contraindications": [
+        "汗出（用桂枝加葛根汤）"
+      ],
+      "source_text": "太阳病，项背强几几，无汗恶风，葛根汤主之。",
+      "variants": [
+        "ge-gen-jia-banxia-tang"
+      ],
+      "confusable_formulas": [
+        "gui-zhi-tang",
+        "ma-huang-tang"
+      ],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→3": {
+        "label": "方名→用法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "3→0": {
+        "label": "用法→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→4": {
+        "label": "方名→病机",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "4→0": {
+        "label": "病机→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "da-cheng-qi-tang",
+    "type": "formula_card",
+    "name": "大承气汤",
+    "formula_name": "大承气汤",
+    "role": "主方",
+    "desc": "阳明腑实重证",
+    "tags": [
+      "阳明病",
+      "攻下剂",
+      "重证",
+      "阳明病篇"
+    ],
+    "source_chapter": "阳明病篇",
+    "source_text_ids": [
+      "da-cheng-qi-tang-src-001"
+    ],
+    "created_at": "2026-06-13T09:40:55.532179",
+    "updated_at": "2026-06-13T09:40:55.532179",
+    "data": {
+      "core_symptoms": [
+        "谵语",
+        "潮热",
+        "大便硬",
+        "绕脐痛",
+        "手足濈然汗出"
+      ],
+      "secondary_symptoms": [
+        "阳明病"
+      ],
+      "symptoms": [
+        "谵语",
+        "潮热",
+        "大便硬",
+        "绕脐痛",
+        "手足濈然汗出",
+        "阳明病"
+      ],
+      "pathology": "阳明腑实，燥屎内结，热结肠腑",
+      "herbs": [
+        {
+          "name": "大黄",
+          "dosage": "四两"
+        },
+        {
+          "name": "厚朴",
+          "dosage": "半斤"
+        },
+        {
+          "name": "枳实",
+          "dosage": "五枚"
+        },
+        {
+          "name": "芒硝",
+          "dosage": "三合"
+        }
+      ],
+      "usage": "以水一斗，先煮二物取五升，去滓，内大黄煮取二升，去滓，内芒硝，更上微火一两沸，分温再服。得下，余勿服。",
+      "contraindications": [
+        "表证未解",
+        "津液内竭之便秘"
+      ],
+      "source_text": "阳明病，谵语，潮热，大便硬，大承气汤主之。",
+      "variants": [
+        "xiao-cheng-qi-tang",
+        "tiao-wei-cheng-qi-tang"
+      ],
+      "confusable_formulas": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→3": {
+        "label": "方名→用法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "3→0": {
+        "label": "用法→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→4": {
+        "label": "方名→病机",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "4→0": {
+        "label": "病机→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  },
+  {
+    "id": "xiao-chai-hu-tang",
+    "type": "formula_card",
+    "name": "小柴胡汤",
+    "formula_name": "小柴胡汤",
+    "role": "主方",
+    "desc": "少阳病主方",
+    "tags": [
+      "少阳病",
+      "和解剂",
+      "枢机之剂",
+      "少阳病篇"
+    ],
+    "source_chapter": "少阳病篇",
+    "source_text_ids": [
+      "xiao-chai-hu-tang-src-001"
+    ],
+    "created_at": "2026-06-13T09:40:55.532179",
+    "updated_at": "2026-06-13T09:40:55.532179",
+    "data": {
+      "core_symptoms": [
+        "往来寒热",
+        "胸胁苦满",
+        "默默不欲饮食",
+        "心烦喜呕"
+      ],
+      "secondary_symptoms": [
+        "伤寒五六日",
+        "中风"
+      ],
+      "symptoms": [
+        "往来寒热",
+        "胸胁苦满",
+        "默默不欲饮食",
+        "心烦喜呕",
+        "伤寒五六日",
+        "中风"
+      ],
+      "pathology": "少阳枢机不利，正邪分争",
+      "herbs": [
+        {
+          "name": "柴胡",
+          "dosage": "半斤"
+        },
+        {
+          "name": "黄芩",
+          "dosage": "三两"
+        },
+        {
+          "name": "人参",
+          "dosage": "三两"
+        },
+        {
+          "name": "半夏",
+          "dosage": "半升"
+        },
+        {
+          "name": "生姜",
+          "dosage": "三两"
+        },
+        {
+          "name": "大枣",
+          "dosage": "十二枚"
+        },
+        {
+          "name": "甘草",
+          "dosage": "三两"
+        }
+      ],
+      "usage": "以水一斗二升，煮取六升，去滓，再煎取三升，温服一升，日三服",
+      "contraindications": [
+        "纯少阳证见阳明里实（需合方）"
+      ],
+      "source_text": "伤寒五六日，中风，往来寒热，胸胁苦满，默默不欲饮食，心烦喜呕，小柴胡汤主之。",
+      "variants": [
+        "da-chai-hu-tang",
+        "chai-hu-gui-zhi-tang"
+      ],
+      "confusable_formulas": [],
+      "allow_multiple": false,
+      "mapping_note": ""
+    },
+    "experience_ids": [],
+    "mastery": {
+      "0→1": {
+        "label": "方名→症状",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "1→0": {
+        "label": "症状→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→2": {
+        "label": "方名→药物",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "2→0": {
+        "label": "药物→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→3": {
+        "label": "方名→用法",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "3→0": {
+        "label": "用法→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "0→4": {
+        "label": "方名→病机",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      },
+      "4→0": {
+        "label": "病机→方名",
+        "level": 0,
+        "status": "未知",
+        "last_result": null,
+        "last_review": null,
+        "streak_right": 0,
+        "streak_wrong": 0,
+        "total_rights": 0,
+        "total_wrongs": 0,
+        "history": []
+      }
+    }
+  }
+];
+
+// ========== [v7 新写] 状态机 ==========
+
+const appState = {
+  page: 'dashboard',
+  activeCardId: null,
+  selectedCardIds: [],
+  examMode: null,
+  examCardCount: 2,
+  examVectors: [],
+  currentQuestionIndex: 0,
+  questions: [],
+  answers: [],
+  isInputBoxVisible: false,
+  isFeedbackModalVisible: false,
+  isEndPanelVisible: false
+};
+
+function assertValidTransition(from, to) {
+  if (!to || typeof to !== 'object' || !to.page) {
+    throw new Error('transition 必须提供包含 page 的对象');
+  }
+  if (!['dashboard', 'learn', 'exam'].includes(to.page)) {
+    throw new Error(`非法 page: ${to.page}`);
+  }
+  if (to.page === 'exam' && !to.examMode) {
+    throw new Error('进入 exam 必须指定 examMode');
+  }
+  if (to.page === 'learn' && !to.activeCardId) {
+    throw new Error('进入 learn 必须指定 activeCardId');
+  }
+  if (to.examMode && !['formula', 'clinical'].includes(to.examMode)) {
+    throw new Error(`非法 examMode: ${to.examMode}`);
+  }
+}
+
+function transition(newState) {
+  assertValidTransition(appState, newState);
+  Object.assign(appState, newState);
+  renderByState();
+}
+
+function goToDashboard() {
+  transition({
+    page: 'dashboard',
+    activeCardId: null,
+    selectedCardIds: [],
+    examMode: null,
+    examVectors: [],
+    questions: [],
+    answers: [],
+    currentQuestionIndex: 0,
+    isInputBoxVisible: false,
+    isFeedbackModalVisible: false,
+    isEndPanelVisible: false
+  });
+}
+
+function goToLearn(cardId) {
+  transition({ page: 'learn', activeCardId: cardId });
+}
+
+function startFormulaExam(cardId) {
+  transition({
+    page: 'exam',
+    examMode: 'formula',
+    activeCardId: cardId,
+    selectedCardIds: [cardId],
+    examVectors: ALL_VECTOR_IDS,
+    questions: [],
+    currentQuestionIndex: 0,
+    answers: [],
+    isInputBoxVisible: false,
+    isFeedbackModalVisible: false,
+    isEndPanelVisible: false
+  });
+}
+
+function startClinicalExam(cardIds, count) {
+  const selected = cardIds.slice(0, Math.max(1, count));
+  transition({
+    page: 'exam',
+    examMode: 'clinical',
+    activeCardId: selected[0],
+    selectedCardIds: selected,
+    examCardCount: count,
+    examVectors: ['1→0'],
+    questions: [],
+    currentQuestionIndex: 0,
+    answers: [],
+    isInputBoxVisible: false,
+    isFeedbackModalVisible: false,
+    isEndPanelVisible: false
+  });
+}
+
+function getCard(cardId) {
+  return CARDS.find(c => c.id === cardId) || null;
+}
+
+// [v7 新写] 临床模式组卷：以 anchor 为主卡，随机补齐到 count 张
+function buildClinicalGroup(anchorId, count) {
+  const group = [anchorId];
+  const anchor = CARDS.find(c => c.id === anchorId);
+  if (!anchor) return group;
+
+  // 优先使用卡片自带的易混方
+  let preferred = (anchor.data.confusable_formulas || [])
+    .filter(id => id !== anchorId && CARDS.some(c => c.id === id));
+
+  // 若易混方不足，随机补齐
+  const others = CARDS.filter(c => c.id !== anchorId && !preferred.includes(c.id)).map(c => c.id);
+  for (let i = others.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [others[i], others[j]] = [others[j], others[i]];
+  }
+
+  const needed = Math.min(count - 1, CARDS.length - 1);
+  const pool = [...preferred, ...others];
+  for (let i = 0; i < needed; i++) {
+    if (pool[i]) group.push(pool[i]);
+  }
+  return group;
+}
+
+function selectAnchor(cardId) {
+  appState.activeCardId = cardId;
+  appState.selectedCardIds = buildClinicalGroup(cardId, appState.examCardCount);
+  renderByState();
+}
+
+function reshuffleClinicalGroup() {
+  if (!appState.activeCardId) return;
+  appState.selectedCardIds = buildClinicalGroup(appState.activeCardId, appState.examCardCount);
+  renderByState();
+}
+
+function updateExamCardCount(count) {
+  const val = parseInt(count, 10);
+  if (isNaN(val)) return;
+  const min = 2;
+  const max = CARDS.length;
+  const clamped = Math.max(min, Math.min(max, val));
+  appState.examCardCount = clamped;
+  // 如果已选锚点，按新数量重新组卷
+  if (appState.activeCardId) {
+    appState.selectedCardIds = buildClinicalGroup(appState.activeCardId, appState.examCardCount);
+  }
+  renderByState();
+}
+
+// ========== [v7 新写] 无 UI 状态机单元测试 ==========
+
+function runStateMachineTests() {
+  let passed = 0;
+  let failed = 0;
+  const logs = [];
+
+  function test(name, fn) {
+    try {
+      fn();
+      passed++;
+      logs.push(`✅ ${name}`);
+    } catch (err) {
+      failed++;
+      logs.push(`❌ ${name}: ${err.message}`);
+    }
+  }
+
+  function assert(cond, msg) {
+    if (!cond) throw new Error(msg || '断言失败');
+  }
+
+  function resetState() {
+    Object.assign(appState, {
+      page: 'dashboard',
+      activeCardId: null,
+      selectedCardIds: [],
+      examMode: null,
+      examCardCount: 2,
+      examVectors: [],
+      currentQuestionIndex: 0,
+      questions: [],
+      answers: [],
+      isInputBoxVisible: false,
+      isFeedbackModalVisible: false,
+      isEndPanelVisible: false
+    });
+  }
+
+  test('初始状态为 dashboard', () => {
+    resetState();
+    assert(appState.page === 'dashboard');
+  });
+
+  test('goToDashboard 重置考试相关状态', () => {
+    resetState();
+    goToDashboard();
+    assert(appState.page === 'dashboard');
+    assert(appState.activeCardId === null);
+    assert(appState.examMode === null);
+    assert(appState.questions.length === 0);
+    assert(appState.answers.length === 0);
+  });
+
+  test('goToLearn 需要 activeCardId', () => {
+    resetState();
+    let threw = false;
+    try { goToLearn(); } catch (e) { threw = true; }
+    assert(threw);
+  });
+
+  test('goToLearn 正确进入学习视图', () => {
+    resetState();
+    goToLearn('gui-zhi-tang');
+    assert(appState.page === 'learn');
+    assert(appState.activeCardId === 'gui-zhi-tang');
+  });
+
+  test('startFormulaExam 进入方剂模式并携带全向量', () => {
+    resetState();
+    startFormulaExam('gui-zhi-tang');
+    assert(appState.page === 'exam');
+    assert(appState.examMode === 'formula');
+    assert(appState.activeCardId === 'gui-zhi-tang');
+    assert(appState.examVectors.length === 8);
+    assert(appState.selectedCardIds[0] === 'gui-zhi-tang');
+  });
+
+  test('startClinicalExam 进入临床模式并限制卡片数', () => {
+    resetState();
+    startClinicalExam(['gui-zhi-tang', 'ma-huang-tang', 'ge-gen-tang'], 2);
+    assert(appState.page === 'exam');
+    assert(appState.examMode === 'clinical');
+    assert(appState.examVectors.length === 1);
+    assert(appState.examVectors[0] === '1→0');
+    assert(appState.selectedCardIds.length === 2);
+  });
+
+  test('非法 page 被拦截', () => {
+    resetState();
+    let threw = false;
+    try { transition({ page: 'unknown' }); } catch (e) { threw = true; }
+    assert(threw);
+  });
+
+  test('进入 exam 必须指定 examMode', () => {
+    resetState();
+    let threw = false;
+    try { transition({ page: 'exam' }); } catch (e) { threw = true; }
+    assert(threw);
+  });
+
+  test('非法 examMode 被拦截', () => {
+    resetState();
+    let threw = false;
+    try { transition({ page: 'exam', examMode: 'random' }); } catch (e) { threw = true; }
+    assert(threw);
+  });
+
+  test('从 learn 返回 dashboard 清理上下文', () => {
+    resetState();
+    goToLearn('gui-zhi-tang');
+    goToDashboard();
+    assert(appState.page === 'dashboard');
+    assert(appState.activeCardId === null);
+  });
+
+  const summary = `\n[v7 状态机单元测试] 通过 ${passed} / 失败 ${failed} / 总计 ${passed + failed}`;
+  logs.push(summary);
+  console.log(logs.join('\n'));
+  return { passed, failed, logs };
+}
+
+// ========== [v7 新写] 渲染引擎 ==========
+
+function renderByState() {
+  renderLeftPanel();
+  renderCenterPanel();
+  renderRightPanel();
+  renderTopbar();
+  updateShortcutBar();
+  updateDebugState();
+}
+
+// [调试] 临时状态显示
+function updateDebugState() {
+  const el = document.getElementById('debugState');
+  if (!el) return;
+  el.textContent = JSON.stringify({
+    page: appState.page,
+    examMode: appState.examMode,
+    activeCardId: appState.activeCardId,
+    selectedCardIds: appState.selectedCardIds,
+    examCardCount: appState.examCardCount
+  }, null, 2);
+}
+
+function hideAllCenterPanels() {
+  ['viewDashboard', 'viewLearn', 'viewExam'].forEach(id => {
+    document.getElementById(id).classList.remove('active');
+  });
+}
+
+function renderCenterPanel() {
+  hideAllCenterPanels();
+  switch (appState.page) {
+    case 'dashboard':
+      document.getElementById('viewDashboard').classList.add('active');
+      renderReviewDashboard();
+      break;
+    case 'learn':
+      document.getElementById('viewLearn').classList.add('active');
+      renderLearnCenter();
+      break;
+    case 'exam':
+      document.getElementById('viewExam').classList.add('active');
+      document.getElementById('examModePlaceholder').textContent = appState.examMode;
+      break;
+  }
+}
+
+// [v7 新写] 左栏渲染
+function renderLeftPanel() {
+  const container = document.getElementById('leftContent');
+  const indicator = document.getElementById('modeIndicator');
+  const badge = document.getElementById('modeBadge');
+
+  // 模式标签
+  if (appState.examMode === 'clinical') {
+    indicator.className = 'mode-indicator clinical';
+    badge.textContent = '🩺 临床模式';
+  } else {
+    indicator.className = 'mode-indicator formula';
+    badge.textContent = '📋 方剂模式';
+  }
+
+  // 卡片列表
+  container.innerHTML = CARDS.map(card => {
+    let classes = 'card-item';
+    const isLearnActive = appState.page === 'learn' && appState.activeCardId === card.id;
+    const isExamSelected = appState.page === 'exam' && appState.selectedCardIds.includes(card.id);
+    // 仪表盘临床模式：锚点高亮，同组卡片也标记
+    const isClinicalAnchor = appState.page === 'dashboard' && appState.examMode === 'clinical' && appState.activeCardId === card.id;
+    const isClinicalGroup = appState.page === 'dashboard' && appState.examMode === 'clinical' && appState.selectedCardIds.includes(card.id);
+
+    if (isLearnActive || isClinicalAnchor) classes += ' active';
+    if (isExamSelected || isClinicalGroup) classes += ' selected';
+
+    return `
+      <div class="${classes}" onclick="selectCard('${card.id}')">
+        <div class="card-item-name">${card.name}</div>
+        <div class="card-item-desc">${card.desc}</div>
+        <div class="card-item-progress">
+          ${[1, 2, 3, 4, 5].map(i => `<div class="progress-dot ${i <= 3 ? 'partial' : 'done'}"></div>`).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// [v7 新写] 顶部栏渲染
+function renderTopbar() {
+  const btn = document.getElementById('btnStartExam');
+  const icon = document.getElementById('btnStartExamIcon');
+  const label = document.getElementById('btnStartExamLabel');
+
+  if (appState.page === 'exam') {
+    icon.textContent = '📖';
+    label.textContent = '返回学习';
+    btn.onclick = () => goToLearn(appState.activeCardId || CARDS[0].id);
+    return;
+  }
+
+  if (appState.examMode === 'clinical') {
+    icon.textContent = '🩺';
+    label.textContent = '症状→方名考试';
+  } else {
+    icon.textContent = '📝';
+    label.textContent = '全向量考试';
+  }
+
+  btn.onclick = onStartExamClick;
+}
+
+// [v7 新写] 右栏渲染
+function renderRightPanel() {
+  const title = document.getElementById('rightPanelTitle');
+  const content = document.getElementById('rightPanelContent');
+
+  if (appState.page === 'dashboard' && appState.examMode === 'clinical') {
+    title.textContent = '🩺 本次考试卡片';
+    renderClinicalGroupPanel(content);
+  } else if (appState.page === 'learn' && appState.activeCardId) {
+    title.textContent = '🎯 掌握度';
+    renderMasteryPanel(content);
+  } else if (appState.page === 'exam') {
+    title.textContent = '📈 考试统计';
+    content.innerHTML = `
+      <div style="font-size:13px;color:var(--text-secondary);padding:8px 0;">
+        <div>模式：${appState.examMode === 'clinical' ? '临床模式' : '方剂模式'}</div>
+        <div>卡片：${appState.selectedCardIds.length} 张</div>
+        <div>向量：${appState.examVectors.map(v => VECTOR_LABEL[v]).join('、') || '—'}</div>
+      </div>
+    `;
+  } else {
+    title.textContent = '📅 复习概览';
+    content.innerHTML = `
+      <div style="font-size:12px;color:var(--text-muted);padding:8px 0;">
+        当前无待复习卡片（P0 使用空掌握度数据）。
+      </div>
+    `;
+  }
+}
+
+// [v7 新写] 掌握度面板
+function renderClinicalGroupPanel(container) {
+  const countOptions = [2, 3, 4, 5]
+    .map(n => `<option value="${n}" ${n === appState.examCardCount ? 'selected' : ''}>${n} 张</option>`)
+    .join('');
+
+  const countSelectorHtml = `
+    <div style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--text-secondary);">
+      <span>考试数量</span>
+      <select onchange="updateExamCardCount(this.value)" style="padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-primary);font-size:12px;cursor:pointer;">
+        ${countOptions}
+      </select>
+    </div>
+  `;
+
+  if (!appState.activeCardId) {
+    container.innerHTML = `
+      ${countSelectorHtml}
+      <div style="font-size:12px;color:var(--text-muted);padding:8px 0;">
+        点击左栏卡片选择主方，系统将自动补齐 ${appState.examCardCount - 1} 张相似方。
+      </div>
+    `;
+    return;
+  }
+
+  const cards = appState.selectedCardIds.map(id => getCard(id)).filter(Boolean);
+  const listHtml = cards.map((card, idx) => `
+    <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--bg-card);border-radius:5px;margin-bottom:4px;font-size:12px;border:1px solid var(--border);">
+      <span style="font-size:14px;">${idx === 0 ? '⚓' : '•'}</span>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-primary);">${card.name}</div>
+        <div style="font-size:11px;color:var(--text-secondary);">${card.desc}</div>
+      </div>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    ${countSelectorHtml}
+    <div style="margin-bottom:8px;font-size:12px;color:var(--text-secondary);">
+      共 ${cards.length} 张，按 <kbd style="font-family:inherit;padding:1px 4px;border-radius:3px;background:var(--bg-hover);border:1px solid var(--border);font-size:10px;">空格</kbd> 开始考试
+    </div>
+    ${listHtml}
+    <button class="topbar-btn" onclick="reshuffleClinicalGroup()" style="width:100%;margin-top:8px;justify-content:center;">🔀 换一批</button>
+  `;
+}
+
+function renderMasteryPanel(container) {
+  const card = getCard(appState.activeCardId);
+  if (!card) {
+    container.innerHTML = '<div style="font-size:12px;color:var(--text-muted);">未找到卡片</div>';
+    return;
+  }
+
+  const html = ALL_VECTOR_IDS.map(vid => {
+    const m = card.mastery[vid];
+    const disp = STATUS_DISPLAY[m.status] || STATUS_DISPLAY['未知'];
+    return `
+      <div class="mastery-vector">
+        <div class="mastery-vector-name">${VECTOR_LABEL[vid]}</div>
+        <div class="mastery-vector-bar">
+          <div class="mastery-vector-fill" style="width:${disp.pct}%;background:${disp.color};"></div>
+        </div>
+        <div class="mastery-vector-status">${m.status}${m.level > 0 ? ' · Lv.' + m.level : ''}</div>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `<div class="mastery-grid">${html}</div>`;
+}
+
+// [复用 v6] 复习仪表盘（P0 简化版：基于空数据展示结构）
+function renderReviewDashboard() {
+  const overdue = [];
+  const today = [];
+  const future = [];
+
+  renderReviewSection('reviewOverdue', 'overdue', '🔴 已逾期', overdue);
+  renderReviewSection('reviewToday', 'today', '🟡 今日待复习', today);
+  renderReviewSection('reviewFuture', 'future', '🟢 未来7天', future);
+}
+
+function renderReviewSection(containerId, status, title, items) {
+  const container = document.getElementById(containerId);
+  const count = items.length;
+  const countId = status + 'Count';
+  let html = `<div class="review-section-title ${status}">${title}：<span id="${countId}">${count}</span> 张</div>`;
+  if (count === 0) {
+    html += `<div style="font-size:12px;color:var(--text-muted);padding:6px 0;">暂无卡片</div>`;
+  }
+  container.innerHTML = html;
+}
+
+// [复用 v6] 卡片详情渲染（已适配 v7 数据字段）
+function renderLearnCenter() {
+  const card = getCard(appState.activeCardId);
+  if (!card) return;
+
+  document.getElementById('detailName').textContent = card.name;
+  document.getElementById('detailTags').innerHTML = card.tags
+    .map(t => `<span class="tag">${t}</span>`)
+    .join('');
+  document.getElementById('detailText').textContent = card.data.source_text;
+  document.getElementById('detailHerbs').innerHTML = card.data.herbs
+    .map(h => `<div class="herb-item"><div class="herb-name">${h.name}</div><div class="herb-dose">${h.dosage}</div></div>`)
+    .join('');
+  document.getElementById('detailDiagnosis').innerHTML = `
+    <b>主症：</b>${card.data.symptoms.join('、')}<br>
+    <b>病机：</b>${card.data.pathology}
+  `;
+  document.getElementById('detailContraindications').textContent =
+    card.data.contraindications.join('、') || '无明确禁忌';
+
+  // 易混方
+  const confusable = card.data.confusable_formulas || [];
+  const confusableTitle = document.getElementById('confusableTitle');
+  const detailConfusable = document.getElementById('detailConfusable');
+  if (confusable.length > 0) {
+    confusableTitle.style.display = 'block';
+    detailConfusable.style.display = 'block';
+    detailConfusable.innerHTML = confusable.map(id => {
+      const c = CARDS.find(x => x.id === id);
+      return c ? `<span class="tag">${c.name}</span>` : '';
+    }).join(' ');
+  } else {
+    confusableTitle.style.display = 'none';
+    detailConfusable.style.display = 'none';
+  }
+
+  // 更新学习提示
+  const modeName = appState.examMode === 'clinical' ? '临床模式' : '方剂模式';
+  const examDesc = appState.examMode === 'clinical'
+    ? '症状→方名填空题'
+    : '全向量选择题';
+  document.getElementById('learnHint').innerHTML = `
+    💡 当前为<b>${modeName}</b>，按 <kbd>空格</kbd> 或 <kbd>Enter</kbd> 开始${examDesc}；
+    按 <kbd>Tab</kbd> 切换模式；按 <kbd>ESC</kbd> 返回仪表盘。
+  `;
+}
+
+// [v7 新写] 底部快捷键提示更新
+function updateShortcutBar() {
+  const bar = document.getElementById('shortcutBar');
+  if (appState.page === 'exam') {
+    bar.innerHTML = `
+      <div class="shortcut-item"><span class="shortcut-kbd">ESC</span> 返回学习</div>
+      <div class="shortcut-item">P1 阶段将补全考试键位</div>
+    `;
+  } else {
+    bar.innerHTML = `
+      <div class="shortcut-item"><span class="shortcut-kbd">空格</span> 确认/前进</div>
+      <div class="shortcut-item"><span class="shortcut-kbd">Enter</span> 提交/确认</div>
+      <div class="shortcut-item"><span class="shortcut-kbd">ESC</span> 取消/返回</div>
+      <div class="shortcut-item"><span class="shortcut-kbd">Tab</span> 切换模式</div>
+    `;
+  }
+}
+
+// ========== [v7 新写] 交互处理 ==========
+
+function selectCard(cardId) {
+  // 仪表盘 + 临床模式：点击卡片设为锚点并生成考试组
+  if (appState.page === 'dashboard' && appState.examMode === 'clinical') {
+    selectAnchor(cardId);
+    return;
+  }
+  goToLearn(cardId);
+}
+
+function toggleExamMode() {
+  // 考试进行中不切换模式
+  if (appState.page === 'exam') return;
+  appState.examMode = appState.examMode === 'clinical' ? 'formula' : 'clinical';
+  renderByState();
+}
+
+function onStartExamClick() {
+  if (appState.page === 'exam') {
+    goToLearn(appState.activeCardId || CARDS[0].id);
+    return;
+  }
+  if (appState.page === 'learn' && appState.activeCardId) {
+    if (appState.examMode === 'clinical') {
+      const group = buildClinicalGroup(appState.activeCardId, appState.examCardCount);
+      startClinicalExam(group, appState.examCardCount);
+    } else {
+      startFormulaExam(appState.activeCardId);
+    }
+  } else if (appState.page === 'dashboard') {
+    if (appState.examMode === 'clinical') {
+      // 仪表盘临床模式：以第一张卡为锚点组卷
+      const anchorId = appState.activeCardId || CARDS[0].id;
+      if (!appState.activeCardId) {
+        selectAnchor(anchorId);
+      }
+      startClinicalExam(appState.selectedCardIds, appState.examCardCount);
+    } else {
+      // 仪表盘方剂模式：进入第一张卡片学习视图
+      goToLearn(CARDS[0].id);
+    }
+  }
+}
+
+// [v7 新写] 键盘事件总线
+function handleDashboardKeys(k, e) {
+  if (k === ' ' || k === 'enter') {
+    e.preventDefault();
+    if (appState.examMode === 'clinical') {
+      const anchorId = appState.activeCardId || CARDS[0].id;
+      if (!appState.activeCardId) {
+        selectAnchor(anchorId);
+      }
+      startClinicalExam(appState.selectedCardIds, appState.examCardCount);
+    } else {
+      goToLearn(CARDS[0].id);
+    }
+  }
+}
+
+function handleLearnKeys(k, e) {
+  if (k === ' ' || k === 'enter') {
+    e.preventDefault();
+    if (appState.examMode === 'clinical') {
+      const group = buildClinicalGroup(appState.activeCardId, appState.examCardCount);
+      startClinicalExam(group, appState.examCardCount);
+    } else {
+      startFormulaExam(appState.activeCardId);
+    }
+  } else if (k === 'escape') {
+    e.preventDefault();
+    goToDashboard();
+  }
+}
+
+function handleExamKeys(k, e) {
+  if (k === 'escape') {
+    e.preventDefault();
+    if (confirm('确定要退出当前考试吗？')) {
+      goToLearn(appState.activeCardId || CARDS[0].id);
+    }
+  }
+}
+
+// [v7 新写] 视觉主题切换（复用 v6 逻辑）
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').textContent = next === 'light' ? '🌙' : '☀️';
+  localStorage.setItem('sh_theme', next);
+}
+
+function loadTheme() {
+  const saved = localStorage.getItem('sh_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('themeIcon').textContent = saved === 'light' ? '🌙' : '☀️';
+}
+
+// ========== [v7 新写] 初始化 ==========
+
+document.addEventListener('keydown', (e) => {
+  // 输入框聚焦时，除 ESC/Tab 外不拦截
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+    if (e.key !== 'Escape' && e.key !== 'Tab') return;
+  }
+
+  const k = e.key.toLowerCase();
+
+  if (k === 'tab') {
+    e.preventDefault();
+    toggleExamMode();
+    return;
+  }
+
+  switch (appState.page) {
+    case 'dashboard': handleDashboardKeys(k, e); break;
+    case 'learn': handleLearnKeys(k, e); break;
+    case 'exam': handleExamKeys(k, e); break;
+  }
+});
+
+function init() {
+  loadTheme();
+  // 先运行状态机单元测试，确保迁移逻辑正确
+  const testResult = runStateMachineTests();
+  if (testResult.failed > 0) {
+    document.body.innerHTML = `<div style="padding:20px;color:red;">状态机单元测试失败 ${testResult.failed} 项，请打开控制台查看详情。</div>`;
+    return;
+  }
+  // 重置为初始状态后渲染
+  goToDashboard();
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

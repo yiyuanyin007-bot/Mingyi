@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>经方标签体系设计原型 · 交互体验</title>
+<style>
+:root {
+  --bg: #f5f5f0; --bg-card: #fff; --bg-panel: #fafaf8;
+  --text: #1a1a1a; --text-secondary: #555; --text-muted: #999;
+  --border: #e0e0d8; --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --accent: #047857;
+
+  /* 六经颜色 */
+  --taiyang: #E87A3D; --yangming: #D9534F; --shaoyang: #5CB85C;
+  --shaoyin: #337AB7; --jueyin: #9B59B6; --taiyin: #F0AD4E;
+  --hebing: #999;
+
+  /* 标签层级颜色 */
+  --symptom-bg: #f5f5f5; --symptom-text: #666;
+  --pathology-bg: #f5f0e8; --pathology-text: #8b7355;
+  --herb-bg: #e8e8e8; --herb-text: #777;
+  --special-bg: #fff8dc; --special-text: #8b6914;
+  --dynamic-weak: #ffebee; --dynamic-weak-text: #c62828;
+  --dynamic-master: #e8f5e9; --dynamic-master-text: #2e7d32;
+  --dynamic-confuse: #fff3e0; --dynamic-confuse-text: #ef6c00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+/* 头部 */
+header { text-align: center; padding: 30px 0; border-bottom: 2px solid var(--border); margin-bottom: 24px; }
+header h1 { font-size: 28px; margin-bottom: 8px; }
+header p { color: var(--text-secondary); font-size: 15px; }
+
+/* 说明面板 */
+.info-panel {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow);
+}
+.info-panel h2 { font-size: 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.info-panel .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.info-panel .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+.info-panel .legend-item .dot { width: 14px; height: 14px; border-radius: 4px; }
+
+/* 筛选区 */
+.filter-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow); }
+.filter-section h3 { font-size: 16px; margin-bottom: 12px; color: var(--text-secondary); }
+.filter-group { margin-bottom: 16px; }
+.filter-group:last-child { margin-bottom: 0; }
+.filter-group-label { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.filter-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-tag {
+  padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer;
+  border: 2px solid transparent; transition: all 0.15s; user-select: none;
+  background: var(--bg-panel); color: var(--text-secondary);
+}
+.filter-tag:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.filter-tag.active { border-color: var(--accent); color: var(--accent); background: #ecfdf5; font-weight: 600; }
+
+/* 六经筛选标签颜色 */
+.filter-tag.taiyang { background: #fdf2e9; color: #c05621; }
+.filter-tag.taiyang.active { border-color: var(--taiyang); background: #fdf2e9; color: #c05621; }
+.filter-tag.yangming { background: #fde8e8; color: #c53030; }
+.filter-tag.yangming.active { border-color: var(--yangming); background: #fde8e8; color: #c53030; }
+.filter-tag.shaoyang { background: #e6f4ea; color: #2f855a; }
+.filter-tag.shaoyang.active { border-color: var(--shaoyang); background: #e6f4ea; color: #2f855a; }
+.filter-tag.shaoyin { background: #e8f0fe; color: #1d4ed8; }
+.filter-tag.shaoyin.active { border-color: var(--shaoyin); background: #e8f0fe; color: #1d4ed8; }
+.filter-tag.jueyin { background: #f3e8fd; color: #7c3aed; }
+.filter-tag.jueyin.active { border-color: var(--jueyin); background: #f3e8fd; color: #7c3aed; }
+.filter-tag.taiyin { background: #fef9e7; color: #b7791f; }
+.filter-tag.taiyin.active { border-color: var(--taiyin); background: #fef9e7; color: #b7791f; }
+
+/* 卡片网格 */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin-bottom: 24px; }
+
+/* 卡片 */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 20px; box-shadow: var(--shadow); transition: all 0.2s; position: relative;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.card.hidden { display: none; }
+
+/* 卡片头部 */
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.card-title { font-size: 20px; font-weight: 700; color: var(--text); }
+.card-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+/* 第一层标签：六经 + 类型 */
+.layer-1 { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.tag-l1 {
+  padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: 700;
+  color: white; display: inline-flex; align-items: center; gap: 4px;
+}
+.tag-l1.taiyang { background: var(--taiyang); }
+.tag-l1.yangming { background: var(--yangming); }
+.tag-l1.shaoyang { background: var(--shaoyang); }
+.tag-l1.shaoyin { background: var(--shaoyin); }
+.tag-l1.jueyin { background: var(--jueyin); }
+.tag-l1.taiyin { background: var(--taiyin); }
+.tag-l1.hebing { background: var(--hebing); }
+.tag-l1.type { background: #4a5568; }
+
+/* 第二层标签：症状 + 病机 + 药对 + 特殊 */
+.layer-2 { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.tag-l2 {
+  padding: 4px 10px; border-radius: 14px; font-size: 13px; cursor: pointer;
+  transition: all 0.15s; border: 1px solid transparent;
+}
+.tag-l2:hover { transform: scale(1.05); }
+.tag-l2.symptom { background: var(--symptom-bg); color: var(--symptom-text); border-color: #ddd; }
+.tag-l2.pathology { background: var(--pathology-bg); color: var(--pathology-text); border-color: #e0d8c8; }
+.tag-l2.herb { background: var(--herb-bg); color: var(--herb-text); border-color: #d0d0d0; }
+.tag-l2.special { background: var(--special-bg); color: var(--special-text); border-color: #f0e0a0; }
+
+/* 第三层标签：动态 */
+.layer-3 { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+.tag-l3 {
+  padding: 3px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;
+}
+.tag-l3.weak { background: var(--dynamic-weak); color: var(--dynamic-weak-text); }
+.tag-l3.master { background: var(--dynamic-master); color: var(--dynamic-master-text); }
+.tag-l3.confuse { background: var(--dynamic-confuse); color: var(--dynamic-confuse-text); }
+
+/* 卡片内容 */
+.card-content { font-size: 14px; color: var(--text-secondary); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+.card-content .pathology-text { font-style: italic; color: var(--text-muted); margin-bottom: 6px; }
+.card-content .symptoms { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.card-content .symptom-pill {
+  font-size: 12px; padding: 2px 8px; border-radius: 10px; background: #f0f0f0; color: #666;
+}
+.card-content .symptom-pill.necessary { background: #ffe0e0; color: #c53030; font-weight: 600; }
+
+/* 详情展开 */
+.card-detail {
+  max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  margin-top: 0;
+}
+.card-detail.expanded { max-height: 500px; margin-top: 14px; }
+.card-detail-inner {
+  background: var(--bg-panel); border-radius: 10px; padding: 14px; font-size: 13px;
+  border: 1px solid var(--border);
+}
+.card-detail-inner h4 { font-size: 14px; margin-bottom: 8px; color: var(--text); }
+.card-detail-inner .detail-row { margin-bottom: 8px; }
+.card-detail-inner .detail-label { color: var(--text-muted); font-size: 12px; }
+.card-detail-inner .detail-value { color: var(--text); }
+
+/* 展开按钮 */
+.expand-btn {
+  width: 100%; padding: 8px; margin-top: 12px; border: 1px solid var(--border);
+  background: var(--bg-panel); border-radius: 8px; cursor: pointer; font-size: 13px;
+  color: var(--text-secondary); transition: all 0.15s;
+}
+.expand-btn:hover { background: var(--border); }
+
+/* 统计栏 */
+.stats-bar {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 24px; display: flex; gap: 24px; flex-wrap: wrap;
+  box-shadow: var(--shadow); font-size: 14px;
+}
+.stats-bar .stat { display: flex; align-items: center; gap: 6px; }
+.stats-bar .stat-number { font-size: 20px; font-weight: 700; color: var(--accent); }
+.stats-bar .stat-label { color: var(--text-secondary); }
+
+/* 标签树 */
+.tag-tree {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow);
+}
+.tag-tree h3 { font-size: 16px; margin-bottom: 16px; }
+.tree-node { margin-left: 20px; margin-bottom: 8px; position: relative; }
+.tree-node::before {
+  content: ''; position: absolute; left: -14px; top: 0; bottom: 0;
+  width: 2px; background: var(--border);
+}
+.tree-node::after {
+  content: ''; position: absolute; left: -14px; top: 10px;
+  width: 10px; height: 2px; background: var(--border);
+}
+.tree-node-header {
+  display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 4px 0;
+  font-weight: 600; font-size: 14px;
+}
+.tree-node-header:hover { color: var(--accent); }
+.tree-node-count {
+  font-size: 12px; color: var(--text-muted); background: var(--bg-panel);
+  padding: 2px 8px; border-radius: 10px;
+}
+.tree-leaf { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; margin-left: 20px; }
+.tree-leaf-item {
+  font-size: 12px; padding: 3px 10px; border-radius: 12px; background: var(--bg-panel);
+  border: 1px solid var(--border); cursor: pointer; color: var(--text-secondary);
+}
+.tree-leaf-item:hover { background: var(--border); }
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .filter-tags { gap: 6px; }
+  .filter-tag { padding: 5px 10px; font-size: 12px; }
+}
+
+/* 提示 */
+.tip {
+  background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 8px;
+  padding: 12px 16px; margin-bottom: 20px; font-size: 13px; color: #096dd9;
+}
+.tip strong { color: #0050b3; }
+
+/* 模拟控制 */
+.sim-controls {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 24px; box-shadow: var(--shadow);
+}
+.sim-controls h3 { font-size: 16px; margin-bottom: 12px; }
+.sim-controls .sim-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+.sim-btn {
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-panel); cursor: pointer; font-size: 13px; transition: all 0.15s;
+}
+.sim-btn:hover { background: var(--border); }
+.sim-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <h1>🎯 经方标签体系设计原型</h1>
+  <p>三层标签体系 · 交互体验 · 请测试筛选、点击、展开功能</p>
+</header>
+
+<div class="tip">
+  <strong>💡 操作提示：</strong>点击上方筛选标签可过滤卡片；点击卡片中的标签（症状/病机/药对）可查看同类卡片；点击「展开详情」查看完整标签映射和层次结构。
+  <br>点击下方「模拟学习状态」按钮，可体验动态标签（薄弱/已掌握/易混淆）的变化。
+</div>
+
+<div class="info-panel">
+  <h2>🏷️ 标签层次说明</h2>
+  <div class="legend">
+    <div class="legend-item"><div class="dot" style="background:#E87A3D"></div>第一层：六经归属（固定，左上）</div>
+    <div class="legend-item"><div class="dot" style="background:#4a5568"></div>第一层：方剂类型（固定，左上）</div>
+    <div class="legend-item"><div class="dot" style="background:#f5f5f5;border:1px solid #ddd"></div>第二层：核心症状（固定，中部）</div>
+    <div class="legend-item"><div class="dot" style="background:#f5f0e8;border:1px solid #e0d8c8"></div>第二层：核心病机（固定，中部）</div>
+    <div class="legend-item"><div class="dot" style="background:#e8e8e8;border:1px solid #d0d0d0"></div>第二层：核心药对（固定，中部）</div>
+    <div class="legend-item"><div class="dot" style="background:#fff8dc;border:1px solid #f0e0a0"></div>第二层：特殊属性（固定，中部）</div>
+    <div class="legend-item"><div class="dot" style="background:#ffebee"></div>第三层：薄弱向量（动态，右下）</div>
+    <div class="legend-item"><div class="dot" style="background:#e8f5e9"></div>第三层：已掌握（动态，右下）</div>
+    <div class="legend-item"><div class="dot" style="background:#fff3e0"></div>第三层：易混淆（动态，右下）</div>
+  </div>
+</div>
+
+<!-- 模拟学习状态控制 -->
+<div class="sim-controls">
+  <h3>🎮 模拟学习状态（测试动态标签）</h3>
+  <div class="sim-buttons">
+    <button class="sim-btn" onclick="simulateState('weak')">模拟：有薄弱向量</button>
+    <button class="sim-btn" onclick="simulateState('master')">模拟：全部已掌握</button>
+    <button class="sim-btn" onclick="simulateState('confuse')">模拟：易混淆方</button>
+    <button class="sim-btn" onclick="simulateState('reset')">重置：清除动态标签</button>
+  </div>
+</div>
+
+<!-- 筛选区 -->
+<div class="filter-section">
+  <h3>🔍 按标签筛选卡片</h3>
+  
+  <div class="filter-group">
+    <div class="filter-group-label">六经归属（第一层）</div>
+    <div class="filter-tags" id="filter-meridian">
+      <span class="filter-tag taiyang" data-filter="太阳病" onclick="toggleFilter(this)">太阳病 🟠</span>
+      <span class="filter-tag yangming" data-filter="阳明病" onclick="toggleFilter(this)">阳明病 🔴</span>
+      <span class="filter-tag shaoyang" data-filter="少阳病" onclick="toggleFilter(this)">少阳病 🟢</span>
+      <span class="filter-tag shaoyin" data-filter="少阴病" onclick="toggleFilter(this)">少阴病 🔵</span>
+      <span class="filter-tag jueyin" data-filter="厥阴病" onclick="toggleFilter(this)">厥阴病 🟣</span>
+      <span class="filter-tag taiyin" data-filter="太阴病" onclick="toggleFilter(this)">太阴病 🟡</span>
+    </div>
+  </div>
+  
+  <div class="filter-group">
+    <div class="filter-group-label">方剂类型（第一层）</div>
+    <div class="filter-tags" id="filter-type">
+      <span class="filter-tag" data-filter="解表剂" onclick="toggleFilter(this)">解表剂</span>
+      <span class="filter-tag" data-filter="攻下剂" onclick="toggleFilter(this)">攻下剂</span>
+      <span class="filter-tag" data-filter="和解剂" onclick="toggleFilter(this)">和解剂</span>
+      <span class="filter-tag" data-filter="温里剂" onclick="toggleFilter(this)">温里剂</span>
+      <span class="filter-tag" data-filter="清热剂" onclick="toggleFilter(this)">清热剂</span>
+      <span class="filter-tag" data-filter="补益剂" onclick="toggleFilter(this)">补益剂</span>
+      <span class="filter-tag" data-filter="祛湿剂" onclick="toggleFilter(this)">祛湿剂</span>
+      <span class="filter-tag" data-filter="理血剂" onclick="toggleFilter(this)">理血剂</span>
+      <span class="filter-tag" data-filter="固涩剂" onclick="toggleFilter(this)">固涩剂</span>
+    </div>
+  </div>
+  
+  <div class="filter-group">
+    <div class="filter-group-label">核心症状（第二层）</div>
+    <div class="filter-tags" id="filter-symptom">
+      <span class="filter-tag" data-filter="汗出" onclick="toggleFilter(this)">汗出</span>
+      <span class="filter-tag" data-filter="无汗" onclick="toggleFilter(this)">无汗</span>
+      <span class="filter-tag" data-filter="发热" onclick="toggleFilter(this)">发热</span>
+      <span class="filter-tag" data-filter="恶寒" onclick="toggleFilter(this)">恶寒</span>
+      <span class="filter-tag" data-filter="头痛" onclick="toggleFilter(this)">头痛</span>
+      <span class="filter-tag" data-filter="身痛" onclick="toggleFilter(this)">身痛</span>
+      <span class="filter-tag" data-filter="喘咳" onclick="toggleFilter(this)">喘/咳</span>
+      <span class="filter-tag" data-filter="呕吐" onclick="toggleFilter(this)">呕吐</span>
+      <span class="filter-tag" data-filter="下利" onclick="toggleFilter(this)">下利</span>
+      <span class="filter-tag" data-filter="便秘" onclick="toggleFilter(this)">便秘</span>
+      <span class="filter-tag" data-filter="烦躁" onclick="toggleFilter(this)">烦躁</span>
+      <span class="filter-tag" data-filter="心悸" onclick="toggleFilter(this)">心悸</span>
+      <span class="filter-tag" data-filter="腹满痛" onclick="toggleFilter(this)">腹满痛</span>
+      <span class="filter-tag" data-filter="小便不利" onclick="toggleFilter(this)">小便不利</span>
+      <span class="filter-tag" data-filter="口渴" onclick="toggleFilter(this)">口渴</span>
+      <span class="filter-tag" data-filter="项背强" onclick="toggleFilter(this)">项背强</span>
+      <span class="filter-tag" data-filter="厥逆" onclick="toggleFilter(this)">厥逆</span>
+      <span class="filter-tag" data-filter="不眠" onclick="toggleFilter(this)">不眠</span>
+      <span class="filter-tag" data-filter="胸胁满" onclick="toggleFilter(this)">胸胁满</span>
+      <span class="filter-tag" data-filter="谵语" onclick="toggleFilter(this)">谵语</span>
+      <span class="filter-tag" data-filter="瘀血" onclick="toggleFilter(this)">瘀血</span>
+      <span class="filter-tag" data-filter="水饮" onclick="toggleFilter(this)">水饮</span>
+      <span class="filter-tag" data-filter="黄疸" onclick="toggleFilter(this)">黄疸</span>
+      <span class="filter-tag" data-filter="蛔虫" onclick="toggleFilter(this)">蛔虫</span>
+      <span class="filter-tag" data-filter="表郁" onclick="toggleFilter(this)">表郁</span>
+    </div>
+  </div>
+  
+  <div class="filter-group">
+    <div class="filter-group-label">核心病机（第二层）</div>
+    <div class="filter-tags" id="filter-pathology">
+      <span class="filter-tag" data-filter="表虚" onclick="toggleFilter(this)">表虚</span>
+      <span class="filter-tag" data-filter="表实" onclick="toggleFilter(this)">表实</span>
+      <span class="filter-tag" data-filter="表郁" onclick="toggleFilter(this)">表郁</span>
+      <span class="filter-tag" data-filter="里热" onclick="toggleFilter(this)">里热</span>
+      <span class="filter-tag" data-filter="腑实" onclick="toggleFilter(this)">腑实</span>
+      <span class="filter-tag" data-filter="少阳枢机" onclick="toggleFilter(this)">少阳枢机</span>
+      <span class="filter-tag" data-filter="阳虚" onclick="toggleFilter(this)">阳虚</span>
+      <span class="filter-tag" data-filter="阴虚" onclick="toggleFilter(this)">阴虚</span>
+      <span class="filter-tag" data-filter="阴阳两虚" onclick="toggleFilter(this)">阴阳两虚</span>
+      <span class="filter-tag" data-filter="寒热错杂" onclick="toggleFilter(this)">寒热错杂</span>
+      <span class="filter-tag" data-filter="水饮内停" onclick="toggleFilter(this)">水饮内停</span>
+      <span class="filter-tag" data-filter="瘀血内阻" onclick="toggleFilter(this)">瘀血内阻</span>
+      <span class="filter-tag" data-filter="湿热蕴结" onclick="toggleFilter(this)">湿热蕴结</span>
+      <span class="filter-tag" data-filter="肝气郁结" onclick="toggleFilter(this)">肝气郁结</span>
+      <span class="filter-tag" data-filter="营卫不和" onclick="toggleFilter(this)">营卫不和</span>
+      <span class="filter-tag" data-filter="太少两感" onclick="toggleFilter(this)">太少两感</span>
+      <span class="filter-tag" data-filter="阳明少阳" onclick="toggleFilter(this)">阳明少阳</span>
+    </div>
+  </div>
+  
+  <div class="filter-group">
+    <div class="filter-group-label">核心药对（第二层）</div>
+    <div class="filter-tags" id="filter-herb">
+      <span class="filter-tag" data-filter="桂芍" onclick="toggleFilter(this)">桂芍</span>
+      <span class="filter-tag" data-filter="麻桂" onclick="toggleFilter(this)">麻桂</span>
+      <span class="filter-tag" data-filter="柴芩" onclick="toggleFilter(this)">柴芩</span>
+      <span class="filter-tag" data-filter="附姜" onclick="toggleFilter(this)">附姜</span>
+      <span class="filter-tag" data-filter="苓桂" onclick="toggleFilter(this)">苓桂</span>
+      <span class="filter-tag" data-filter="麻杏" onclick="toggleFilter(this)">麻杏</span>
+      <span class="filter-tag" data-filter="石膏知母" onclick="toggleFilter(this)">石膏知母</span>
+      <span class="filter-tag" data-filter="桃核" onclick="toggleFilter(this)">桃核</span>
+      <span class="filter-tag" data-filter="归桂" onclick="toggleFilter(this)">归桂</span>
+      <span class="filter-tag" data-filter="芍甘" onclick="toggleFilter(this)">芍甘</span>
+      <span class="filter-tag" data-filter="栀豉" onclick="toggleFilter(this)">栀豉</span>
+      <span class="filter-tag" data-filter="连胶" onclick="toggleFilter(this)">连胶</span>
+      <span class="filter-tag" data-filter="乌头" onclick="toggleFilter(this)">乌头</span>
+      <span class="filter-tag" data-filter="参姜" onclick="toggleFilter(this)">参姜</span>
+      <span class="filter-tag" data-filter="苓术" onclick="toggleFilter(this)">苓术</span>
+      <span class="filter-tag" data-filter="附术" onclick="toggleFilter(this)">附术</span>
+      <span class="filter-tag" data-filter="茵栀" onclick="toggleFilter(this)">茵栀</span>
+      <span class="filter-tag" data-filter="黄白" onclick="toggleFilter(this)">黄白</span>
+      <span class="filter-tag" data-filter="猪胶" onclick="toggleFilter(this)">猪胶</span>
+      <span class="filter-tag" data-filter="麻子" onclick="toggleFilter(this)">麻子</span>
+      <span class="filter-tag" data-filter="大黄硝" onclick="toggleFilter(this)">大黄硝</span>
+      <span class="filter-tag" data-filter="抵当" onclick="toggleFilter(this)">抵当</span>
+    </div>
+  </div>
+  
+  <div class="filter-group">
+    <div class="filter-group-label">特殊属性（第二层）</div>
+    <div class="filter-tags" id="filter-special">
+      <span class="filter-tag" data-filter="太少两感" onclick="toggleFilter(this)">太少两感</span>
+      <span class="filter-tag" data-filter="表里双解" onclick="toggleFilter(this)">表里双解</span>
+      <span class="filter-tag" data-filter="寒热错杂" onclick="toggleFilter(this)">寒热错杂</span>
+      <span class="filter-tag" data-filter="上热下寒" onclick="toggleFilter(this)">上热下寒</span>
+      <span class="filter-tag" data-filter="阳郁厥逆" onclick="toggleFilter(this)">阳郁厥逆</span>
+      <span class="filter-tag" data-filter="戴阳" onclick="toggleFilter(this)">戴阳</span>
+      <span class="filter-tag" data-filter="脾约" onclick="toggleFilter(this)">脾约</span>
+      <span class="filter-tag" data-filter="蓄水" onclick="toggleFilter(this)">蓄水</span>
+      <span class="filter-tag" data-filter="蓄血" onclick="toggleFilter(this)">蓄血</span>
+      <span class="filter-tag" data-filter="水逆" onclick="toggleFilter(this)">水逆</span>
+      <span class="filter-tag" data-filter="蛔厥" onclick="toggleFilter(this)">蛔厥</span>
+      <span class="filter-tag" data-filter="阴盛格阳" onclick="toggleFilter(this)">阴盛格阳</span>
+      <span class="filter-tag" data-filter="亡阳虚脱" onclick="toggleFilter(this)">亡阳虚脱</span>
+      <span class="filter-tag" data-filter="气阴两伤" onclick="toggleFilter(this)">气阴两伤</span>
+      <span class="filter-tag" data-filter="心肾不交" onclick="toggleFilter(this)">心肾不交</span>
+      <span class="filter-tag" data-filter="血虚寒厥" onclick="toggleFilter(this)">血虚寒厥</span>
+      <span class="filter-tag" data-filter="风湿痹痛" onclick="toggleFilter(this)">风湿痹痛</span>
+      <span class="filter-tag" data-filter="阳虚外感" onclick="toggleFilter(this)">阳虚外感</span>
+      <span class="filter-tag" data-filter="误下后" onclick="toggleFilter(this)">误下后</span>
+      <span class="filter-tag" data-filter="急救回阳" onclick="toggleFilter(this)">急救回阳</span>
+    </div>
+  </div>
+  
+  <div style="margin-top:16px;display:flex;gap:10px;">
+    <button class="sim-btn" onclick="clearFilters()">清除全部筛选</button>
+    <span id="filter-status" style="font-size:13px;color:var(--text-muted);align-self:center;">已显示全部 15 张代表卡片</span>
+  </div>
+</div>
+
+<!-- 统计栏 -->
+<div class="stats-bar" id="stats-bar">
+  <div class="stat"><span class="stat-number" id="stat-visible">15</span><span class="stat-label">张可见</span></div>
+  <div class="stat"><span class="stat-number">63</span><span class="stat-label">总卡片</span></div>
+  <div class="stat"><span class="stat-number">6</span><span class="stat-label">六经</span></div>
+  <div class="stat"><span class="stat-number">11</span><span class="stat-label">方剂类型</span></div>
+  <div class="stat"><span class="stat-number">25</span><span class="stat-label">症状标签</span></div>
+  <div class="stat"><span class="stat-number">18</span><span class="stat-label">病机标签</span></div>
+  <div class="stat"><span class="stat-number">30</span><span class="stat-label">药对标签</span></div>
+  <div class="stat"><span class="stat-number">20</span><span class="stat-label">特殊属性</span></div>
+</div>
+
+<!-- 卡片网格 -->
+<div class="card-grid" id="card-grid">
+  <!-- 卡片由JS生成 -->
+</div>
+
+<!-- 标签树 -->
+<div class="tag-tree">
+  <h3>🌲 标签层次树（六经 → 病机 → 代表方）</h3>
+  <div id="tag-tree-content">
+    <!-- 由JS生成 -->
+  </div>
+</div>
+
+</div>
+
+<script>
+// ============== 数据 ==============
+const cards = [
+  {
+    id: 'gui-zhi-tang', name: '桂枝汤', subtitle: '太阳中风主方',
+    meridian: '太阳病', type: '解表剂', meridianClass: 'taiyang',
+    symptoms: ['汗出','恶风','头痛','发热'],
+    pathology: ['表虚','营卫不和'],
+    herbs: ['桂芍'],
+    special: [],
+    dynamic: [],
+    pathologyText: '风邪袭表，营卫不和',
+    necessary: ['汗出','恶风'], common: ['头痛','发热','脉浮缓'],
+    contras: ['无汗','脉浮紧'],
+    herbList: '桂枝三两、芍药三两、甘草二两、生姜三两、大枣十二枚',
+    source: '太阳病篇 · 第12条'
+  },
+  {
+    id: 'ma-huang-tang', name: '麻黄汤', subtitle: '太阳伤寒主方',
+    meridian: '太阳病', type: '解表剂', meridianClass: 'taiyang',
+    symptoms: ['无汗','喘咳','身痛','恶寒'],
+    pathology: ['表实','寒邪束表'],
+    herbs: ['麻桂'],
+    special: [],
+    dynamic: [],
+    pathologyText: '寒邪束表，营卫闭塞，肺气不宣',
+    necessary: ['无汗','喘'], common: ['头痛发热','身疼腰痛','骨节疼痛','脉浮紧'],
+    contras: ['汗出','脉浮缓'],
+    herbList: '麻黄三两、桂枝二两、杏仁七十个、甘草一两',
+    source: '太阳病篇 · 第35条'
+  },
+  {
+    id: 'da-cheng-qi-tang', name: '大承气汤', subtitle: '阳明腑实重证',
+    meridian: '阳明病', type: '攻下剂', meridianClass: 'yangming',
+    symptoms: ['便秘','腹满痛','烦躁','谵语'],
+    pathology: ['腑实','里热'],
+    herbs: ['大黄硝'],
+    special: ['重证'],
+    dynamic: [],
+    pathologyText: '阳明腑实，燥屎内结，热结肠腑',
+    necessary: ['大便硬','潮热'], common: ['谵语','绕脐痛','手足濈然汗出','脉沉实'],
+    contras: ['表证未解','脉浮'],
+    herbList: '大黄四两、厚朴半斤、枳实五枚、芒硝三合',
+    source: '阳明病篇 · 第208条'
+  },
+  {
+    id: 'xiao-chai-hu-tang', name: '小柴胡汤', subtitle: '少阳病主方',
+    meridian: '少阳病', type: '和解剂', meridianClass: 'shaoyang',
+    symptoms: ['发热','胸胁满','呕吐','烦躁'],
+    pathology: ['少阳枢机'],
+    herbs: ['柴芩'],
+    special: [],
+    dynamic: [],
+    pathologyText: '少阳枢机不利，正邪分争',
+    necessary: ['往来寒热','胸胁苦满'], common: ['默默不欲饮食','心烦喜呕','口苦咽干','脉弦'],
+    contras: ['纯阳明里实','纯太阳表证'],
+    herbList: '柴胡半斤、黄芩三两、半夏半升、人参三两、甘草三两、生姜三两、大枣十二枚',
+    source: '少阳病篇 · 第96条'
+  },
+  {
+    id: 'bai-hu-tang', name: '白虎汤', subtitle: '阳明气分热盛',
+    meridian: '阳明病', type: '清热剂', meridianClass: 'yangming',
+    symptoms: ['发热','汗出','口渴'],
+    pathology: ['里热','气津两伤'],
+    herbs: ['石膏知母'],
+    special: [],
+    dynamic: [],
+    pathologyText: '阳明气分热盛，津伤燥热',
+    necessary: ['身大热','大汗出'], common: ['大烦渴','脉洪大','面赤'],
+    contras: ['表证未解','脉浮'],
+    herbList: '石膏一斤、知母六两、甘草二两、粳米六合',
+    source: '阳明病篇 · 第176条'
+  },
+  {
+    id: 'si-ni-tang', name: '四逆汤', subtitle: '少阴病回阳救逆',
+    meridian: '少阴病', type: '温里剂', meridianClass: 'shaoyin',
+    symptoms: ['厥逆','下利','恶寒','呕吐'],
+    pathology: ['阳虚','阴寒'],
+    herbs: ['附姜'],
+    special: ['亡阳虚脱'],
+    dynamic: [],
+    pathologyText: '少阴阳衰，阴寒内盛，阳气欲脱',
+    necessary: ['脉沉','四肢厥逆'], common: ['恶寒','下利清谷','呕吐','脉微欲绝'],
+    contras: ['热厥','阴虚'],
+    herbList: '甘草二两、干姜一两半、附子一枚',
+    source: '少阴病篇 · 第323条'
+  },
+  {
+    id: 'zhen-wu-tang', name: '真武汤', subtitle: '阳虚水泛',
+    meridian: '少阴病', type: '祛湿剂', meridianClass: 'shaoyin',
+    symptoms: ['水饮','小便不利','腹满痛','身痛'],
+    pathology: ['阳虚','水饮内停'],
+    herbs: ['附术','苓术'],
+    special: [],
+    dynamic: [],
+    pathologyText: '脾肾阳虚，水湿内停，水气泛滥',
+    necessary: ['腹痛','小便不利'], common: ['四肢沉重疼痛','自下利','或咳','或呕','脉沉'],
+    contras: ['阴虚','湿热'],
+    herbList: '茯苓三两、芍药三两、白术二两、生姜三两、附子一枚',
+    source: '少阴病篇 · 第316条'
+  },
+  {
+    id: 'wu-mei-wan', name: '乌梅丸', subtitle: '厥阴病寒热错杂',
+    meridian: '厥阴病', type: '驱虫剂', meridianClass: 'jueyin',
+    symptoms: ['蛔虫','烦躁','厥逆','腹满痛'],
+    pathology: ['寒热错杂','上热下寒'],
+    herbs: ['乌头'],
+    special: ['寒热错杂','蛔厥','上热下寒'],
+    dynamic: [],
+    pathologyText: '上热下寒，蛔虫内扰，寒热错杂',
+    necessary: ['吐蛔','时烦时止'], common: ['厥冷','得食而呕','腹痛','久利'],
+    contras: ['纯寒无热','纯热无寒'],
+    herbList: '乌梅三百枚、黄连十六两、附子六两、干姜十两、细辛六两...',
+    source: '厥阴病篇 · 第338条'
+  },
+  {
+    id: 'da-chai-hu-tang', name: '大柴胡汤', subtitle: '少阳阳明合病',
+    meridian: '少阳病', type: '和解剂', meridianClass: 'shaoyang',
+    symptoms: ['呕吐','腹满痛','发热','胸胁满'],
+    pathology: ['少阳枢机','阳明少阳'],
+    herbs: ['柴芩'],
+    special: ['表里双解','阳明少阳'],
+    dynamic: [],
+    pathologyText: '少阳枢机不利，胆胃热实，兼阳明里实',
+    necessary: ['呕不止','心下急'], common: ['郁郁微烦','往来寒热','胸胁苦满','脉弦有力'],
+    contras: ['太阴脾虚','纯表证'],
+    herbList: '柴胡半斤、黄芩三两、半夏半升、芍药三两、枳实四枚、大黄二两、生姜五两、大枣十二枚',
+    source: '少阳病篇 · 第103条'
+  },
+  {
+    id: 'ma-huang-fu-zi-xi-xin-tang', name: '麻黄附子细辛汤', subtitle: '太少两感',
+    meridian: '太阳病', type: '解表剂', meridianClass: 'taiyang',
+    symptoms: ['发热','恶寒','无汗','身痛'],
+    pathology: ['阳虚','太少两感'],
+    herbs: ['麻桂'],
+    special: ['太少两感','阳虚外感'],
+    dynamic: [],
+    pathologyText: '素体阳虚，复感风寒，太阳少阴两感',
+    necessary: ['发热','脉沉','恶寒'], common: ['无汗','头痛','身痛'],
+    contras: ['阴虚火旺','里热'],
+    herbList: '麻黄二两、附子一枚、细辛二两',
+    source: '少阴病篇 · 第301条'
+  },
+  {
+    id: 'wu-ling-san', name: '五苓散', subtitle: '太阳蓄水证',
+    meridian: '太阳病', type: '祛湿剂', meridianClass: 'taiyang',
+    symptoms: ['小便不利','口渴','水饮','发热'],
+    pathology: ['水饮内停','表郁'],
+    herbs: ['苓桂'],
+    special: ['蓄水','水逆'],
+    dynamic: [],
+    pathologyText: '膀胱蓄水，气化不利，津液不布',
+    necessary: ['小便不利','消渴'], common: ['脉浮','微热','烦渴','水入即吐'],
+    contras: ['阴虚','无尿'],
+    herbList: '猪苓十八铢、泽泻一两六铢、白术十八铢、茯苓十八铢、桂枝半两',
+    source: '太阳病篇 · 第71条'
+  },
+  {
+    id: 'tao-he-cheng-qi-tang', name: '桃核承气汤', subtitle: '太阳蓄血证',
+    meridian: '太阳病', type: '理血剂', meridianClass: 'taiyang',
+    symptoms: ['瘀血','腹满痛','烦躁','谵语'],
+    pathology: ['瘀血内阻','里热'],
+    herbs: ['桃核'],
+    special: ['蓄血'],
+    dynamic: [],
+    pathologyText: '瘀热互结下焦，血蓄膀胱',
+    necessary: ['少腹急结','其人如狂'], common: ['小便自利','热结膀胱','烦躁谵语'],
+    contras: ['血虚','尿血'],
+    herbList: '桃仁五十个、大黄四两、桂枝二两、甘草二两、芒硝二两',
+    source: '太阳病篇 · 第106条'
+  },
+  {
+    id: 'li-zhong-wan', name: '理中丸', subtitle: '霍乱病脾胃虚寒',
+    meridian: '太阴病', type: '温里剂', meridianClass: 'taiyin',
+    symptoms: ['下利','呕吐','腹满痛','厥逆'],
+    pathology: ['阳虚','脾虚湿困'],
+    herbs: ['参姜'],
+    special: [],
+    dynamic: [],
+    pathologyText: '中焦虚寒，脾胃升降失常，清浊相干',
+    necessary: ['吐利','寒多不用水'], common: ['腹痛','手足不温','不欲饮食','脉沉迟'],
+    contras: ['里热','湿热'],
+    herbList: '人参三两、干姜三两、白术三两、甘草三两',
+    source: '霍乱病篇 · 第386条'
+  },
+  {
+    id: 'huang-lian-e-jiao-tang', name: '黄连阿胶汤', subtitle: '少阴病阴虚火旺',
+    meridian: '少阴病', type: '清热剂', meridianClass: 'shaoyin',
+    symptoms: ['不眠','烦躁','口渴'],
+    pathology: ['阴虚','心肾不交'],
+    herbs: ['连胶'],
+    special: ['心肾不交'],
+    dynamic: [],
+    pathologyText: '肾阴亏虚，心火独亢，心肾不交',
+    necessary: ['心中烦','不得卧'], common: ['口干','舌红少苔','手足心热'],
+    contras: ['阳虚','脾胃虚寒'],
+    herbList: '黄连四两、黄芩二两、阿胶三两、鸡子黄二枚、芍药二两',
+    source: '少阴病篇 · 第303条'
+  },
+  {
+    id: 'zhi-gan-cao-tang', name: '炙甘草汤', subtitle: '心动悸脉结代',
+    meridian: '太阳病', type: '补益剂', meridianClass: 'taiyang',
+    symptoms: ['心悸','便秘','烦躁'],
+    pathology: ['阴阳两虚','气阴两伤'],
+    herbs: ['炙甘草'],
+    special: ['气阴两伤'],
+    dynamic: [],
+    pathologyText: '阴阳两虚，阳虚为主，水饮内停，心神不宁',
+    necessary: ['心动悸','脉结代'], common: ['虚羸少气','大便干','舌光少苔'],
+    contras: ['实热','湿热'],
+    herbList: '甘草四两、生姜三两、桂枝三两、人参二两、生地黄一斤...',
+    source: '太阳病篇 · 第177条'
+  }
+];
+
+// ============== 渲染 ==============
+function renderCards() {
+  const grid = document.getElementById('card-grid');
+  grid.innerHTML = cards.map(c => `
+    <div class="card" data-id="${c.id}" data-meridian="${c.meridian}" data-type="${c.type}"
+         data-symptoms="${c.symptoms.join(',')}" data-pathology="${c.pathology.join(',')}"
+         data-herbs="${c.herbs.join(',')}" data-special="${c.special.join(',')}">
+      <div class="card-header">
+        <div>
+          <div class="card-title">${c.name}</div>
+          <div class="card-subtitle">${c.subtitle}</div>
+        </div>
+      </div>
+      
+      <!-- 第一层：分类维度 -->
+      <div class="layer-1">
+        <span class="tag-l1 ${c.meridianClass}">${c.meridian}</span>
+        <span class="tag-l1 type">${c.type}</span>
+      </div>
+      
+      <!-- 第二层：内容标签 -->
+      <div class="layer-2">
+        ${c.symptoms.map(s => `<span class="tag-l2 symptom" onclick="filterByTag('${s}')">${s}</span>`).join('')}
+        ${c.pathology.map(p => `<span class="tag-l2 pathology" onclick="filterByTag('${p}')">${p}</span>`).join('')}
+        ${c.herbs.map(h => `<span class="tag-l2 herb" onclick="filterByTag('${h}')">${h}</span>`).join('')}
+        ${c.special.map(sp => `<span class="tag-l2 special" onclick="filterByTag('${sp}')">${sp}</span>`).join('')}
+      </div>
+      
+      <!-- 第三层：动态标签 -->
+      <div class="layer-3" id="dynamic-${c.id}">
+        ${c.dynamic.map(d => {
+          const cls = d.includes('薄弱') ? 'weak' : d.includes('已掌握') ? 'master' : d.includes('易混') ? 'confuse' : 'weak';
+          return `<span class="tag-l3 ${cls}">${d}</span>`;
+        }).join('')}
+      </div>
+      
+      <!-- 卡片内容 -->
+      <div class="card-content">
+        <div class="pathology-text">${c.pathologyText}</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">核心症状：</div>
+        <div class="symptoms">
+          ${c.necessary.map(s => `<span class="symptom-pill necessary">${s}</span>`).join('')}
+          ${c.common.slice(0,3).map(s => `<span class="symptom-pill">${s}</span>`).join('')}
+        </div>
+      </div>
+      
+      <!-- 展开详情 -->
+      <button class="expand-btn" onclick="toggleDetail('${c.id}')">📋 展开详情 · 查看标签映射</button>
+      <div class="card-detail" id="detail-${c.id}">
+        <div class="card-detail-inner">
+          <h4>标签体系映射</h4>
+          <div class="detail-row">
+            <span class="detail-label">第一层 · 六经归属：</span>
+            <span class="detail-value">${c.meridian}（${c.meridianClass === 'taiyang' ? '太阳' : c.meridianClass === 'yangming' ? '阳明' : c.meridianClass === 'shaoyang' ? '少阳' : c.meridianClass === 'shaoyin' ? '少阴' : c.meridianClass === 'jueyin' ? '厥阴' : '太阴'}）</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">第一层 · 方剂类型：</span>
+            <span class="detail-value">${c.type}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">第二层 · 核心症状（从 symptom_profile 提取）：</span>
+            <span class="detail-value">${c.symptoms.join('、')}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">第二层 · 核心病机（从 pathology 提炼）：</span>
+            <span class="detail-value">${c.pathology.join('、')}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">第二层 · 核心药对（从 core_combinations 提取）：</span>
+            <span class="detail-value">${c.herbs.join('、')}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">第二层 · 特殊属性（差异化特征）：</span>
+            <span class="detail-value">${c.special.length > 0 ? c.special.join('、') : '无'}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">第三层 · 动态标签（从 mastery 向量生成）：</span>
+            <span class="detail-value" id="detail-dynamic-${c.id}">${c.dynamic.length > 0 ? c.dynamic.join('、') : '暂无（根据学习状态自动生成）'}</span>
+          </div>
+          <div class="detail-row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+            <span class="detail-label">方剂组成：</span>
+            <span class="detail-value">${c.herbList}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">来源：</span>
+            <span class="detail-value">${c.source}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">禁忌：</span>
+            <span class="detail-value">${c.contras.join('、')}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  updateStats();
+}
+
+function renderTagTree() {
+  const treeData = {
+    '太阳病': {
+      '表虚': ['桂枝汤','桂枝加葛根汤','桂枝加附子汤'],
+      '表实': ['麻黄汤'],
+      '表郁': ['大青龙汤','桂枝麻黄各半汤'],
+      '水饮内停': ['五苓散','真武汤'],
+      '瘀血内阻': ['桃核承气汤','抵当汤'],
+      '营卫不和': ['桂枝汤']
+    },
+    '阳明病': {
+      '里热': ['白虎汤','白虎加人参汤'],
+      '腑实': ['大承气汤','小承气汤','调胃承气汤'],
+      '湿热蕴结': ['茵陈蒿汤'],
+      '气津两伤': ['白虎加人参汤']
+    },
+    '少阳病': {
+      '少阳枢机': ['小柴胡汤','大柴胡汤','柴胡加芒硝汤'],
+      '阳明少阳': ['大柴胡汤']
+    },
+    '少阴病': {
+      '阳虚': ['四逆汤','真武汤','通脉四逆汤','白通汤'],
+      '阴虚': ['黄连阿胶汤'],
+      '阴阳两虚': ['炙甘草汤','茯苓四逆汤'],
+      '水饮内停': ['真武汤','猪苓汤']
+    },
+    '厥阴病': {
+      '寒热错杂': ['乌梅丸'],
+      '上热下寒': ['乌梅丸','干姜黄连黄芩人参汤'],
+      '血虚寒厥': ['当归四逆汤']
+    },
+    '太阴病': {
+      '阳虚': ['理中丸'],
+      '脾虚湿困': ['理中丸']
+    }
+  };
+  
+  const container = document.getElementById('tag-tree-content');
+  container.innerHTML = Object.entries(treeData).map(([meridian, pathologies]) => `
+    <div class="tree-node">
+      <div class="tree-node-header" onclick="toggleTreeNode(this)">
+        <span style="color:var(--${meridian === '太阳病' ? 'taiyang' : meridian === '阳明病' ? 'yangming' : meridian === '少阳病' ? 'shaoyang' : meridian === '少阴病' ? 'shaoyin' : meridian === '厥阴病' ? 'jueyin' : 'taiyin'});font-weight:700;">${meridian}</span>
+        <span class="tree-node-count">${Object.values(pathologies).flat().length} 方</span>
+      </div>
+      <div class="tree-leaf" style="display:none;">
+        ${Object.entries(pathologies).map(([pathology, formulas]) => `
+          <div style="margin-bottom:8px;">
+            <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;">└ ${pathology}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-left:12px;">
+              ${formulas.map(f => `<span class="tree-leaf-item">${f}</span>`).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleTreeNode(header) {
+  const leaf = header.nextElementSibling;
+  leaf.style.display = leaf.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleDetail(id) {
+  const detail = document.getElementById('detail-' + id);
+  detail.classList.toggle('expanded');
+  const btn = detail.previousElementSibling;
+  btn.textContent = detail.classList.contains('expanded') ? '🔼 收起详情' : '📋 展开详情 · 查看标签映射';
+}
+
+// ============== 筛选 ==============
+let activeFilters = new Set();
+
+function toggleFilter(el) {
+  const filter = el.dataset.filter;
+  if (activeFilters.has(filter)) {
+    activeFilters.delete(filter);
+    el.classList.remove('active');
+  } else {
+    activeFilters.add(filter);
+    el.classList.add('active');
+  }
+  applyFilters();
+}
+
+function filterByTag(tag) {
+  // 清除所有筛选
+  document.querySelectorAll('.filter-tag.active').forEach(el => el.classList.remove('active'));
+  activeFilters.clear();
+  
+  // 激活对应筛选
+  const target = document.querySelector(`.filter-tag[data-filter="${tag}"]`);
+  if (target) {
+    target.classList.add('active');
+    activeFilters.add(tag);
+  }
+  applyFilters();
+  
+  // 滚动到筛选区
+  document.querySelector('.filter-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function clearFilters() {
+  activeFilters.clear();
+  document.querySelectorAll('.filter-tag.active').forEach(el => el.classList.remove('active'));
+  applyFilters();
+}
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.card');
+  let visible = 0;
+  
+  cards.forEach(card => {
+    if (activeFilters.size === 0) {
+      card.classList.remove('hidden');
+      visible++;
+      return;
+    }
+    
+    const meridian = card.dataset.meridian;
+    const type = card.dataset.type;
+    const symptoms = card.dataset.symptoms.split(',');
+    const pathology = card.dataset.pathology.split(',');
+    const herbs = card.dataset.herbs.split(',');
+    const special = card.dataset.special.split(',');
+    
+    const allTags = [meridian, type, ...symptoms, ...pathology, ...herbs, ...special].filter(Boolean);
+    
+    // 卡片必须匹配所有激活的筛选（AND 逻辑）
+    const matches = [...activeFilters].every(f => allTags.includes(f));
+    
+    if (matches) {
+      card.classList.remove('hidden');
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+  
+  document.getElementById('stat-visible').textContent = visible;
+  document.getElementById('filter-status').textContent = 
+    activeFilters.size === 0 ? '已显示全部 15 张代表卡片' : 
+    `已筛选：${[...activeFilters].join(' + ')}，显示 ${visible} 张`;
+}
+
+function updateStats() {
+  document.getElementById('stat-visible').textContent = cards.length;
+}
+
+// ============== 模拟动态标签 ==============
+function simulateState(state) {
+  // 重置
+  cards.forEach(c => { c.dynamic = []; });
+  
+  switch(state) {
+    case 'weak':
+      // 模拟某些卡片有薄弱向量
+      cards.find(c => c.id === 'gui-zhi-tang').dynamic = ['薄弱：1→0'];
+      cards.find(c => c.id === 'si-ni-tang').dynamic = ['薄弱：0→2'];
+      cards.find(c => c.id === 'da-chai-hu-tang').dynamic = ['薄弱：1→0'];
+      break;
+    case 'master':
+      // 模拟某些卡片已掌握
+      cards.find(c => c.id === 'gui-zhi-tang').dynamic = ['已掌握'];
+      cards.find(c => c.id === 'ma-huang-tang').dynamic = ['已掌握'];
+      cards.find(c => c.id === 'xiao-chai-hu-tang').dynamic = ['已掌握'];
+      break;
+    case 'confuse':
+      // 模拟易混淆
+      cards.find(c => c.id === 'gui-zhi-tang').dynamic = ['易混：麻黄汤'];
+      cards.find(c => c.id === 'ma-huang-tang').dynamic = ['易混：桂枝汤'];
+      cards.find(c => c.id === 'si-ni-tang').dynamic = ['易混：四逆加人参汤'];
+      break;
+    case 'reset':
+      // 全部清空
+      break;
+  }
+  
+  // 更新按钮状态
+  document.querySelectorAll('.sim-btn').forEach(btn => btn.classList.remove('active'));
+  if (state !== 'reset') {
+    event.target.classList.add('active');
+  }
+  
+  renderCards();
+  // 重新应用筛选
+  applyFilters();
+}
+
+// ============== 初始化 ==============
+renderCards();
+renderTagTree();
+</script>
+
+</body>
+</html>
