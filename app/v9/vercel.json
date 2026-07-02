@@ -1,15 +1,7 @@
 {
   "version": 2,
   "name": "明医成长录-v9",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+  "framework": "vite",
   "routes": [
     {
       "src": "/(.*)",
