@@ -1,0 +1,64 @@
+# Git 忽略文件
+# 版本：v1.0
+# 日期：2026-07-02
+# 用途：排除不需要纳入版本控制的文件
+
+# ====== 构建产物 ======
+app/v9/dist/
+app/v9/shanghanlun-v9-deploy.zip
+
+# ====== Node.js 依赖 ======
+app/v9/node_modules/
+*.lock
+app/v9/package-lock.json
+
+# ====== Python 缓存 ======
+__pycache__/
+*.pyc
+*.pyo
+
+# ====== 备份和归档 ======
+archive/
+app/archive/
+data/archive/
+docs/archive/
+app/v9/src/archive/
+app/v9/src/services/archive/
+
+# ====== 临时文件 ======
+temp_*
+tmp_*
+*.tmp
+*.temp
+%TEMP%/
+
+# ====== IDE 和编辑器 ======
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ====== 操作系统文件 ======
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ====== 测试产物 ======
+app/v9/test-results/
+app/v9/tests/e2e/test-results/
+
+# ====== 日志文件 ======
+*.log
+app/v9/dist/server.log
+
+# ====== WebBridge 临时文件 ======
+app/v9/webbridge-*.json
+
+# ====== 环境文件 ======
+.env
+.env.local
+.env.*.local
+
+# ====== Vercel 配置（本地缓存） ======
+.vercel/
