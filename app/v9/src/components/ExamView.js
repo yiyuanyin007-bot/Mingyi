@@ -9,10 +9,11 @@
  *   5. 新增全局键盘事件支持（在 app.js 中绑定）
  */
 
-import { createElement } from '@utils/dom.js';
+import { createElement, escapeHtml } from '@utils/dom.js';
 import { checkAnswer } from '@services/ExamService.js';
-import { formatCorrectAnswer } from '@utils/formatters.js';
+import { formatCorrectAnswer, getVectorLabel } from '@utils/formatters.js';
 import { getOptionStats } from '@services/StatsService.js';
+import { DIAGNOSIS_TAGS } from '@services/StorageService.js';
 
 /**
  * 渲染考试视图
@@ -168,5 +169,106 @@ export function renderExamView(container, examState, callbacks, allCards) {
   nav.appendChild(nextBtn);
 
   layout.appendChild(nav);
+  container.appendChild(layout);
+}
+
+/**
+ * 渲染考试结果页面
+ * @param {HTMLElement} container — 容器
+ * @param {Object} examState — 考试状态
+ * @param {Object} callbacks — { onRetrieval, onReturn, onReviewQuestion, onDiagnosis, onAskKimi }
+ * @param {Array} allCards — 全部卡片数组
+ */
+export function renderExamResult(container, examState, callbacks, allCards) {
+  container.innerHTML = '';
+
+  const total = examState.questions.length;
+  const right = examState.answers.filter(a => a.isCorrect).length;
+  const wrongList = examState.answers.filter(a => !a.isCorrect);
+  const isManyWrong = wrongList.length > 3;
+
+  const layout = createElement('div', { className: 'exam-result-layout' });
+
+  // 标题
+  const title = createElement('div', { className: 'exam-result-title' }, '考试结果');
+  layout.appendChild(title);
+
+  // 分数
+  const score = createElement('div', { className: 'exam-result-score' }, `${right} / ${total} 正确`);
+  layout.appendChild(score);
+
+  // 统计
+  const stats = createElement('div', { className: 'exam-result-stats' },
+    `共 ${total} 题，答对 ${right} 题，答错 ${wrongList.length} 题`);
+  layout.appendChild(stats);
+
+  // 错题回顾
+  if (wrongList.length > 0) {
+    const wrongSection = createElement('div', { className: 'exam-wrong-list' });
+
+    const wrongTitle = createElement('div', {
+      className: 'exam-wrong-list-title',
+      style: 'font-weight:600;margin-bottom:8px;font-size:14px;'
+    }, '错题回顾');
+    wrongSection.appendChild(wrongTitle);
+
+    if (isManyWrong) {
+      const batchHeader = createElement('div', { className: 'batch-tag-header' });
+      batchHeader.innerHTML = `
+        <span class="batch-tag-hint">错题较多（${wrongList.length} 题），建议先批量分类，后续在错题本中逐个学习</span>
+      `;
+      const batchBtn = createElement('button', { className: 'batch-tag-btn' }, '🏷️ 批量标记为"类方混淆"');
+      batchBtn.addEventListener('click', () => callbacks.onBatchTag?.());
+      batchHeader.appendChild(batchBtn);
+      wrongSection.appendChild(batchHeader);
+    }
+
+    wrongList.forEach((a, i) => {
+      const item = createElement('div', { className: 'exam-wrong-item' });
+      item.innerHTML = `
+        <div><strong>${i + 1}. ${escapeHtml(a.question.text)}</strong>（类型：${a.question.type}）</div>
+        <div style="margin-top:4px;">你的选择：${a.selected ? escapeHtml(a.selected.label) : '未作答'}</div>
+        <div>正确答案：${escapeHtml(formatCorrectAnswer(a.question, allCards))}</div>
+      `;
+
+      // 诊断按钮
+      const diagButtons = createElement('div', { className: 'diagnosis-buttons' });
+
+      if (!isManyWrong) {
+        const askBtn = createElement('button', { className: 'wrong-kimi-btn' }, '🤖 问Kimi');
+        askBtn.addEventListener('click', () => callbacks.onAskKimi?.(a));
+        diagButtons.appendChild(askBtn);
+      }
+
+      Object.entries(DIAGNOSIS_TAGS).forEach(([key, tag]) => {
+        const btn = createElement('button', { className: `diagnosis-btn ${key}` }, tag.label);
+        btn.addEventListener('click', () => callbacks.onDiagnosis?.(a, key));
+        diagButtons.appendChild(btn);
+      });
+
+      item.appendChild(diagButtons);
+      wrongSection.appendChild(item);
+    });
+
+    layout.appendChild(wrongSection);
+  } else {
+    const congrats = createElement('div', {
+      style: 'margin-top:12px;color:var(--success);'
+    }, '恭喜，全部答对！');
+    layout.appendChild(congrats);
+  }
+
+  // 操作栏
+  const actionBar = createElement('div', { className: 'action-bar', style: 'margin-top:16px;padding-top:0;border-top:none;' });
+
+  const retryBtn = createElement('button', { className: 'btn-secondary' }, '再来一组');
+  retryBtn.addEventListener('click', () => callbacks.onRetrieval?.());
+  actionBar.appendChild(retryBtn);
+
+  const homeBtn = createElement('button', { className: 'btn-primary' }, '返回首页');
+  homeBtn.addEventListener('click', () => callbacks.onReturn?.());
+  actionBar.appendChild(homeBtn);
+
+  layout.appendChild(actionBar);
   container.appendChild(layout);
 }

@@ -76,27 +76,57 @@ function parseChineseNum(str) {
 
 /**
  * 解析剂量字符串
+ * 支持：中文数字（三两）、阿拉伯数字（3两）、混合（3.5两）、以药名开头（芍药三两→提取三两）
  * @param {string} dosage
  * @returns {{num:number, unit:string, note:string}|null}
  */
 function parseChineseDosage(dosage) {
   if (!dosage) return null;
-  if (dosage.startsWith('半')) {
-    const rest = dosage.slice(1);
-    const m = rest.match(/^([^（(]*)/);
-    return { num: 0.5, unit: m ? m[1] : rest, note: '' };
+
+  // 预处理：尝试提取末尾的剂量部分（匹配数字+单位模式）
+  // 支持：中文数字（三两）、阿拉伯数字（3两）、混合（3.5两）
+  const dosePattern = /(\d+\.?\d*|半|[一二三四五六七八九十百千]+)(两|钱|斤|分|升|合|合半|枚|个|铢|茎|尺|方寸匕|半方寸匕|钱匕|圭|撮|把|一握|如鸡子大)/;
+  let cleaned = dosage;
+  const m = cleaned.match(dosePattern);
+  if (m) {
+    cleaned = m[0];
   }
+
+  // 特殊单位：直接匹配
+  if (SPECIAL_UNIT_MAP[cleaned]) {
+    return { num: 1, unit: cleaned, note: '' };
+  }
+
+  // "半"开头
+  if (cleaned.startsWith('半')) {
+    const rest = cleaned.slice(1);
+    const unitM = rest.match(/^([^（(]*)/);
+    return { num: 0.5, unit: unitM ? unitM[1] : rest, note: '' };
+  }
+
+  // 尝试阿拉伯数字前缀（如"3两"、"12枚"、"3.5g"）
+  const arabicMatch = cleaned.match(/^(\d+\.?\d*)/);
+  if (arabicMatch) {
+    const num = parseFloat(arabicMatch[1]);
+    const rest = cleaned.slice(arabicMatch[1].length);
+    const unitM = rest.match(/^([^（(]*)([（(].*)?$/);
+    const unit = unitM ? unitM[1] : rest;
+    const note = unitM && unitM[2] ? unitM[2] : '';
+    return { num, unit, note };
+  }
+
+  // 中文数字前缀（如"三两"、"十二枚"）
   let numStr = '';
-  for (let c of dosage) {
+  for (let c of cleaned) {
     if (CN_NUM_MAP[c] !== undefined) numStr += c;
     else break;
   }
   if (!numStr) return null;
   const num = parseChineseNum(numStr);
-  const rest = dosage.slice(numStr.length);
-  const m = rest.match(/^([^（(]*)([（(].*)?$/);
-  const unit = m ? m[1] : rest;
-  const note = m && m[2] ? m[2] : '';
+  const rest = cleaned.slice(numStr.length);
+  const unitM = rest.match(/^([^（(]*)([（(].*)?$/);
+  const unit = unitM ? unitM[1] : rest;
+  const note = unitM && unitM[2] ? unitM[2] : '';
   return { num, unit, note };
 }
 
@@ -224,6 +254,71 @@ export function convertDosage(herbName, dosage) {
  */
 export function getDoseStandards() {
   return Object.entries(STANDARDS).map(([key, s]) => ({ key, name: s.name }));
+}
+
+/**
+ * 判断是否为可换算的剂量
+ * @param {string} dosage
+ * @returns {boolean}
+ */
+/**
+ * 格式化剂量为紧凑显示文本
+ * 四档相同时合并为一行，不同时按值分组
+ * @param {Object} converted — convertDosage 返回值
+ * @returns {{text:string, note:string}|null}
+ */
+export function formatDoseCompact(converted) {
+  if (!converted) return null;
+  if (converted.type === 'unknown') return { text: '暂无换算', note: converted.note || '' };
+
+  const { modern, light, medium, full, note } = converted;
+
+  const standards = [
+    { name: '教材', val: modern },
+    { name: '轻量', val: light },
+    { name: '经方', val: medium },
+    { name: '原方', val: full }
+  ].filter(s => s.val);
+
+  if (standards.length === 0) return { text: '暂无换算', note: '' };
+
+  // 按值分组（Exp-24：合并相同档）
+  const groups = [];
+  standards.forEach(s => {
+    const existing = groups.find(g => g.val === s.val);
+    if (existing) {
+      existing.names.push(s.name);
+    } else {
+      groups.push({ val: s.val, names: [s.name] });
+    }
+  });
+
+  // 只有一组 = 四档一致（Exp-19）
+  if (groups.length === 1) {
+    return { text: `≈ ${groups[0].val}`, note: note || '四档一致' };
+  }
+
+  // 多组，生成简洁文本
+  const parts = groups.map(g => `${g.names.join('/')}: ${g.val}`);
+  return { text: parts.join('；'), note: note || '' };
+}
+
+/**
+ * 判断是否为古方剂量（需要换算）
+ * Exp-21：现代单位（g/mg/毫升/ml）返回 false
+ * @param {string} dosage
+ * @returns {boolean}
+ */
+export function isAncientDosage(dosage) {
+  if (!dosage) return false;
+  // 直接匹配特殊古方单位
+  if (SPECIAL_UNIT_MAP[dosage]) return true;
+  // 解析
+  const parsed = parseChineseDosage(dosage);
+  if (!parsed) return false;
+  // 检查单位是否是古方单位
+  const ancientUnits = ['两', '钱', '斤', '分', '升', '合', '枚', '个', '铢', '茎', '尺', '方寸匕', '半方寸匕', '钱匕', '圭', '撮', '把', '握', '如鸡子大', '合半', '两半'];
+  return ancientUnits.some(u => parsed.unit === u || parsed.unit.startsWith(u));
 }
 
 /**

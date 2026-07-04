@@ -31,8 +31,8 @@
 ---
 
 ## 变更统计
-- **总变更数**：77
-- **总文档数**：47
+- **总变更数**：84
+- **总文档数**：48
 - **已归档**：75
 - **待确认**：0
 - **已废弃**：0
@@ -143,6 +143,14 @@
 
 ---
 
+
+
+### 2025-07-04
+
+| 编号 | 状态 | 来源 | 触发 | 变更内容 | 影响文档 | 确认人 |
+|---|---|---|---|---|---|---|
+| SH-20250704-001 | ✅已执行 | 测试反馈 | Bug修复 | 修复 V9 聚类复习（Bug-2）与学习页向量题（Bug-3）两个 Bug。Bug-2：startClusterExam 函数调用 genQuestionsForCard 后未为题目生成 options，导致 renderExamView 无法渲染选项。修复：为每题补充 q.options = generateOptions(...)。Bug-3：LearnView.js 的 buildMasterySection 仅显示只读进度点，无点击事件。修复：1) 标题改为「掌握度（点击向量直接练习）」；2) 每个向量项添加 click 事件调用 options.onPracticeVector；3) 添加 hover 效果（边框变色+背景高亮）和 cursor:pointer。JS 语法验证通过。 | app/v9/src/app.js, app/v9/src/components/LearnView.js | AI |
+| SH-20250704-002 | ✅已执行 | 测试反馈 | 笔记系统重构 | 修复笔记系统 Bug-18（Markdown 未渲染）+ Exp-11（只显示一行）+ Exp-12（无"看笔记"按钮），实现 Feature-13（看笔记弹窗）+ Feature-14（弹窗上半条文+下半笔记布局）。修改：1）新增 `renderMarkdown`/`escapeHtml` 函数（XSS 安全）；2）`buildNoteSection` 改为预览+"看笔记"/"编辑"双按钮；3）新增 `openNoteModal` 弹窗（条文在上+笔记在下，支持编辑/预览/保存/ESC 关闭）；4）`theme.css` 新增 `.note-modal-*` 和 `.markdown-body` 全套样式。JS/CSS 语法验证通过。 | app/v9/src/components/LearnView.js, app/v9/src/styles/theme.css | AI |
 ### 2026-07-02
 
 | 编号 | 状态 | 来源 | 触发 | 变更内容 | 影响文档 | 确认人 |
@@ -346,12 +354,26 @@
 | SH-20260702-006 | ✅已执行 | 用户确认 | 软著文档 | 生成软件著作权登记《软件说明书》模板（docs/SPEC-software-copyright-manual-v1.md）：含软件概述（开发背景/目的/定位）、9大功能模块详细说明、6大服务+4大工具模块说明、4项技术创新点（六向量认知映射/SRS状态机/智能干扰项/症状索引）、技术栈与数据资产、运行环境、6条核心使用流程。确认：软件名「明医成长录」、版本号V1.0（对外首次正式版，对内第9迭代版）、数据资产截至登记时（99方/398条/106例）。附确认清单C-01~C-05全部通过。 | docs/SPEC-software-copyright-manual-v1.md | AI |
 | SH-20260702-007 | ✅已执行 | 用户确认 | 软著代码 | 生成软件著作权登记源代码提交文档（前后各30页）：前30页（app.js 939行 + AppStore.js 182行 + DataService.js 72行 + CardList.js 117行 + LearnView.js 190行）= 1500行；后30页（LearnView.js 剩余83行 + ExamService.js 192行 + MasteryService.js 103行 + RetrievalEngine.js 204行 + StatsService.js 281行 + StorageService.js 438行 + doseConverter.js 199行）= 1500行。每页50行，页眉标注「明医成长录 V1.0 — 第X页」。文件：COPYRIGHT-source-code-front.md + COPYRIGHT-source-code-back.md | docs/COPYRIGHT-source-code-front.md, docs/COPYRIGHT-source-code-back.md | AI |
 | SH-20260702-008 | ✅已执行 | 用户确认 | 框架讨论 | 基于控制论和第一性原理，生成「数据收集/专利/假设验证」三问题讨论文档（docs/SPEC-control-theory-first-principles-v1.md）：控制论视角（开环训练器→闭环系统）、4个候选专利（六向量映射/智能干扰项/多路径检索/状态机调度）、科学方法四层次验证（逻辑→A/B→SP→真实世界）。 | docs/SPEC-control-theory-first-principles-v1.md | AI |
-| SH-20260702-009 | ✅已执行 | 用户确认 | 认知架构校准 | 基于用户「场景化认知迁移」框架（文字→画面→表征→临床的四层切换），重新校准三个问题的底层假设：六向量=认知CT（诊断切换堵塞）、数据=摩擦痕迹（不是结果）、专利=认知迁移架构（不是算法）、验证=切换流畅度（不是正确率）、SP=认知显微镜（不是考试）。新增主观体验数据维度（信心度/顿悟/模糊感/身体反应/画面清晰度）。E-01~E-05全部对齐确认。 | docs/SPEC-cognitive-architecture-update-v1.md | AI |
+| SH-20260704-002 | ✅已执行 | 用户确认 | 功能迁移 | V8→V9 条文面板功能迁移：将 V8（app/index.html 4821-4983行）的条文面板完整功能迁移到 V9 SourcePanel.js。1）面板打开/关闭动画（CSS transition）已继承 V9 现有实现；2）条文渲染（按卡片 source_text_ids 查找）保留并增强，显示章节+条文编号；3）条文原文显示保留 V9 Markdown 渲染；4）新增"问 Kimi"按钮（生成5点结构化提示词弹窗，可复制）；5）新增"记笔记"按钮（per-source 笔记，prompt 弹窗输入，保存到 localStorage source_article_notes_v1）；6）浮动按钮"S"→V9 已有 LearnView 底部"📜 条文"按钮，保持现状。备份 SourcePanel.js，新增 SourcePanel 操作按钮 CSS 样式，JS 语法验证通过（node -c）。影响文件：SourcePanel.js（+184行）/ theme.css（+50行）。 | app/v9/src/components/SourcePanel.js, app/v9/src/styles/theme.css | AI |
+| SH-20260704-001 | ✅已执行 | 测试反馈 | V9卡片点击无响应 | V9 重构版：app.js 中导入了 `subscribe` 但从未调用注册，导致 `AppStore` 状态变化无人监听，视图切换无法触发。修复：在 `init()` 中添加 `subscribe((newState, oldState) => { if (newState.page !== oldState.page) switchView(newState.page); });`。验证：WebBridge 直接执行 `setPage('learn')` → activeView 从 viewDashboard 切换至 viewLearn，卡片点击→学习页链路恢复。 | app/v9/src/app.js, app/v9/src/app.js（备份） | AI |
+| SH-20260704-002 | ✅已执行 | 用户确认 | 功能迁移 | V8→V9 条文面板功能迁移：将 V8（app/index.html 4821-4983行）的条文面板完整功能迁移到 V9 SourcePanel.js。1）面板打开/关闭动画（CSS transition）已继承 V9 现有实现；2）条文渲染（按卡片 source_text_ids 查找）保留并增强，显示章节+条文编号；3）条文原文显示保留 V9 Markdown 渲染；4）新增
 
 *创建者：AI（Kimi Work）*  
 *创建时间：2026-06-17*  
-*项目根目录：`C:
-Users
-Chen
-Desktop
-经方学习系统（旧版）`
+*项目根目录：`C:\Users\Chen\Desktop\经方学习系统（旧版）`
+
+*创建者：AI（Kimi Work）*  
+*创建时间：2026-06-17*  
+*项目根目录：`C:\Users\Chen\Desktop\经方学习系统（旧版）`
+
+| SH-20260704-003 | ✅已执行 | 用户确认 | 功能迁移 | V8→V9 学习页交互迁移：将 V8（app/index.html 5160-5639行）的 `renderLearn` 交互功能迁移到 V9 LearnView.js。1）返回按钮（顶部+底部）；2）方剂标题+角色+描述显示；3）标签显示；4）病机/禁忌/煎服法区块切换（点击标题切换显示/隐藏，按钮状态同步）；5）药物组成（药丸式剂量+点击换算弹窗）；6）6向量掌握度进度点；7）笔记区域（可编辑+保存到 localStorage sh_v9_card_notes）；8）"问 Kimi" 按钮；9）临床医案（条件渲染，依赖 options.experiences）；10）来源条文按钮（复用 SourcePanel.js）。备份 LearnView.js，JS 语法验证通过，WebBridge 浏览器验证：标题/角色/描述/剂量/笔记/向量/返回按钮全部存在。影响文件：LearnView.js（+308行）。 | app/v9/src/components/LearnView.js | AI |
+| SH-20260704-004 | ✅已执行 | 用户确认 | 功能迁移 | V8→V9 考试与错题本功能迁移：将 V8（app/index.html 5640-6013行考试+4145-4533行错题本）迁移到 V9。1）考试结果页面（分数+统计+错题回顾+诊断标签）；2）错题详情弹窗（题目+答案+诊断标签+复习计划+问 Kimi）；3）错题批量标记（类方混淆/反向盲区/知识缺口/决策失误）；4）错题重新练习（"重做这题"+"一键复习全部"）；5）标记已掌握（从错题本删除）；6）编辑学习笔记；7）艾宾浩斯复习计划显示。备份 ExamView.js 和 WrongBookView.js，Vite 构建通过。已知问题：标记已掌握后未自动刷新列表（中）、复习进度 done 状态需 StorageService 返回对象数组（中）、部分 CSS 样式需 Agent E 补充。影响文件：ExamView.js（+102行）、WrongBookView.js（+281行）、app.js（+92行）。 | app/v9/src/components/ExamView.js, app/v9/src/components/WrongBookView.js, app/v9/src/app.js | AI |
+| SH-20260704-005 | ✅已执行 | 内部思考 | 数据修复 | V9 学习页临床医案数据传入：修复 `renderLearn` 函数未传入 `options.experiences` 导致临床医案区域无法显示数据的问题。在 `renderLearn` 中增加 `EXPERIENCES.filter` 逻辑，按卡片 `experience_ids` / `cardId` / `formula_name` 匹配关联医案，传入 `renderLearnView`。验证：学习页 `hasContent: true`，临床医案代码已就绪。影响文件：app.js。 | app/v9/src/app.js | AI |
+| SH-20260704-006 | ✅已执行 | 用户确认 | 样式迁移 | V8→V9 样式迁移：将 V8（app/index.html 内联 CSS）的关键样式提取到 V9 样式系统。1）创建 v8-migrated.css（1212行，兼容 V9 CSS 变量）；2）更新 theme.css（+50行，条文面板操作按钮样式）；3）迁移的样式类：.mastery-grid / .learn-back-bottom / .exam-result-panel / .exam-wrong-list / .wrong-card / .source-panel-action-btn / .dose-modal-overlay / .reveal-btn / .herb-dose 等；4）适配 V9 CSS 变量（--accent-dark → --brand-primary-dark）。验证：Vite 构建通过，浏览器中学习页/考试结果页/错题本样式正常。影响文件：v8-migrated.css（新建）、theme.css（+50行）。 | app/v9/src/styles/v8-migrated.css, app/v9/src/styles/theme.css | AI |
+| SH-20260704-007 | ✅已执行 | 测试反馈 | Data-1 剂量换算缺失 | 修复 V9 学习页剂量换算仅部分药物显示的问题。1）增强 doseConverter.js 的 parseChineseDosage：新增正则提取剂量部分（支持"炙甘草二两"→提取"二两"）、支持阿拉伯数字前缀（"3两""12枚"）、支持小数（"3.5g"）；2）增强 showDoseModal：添加 console.log 调试输出（herbName+dosage+convertDosage result）、unknown 类型友好提示弹窗（显示支持单位列表）；3）删除 LearnView.js 中重复的 buildMasterySection 和 showDoseModal 残留代码。验证：node --check 语法通过。 | app/v9/src/utils/doseConverter.js, app/v9/src/components/LearnView.js | AI |
+| SH-20260704-008 | ✅已执行 | 测试反馈 | UI-1 界面空白 | 修复 V9 学习页两侧大量空白的问题。1）base.css .learn-container max-width 从 680px 改为 100%（内容占满可用宽度）；2）base.css .view padding 从 24px 改为 16px（减少两侧内边距）。验证：CSS 语法无误。 | app/v9/src/styles/base.css | AI |
+| SH-20260704-009 | ✅已执行 | 测试反馈 | UI-2 Markdown 未渲染 | 修复 V9 学习页笔记区域 Markdown 语法显示为纯文本的问题。1）新增 renderMarkdown 函数（支持 #标题、**粗体**、*斜体*、-列表、>引用、---分割线、换行转 <br>）；2）buildNoteSection 和 saveCardNoteFromUI 中笔记只读区域改用 innerHTML 渲染 Markdown；3）XSS 防护：转义 & < > 后再渲染。验证：node --check 语法通过。 | app/v9/src/components/LearnView.js | AI |
+| SH-20260704-010 | ✅已执行 | 用户确认 | Feature-1 提示词升级 | 升级 V9「问 Kimi」提示词结构。1）buildTutorPrompt 从 3 点要求升级为 4 部分结构：一、方剂概述与核心辨证；二、药物组成与配伍精义；三、生理学/病机深度解读（重点：现代医学机制/病理生理链条/关键靶点）；四、临床鉴别与自测（2-3个混淆方对比+场景病例题）；2）提示词末尾添加"请用 Markdown 格式输出"；3）药物列表增加剂量信息（如"桂枝三两"）。验证：node --check 语法通过。 | app/v9/src/components/KimiModal.js | AI |
+| SH-20260704-011 | ✅已执行 | 用户确认 | 剂量换算系统重构 | 剂量换算系统全面重构（Data-5+Exp-19~24）：1）Exp-20：废弃 showDoseModal 弹窗，回归 V8 直接展开模式；2）Exp-22：buildHerbsSection 重写，点击药丸在卡片内直接展开原始剂量+换算结果；3）Exp-21：新增 isAncientDosage 函数，现代单位（g/mg/毫升/ml）不显示换算按钮；4）Data-5：增强 parseChineseDosage 正则提取，支持带药名前缀（"炙甘草二两"→提取"二两"）、阿拉伯数字（"3两""12枚"）、小数（"3.5g"）；5）Exp-19+Exp-24：新增 formatDoseCompact 函数，四档相同时合并为一行（"≈ 9g（四档一致）"），不同时按值分组（"教材: 9g；轻量/经方/原方: 18g/27g/45g"）；6）Exp-23：仅对 isAncientDosage 返回 true 的药物显示换算区域；7）新增 herb-conversion CSS 样式（直接展开/换算值/备注/缺失状态）。验证：node --check 语法通过，isAncientDosage 16/16 测试通过。 | app/v9/src/utils/doseConverter.js, app/v9/src/components/LearnView.js, app/v9/src/styles/base.css | AI |
+
+

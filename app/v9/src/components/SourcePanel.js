@@ -171,7 +171,7 @@ function normalizeSourceAnnotations(card, sourceCards) {
       if (sc && sc.text) {
         const exists = result.text.some(t => t.content === sc.text);
         if (!exists) {
-          result.text.push({ content: sc.text, summary: sc.summary || '' });
+          result.text.push({ content: sc.text, summary: sc.summary || '', sourceCard: sc });
         }
       }
     });
@@ -209,16 +209,27 @@ function renderTabContent(tab, normalized, myNote, card) {
   switch (tab.key) {
     case 'text':
       if (normalized.text.length === 0) {
-        return '<div class="source-panel-empty">暂无原文资料</div>';
+        return '<div class="source-panel-empty">暂无关联条文</div>';
       }
-      return normalized.text.map((t, i) => `
-        <div class="source-panel-block maskable" data-maskable="true">
-          <div class="source-panel-mask-layer"></div>
-          <div class="source-panel-block-title">原文 ${i + 1}</div>
-          <div class="source-panel-block-content">${renderMarkdown(t.content)}</div>
-          ${t.summary ? `<div class="source-panel-block-summary">摘要：${t.summary}</div>` : ''}
-        </div>
-      `).join('');
+      return normalized.text.map((t, i) => {
+        const sc = t.sourceCard || {};
+        const chapter = sc.chapter || sc.source_chapter || '伤寒论';
+        const articleNum = sc.article_number ? `第${sc.article_number}条` : '';
+        return `
+          <div class="source-panel-block maskable" data-maskable="true">
+            <div class="source-panel-mask-layer"></div>
+            <div class="source-panel-block-title">
+              ${chapter}${articleNum ? ' · ' + articleNum : ''}
+            </div>
+            <div class="source-panel-block-content">${renderMarkdown(t.content)}</div>
+            ${t.summary ? `<div class="source-panel-block-summary">摘要：${t.summary}</div>` : ''}
+            <div class="source-panel-source-actions">
+              <button class="source-panel-action-btn source-panel-kimi-btn" data-action="kimi" data-source-index="${i}">🤖 问 Kimi</button>
+              <button class="source-panel-action-btn source-panel-note-btn" data-action="note" data-source-index="${i}">📝 记笔记</button>
+            </div>
+          </div>
+        `;
+      }).join('');
 
     case 'liuduozhou':
       if (normalized.liuduozhou.length === 0) {
@@ -377,6 +388,22 @@ function bindPanelEvents(panel, card, normalized, tabs) {
     saveMyNote(card.id, note);
     showToast(panel, '笔记已保存');
   });
+
+  // 条文操作按钮（事件委托）
+  panel.addEventListener('click', (e) => {
+    const btn = e.target.closest('.source-panel-action-btn');
+    if (!btn) return;
+    const idx = parseInt(btn.dataset.sourceIndex, 10);
+    const action = btn.dataset.action;
+    const sourceItem = normalized.text[idx];
+    if (!sourceItem) return;
+
+    if (action === 'kimi') {
+      buildSourceTutorPrompt(sourceItem.sourceCard, card);
+    } else if (action === 'note') {
+      saveSourceNote(sourceItem.sourceCard, card);
+    }
+  });
 }
 
 /**
@@ -421,6 +448,163 @@ function showToast(panel, message) {
     toast.classList.add('fade-out');
     setTimeout(() => toast.remove(), 300);
   }, 2000);
+}
+
+// ===== V8 迁移：条文"问 Kimi" 和 "记笔记" 功能 =====
+
+const SOURCE_ARTICLE_NOTES_KEY = 'source_article_notes_v1';
+
+/**
+ * 生成条文"问 Kimi"提示词并显示弹窗
+ * @param {Object} sourceCard - 条文卡片
+ * @param {Object} card - 当前方剂卡片
+ */
+function buildSourceTutorPrompt(sourceCard, card) {
+  if (!sourceCard || !card) return;
+  const formula = card.formula_name || card.name || '本方';
+  const chapter = sourceCard.chapter || sourceCard.source_chapter || '伤寒论';
+  const text = sourceCard.text || sourceCard.source_text || '';
+
+  const prompt = `你是《伤寒论》经方学习助手。\n\n【条文】\n${chapter}：${text}\n\n【当前方剂】${formula}\n\n请帮我：\n1. 逐句翻译这条条文\n2. 提取辨证要点（症状→病机→方证对应）\n3. 指出这条条文与「${formula}」的方证关联\n4. 列出容易与此条文混淆的其他方证（对比表）\n5. 用现代生理学/病理学语言解读这条条文`;
+
+  openSourceTutorModal(prompt);
+}
+
+/**
+ * 打开条文 Kimi 提示词弹窗
+ * @param {string} prompt - 提示词文本
+ */
+function openSourceTutorModal(prompt) {
+  // 关闭已有弹窗
+  const existing = document.querySelector('.source-tutor-overlay');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'source-tutor-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:3000;display:flex;align-items:center;justify-content:center;animation:fadeIn 0.2s ease;';
+
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--bg-panel);border-radius:var(--radius-lg);padding:24px;max-width:600px;width:90%;max-height:80vh;display:flex;flex-direction:column;box-shadow:var(--shadow-xl);animation:slideUp 0.2s ease;';
+
+  const title = document.createElement('div');
+  title.textContent = '🤖 问 Kimi — 条文';
+  title.style.cssText = 'font-size:var(--font-size-lg);font-weight:600;margin-bottom:16px;flex-shrink:0;color:var(--text-primary);';
+
+  const textarea = document.createElement('textarea');
+  textarea.value = prompt;
+  textarea.readOnly = true;
+  textarea.style.cssText = 'width:100%;min-height:200px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);color:var(--text-primary);font-size:var(--font-size-sm);line-height:1.6;resize:vertical;flex:1;font-family:inherit;';
+
+  const actions = document.createElement('div');
+  actions.style.cssText = 'display:flex;gap:8px;justify-content:flex-end;margin-top:16px;flex-shrink:0;';
+
+  const btnCopy = document.createElement('button');
+  btnCopy.textContent = '复制 Prompt';
+  btnCopy.className = 'btn-primary';
+  btnCopy.addEventListener('click', () => {
+    textarea.select();
+    try {
+      navigator.clipboard.writeText(prompt);
+      showToastOnModal(modal, '已复制到剪贴板');
+    } catch (e) {
+      document.execCommand('copy');
+      showToastOnModal(modal, '已复制到剪贴板');
+    }
+  });
+
+  const btnClose = document.createElement('button');
+  btnClose.textContent = '关闭';
+  btnClose.className = 'btn-secondary';
+  btnClose.addEventListener('click', () => overlay.remove());
+
+  actions.appendChild(btnCopy);
+  actions.appendChild(btnClose);
+
+  modal.appendChild(title);
+  modal.appendChild(textarea);
+  modal.appendChild(actions);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
+}
+
+/**
+ * 在弹窗上显示临时提示
+ */
+function showToastOnModal(modal, message) {
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.cssText = 'position:absolute;bottom:16px;left:50%;transform:translateX(-50%);padding:8px 16px;background:var(--success);color:white;border-radius:var(--radius-md);font-size:var(--font-size-sm);animation:fadeInUp 0.2s ease;z-index:10;';
+  modal.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
+/**
+ * 保存条文笔记（per-source）
+ * @param {Object} sourceCard - 条文卡片
+ * @param {Object} card - 当前方剂卡片
+ */
+function saveSourceNote(sourceCard, card) {
+  if (!sourceCard || !card) return;
+  const formula = card.formula_name || card.name || '本方';
+  const chapter = sourceCard.chapter || sourceCard.source_chapter || '伤寒论';
+  const text = sourceCard.text || sourceCard.source_text || '';
+  const sourceId = sourceCard.id || 'unknown';
+
+  // 检查是否已有笔记
+  const existing = loadSourceNote(card.id, sourceId);
+
+  const title = prompt('笔记标题：', existing?.title || `${chapter} — ${formula}`);
+  if (title === null) return;
+
+  const content = prompt('笔记内容（支持 Markdown）：', existing?.content || `【条文】\n${text}\n\n【笔记】\n`);
+  if (content === null) return;
+
+  saveSourceNoteData(card.id, sourceId, {
+    title: title || `${chapter} — ${formula}`,
+    content,
+    formulaName: formula,
+    chapter,
+    sourceText: text,
+    updatedAt: new Date().toISOString()
+  });
+
+  // 显示 toast
+  const panel = document.getElementById('sourcePanel');
+  if (panel) showToast(panel, '条文笔记已保存');
+}
+
+/**
+ * 从 localStorage 加载 per-source 笔记
+ */
+function loadSourceNote(cardId, sourceId) {
+  try {
+    const raw = localStorage.getItem(SOURCE_ARTICLE_NOTES_KEY);
+    if (!raw) return null;
+    const notes = JSON.parse(raw);
+    return notes[`${cardId}__${sourceId}`] || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * 保存 per-source 笔记到 localStorage
+ */
+function saveSourceNoteData(cardId, sourceId, note) {
+  try {
+    const raw = localStorage.getItem(SOURCE_ARTICLE_NOTES_KEY);
+    const notes = raw ? JSON.parse(raw) : {};
+    notes[`${cardId}__${sourceId}`] = note;
+    localStorage.setItem(SOURCE_ARTICLE_NOTES_KEY, JSON.stringify(notes));
+    return true;
+  } catch (e) {
+    console.warn('[SourcePanel] 保存条文笔记失败:', e);
+    return false;
+  }
 }
 
 /**

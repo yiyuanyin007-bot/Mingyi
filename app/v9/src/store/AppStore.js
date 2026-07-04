@@ -29,6 +29,7 @@ let _state = {
 
 /** 订阅者集合 */
 const _listeners = new Set();
+console.log('[AppStore] 模块加载，_listeners 创建，实例ID:', Math.random().toString(36).slice(2, 8));
 
 /**
  * 获取当前状态的深拷贝（只读）
@@ -73,6 +74,11 @@ function _notify(oldState, newState) {
       console.error('[AppStore] 订阅者报错:', e);
     }
   });
+}
+
+// 调试：暴露内部状态到全局
+if (typeof window !== 'undefined') {
+  window.__APP_STORE_DEBUG__ = { getListeners: () => _listeners, getState: () => _state };
 }
 
 // ===== 快捷操作 =====

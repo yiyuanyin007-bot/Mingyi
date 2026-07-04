@@ -4,7 +4,7 @@
  */
 
 import { preloadAll } from '@services/DataService.js';
-import { loadState, updateMastery, updateStats, updateTodayStats, getTodayStats, saveStudyNote } from '@services/StorageService.js';
+import { loadState, updateMastery, updateStats, updateTodayStats, getTodayStats } from '@services/StorageService.js';
 import { recordAnswerEvent, getTopErrorCards, getTopPracticeCards, getWeakVectors, generateReviewSuggestions, loadStats } from '@services/StatsService.js';
 import { openPracticeSummary, closePracticeSummary } from '@components/PracticeSummary.js';
 import { renderWrongBookView } from '@components/WrongBookView.js';
@@ -14,7 +14,7 @@ import { getState, setState, subscribe, setPage, setActiveCard, initExam, record
 import { renderCardList } from '@components/CardList.js';
 import { renderLearnView } from '@components/LearnView.js';
 import { openSourcePanel } from '@components/SourcePanel.js';
-import { renderExamView, renderExamResult } from '@components/ExamView.js';
+import { renderExamView } from '@components/ExamView.js';
 import { openKimiModal } from '@components/KimiModal.js';
 import { generateQuestions as genQuestionsForCard, generateQuestionForVector, generateOptions, generateDailyReview } from '@services/ExamService.js';
 import { generateRetrievalRound, generateWrongProfile } from '@services/RetrievalEngine.js';
@@ -123,26 +123,6 @@ async function init() {
         onClose: () => {
           setPage('dashboard');
           renderDashboard();
-        },
-        onRetryWrong: (cardId, vector) => {
-          if (!cardId || !vector) return;
-          const card = CARDS.find(c => c.id === cardId);
-          if (!card) return;
-          const q = generateQuestionForVector(card, vector);
-          if (!q) { alert('暂无可练习题目。'); return; }
-          q.options = generateOptions(q.cardId, q.type, CARDS);
-          initExam([q], 'practice-card');
-          setPage('exam');
-          renderExam();
-        },
-        onStartWrongBookReview: (questions) => {
-          console.log('[onStartWrongBookReview] 收到题目数:', questions?.length);
-          if (!questions || questions.length === 0) { alert('暂无可复习题目'); return; }
-          initExam(questions, 'wrongbook-review');
-          console.log('[onStartWrongBookReview] initExam 完成，切换页面');
-          setPage('exam');
-          renderExam();
-          console.log('[onStartWrongBookReview] renderExam 完成');
         }
       });
     });
@@ -168,13 +148,6 @@ async function init() {
         searchInput.focus();
       });
     }
-
-    // 5.5 注册状态变化订阅（视图切换）
-    subscribe((newState, oldState) => {
-      if (newState.page !== oldState.page) {
-        switchView(newState.page);
-      }
-    });
 
     // 6. 渲染仪表盘
     renderDashboard();
@@ -322,13 +295,6 @@ function renderLearn(cardId) {
   if (!card) return;
   const container = document.getElementById('learnContainer');
 
-  // 获取当前卡片关联的临床医案
-  const cardExperiences = EXPERIENCES.filter(e => 
-    card.experience_ids?.includes(e.id) ||
-    e.cardId === cardId ||
-    e.formula_name === card.formula_name
-  );
-
   renderLearnView(container, card, {
     onBack: () => {
       if (fromPracticeSummaryFlag) {
@@ -341,7 +307,6 @@ function renderLearn(cardId) {
       }
     },
     onPractice: (id) => startPractice(id),
-    onPracticeVector: (id, vector) => startPracticeVector(id, vector),
     onSimilar: (id) => startPracticeSimilar(id),
     onExam: () => startExamMode(),
     onTutor: () => openKimiModal(card),
@@ -349,8 +314,7 @@ function renderLearn(cardId) {
       const c = CARDS.find(x => x.id === id);
       if (!c) return;
       openSourcePanel(c, SOURCES, document.body);
-    },
-    experiences: cardExperiences
+    }
   });
 }
 
@@ -359,7 +323,6 @@ function renderLearn(cardId) {
 function renderExam() {
   const state = getState();
   const container = document.getElementById('examContainer');
-  console.log('[renderExam] mode:', state.exam?.mode, 'current:', state.exam?.current, 'questions.length:', state.exam?.questions?.length, 'container:', !!container);
 
   renderExamView(container, state.exam, {
     onSelect: (idx) => handleSelectOption(idx),
@@ -372,26 +335,15 @@ function renderExam() {
 
 function handleSelectOption(idx) {
   const state = getState();
-  console.log('[handleSelectOption] idx:', idx, 'mode:', state.exam.mode, 'current:', state.exam.current, 'finished:', state.exam.finished, 'submitted:', state.exam.submitted, 'questions.length:', state.exam.questions.length);
   const isExam = state.exam.mode === 'exam';
-  if (state.exam.finished && !isExam) {
-    console.log('[handleSelectOption] 被拦截: finished=true && !isExam');
-    return;
-  }
-  if (isExam && state.exam.submitted) {
-    console.log('[handleSelectOption] 被拦截: isExam && submitted');
-    return;
-  }
+  if (state.exam.finished && !isExam) return;
+  if (isExam && state.exam.submitted) return;
 
   const q = state.exam.questions[state.exam.current];
-  if (!q || !q.options || idx < 0 || idx >= q.options.length) {
-    console.log('[handleSelectOption] 被拦截: q无效或idx越界', { q: !!q, optionsLen: q?.options?.length, idx });
-    return;
-  }
+  if (!q || !q.options || idx < 0 || idx >= q.options.length) return;
   
   const selected = q.options[idx];
   const isCorrect = checkAnswer(q, selected);
-  console.log('[handleSelectOption] selected:', selected?.label, 'isCorrect:', isCorrect, 'cardId:', q.cardId, 'type:', q.type);
 
   if (isExam) {
     recordSelection(state.exam.current, selected);
@@ -422,77 +374,12 @@ function finishExam() {
   const state = getState();
   if (state.exam.mode === 'exam') {
     // 考试模式：提交后统一判分，记录统计（包含未作答的）
-    console.log('[finishExam] 考试模式，answers.length:', state.exam.answers.length);
     state.exam.answers.forEach(a => {
       recordAnswerEvent(a.question.cardId, a.question.cardName || a.question.cardId, a.question.type, getVectorLabel(a.question.type), a.isCorrect, 'exam', a.selected?.label);
     });
-    // 显示考试结果页面
-    console.log('[finishExam] 渲染考试结果');
-    const container = document.getElementById('examContainer');
-    renderExamResult(container, state.exam, {
-      onRetrieval: () => {
-        startRetrievalRound();
-      },
-      onReturn: () => {
-        setPage('dashboard');
-        renderDashboard();
-        resetExam();
-      },
-      onDiagnosis: (answer, diagnosisKey) => {
-        const card = CARDS.find(c => c.id === answer.question.cardId);
-        const cardName = card ? card.name : answer.question.cardId;
-        saveStudyNote({
-          cardId: answer.question.cardId,
-          cardName: cardName,
-          vector: answer.question.type,
-          vectorLabel: getVectorLabel(answer.question.type),
-          diagnosis: diagnosisKey,
-          question: answer.question.text,
-          selected: answer.selected?.label || '未作答',
-          correct: Array.isArray(answer.question.correct)
-            ? answer.question.correct.join('、')
-            : answer.question.correct
-        });
-        showToast('已保存到错题本');
-      },
-      onAskKimi: (answer) => {
-        const card = CARDS.find(c => c.id === answer.question.cardId);
-        const cardName = card ? card.name : answer.question.cardId;
-        const prompt = `我是中医学习者，我在《伤寒论》方剂模拟考试中遇到了一道错题，请帮我分析：
-
-方剂：${cardName}
-向量：${getVectorLabel(answer.question.type)}
-题目：${answer.question.text}
-我的选择：${answer.selected?.label || '未作答'}
-正确答案：${Array.isArray(answer.question.correct) ? answer.question.correct.join('、') : answer.question.correct}
-
-请分析：
-1. 我为什么错（认知层面的原因）
-2. 这个方剂和正确答案的关键区别是什么
-3. 我应该如何强化记忆（具体方法）
-4. 推荐我下一步练习哪个方向`;
-        openKimiModal({ prompt, title: '错题分析' });
-      },
-      onBatchTag: () => {
-        state.exam.answers.filter(a => !a.isCorrect).forEach(a => {
-          const card = CARDS.find(c => c.id === a.question.cardId);
-          const cardName = card ? card.name : a.question.cardId;
-          saveStudyNote({
-            cardId: a.question.cardId,
-            cardName: cardName,
-            vector: a.question.type,
-            vectorLabel: getVectorLabel(a.question.type),
-            diagnosis: 'confusion',
-            question: a.question.text,
-            selected: a.selected?.label || '未作答',
-            correct: Array.isArray(a.question.correct)
-              ? a.question.correct.join('、')
-              : a.question.correct
-          });
-        });
-        showToast('已批量标记到错题本');
-      }
-    }, CARDS);
+    setPage('dashboard');
+    renderDashboard();
+    resetExam();
   } else {
     // 练习模式：显示错题回顾面板
     openPracticeSummary(state.exam, CARDS, {
@@ -553,17 +440,6 @@ function startPractice(cardId) {
   }).filter(Boolean);
   if (questions.length === 0) { alert('暂无可练习题目。'); return; }
   initExam(questions, 'practice-card');
-  setPage('exam');
-  renderExam();
-}
-
-function startPracticeVector(cardId, vector) {
-  const card = CARDS.find(c => c.id === cardId);
-  if (!card) return;
-  const q = generateQuestionForVector(card, vector);
-  if (!q) { alert('暂无可练习题目。'); return; }
-  q.options = generateOptions(q.cardId, q.type, CARDS);
-  initExam([q], 'practice-card');
   setPage('exam');
   renderExam();
 }
@@ -925,51 +801,17 @@ function startClusterExam(cards, clusterName, mode) {
     return;
   }
 
-  // 从聚类卡片中生成题目，每张卡片至少2题，最多3题
+  // 从聚类卡片中生成题目，每张卡片至少一道题
   let questions = [];
   cards.forEach(card => {
     const qList = genQuestionsForCard(card);
     if (qList && qList.length > 0) {
-      // 每张卡片至少抽2题（如果可用），最多3题
-      const minPerCard = 2;
-      const maxPerCard = 3;
-      let count = Math.min(qList.length, maxPerCard);
-      if (qList.length >= minPerCard && count < minPerCard) {
-        count = minPerCard;
-      }
+      // 从每张卡片中随机抽1-2题
+      const count = Math.min(qList.length, Math.random() > 0.5 ? 2 : 1);
       const shuffled = [...qList].sort(() => Math.random() - 0.5).slice(0, count);
-      shuffled.forEach(q => {
-        if (q) {
-          q.options = generateOptions(q.cardId, q.type, CARDS);
-        }
-      });
-      questions = questions.concat(shuffled.filter(Boolean));
+      questions = questions.concat(shuffled);
     }
   });
-
-  // 补充策略：如果总题量不足，为每张卡片尝试生成不同向量的题目
-  const minTotal = Math.max(5, cards.length * 2);
-  if (questions.length < minTotal) {
-    const existingKeys = new Set(questions.map(q => `${q.cardId}-${q.type}`));
-    const supplementPool = [];
-    cards.forEach(card => {
-      const vectors = ['0→1', '1→0', '0→2', '2→0', '0→contra', '0→usage'];
-      vectors.forEach(v => {
-        const key = `${card.id}-${v}`;
-        if (existingKeys.has(key)) return;
-        const q = generateQuestionForVector(card, v);
-        if (q) {
-          q.options = generateOptions(q.cardId, q.type, CARDS);
-          supplementPool.push(q);
-          existingKeys.add(key);
-        }
-      });
-    });
-    // 打乱补充池，取需要的数量
-    supplementPool.sort(() => Math.random() - 0.5);
-    const needed = minTotal - questions.length;
-    questions = questions.concat(supplementPool.slice(0, needed));
-  }
 
   if (questions.length === 0) {
     alert('这些卡片暂无题目，请先学习');
@@ -985,9 +827,9 @@ function startClusterExam(cards, clusterName, mode) {
   renderExam();
   alert(`${clusterName}复习：共 ${questions.length} 题，来自 ${cards.length} 张卡片`);
 }
+
 function handleKeydown(e) {
   const state = getState();
-  console.log('[handleKeydown] e.key:', e.key, 'e.code:', e.code, 'page:', state.page, 'mode:', state.exam?.mode, 'current:', state.exam?.current, 'questions.length:', state.exam?.questions?.length, 'submitted:', state.exam?.submitted, 'finished:', state.exam?.finished);
 
   // 统计页按 Esc 返回仪表盘
   if (state.page === 'stats' && e.key === 'Escape') {
@@ -1006,18 +848,10 @@ function handleKeydown(e) {
   // 考试页快捷键
   if (state.page !== 'exam') return;
 
-  // 防御性检查：确保考试状态有效
-  if (!state.exam || !state.exam.questions || state.exam.questions.length === 0) {
-    console.error('[handleKeydown] 考试状态异常，questions为空或不存在');
-    return;
-  }
-
   const answered = state.exam.answers[state.exam.current];
   const isExam = state.exam.mode === 'exam';
   const hasAnswered = answered && answered.selected != null;
   const isLast = state.exam.current >= state.exam.questions.length - 1;
-
-  console.log('[handleKeydown] isExam:', isExam, 'hasAnswered:', hasAnswered, 'isLast:', isLast, 'answered:', answered ? '存在' : 'null');
 
   // 数字键 1-4 选择选项（支持主键盘和数字键盘）
   let idx = -1;
@@ -1026,17 +860,9 @@ function handleKeydown(e) {
   else if (e.code === 'Digit3' || e.code === 'Numpad3') idx = 2;
   else if (e.code === 'Digit4' || e.code === 'Numpad4') idx = 3;
   if (idx >= 0) {
-    console.log('[handleKeydown] 数字键 idx:', idx, 'isExam:', isExam, 'hasAnswered:', hasAnswered, 'submitted:', state.exam.submitted);
     e.preventDefault();
-    if (!isExam && hasAnswered) {
-      console.log('[handleKeydown] 数字键被拦截: 练习模式已答过');
-      return; // 练习模式已答过不能重选
-    }
-    if (isExam && state.exam.submitted) {
-      console.log('[handleKeydown] 数字键被拦截: 考试已提交');
-      return; // 考试已提交不能选
-    }
-    console.log('[handleKeydown] 调用 handleSelectOption(', idx, ')');
+    if (!isExam && hasAnswered) return; // 练习模式已答过不能重选
+    if (isExam && state.exam.submitted) return; // 考试已提交不能选
     handleSelectOption(idx);
     return;
   }
@@ -1054,11 +880,6 @@ function handleKeydown(e) {
   // ] 下一题 / 提交 / 完成
   if (e.key === ']') {
     e.preventDefault();
-    // 移除焦点，防止按钮 click 事件重复触发
-    if (document.activeElement && document.activeElement !== document.body) {
-      document.activeElement.blur();
-    }
-    console.log('[handleKeydown] ]键 isExam:', isExam, 'submitted:', state.exam.submitted, 'isLast:', isLast, 'hasAnswered:', hasAnswered);
     if (isExam) {
       if (state.exam.submitted) {
         if (isLast) {
@@ -1077,17 +898,8 @@ function handleKeydown(e) {
         }
       }
     } else {
-      // 练习模式：重新获取最新状态判断
-      const freshState = getState();
-      const freshAnswered = freshState.exam.answers[freshState.exam.current];
-      const freshHasAnswered = freshAnswered && freshAnswered.selected != null;
-      const freshIsLast = freshState.exam.current >= freshState.exam.questions.length - 1;
-      console.log('[handleKeydown] ]键练习模式 freshHasAnswered:', freshHasAnswered, 'freshIsLast:', freshIsLast, 'current:', freshState.exam.current);
-      if (!freshHasAnswered) {
-        console.log('[handleKeydown] ]键被拦截: 练习模式未答');
-        return;
-      }
-      if (freshIsLast) {
+      if (!hasAnswered) return;
+      if (isLast) {
         finishExam();
       } else {
         nextQuestion();
@@ -1100,11 +912,6 @@ function handleKeydown(e) {
   // Enter / 空格 下一题 / 提交 / 完成
   if (e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
-    // 移除焦点，防止按钮 click 事件重复触发
-    if (document.activeElement && document.activeElement !== document.body) {
-      document.activeElement.blur();
-    }
-    console.log('[handleKeydown] Enter/空格 isExam:', isExam, 'submitted:', state.exam.submitted, 'isLast:', isLast, 'hasAnswered:', hasAnswered);
     if (isExam) {
       if (state.exam.submitted) {
         if (isLast) finishExam();
@@ -1114,17 +921,8 @@ function handleKeydown(e) {
         else { nextQuestion(); renderExam(); }
       }
     } else {
-      // 练习模式：重新获取最新状态判断
-      const freshState = getState();
-      const freshAnswered = freshState.exam.answers[freshState.exam.current];
-      const freshHasAnswered = freshAnswered && freshAnswered.selected != null;
-      const freshIsLast = freshState.exam.current >= freshState.exam.questions.length - 1;
-      console.log('[handleKeydown] Enter/空格练习模式 freshHasAnswered:', freshHasAnswered, 'freshIsLast:', freshIsLast, 'current:', freshState.exam.current);
-      if (!freshHasAnswered) {
-        console.log('[handleKeydown] Enter/空格被拦截: 练习模式未答');
-        return;
-      }
-      if (freshIsLast) finishExam();
+      if (!hasAnswered) return;
+      if (isLast) finishExam();
       else { nextQuestion(); renderExam(); }
     }
     return;
@@ -1141,15 +939,3 @@ function handleKeydown(e) {
 // 测试环境暴露（供E2E测试直接导航）
 // 启动
 init();
-
-/**
- * 显示 Toast 提示
- */
-function showToast(message) {
-  const toast = document.createElement('div');
-  toast.className = 'save-toast';
-  toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:10px 20px;background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;z-index:10000;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2000);
-}

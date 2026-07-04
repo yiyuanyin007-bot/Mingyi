@@ -64,7 +64,7 @@ body {
   display: none;
   height: 100%;
   overflow-y: auto;
-  padding: 24px;
+  padding: 16px;
 }
 
 .view.active { display: block; }
@@ -134,8 +134,8 @@ body {
 
 /* 学习视图 */
 .learn-container {
-  max-width: 680px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
 }
 .back-link {
   font-size: 13px;
@@ -226,6 +226,32 @@ body {
   transition: opacity 0.2s;
 }
 .herb-item.revealed .herb-dose { opacity: 1; }
+
+/* 剂量换算直接展开样式（Exp-22：回归V8模式） */
+.herb-conversion {
+  display: none;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+  font-size: 11px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+.herb-item.revealed .herb-conversion { display: block; }
+.conversion-value {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 12px;
+}
+.conversion-note {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.conversion-missing {
+  color: var(--text-muted);
+  font-style: italic;
+}
 
 .reveal-btn {
   padding: 4px 10px;
