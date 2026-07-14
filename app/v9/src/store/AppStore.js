@@ -107,12 +107,17 @@ export function initExam(questions, mode) {
   });
 }
 
-/** 记录答题 */
+/** 记录答题（练习模式）
+ * 注意：finished 只应在所有题目都答完时设为 true。
+ * 判断标准：answers 中所有题目的 selected 都不为 null。
+ */
 export function recordAnswer(index, selected, isCorrect) {
   const state = getState();
   const answers = [...state.exam.answers];
   answers[index] = { question: state.exam.questions[index], selected, isCorrect };
-  setState({ exam: { ...state.exam, answers, finished: true } });
+  // 只有全部题目都已作答才设 finished=true
+  const allAnswered = answers.every(a => a.selected != null);
+  setState({ exam: { ...state.exam, answers, finished: allAnswered } });
 }
 
 /** 考试模式下记录选择（不判分） */
