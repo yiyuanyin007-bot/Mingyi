@@ -1,7 +1,7 @@
 # 经方学习系统 · 项目索引
 
 > 这是本文件夹的「活地图」。每次回到这个项目时，先读此文件。  
-> 最后更新：2026-06-22
+> 最后更新：2026-07-11
 
 ---
 
@@ -64,6 +64,9 @@
 | `app/` | 前端应用 |
 | `docs/` | 项目文档 |
 | `scripts/` | 便捷脚本 |
+| `tests/` | 测试目录（当前为空，仅含空 smoke/ 子目录） |
+| `logs/` | 日志与会话速记（含 session_notes/，1 条会话记录） |
+| `archive/` | 旧版本文件备份（7 个备份文件：.bat/.py/.md 等） |
 
 ### 核心目录
 
@@ -125,6 +128,21 @@ app/              前端应用
 │   └── src/              组件、服务、状态、工具
 ├── archive/              历史原型版本
 └── assets/               静态资源（预留）
+
+archive/          旧版本文件备份
+├── AGENTS-before-port-20260618.md
+├── README-before-port-20250618.md
+├── persona_system-before-补充40方人格映射表_*.md
+├── start_server-before-port-comment-fix-20250618.py
+├── start_server-before-port-migration-20250618.py
+├── 经方学习系统-before-port-migration-20250618.bat
+└── 经方学习系统-手机版-before-port-migration-20250618.bat
+
+logs/             日志与会话速记
+└── session_notes/       AI 会话记录
+    └── S-20260702-002.md   2026-07-02 数据层会话速记
+
+tests/            测试目录（当前为空，仅含空 smoke/ 子目录）
 ```
 
 ---
@@ -367,6 +385,7 @@ python .agents\skills\text-to-cards\scripts\build_demo_cards.py
 | 2026-06-14 | 修复 `rule_source_card_analyzer` 主方归属 bug：结论词前最近方名优先，避免句首误方名被当作主方 |
 | 2026-06-14 | INDEX.md 显式沉淀 DeepSeek 评审共识：双轨制 / lineage / 经验三级分层 / 疗效客观化 / 训练向量精简 / MVP 不做清单 |
 | 2026-06-14 | Phase 3 启动：实现 `scripts/card_manager.py`（list / show / approve / reject / delete / reextract），候选生命周期可管理 |
+| 2026-07-11 | 补全小目录索引：`archive/`（7 个备份文件）、`logs/`（1 条会话速记）、`tests/`（空目录）加入 INDEX.md 和 AGENTS.md |
 
 ---
 

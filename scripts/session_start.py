@@ -9,10 +9,11 @@
 
 检查项：
   1. 项目根目录是否存在
-  2. 关键文件是否存在（app/index.html, data/*.json, docs/CHANGELOG.md）
+  2. 关键文件是否存在（app/index.html, data/*.json, docs/CHANGELOG.md, PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md）
   3. 临时文件残留检查
   4. 上次会话是否未结束（基于 CHANGELOG 最后变更日期）
-  5. 输出会话启动摘要
+  5. 架构确认单检查
+  6. 输出会话启动摘要
 """
 
 import os
@@ -40,6 +41,7 @@ def check_key_files():
         "data/sun_target_formulas.json",
         "docs/CHANGELOG.md",
         "AGENTS.md",
+        "PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md",  # 架构确认单
     ]
     missing = []
     for f in key_files:
@@ -100,6 +102,16 @@ def check_last_session_status():
         print(f"[OK] 无未归档变更")
 
 
+def check_architecture_checklist():
+    checklist = PROJECT_ROOT / "PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md"
+    if checklist.exists():
+        print("[OK] PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md 存在")
+    else:
+        print("[MISSING] PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md 不存在")
+        print("        如需启动新任务，请先创建架构确认单")
+    return checklist.exists()
+
+
 def main():
     print("=" * 60)
     print("会话启动检查")
@@ -132,7 +144,11 @@ def main():
     print("\n--- 上次会话状态 ---")
     check_last_session_status()
 
-    # 5. 会话启动摘要
+    # 5. 架构确认单检查
+    print("\n--- 架构确认单检查 ---")
+    has_checklist = check_architecture_checklist()
+
+    # 6. 会话启动摘要
     print("\n" + "=" * 60)
     print("会话启动摘要")
     print("=" * 60)
@@ -146,6 +162,16 @@ def main():
     print("  3. 任何文件修改前: python scripts/governance.py backup <file> <reason>")
     print("  4. 任何 JSON 修改后: python scripts/governance.py check-json <file>")
     print("  5. 会话结束时: python scripts/governance.py end")
+    print()
+    print("【架构确认铁律】")
+    if has_checklist:
+        print("  架构确认单已存在。")
+        print("  如本次会话要启动新任务，且涉及多文件/多 Agent 协作：")
+        print("  → 必须先完成 PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md")
+        print("  → 双方签署后才能编码")
+        print("  → 单文件修复可跳过，但仍需口头确认需求")
+    else:
+        print("  [WARN] 架构确认单缺失，建议创建 PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md")
     print("=" * 60)
 
 

@@ -21,6 +21,14 @@ C:\Users\Chen\Desktop\经方学习系统（旧版）
 | `MISSION.md` | 项目目标、范围、成功标准。 |
 | `RESOURCES.md` | 数据来源、核心文件、脚本、备份策略。 |
 | `docs/CHANGELOG.md` | 变更登记簿（编号规则：SH-YYYYMMDD-NNN）。 |
+| `PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md` | **项目启动架构确认单**：任何涉及多文件/多 Agent 的任务，编码前必须完成此确认单，双方签署后才能开始。 |
+| `app/index.html` | 桌面版主入口，优先修改此文件。 |
+
+| 文件/目录 | 作用 |
+|---|---|
+| `MISSION.md` | 项目目标、范围、成功标准。 |
+| `RESOURCES.md` | 数据来源、核心文件、脚本、备份策略。 |
+| `docs/CHANGELOG.md` | 变更登记簿（编号规则：SH-YYYYMMDD-NNN）。 |
 | `app/index.html` | 桌面版主入口，优先修改此文件。 |
 | `data/formula_cards.json` | 方剂卡片真相源（63 张）。 |
 | `data/source_cards.json` | 原文条文卡（398 条）。 |
@@ -46,6 +54,15 @@ C:\Users\Chen\Desktop\经方学习系统（旧版）
 3. **验证浏览器**：修改后用 WebBridge 或本地浏览器打开 `http://localhost:8100/app/index.html` 确认无报错。
 
 ### 3.1 会话启动强制步骤
+
+每个会话**开始时**必须执行：
+
+1. 读取 AGENTS.md（本文件）→ 了解项目规范
+2. 读取 `docs/CHANGELOG.md` → 了解当前变更状态（路径：`docs/CHANGELOG.md`，非根目录）
+3. 运行 `python scripts/session_start.py` → 检查项目健康状态
+4. **架构确认检查**：如果本次会话要启动**新任务**（非延续上次任务），且任务涉及**多文件修改**或**多 Agent 协作**，必须先完成《项目启动架构确认单》（`PROJECT_STARTUP_ARCHITECTURE_CHECKLIST.md`），双方签署后才能进入编码阶段。单文件/单点修复可跳过，但仍需口头确认需求。
+
+### 3.2 会话结束强制步骤
 
 每个会话**开始时**必须执行：
 
@@ -177,6 +194,17 @@ python -m http.server 8100
 - ❌ **删除 archive 目录中的备份文件**
 - ❌ **使用外部路径写入文件**
 - ❌ **跳过会话启动/结束检查**
+- ❌ **跳过《项目启动架构确认单》直接编码**（涉及多文件/多 Agent 的任务，未确认即编码视为违规）
+- ❌ **确认单签署后擅自变更方案而不走变更流程**
+
+- ❌ **修改文件后不备份**
+- ❌ **修改 JSON 后不验证语法**
+- ❌ **修改后不登记 CHANGELOG**
+- ❌ **在项目中留下临时文件**（temp_*.json、tmp_*.txt 等）
+- ❌ **修改 CHANGELOG 的编号规则或格式**
+- ❌ **删除 archive 目录中的备份文件**
+- ❌ **使用外部路径写入文件**
+- ❌ **跳过会话启动/结束检查**
 
 ---
 
@@ -238,8 +266,49 @@ python start_server.py
 
 ---
 
-## 7. 联系上下文
+## 7. 代码索引维护规则（硬约束）
+
+1. **先读索引，再改代码**：修改某子目录前，先读该目录的 INDEX.md
+2. **改了代码，必更新索引**：任何文件新增/修改/删除后，更新对应的 INDEX.md
+3. **连接变了，必更新索引**：文件间的依赖/调用关系变更时更新「连接关系图」
+4. **状态变了，必更新索引**：文件状态（✅ 🗑 🔄 等）变更时更新「快速索引」
+5. **创建新文件，先写索引**：需在新文件第一个 PR 中同步添加 INDEX.md 入口行
+6. **变更历史必记**：每次 INDEX.md 更新需追加变更历史行
+> 违反后果：索引不更新 = 变更未完成
+
+## 8. 现有 INDEX.md 索引清单
+
+| 目录 | 路径 | 范围 |
+|------|------|------|
+| 应用前端 | `app/INDEX.md` | v7/v8/v9 三版本 + 原型 + 截图 + 备份 |
+| 核心数据 | `data/INDEX.md` | 方剂/源文章/经验/SP 卡片 + 别名/症状映射 + 备份 |
+| 工具脚本 | `scripts/INDEX.md` | 67 脚本按 10 功能域分组 + analyzers/text_extractors 子模块 |
+| 项目文档 | `docs/INDEX.md` | 179 文档按类型分组（顶层设计/交互/周报/规范等） |
+| 提取知识 | `extracted/INDEX.md` | 417 提取产物（小红书/经方沙龙/标注/卡片中间态） |
+| 原始素材 | `raw/INDEX.md` | ~3320 原始文件（12 CHM 提取 + 注解 + 古典条文） |
+| 标准化病人 | `standardized-patient/INDEX.md` | SP Skill + 6 案例 + 批量输出 + 6 参考文档 |
+| 学习范围配置 | `config/INDEX.md` | 2 个 scope 配置文件 |
+| 临床记录 | `clinical/INDEX.md` | 1 次实际临床 + 1 空模板 |
+| Mock 卡片 | `mock_cards/INDEX.md` | 5 首标准方剂 Mock 数据 |
+| 数据 Schema | `schemas/INDEX.md` | 方剂 SOP + 学习轨迹 Schema |
+| 旧版归档 | `archive/` | 7 个旧版本备份文件（.bat/.py/.md） |
+| 日志速记 | `logs/` | 1 条 AI 会话速记（session_notes/） |
+| 测试代码 | `tests/` | 当前为空目录（仅含空 smoke/ 子目录） |
+
+---
+
+## 9. 联系上下文
 
 - 用户（陈医生）是中医临床学习者，下周二开始临床开方。
 - 优先考虑「周二前能用的最小闭环」。
 - 数据来源优先级：老师小红书笔记 > 本地 `extracted/太阳病.md` > 网络权威中医站点。
+
+---
+
+## 10. AI 技能（Skills）
+
+项目中可调用的 AI 辅助技能，放在 `app/v9/.kimi-code/skills/`（因 v9 是当前活跃开发版本）。
+
+| 触发指令 | 技能文件 | 作用 | 适用场景 |
+|---------|---------|------|---------|
+| "线上出问题了" / "帮我部署" | `app/v9/.kimi-code/skills/前端项目线上问题排查与部署.md` | 诊断 → 修复 → 部署全流程 | v9 Vercel 部署问题排查及手动 Redeploy |
