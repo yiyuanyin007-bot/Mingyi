@@ -1139,8 +1139,19 @@ function handleKeydown(e) {
 }
 
 // 测试环境暴露（供E2E测试直接导航）
+// ═══════════════════════════════════════════
+// Rollup tree-shaking 防护标记
+// 以下副作用标记确保 Rollup 不会误删文件和核心函数
+// ═══════════════════════════════════════════
+
+// 副作用标记 #1: 强导出标记，阻止 Rollup 将本文件视为"纯副作用已完成"
+export const __ENTRY_GUARD__ = (typeof document !== 'undefined' ? 1 : 0);
+
 // 启动
 init();
+
+// 副作用标记 #2: 确保 init() 调用后的语句也被保留
+void document?.documentElement?.dataset?._v ?? '';
 
 /**
  * 显示 Toast 提示

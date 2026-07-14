@@ -12,8 +12,16 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html')
-      }
-    }
+      },
+      // 防止 tree-shaking 误删核心逻辑（init/switchView/subscribe 等）
+      treeshake: false,
+      // 确保入口模块及所有副作用被保留
+      preserveEntrySignatures: 'strict',
+    },
+    // 确保模块的副作用完全保留
+    target: 'es2020',
+    modulePreload: false,
+    cssCodeSplit: false,
   },
   server: {
     port: 5173,
