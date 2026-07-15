@@ -10,9 +10,8 @@
 
 import { createElement } from '@utils/dom.js';
 import { convertDosage, formatDoseCompact, isAncientDosage } from '@utils/doseConverter.js';
-
-/** 卡片笔记 localStorage 键（V8 兼容：独立键，不与错题本混用） */
-const CARD_NOTES_KEY = 'sh_v9_card_notes';
+import { getNotesByCardFlat, getNote, createNote, updateNote } from '@services/NoteService.js';
+import { openNoteEditor } from '@components/NoteEditor.js';
 
 /** 6 个学习向量定义 */
 const VECTORS = [
@@ -168,8 +167,8 @@ export function renderLearnView(container, card, options = {}) {
   cols.appendChild(rightCol);
   wrap.appendChild(cols);
 
-  // ===== 笔记区域（V8: 5291-5354） =====
-  wrap.appendChild(buildNoteSection(card));
+  // ===== 笔记区域（使用 NoteService + NoteEditor） =====
+  wrap.appendChild(buildNoteSection(card, options));
 
   // ===== 底部返回按钮 =====
   const bottomBack = createElement('div', { className: 'learn-back-bottom' });
@@ -399,20 +398,21 @@ function buildExperienceSection(card, experiences) {
 }
 
 /**
- * [V8 REF] 笔记区域（V8: 5301-5354）
- * 可编辑、保存到 localStorage（使用独立键 CARD_NOTES_KEY）
- * V9 增强：支持 Markdown 渲染、看笔记弹窗、条文+笔记上下布局
+ * [V9 REF] 笔记区域 — 使用 NoteService（统一存储）+ NoteEditor（浮窗）
+ * 废弃旧的独立 CARD_NOTES_KEY 存储，所有笔记通过 NoteService 管理
  */
-function buildNoteSection(card) {
+function buildNoteSection(card, options) {
   const section = createElement('div', { className: 'card-note-section', id: 'cardNoteSection' });
-  const note = loadCardNote(card.id);
+  const notes = getNotesByCardFlat(card.id);
+  // 优先取 type='card' 的笔记，兼容旧 type='exam'（错题本迁移过来的）
+  const note = notes.find(n => n.type === 'card') || notes[0] || null;
   const hasNote = note && note.content;
 
   const header = createElement('div', { className: 'card-note-header', style: 'font-weight:600;padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;' }, '📝 我的笔记');
   section.appendChild(header);
 
   if (hasNote) {
-    // 预览：最多显示前3行，带渐变遮罩
+    // 预览：最多显示前3行
     const lines = note.content.split('\n');
     const isLong = lines.length > 3 || note.content.length > 120;
     const previewText = lines.slice(0, 3).join('\n') + (isLong ? '...' : '');
@@ -435,16 +435,25 @@ function buildNoteSection(card) {
 
     const meta = createElement('div', { className: 'card-note-meta', style: 'font-size:12px;color:var(--text-muted);padding:4px 16px 8px;' });
     const dateStr = note.updatedAt ? `${note.updatedAt.split('T')[0]} ${note.updatedAt.split('T')[1]?.slice(0, 5)}` : '';
-    meta.textContent = `最后编辑：${dateStr}`;
+    const tags = note.tags && note.tags.length ? ` · ${note.tags.join(', ')}` : '';
+    meta.textContent = `最后编辑：${dateStr}${tags}`;
     section.appendChild(meta);
 
     const actions = createElement('div', { className: 'card-note-actions', style: 'padding:8px 16px;display:flex;gap:8px;' });
-    const btnView = createElement('button', { className: 'btn-view', style: 'padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer;font-size:13px;' }, '👁️ 看笔记');
-    btnView.addEventListener('click', () => openNoteModal(card, note));
-    actions.appendChild(btnView);
-
-    const btnEdit = createElement('button', { className: 'btn-edit', style: 'padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer;font-size:13px;' }, '✏️ 编辑');
-    btnEdit.addEventListener('click', () => enterNoteEditMode(card, section));
+    const btnEdit = createElement('button', { className: 'btn-edit', style: 'padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer;font-size:13px;' }, '✏️ 编辑笔记');
+    btnEdit.addEventListener('click', () => {
+      openNoteEditor({
+        cardId: card.id,
+        cardName: card.name || card.formula_name || '',
+        type: 'card',
+        existingNote: note,
+        onSave: () => {
+          // 保存后重新渲染笔记区域
+          const newSection = buildNoteSection(card, options);
+          section.replaceWith(newSection);
+        }
+      });
+    });
     actions.appendChild(btnEdit);
     section.appendChild(actions);
   } else {
@@ -455,126 +464,23 @@ function buildNoteSection(card) {
 
     const actions = createElement('div', { className: 'card-note-actions', style: 'padding:8px 16px;display:flex;gap:8px;' });
     const btnEdit = createElement('button', { className: 'btn-edit', style: 'padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer;font-size:13px;' }, '✏️ 记笔记');
-    btnEdit.addEventListener('click', () => openNoteModal(card, null));
+    btnEdit.addEventListener('click', () => {
+      openNoteEditor({
+        cardId: card.id,
+        cardName: card.name || card.formula_name || '',
+        type: 'card',
+        existingNote: null,
+        onSave: () => {
+          const newSection = buildNoteSection(card, options);
+          section.replaceWith(newSection);
+        }
+      });
+    });
     actions.appendChild(btnEdit);
     section.appendChild(actions);
   }
 
   return section;
-}
-
-/** 进入笔记编辑模式 */
-function enterNoteEditMode(card, section) {
-  const note = loadCardNote(card.id);
-  const content = note ? note.content : '';
-
-  section.innerHTML = '';
-  section.appendChild(createElement('div', { className: 'card-note-header', style: 'font-weight:600;padding:12px 16px;border-bottom:1px solid var(--border);' }, '✏️ 编辑笔记'));
-
-  const editArea = createElement('div', { className: 'card-note-edit', style: 'padding:12px 16px;' });
-  const textarea = createElement('textarea', {
-    id: 'cardNoteEditor',
-    style: 'width:100%;min-height:120px;padding:10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;resize:vertical;',
-    placeholder: '在此粘贴从 Kimi 复制的内容（如：核心辨证点、混淆方对比、生理学解读等），支持 Markdown 语法...'
-  });
-  textarea.value = content;
-  editArea.appendChild(textarea);
-
-  const tip = createElement('div', { style: 'font-size:12px;color:var(--text-muted);margin-top:6px;' }, '💡 支持 Markdown：**粗体**、# 标题、- 列表、> 引用');
-  editArea.appendChild(tip);
-
-  const actions = createElement('div', { style: 'display:flex;gap:8px;margin-top:10px;' });
-  const btnSave = createElement('button', { className: 'btn-save' }, '💾 保存');
-  btnSave.addEventListener('click', () => saveCardNoteFromUI(card.id, section));
-  actions.appendChild(btnSave);
-
-  const btnCancel = createElement('button', { className: 'btn-cancel' }, '❌ 取消');
-  btnCancel.addEventListener('click', () => {
-    // 重新渲染笔记区域
-    section.replaceWith(buildNoteSection(card));
-  });
-  actions.appendChild(btnCancel);
-  editArea.appendChild(actions);
-
-  section.appendChild(editArea);
-}
-
-/** 从 UI 保存笔记 */
-function saveCardNoteFromUI(cardId, section) {
-  const textarea = document.getElementById('cardNoteEditor');
-  if (!textarea) return;
-  const content = textarea.value.trim();
-  setCardNote(cardId, content);
-  // 重新渲染笔记区域
-  const card = { id: cardId }; // 简化：重新构建需要完整 card，这里直接替换整个 section 的父节点调用者会处理
-  // 由于无法获取完整 card 对象，采用重新加载当前卡片笔记的方式
-  const note = loadCardNote(cardId);
-  section.innerHTML = '';
-  const header = createElement('div', { className: 'card-note-header', style: 'font-weight:600;padding:12px 16px;border-bottom:1px solid var(--border);' }, '📝 我的笔记');
-  section.appendChild(header);
-
-  if (note && note.content) {
-    const meta = createElement('div', { className: 'card-note-meta', style: 'font-size:12px;color:var(--text-muted);padding:8px 16px;' });
-    const dateStr = note.updatedAt ? `${note.updatedAt.split('T')[0]} ${note.updatedAt.split('T')[1]?.slice(0, 5)}` : '';
-    meta.textContent = `最后编辑：${dateStr}`;
-    section.appendChild(meta);
-
-    const readArea = createElement('div', { className: 'card-note-read', style: 'padding:12px 16px;max-height:300px;overflow-y:auto;' });
-    readArea.appendChild(createElement('div', { className: 'markdown-body', style: 'white-space:pre-wrap;line-height:1.6;' }, note.content));
-    section.appendChild(readArea);
-
-    const actions = createElement('div', { className: 'card-note-actions', style: 'padding:8px 16px;display:flex;gap:8px;' });
-    const btnEdit = createElement('button', { className: 'btn-edit' }, '✏️ 编辑');
-    btnEdit.addEventListener('click', () => enterNoteEditMode({ id: cardId }, section));
-    actions.appendChild(btnEdit);
-    section.appendChild(actions);
-  } else {
-    const emptyMsg = createElement('div', {
-      style: 'color:var(--text-secondary);text-align:center;padding:20px;'
-    }, '还没有笔记，点击编辑记录从 Kimi 学习的内容');
-    section.appendChild(emptyMsg);
-
-    const actions = createElement('div', { className: 'card-note-actions', style: 'padding:8px 16px;display:flex;gap:8px;' });
-    const btnEdit = createElement('button', { className: 'btn-edit' }, '✏️ 记笔记');
-    btnEdit.addEventListener('click', () => enterNoteEditMode({ id: cardId }, section));
-    actions.appendChild(btnEdit);
-    section.appendChild(actions);
-  }
-}
-
-// ===== 卡片笔记 localStorage 操作（独立实现，不依赖 StorageService）=====
-
-function loadCardNotes() {
-  try {
-    const raw = localStorage.getItem(CARD_NOTES_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (e) {
-    console.warn('[LearnView] 读取卡片笔记失败:', e);
-  }
-  return { notes: {} };
-}
-
-function saveCardNotes(data) {
-  try {
-    localStorage.setItem(CARD_NOTES_KEY, JSON.stringify(data));
-  } catch (e) {
-    console.warn('[LearnView] 保存卡片笔记失败:', e);
-  }
-}
-
-function loadCardNote(cardId) {
-  const data = loadCardNotes();
-  return data.notes[cardId] || null;
-}
-
-function setCardNote(cardId, content) {
-  const data = loadCardNotes();
-  data.notes[cardId] = {
-    cardId,
-    content: content.trim(),
-    updatedAt: new Date().toISOString()
-  };
-  saveCardNotes(data);
 }
 
 // ===== 剂量换算弹窗（已废弃，保留代码便于回滚）=====
@@ -653,116 +559,23 @@ function renderMarkdown(text) {
 }
 
 /**
- * 打开看笔记弹窗（Feature-13 / Feature-14）
- * 上半部分：原文条文 | 下半部分：Markdown 笔记（可编辑）
+ * 打开看笔记弹窗 — 重写为使用 NoteEditor
+ * 保留函数签名兼容性，委托给 NoteEditor
  */
 function openNoteModal(card, note) {
-  const overlay = createElement('div', { className: 'note-modal-overlay' });
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-
-  const panel = createElement('div', { className: 'note-modal-panel' });
-
-  // Header
-  const header = createElement('div', { className: 'note-modal-header' });
-  header.appendChild(createElement('div', { className: 'note-modal-title' }, `📝 ${card.name || '笔记'}`));
-  const closeBtn = createElement('button', { className: 'note-modal-close' }, '✕');
-  closeBtn.addEventListener('click', () => overlay.remove());
-  header.appendChild(closeBtn);
-  panel.appendChild(header);
-
-  // Content wrapper
-  const body = createElement('div', { className: 'note-modal-body' });
-
-  // 上半：原文条文
-  const sourceWrap = createElement('div', { className: 'note-modal-source' });
-  sourceWrap.appendChild(createElement('div', { className: 'note-modal-section-title' }, '📜 原文条文'));
-  const sourceText = card.data && card.data.source_text ? card.data.source_text : '暂无原文';
-  const sourceTextEl = createElement('div', { className: 'note-modal-source-text' });
-  sourceTextEl.textContent = sourceText;
-  sourceWrap.appendChild(sourceTextEl);
-  body.appendChild(sourceWrap);
-
-  // 下半：笔记
-  const noteWrap = createElement('div', { className: 'note-modal-note' });
-  noteWrap.appendChild(createElement('div', { className: 'note-modal-section-title' }, '✏️ 我的笔记'));
-
-  let noteContent = note && note.content ? note.content : '';
-
-  // 渲染区域
-  const renderArea = createElement('div', { className: 'note-modal-render markdown-body' });
-  if (noteContent) {
-    renderArea.innerHTML = renderMarkdown(noteContent);
-  } else {
-    renderArea.appendChild(createElement('div', { style: 'color:var(--text-muted);font-style:italic;padding:12px 0;' }, '还没有笔记，点击「开始记录」开始学习...'));
-  }
-  noteWrap.appendChild(renderArea);
-
-  // 编辑区域（默认隐藏）
-  const editArea = createElement('div', { className: 'note-modal-edit', style: 'display:none;' });
-  const textarea = createElement('textarea', {
-    className: 'note-modal-textarea',
-    placeholder: '在此粘贴从 Kimi 复制的内容...\n支持 Markdown 语法：\n**粗体**、# 标题、- 列表、> 引用、`代码`'
-  });
-  textarea.value = noteContent;
-  editArea.appendChild(textarea);
-  noteWrap.appendChild(editArea);
-
-  body.appendChild(noteWrap);
-  panel.appendChild(body);
-
-  // Actions
-  const actions = createElement('div', { className: 'note-modal-actions' });
-
-  let isEditing = false;
-  const btnEdit = createElement('button', { className: 'btn-secondary' }, noteContent ? '✏️ 编辑' : '✏️ 开始记录');
-  btnEdit.addEventListener('click', () => {
-    isEditing = !isEditing;
-    renderArea.style.display = isEditing ? 'none' : 'block';
-    editArea.style.display = isEditing ? 'block' : 'none';
-    btnEdit.textContent = isEditing ? '👁️ 预览' : (noteContent ? '✏️ 编辑' : '✏️ 开始记录');
-  });
-  actions.appendChild(btnEdit);
-
-  const btnSave = createElement('button', { className: 'btn-primary' }, '💾 保存');
-  btnSave.addEventListener('click', () => {
-    const newContent = textarea.value.trim();
-    setCardNote(card.id, newContent);
-    // 更新渲染区
-    if (newContent) {
-      renderArea.innerHTML = renderMarkdown(newContent);
-    } else {
-      renderArea.innerHTML = '<div style="color:var(--text-muted);font-style:italic;padding:12px 0;">还没有笔记，点击「开始记录」开始学习...</div>';
-    }
-    // 切回预览
-    isEditing = false;
-    renderArea.style.display = 'block';
-    editArea.style.display = 'none';
-    btnEdit.textContent = '✏️ 编辑';
-    noteContent = newContent;
-    // 刷新外部笔记区域
-    const oldSection = document.getElementById('cardNoteSection');
-    if (oldSection) {
-      oldSection.replaceWith(buildNoteSection(card));
+  openNoteEditor({
+    cardId: card.id,
+    cardName: card.name || card.formula_name || '',
+    type: 'card',
+    existingNote: note,
+    onSave: () => {
+      // 刷新外部笔记区域
+      const oldSection = document.getElementById('cardNoteSection');
+      if (oldSection) {
+        oldSection.replaceWith(buildNoteSection(card, {}));
+      }
     }
   });
-  actions.appendChild(btnSave);
-
-  const btnClose = createElement('button', { className: 'btn-secondary' }, '关闭');
-  btnClose.addEventListener('click', () => overlay.remove());
-  actions.appendChild(btnClose);
-
-  panel.appendChild(actions);
-  overlay.appendChild(panel);
-  document.body.appendChild(overlay);
-
-  // ESC 关闭
-  const escHandler = (e) => {
-    if (e.key === 'Escape') {
-      overlay.remove();
-      document.removeEventListener('keydown', escHandler);
-    }
-  };
-  document.addEventListener('keydown', escHandler);
 }
 
 /* 已废弃：showDoseModal 弹窗模式（Exp-20）

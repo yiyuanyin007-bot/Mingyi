@@ -14,6 +14,7 @@ import { getState, setState, subscribe, setPage, setActiveCard, initExam, record
 import { renderCardList } from '@components/CardList.js';
 import { renderLearnView } from '@components/LearnView.js';
 import { openSourcePanel } from '@components/SourcePanel.js';
+import { showNoteList } from '@components/NoteListView.js';
 import { renderExamView, renderExamResult } from '@components/ExamView.js';
 import { openKimiModal } from '@components/KimiModal.js';
 import { generateQuestions as genQuestionsForCard, generateQuestionForVector, generateOptions, generateDailyReview } from '@services/ExamService.js';
@@ -70,6 +71,7 @@ async function init() {
           <button class="topbar-btn" id="btnStats">统计</button>
           <button class="topbar-btn" id="btnOverallReview">总体复习</button>
           <button class="topbar-btn" id="btnWrongBook">错题本</button>
+          <button class="topbar-btn" id="btnNotes">📝 笔记</button>
           <button class="theme-btn" id="btnTheme" title="切换主题">☀️</button>
         </div>
       </div>
@@ -143,6 +145,15 @@ async function init() {
           setPage('exam');
           renderExam();
           console.log('[onStartWrongBookReview] renderExam 完成');
+        }
+      });
+    });
+
+    // 5.4 绑定笔记列表按钮
+    document.getElementById('btnNotes').addEventListener('click', () => {
+      showNoteList({
+        onUpdate: () => {
+          // 笔记变更后刷新仪表盘统计（如果有统计显示笔记数）
         }
       });
     });

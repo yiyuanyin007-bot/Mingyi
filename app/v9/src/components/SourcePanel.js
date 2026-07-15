@@ -7,13 +7,11 @@
  * 2. 标签页切换：【条文】→【刘渡舟】→【胡希恕】→【对比】→【我的理解】
  * 3. 分级解锁：根据卡片掌握度最高等级过滤标签页
  * 4. 提取练习：Space键/按钮 toggleMask 遮罩内容
- * 5. 可编辑"我的理解"，保存到 localStorage
+ * 5. 可编辑"我的理解"，通过 NoteService 统一存储
  */
 
 import { getMastery } from '@services/StorageService.js';
-
-// localStorage 键
-const SOURCE_NOTES_KEY = 'source_notes_v1';
+import { createNote, updateNote, getNote, getNotesByCard } from '@services/NoteService.js';
 
 /** 向量键名列表（与系统一致） */
 const VECTORS = ['0→1', '1→0', '0→2', '2→0', '0→usage', '0→contra'];
@@ -407,32 +405,29 @@ function bindPanelEvents(panel, card, normalized, tabs) {
 }
 
 /**
- * 从 localStorage 加载我的笔记
+ * 从 NoteService 加载"我的理解"笔记
  */
 function loadMyNote(cardId) {
-  try {
-    const raw = localStorage.getItem(SOURCE_NOTES_KEY);
-    if (!raw) return '';
-    const notes = JSON.parse(raw);
-    return notes[cardId] || '';
-  } catch (e) {
-    return '';
-  }
+  const notes = getNotesByCard(cardId);
+  const sourceNote = notes.find(n => n.type === 'source' && !n.sourceId);
+  return sourceNote ? sourceNote.content : '';
 }
 
 /**
- * 保存我的笔记到 localStorage
+ * 保存"我的理解"笔记到 NoteService
  */
-function saveMyNote(cardId, note) {
-  try {
-    const raw = localStorage.getItem(SOURCE_NOTES_KEY);
-    const notes = raw ? JSON.parse(raw) : {};
-    notes[cardId] = note;
-    localStorage.setItem(SOURCE_NOTES_KEY, JSON.stringify(notes));
-    return true;
-  } catch (e) {
-    console.warn('[SourcePanel] 保存笔记失败:', e);
-    return false;
+function saveMyNote(cardId, content) {
+  const notes = getNotesByCard(cardId);
+  const existing = notes.find(n => n.type === 'source' && !n.sourceId);
+  if (existing) {
+    updateNote(existing.id, { content });
+  } else if (content.trim()) {
+    createNote({
+      type: 'source',
+      cardId,
+      content: content.trim(),
+      tags: ['source-note']
+    });
   }
 }
 
@@ -451,8 +446,7 @@ function showToast(panel, message) {
 }
 
 // ===== V8 迁移：条文"问 Kimi" 和 "记笔记" 功能 =====
-
-const SOURCE_ARTICLE_NOTES_KEY = 'source_article_notes_v1';
+// 使用 NoteService 统一存储，不再使用 source_article_notes_v1 键
 
 /**
  * 生成条文"问 Kimi"提示词并显示弹窗
@@ -578,32 +572,39 @@ function saveSourceNote(sourceCard, card) {
 }
 
 /**
- * 从 localStorage 加载 per-source 笔记
+ * 从 NoteService 加载 per-source 笔记
  */
 function loadSourceNote(cardId, sourceId) {
-  try {
-    const raw = localStorage.getItem(SOURCE_ARTICLE_NOTES_KEY);
-    if (!raw) return null;
-    const notes = JSON.parse(raw);
-    return notes[`${cardId}__${sourceId}`] || null;
-  } catch (e) {
-    return null;
-  }
+  const notes = getNotesByCard(cardId);
+  const note = notes.find(n => n.type === 'source' && n.sourceId === sourceId);
+  return note ? note : null;
 }
 
 /**
- * 保存 per-source 笔记到 localStorage
+ * 保存 per-source 笔记到 NoteService
  */
-function saveSourceNoteData(cardId, sourceId, note) {
-  try {
-    const raw = localStorage.getItem(SOURCE_ARTICLE_NOTES_KEY);
-    const notes = raw ? JSON.parse(raw) : {};
-    notes[`${cardId}__${sourceId}`] = note;
-    localStorage.setItem(SOURCE_ARTICLE_NOTES_KEY, JSON.stringify(notes));
-    return true;
-  } catch (e) {
-    console.warn('[SourcePanel] 保存条文笔记失败:', e);
-    return false;
+function saveSourceNoteData(cardId, sourceId, data) {
+  const notes = getNotesByCard(cardId);
+  const existing = notes.find(n => n.type === 'source' && n.sourceId === sourceId);
+  if (existing) {
+    updateNote(existing.id, {
+      content: data.content,
+      sourceTitle: data.title,
+      sourceChapter: data.chapter,
+      sourceText: data.sourceText,
+      tags: ['source-note', 'article-note']
+    });
+  } else if (data.content.trim()) {
+    createNote({
+      type: 'source',
+      cardId,
+      sourceId,
+      content: data.content.trim(),
+      sourceTitle: data.title || '',
+      sourceChapter: data.chapter || '',
+      sourceText: data.sourceText || '',
+      tags: ['source-note', 'article-note']
+    });
   }
 }
 
