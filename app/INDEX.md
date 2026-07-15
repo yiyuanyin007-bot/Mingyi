@@ -25,6 +25,9 @@
 | `v9/vite.config.js` | Vite 配置 | 🔄 重构中 |
 | `v9/vercel.json` | Vercel 部署配置 | 🔄 重构中 |
 | `v9/dist/` | 构建输出 | 🔄 重构中 |
+| `v9/src/services/NoteService.js` | 统一笔记存储服务（合并 exam/card/source 三种笔记类型） | ✅ 新增 |
+| `v9/src/components/NoteEditor.js` | 笔记浮窗编辑器（Markdown 编辑/预览、标签管理） | ✅ 新增 |
+| `v9/src/components/NoteListView.js` | 全部笔记列表页（搜索、类型筛选、空状态） | ✅ 新增 |
 | `v9/DEPLOY-VERIFY-REPORT.md` | 部署验证报告 | 📝 新增 |
 | `v9/VERCEL-DEPLOY.md` | Vercel 部署指南 | 📝 新增 |
 
@@ -97,3 +100,4 @@ scripts/*.py ──────→ shanghanlun-v8-mvp.html（测试注入/自动
 | 日期 | 变更人 | 变更内容 |
 |------|--------|----------|
 | 2026-07-11 | AI 助手 | 初始索引创建 |
+| 2026-07-14 | AI 助手 | 新增 v9 笔记系统文件索引（NoteService.js、NoteEditor.js、NoteListView.js） |
