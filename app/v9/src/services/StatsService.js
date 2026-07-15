@@ -54,12 +54,17 @@ export function recordAnswerEvent(cardId, cardName, vector, vectorLabel, isCorre
     selectedLabel
   });
 
-  // 2. 更新 daily_log
+  // 2. 更新 daily_log（用数组模拟 Set，因为 JSON 序列化会丢失 Set 原型）
   if (!stats.daily_log[today]) {
-    stats.daily_log[today] = { cardIds: new Set(), totalQuestions: 0, right: 0, wrong: 0 };
+    stats.daily_log[today] = { cardIds: [], totalQuestions: 0, right: 0, wrong: 0 };
   }
   const todayLog = stats.daily_log[today];
-  todayLog.cardIds.add(cardId);
+  if (!Array.isArray(todayLog.cardIds)) {
+    todayLog.cardIds = [];
+  }
+  if (!todayLog.cardIds.includes(cardId)) {
+    todayLog.cardIds.push(cardId);
+  }
   todayLog.totalQuestions++;
   if (isCorrect) todayLog.right++; else todayLog.wrong++;
 
@@ -115,7 +120,7 @@ export function getTodayStats() {
     total: log.totalQuestions,
     right: log.right,
     wrong: log.wrong,
-    cardCount: log.cardIds.size || 0
+    cardCount: (Array.isArray(log.cardIds) ? log.cardIds.length : log.cardIds.size || 0)
   };
 }
 
@@ -163,16 +168,18 @@ export function getWeakVectors() {
   const vectorCounts = {};
   Object.values(stats).forEach(cs => {
     Object.entries(cs.vectorErrors).forEach(([vec, count]) => {
-      if (!vectorCounts[vec]) vectorCounts[vec] = { total: 0, cards: new Set() };
+      if (!vectorCounts[vec]) vectorCounts[vec] = { total: 0, cards: [] };
       vectorCounts[vec].total += count;
-      vectorCounts[vec].cards.add(cs.cardName);
+      if (!vectorCounts[vec].cards.includes(cs.cardName)) {
+        vectorCounts[vec].cards.push(cs.cardName);
+      }
     });
   });
   return Object.entries(vectorCounts)
     .map(([vec, data]) => ({
       vector: vec,
       totalErrors: data.total,
-      cardCount: data.cards.size
+      cardCount: data.cards.length
     }))
     .sort((a, b) => b.totalErrors - a.totalErrors)
     .slice(0, 5);

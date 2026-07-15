@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>条文笔记功能 · 交互 DEMO</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Microsoft YaHei', sans-serif; background: #f5f0eb; color: #2c2416; padding: 20px; }
+  .container { max-width: 720px; margin: 0 auto; }
+  
+  h1 { font-size: 20px; text-align: center; padding: 20px 0 8px; color: #5c3e2a; }
+  .subtitle { text-align: center; color: #8b7355; font-size: 13px; margin-bottom: 24px; }
+  
+  .scene { display: none; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 24px; }
+  .scene.active { display: block; }
+  .scene-title { font-size: 14px; color: #8b7355; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+  
+  .source-item { padding: 12px 16px; border-radius: 8px; cursor: pointer; margin-bottom: 8px; transition: background 0.2s; border: 1px solid #eee; }
+  .source-item:hover { background: #faf6f1; border-color: #c17f59; }
+  .source-item .verse { font-weight: 600; color: #5c3e2a; font-size: 14px; }
+  .source-item .preview { font-size: 13px; color: #666; margin-top: 4px; }
+  .source-item .note-badge { display: inline-block; background: #e8d5c4; color: #5c3e2a; font-size: 11px; padding: 1px 8px; border-radius: 10px; margin-left: 8px; }
+  .source-item .note-preview { font-size: 12px; color: #8b7355; margin-top: 4px; padding-left: 4px; border-left: 2px solid #c17f59; }
+  
+  .source-detail .verse { font-weight: 700; color: #5c3e2a; font-size: 16px; }
+  .source-detail .chapter { font-size: 12px; color: #999; margin-left: 8px; }
+  .source-detail .text { background: #faf6f1; padding: 16px; border-radius: 8px; margin: 12px 0; line-height: 1.8; font-size: 15px; letter-spacing: 0.5px; border-left: 3px solid #c17f59; }
+  
+  .note-section { margin-top: 16px; border-top: 1px solid #eee; padding-top: 16px; }
+  .note-section .label { font-size: 13px; color: #5c3e2a; font-weight: 600; margin-bottom: 8px; }
+  .note-section .note-content { background: #faf6f1; padding: 12px; border-radius: 8px; font-size: 13px; line-height: 1.7; white-space: pre-wrap; }
+  .note-section .tags { margin-top: 6px; }
+  .note-section .tag { display: inline-block; background: #f0e6dc; color: #5c3e2a; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; }
+  .note-section .time { font-size: 11px; color: #999; margin-top: 4px; }
+  
+  .note-editor { margin-top: 12px; }
+  .note-editor textarea { width: 100%; min-height: 120px; border: 1px solid #ddd; border-radius: 8px; padding: 12px; font-family: inherit; font-size: 13px; line-height: 1.7; resize: vertical; }
+  .note-editor textarea:focus { border-color: #c17f59; outline: none; box-shadow: 0 0 0 2px rgba(193,127,89,0.15); }
+  .note-editor .hint { font-size: 11px; color: #999; margin-top: 6px; }
+  .note-editor .tag-input { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .note-editor .tag-input input { flex: 1; min-width: 120px; border: 1px solid #ddd; border-radius: 6px; padding: 6px 10px; font-size: 13px; }
+  .note-editor .tag-input input:focus { border-color: #c17f59; outline: none; }
+  .note-editor .btn-group { margin-top: 10px; display: flex; gap: 8px; }
+  .note-editor .btn-save { background: #c17f59; color: #fff; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+  .note-editor .btn-save:hover { background: #a86d4a; }
+  .note-editor .btn-cancel { background: #eee; color: #666; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+  
+  .nav-btns { margin-top: 20px; display: flex; gap: 8px; justify-content: space-between; }
+  .nav-btns button { background: #fff; border: 1px solid #ddd; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; color: #5c3e2a; }
+  .nav-btns button:hover { border-color: #c17f59; background: #faf6f1; }
+  .nav-btns button.primary { background: #c17f59; color: #fff; border-color: #c17f59; }
+  .nav-btns button.primary:hover { background: #a86d4a; }
+  
+  .step-indicator { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
+  .step-dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd; }
+  .step-dot.active { background: #c17f59; width: 24px; border-radius: 4px; }
+  .step-dot.done { background: #c17f59; }
+  
+  .summary-section { background: #faf6f1; border-radius: 8px; padding: 16px; margin-top: 12px; }
+  .summary-section .principle { font-weight: 600; color: #5c3e2a; margin-bottom: 4px; }
+  .summary-section .desc { font-size: 13px; color: #666; line-height: 1.6; }
+  .summary-section + .summary-section { margin-top: 8px; }
+  
+  .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #2c2416; color: #fff; padding: 10px 24px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  
+  .btn-text { background: none; border: 1px solid #ddd; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; color: #5c3e2a; margin-right: 6px; }
+  .btn-text:hover { border-color: #c17f59; }
+  .btn-text.danger { color: #c44; }
+  .btn-text.danger:hover { border-color: #c44; }
+  
+  /* 总结页表格 */
+  .summary-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  .summary-table td { padding: 10px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+  .summary-table td:first-child { font-weight: 600; color: #5c3e2a; width: 100px; white-space: nowrap; }
+  .summary-table td:last-child { color: #333; line-height: 1.6; }
+  .summary-table tr:last-child td { border-bottom: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>条文笔记功能 · 交互 DEMO</h1>
+  <p class="subtitle">模拟「读条文 → 记笔记」的核心交互流程</p>
+
+  <div class="step-indicator" id="stepIndicator">
+    <div class="step-dot active"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+  </div>
+
+  <!-- 场景1：条文列表 -->
+  <div class="scene active" id="scene1">
+    <div class="scene-title">场景1 — 条文浏览（点击「条文原文」后看到）</div>
+    
+    <div class="source-item" onclick="openSource('ty-012')">
+      <div><span class="verse">第12条</span><span class="note-badge">有笔记</span></div>
+      <div class="preview">太阳中风，阳浮而阴弱。阳浮者，热自发；阴弱者，汗自出…</div>
+      <div class="note-preview">✏️ "阳浮而阴弱"提示卫强营弱的关键病机…</div>
+    </div>
+    
+    <div class="source-item" onclick="openSource('ty-013')">
+      <div><span class="verse">第13条</span></div>
+      <div class="preview">太阳病，头痛发热，汗出恶风者，桂枝汤主之。</div>
+    </div>
+    
+    <div class="source-item" onclick="openSource('ty-095')">
+      <div><span class="verse">第95条</span></div>
+      <div class="preview">太阳病，发热汗出者，此为荣弱卫强，故使汗出…</div>
+    </div>
+
+    <div class="nav-btns">
+      <button onclick="showToast('点击一条条文进入阅读')">👆 点击上方任一条条文</button>
+    </div>
+  </div>
+
+  <!-- 场景2：阅读 + 查看笔记 -->
+  <div class="scene" id="scene2">
+    <div class="scene-title">场景2 — 阅读条文 + 查看笔记</div>
+    
+    <div class="source-detail">
+      <span class="verse" id="s2Verse">第12条</span>
+      <span class="chapter" id="s2Chapter">太阳病篇</span>
+      <div class="text" id="s2Text"></div>
+    </div>
+
+    <div class="note-section" id="s2NoteDisplay">
+      <div class="label">✏️ 你的笔记</div>
+      <div class="note-content" id="s2NoteContent"></div>
+      <div class="tags" id="s2NoteTags"></div>
+      <div class="time" id="s2NoteTime"></div>
+    </div>
+
+    <div class="note-editor" id="s2Editor" style="display:none;">
+      <textarea id="s2Textarea" placeholder="在此输入笔记…"></textarea>
+      <div class="hint">提示：Ctrl+Enter 或点击保存按钮</div>
+      <div class="tag-input">
+        <input id="s2TagInput" placeholder="标签（逗号分隔，如：病机, 鉴别）">
+      </div>
+      <div class="btn-group">
+        <button class="btn-save" onclick="saveNote()">💾 保存笔记</button>
+        <button class="btn-cancel" onclick="toggleEditor(false)">取消</button>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <button class="btn-text" onclick="toggleEditor(true)">✏️ 记笔记</button>
+      <button class="btn-text danger" onclick="deleteNote()">🗑 删除笔记</button>
+    </div>
+
+    <div class="nav-btns">
+      <button onclick="goTo('scene1')">← 返回列表</button>
+      <button class="primary" onclick="goTo('scene3')">下一步：看编辑效果 →</button>
+    </div>
+  </div>
+
+  <!-- 场景3：编辑笔记 -->
+  <div class="scene" id="scene3">
+    <div class="scene-title">场景3 — 编辑笔记（展开在条文下方）</div>
+    
+    <div class="source-detail">
+      <span class="verse" id="s3Verse">第12条</span>
+      <span class="chapter">太阳病篇</span>
+      <div class="text" id="s3Text"></div>
+    </div>
+
+    <div class="note-editor" style="border-top:1px solid #eee; padding-top:16px; margin-top:16px;">
+      <div class="label" style="margin-bottom:8px;">✏️ 编辑笔记</div>
+      <textarea id="s3Textarea" style="min-height:120px;">"阳浮而阴弱"提示卫强营弱的关键病机。
+"鼻鸣干呕"是太阳中风区别于伤寒的特征点。
+注意与第13条的鉴别：12条更强调"干呕"。
+另：与第95条对比，12条脉象更具体（阳浮阴弱）</textarea>
+      <div class="hint">空行+回车保存 · 也可以点击保存按钮</div>
+      <div class="tag-input" style="margin-top:8px;">
+        <input id="s3TagInput" value="病机, 鉴别">
+      </div>
+      <div class="btn-group" style="margin-top:10px;">
+        <button class="btn-save" onclick="saveNoteFromScene3()">💾 保存笔记</button>
+        <button class="btn-cancel" onclick="showToast('返回阅读视图')">取消</button>
+      </div>
+    </div>
+
+    <div class="nav-btns">
+      <button onclick="goTo('scene2')">← 返回阅读</button>
+      <button class="primary" onclick="goTo('scene4')">保存后回到列表 →</button>
+    </div>
+  </div>
+
+  <!-- 场景4：列表 + 笔记预览 -->
+  <div class="scene" id="scene4">
+    <div class="scene-title">场景4 — 条文列表（笔记已更新）</div>
+    <p style="font-size:13px; color:#666; margin-bottom:16px;">注意第12条现在有笔记预览了👇</p>
+    
+    <div class="source-item">
+      <div><span class="verse">第12条</span><span class="note-badge">有笔记</span></div>
+      <div class="preview">太阳中风，阳浮而阴弱。阳浮者，热自发；阴弱者，汗自出…</div>
+      <div class="note-preview">✏️ "阳浮而阴弱"提示卫强营弱的关键病机。与第95条对比，12条脉象更具体…</div>
+    </div>
+    
+    <div class="source-item">
+      <div><span class="verse">第13条</span></div>
+      <div class="preview">太阳病，头痛发热，汗出恶风者，桂枝汤主之。</div>
+    </div>
+    
+    <div class="source-item">
+      <div><span class="verse">第95条</span></div>
+      <div class="preview">太阳病，发热汗出者，此为荣弱卫强，故使汗出…</div>
+    </div>
+
+    <div class="nav-btns">
+      <button onclick="goTo('scene3')">← 返回编辑</button>
+      <button class="primary" onclick="goTo('scene5')">看设计总结 →</button>
+    </div>
+  </div>
+
+  <!-- 场景5：总结 -->
+  <div class="scene" id="scene5">
+    <div class="scene-title">总结 — 修改了什么？</div>
+    
+    <table class="summary-table">
+      <tr>
+        <td>去掉冗余</td>
+        <td>把 4 套笔记（卡片笔记/我的理解/记笔记按钮/错题本笔记）合并为「条文笔记」一套，所有笔记都附着于条文。</td>
+      </tr>
+      <tr>
+        <td>合并入口</td>
+        <td>条文面板中「我的理解」标签页 + 「记笔记」按钮合并为：每条条文正文下方的一个可展开/收起的笔记区。</td>
+      </tr>
+      <tr>
+        <td>零摩擦保存</td>
+        <td>支持 Ctrl+Enter 保存 + 显式保存按钮，输入时无需切换标签页。</td>
+      </tr>
+      <tr>
+        <td>笔记预览</td>
+        <td>条文列表中，有条文的条目显示笔记摘要，学习时一眼看到自己写过什么。</td>
+      </tr>
+      <tr>
+        <td>可选结构化</td>
+        <td>支持标签（病机/鉴别/方证/疑问），但不强制。</td>
+      </tr>
+    </table>
+
+    <div style="margin-top:20px; padding:16px; background:#faf6f1; border-radius:8px; text-align:center; color:#5c3e2a; font-size:14px;">
+      <p style="font-weight:600; margin-bottom:6px;">核心原则</p>
+      <p style="font-size:13px; color:#666;">笔记是条文的延伸，不是独立的知识点。</p>
+      <p style="font-size:13px; color:#666;">读原文 → 产生理解 → 原地记录 → 下次复习时看到。</p>
+    </div>
+
+    <div class="nav-btns">
+      <button onclick="goTo('scene1')">← 重头体验</button>
+      <button class="primary" onclick="showToast('DEMO 结束，谢谢体验')">完成 🎉</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── 数据 ──
+
+const SOURCES = {
+  'ty-012': {
+    verse: '第12条',
+    chapter: '太阳病篇',
+    text: '太阳中风，阳浮而阴弱。阳浮者，热自发；阴弱者，汗自出。啬啬恶寒，淅淅恶风，翕翕发热，鼻鸣干呕者，桂枝汤主之。'
+  },
+  'ty-013': {
+    verse: '第13条',
+    chapter: '太阳病篇',
+    text: '太阳病，头痛发热，汗出恶风者，桂枝汤主之。'
+  },
+  'ty-095': {
+    verse: '第95条',
+    chapter: '太阳病篇',
+    text: '太阳病，发热汗出者，此为荣弱卫强，故使汗出，欲救邪风者，宜桂枝汤。'
+  }
+};
+
+let NOTES = {
+  'ty-012': {
+    content: '"阳浮而阴弱"提示卫强营弱的关键病机。\n"鼻鸣干呕"是太阳中风区别于伤寒的特征点。\n注意与第13条的鉴别：12条更强调"干呕"。',
+    tags: ['病机', '鉴别'],
+    updated_at: '2026-07-14 20:15'
+  }
+};
+
+let currentSourceId = 'ty-012';
+
+// ── 导航 ──
+
+function goTo(sceneId) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById(sceneId).classList.add('active');
+  
+  // 更新 step dot
+  const dots = document.querySelectorAll('.step-dot');
+  const idx = ['scene1','scene2','scene3','scene4','scene5'].indexOf(sceneId);
+  dots.forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i === idx) d.classList.add('active');
+    else if (i < idx) d.classList.add('done');
+  });
+
+  // 如果回到 scene2，刷新显示
+  if (sceneId === 'scene2') refreshScene2();
+}
+
+function openSource(id) {
+  currentSourceId = id;
+  refreshScene2();
+  goTo('scene2');
+}
+
+// ── 场景2 刷新 ──
+
+function refreshScene2() {
+  const src = SOURCES[currentSourceId];
+  if (!src) return;
+  document.getElementById('s2Verse').textContent = src.verse;
+  document.getElementById('s2Chapter').textContent = src.chapter + ' · 桂枝汤相关';
+  document.getElementById('s2Text').textContent = src.text;
+
+  const note = NOTES[currentSourceId];
+  const display = document.getElementById('s2NoteDisplay');
+  const content = document.getElementById('s2NoteContent');
+  const tags = document.getElementById('s2NoteTags');
+  const time = document.getElementById('s2NoteTime');
+  
+  if (note) {
+    content.textContent = note.content;
+    tags.innerHTML = note.tags.map(t => '<span class="tag">' + t + '</span>').join('');
+    time.textContent = '更新于 ' + note.updated_at;
+    display.style.display = 'block';
+  } else {
+    display.style.display = 'none';
+  }
+
+  // 如果编辑器开着，同步内容
+  if (document.getElementById('s2Editor').style.display !== 'none') {
+    document.getElementById('s2Textarea').value = note ? note.content : '';
+    document.getElementById('s2TagInput').value = note ? note.tags.join(', ') : '';
+  }
+}
+
+// ── 笔记编辑 ──
+
+function toggleEditor(show) {
+  const editor = document.getElementById('s2Editor');
+  const note = NOTES[currentSourceId];
+  if (show) {
+    document.getElementById('s2Textarea').value = note ? note.content : '';
+    document.getElementById('s2TagInput').value = note ? note.tags.join(', ') : '';
+    editor.style.display = 'block';
+  } else {
+    editor.style.display = 'none';
+  }
+}
+
+function saveNote() {
+  const content = document.getElementById('s2Textarea').value.trim();
+  if (!content) { showToast('笔记不能为空'); return; }
+  const tagStr = document.getElementById('s2TagInput').value.trim();
+  const tags = tagStr ? tagStr.split(/[,，]/).map(t => t.trim()).filter(Boolean) : [];
+  
+  NOTES[currentSourceId] = {
+    content: content,
+    tags: tags,
+    updated_at: new Date().toLocaleString('zh-CN', { hour12: false })
+  };
+  toggleEditor(false);
+  refreshScene2();
+  showToast('✅ 笔记已保存');
+}
+
+function deleteNote() {
+  if (!NOTES[currentSourceId]) { showToast('暂无笔记可删除'); return; }
+  if (!confirm('确定删除这条笔记吗？')) return;
+  delete NOTES[currentSourceId];
+  refreshScene2();
+  showToast('已删除');
+}
+
+// ── 场景3 保存 ──
+
+function saveNoteFromScene3() {
+  const content = document.getElementById('s3Textarea').value.trim();
+  if (!content) { showToast('笔记不能为空'); return; }
+  const tagStr = document.getElementById('s3TagInput').value.trim();
+  const tags = tagStr ? tagStr.split(/[,，]/).map(t => t.trim()).filter(Boolean) : [];
+  
+  NOTES['ty-012'] = {
+    content: content,
+    tags: tags,
+    updated_at: new Date().toLocaleString('zh-CN', { hour12: false })
+  };
+  showToast('✅ 笔记已保存，回到列表可以看到预览');
+}
+
+// ── Toast ──
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ── 初始化 ──
+refreshScene2();
+</script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPT v2.0 — 经方笔记系统 全貌方案</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Microsoft YaHei', 'PingFang SC', sans-serif; background: #2c2416; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+
+  .ppt-container { position: relative; width: 1000px; height: 650px; background: #f5f0eb; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); overflow: hidden; }
+
+  .slide { display: none; width: 100%; height: 100%; padding: 40px 50px; overflow-y: auto; }
+  .slide.active { display: block; }
+
+  /* ── 幻灯导航 ── */
+  .slide-nav { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; align-items: center; z-index: 10; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; cursor: pointer; transition: 0.2s; }
+  .dot.active { background: #c17f59; width: 28px; border-radius: 5px; }
+  .nav-hint { font-size: 11px; color: #999; margin-left: 12px; white-space: nowrap; }
+
+  /* ── 通用样式 ── */
+  h1 { font-size: 26px; color: #5c3e2a; margin-bottom: 6px; }
+  h1 .sub { font-size: 14px; color: #8b7355; font-weight: normal; margin-left: 12px; }
+  h2 { font-size: 16px; color: #5c3e2a; margin: 20px 0 10px; }
+  h3 { font-size: 14px; color: #7a5f44; margin: 14px 0 6px; }
+  p, li { font-size: 13px; color: #2c2416; line-height: 1.7; }
+  ul, ol { padding-left: 20px; margin: 6px 0; }
+
+  .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin: 2px; }
+  .tag.core { background: #c17f59; color: #fff; }
+  .tag.core::after { content: ''; }
+  .tag.temp { background: #ede8e0; color: #7a5f44; border: 1px dashed #c0a88a; }
+  .tag.mixed { background: #ede8e0; color: #7a5f44; }
+  .tag.core-mixed { background: #c17f59; color: #fff; }
+  .tag.core-mixed::after { content: ' (核心)'; font-size: 10px; opacity: 0.7; }
+  .tag.temp-mixed { background: #ede8e0; color: #7a5f44; border: 1px dashed #c0a88a; }
+
+  .card { background: #fff; border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .card-title { font-size: 14px; font-weight: 600; color: #5c3e2a; margin-bottom: 6px; }
+  .card-desc { font-size: 12px; color: #666; line-height: 1.6; }
+
+  .highlight { background: #faf1e8; border-left: 3px solid #c17f59; padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 13px; line-height: 1.6; }
+
+  .flow-row { display: flex; align-items: center; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
+  .flow-box { background: #fff; border-radius: 8px; padding: 12px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); text-align: center; min-width: 80px; font-size: 12px; line-height: 1.4; }
+  .flow-box strong { display: block; font-size: 14px; color: #5c3e2a; margin-bottom: 2px; }
+  .flow-arrow { font-size: 20px; color: #c17f59; }
+
+  /* ── 布局组件 ── */
+  .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .entry-cell { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); cursor: default; }
+  .entry-icon { font-size: 24px; }
+  .entry-label { font-size: 14px; font-weight: 600; color: #5c3e2a; margin: 4px 0; }
+  .entry-desc { font-size: 12px; color: #666; line-height: 1.5; }
+  .entry-auto-tag { margin-top: 6px; }
+
+  .mockscreen { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 16px 0; display: flex; gap: 20px; }
+  .mockscreen-left { flex: 1; min-width: 0; }
+  .mockscreen-right { width: 260px; flex-shrink: 0; background: #fcfcfa; border-radius: 8px; padding: 14px; }
+  .mock-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .mock-header span { font-size: 12px; color: #888; }
+  .mock-search { padding: 8px 12px; background: #f5f0eb; border-radius: 6px; font-size: 12px; color: #999; margin-bottom: 12px; }
+  .mock-item { padding: 8px 0; border-bottom: 1px solid #f0ece6; }
+  .mock-item:last-child { border: none; }
+  .mock-item-title { font-size: 13px; font-weight: 600; color: #5c3e2a; }
+  .mock-item-preview { font-size: 11px; color: #888; margin-top: 2px; line-height: 1.5; }
+
+  /* ── 浮窗 Mock ── */
+  .modal-mock { background: #fff; border-radius: 12px; padding: 16px 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border: 2px solid #c17f59; margin: 10px 0; }
+  .modal-mock-title { font-size: 14px; font-weight: 700; color: #5c3e2a; margin-bottom: 6px; }
+  .modal-mock-body { font-size: 12px; color: #555; line-height: 1.6; }
+  .modal-mock-tags { display: flex; gap: 3px; margin: 6px 0; flex-wrap: wrap; }
+  .modal-mock-input { padding: 6px 10px; background: #f5f0eb; border-radius: 6px; font-size: 11px; color: #999; margin-top: 6px; }
+
+  /* ── 康奈尔对比布局 ── */
+  .cornell-wrap { display: flex; flex-direction: column; gap: 10px; height: 460px; margin: 8px 0; }
+  .cornell-top { display: flex; gap: 10px; flex: 1; min-height: 0; }
+  .cornell-col { flex: 1; background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; flex-direction: column; overflow: hidden; }
+  .cornell-col-title { font-size: 12px; font-weight: 700; color: #5c3e2a; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 2px solid; flex-shrink: 0; }
+  .cornell-col:nth-child(1) .cornell-col-title { border-color: #c17f59; }
+  .cornell-col:nth-child(2) .cornell-col-title { border-color: #7a9f7a; }
+  .cornell-col-body { font-size: 11px; color: #444; line-height: 1.7; overflow-y: auto; flex: 1; padding: 4px 0; }
+  .cornell-col-body .line { padding: 3px 0; border-bottom: 1px solid #f5f0eb; }
+  .cornell-bottom { background: #fff; border-radius: 8px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border: 2px solid #c17f59; flex-shrink: 0; }
+  .cornell-bottom-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .cornell-bottom-title { font-size: 12px; font-weight: 700; color: #5c3e2a; }
+  .cornell-bottom-tags { display: flex; gap: 3px; flex-wrap: wrap; }
+  .cornell-bottom-body { font-size: 11px; color: #555; line-height: 1.6; min-height: 44px; background: #fcfcfa; border-radius: 6px; padding: 8px; }
+  .cornell-bottom-placeholder { font-size: 11px; color: #bbb; }
+  .cornell-actions { display: flex; gap: 6px; margin-top: 4px; }
+  .cornell-btn { font-size: 11px; padding: 3px 10px; border-radius: 4px; cursor: default; background: #f5f0eb; color: #7a5f44; }
+  .cornell-btn.kimi { background: #c17f59; color: #fff; }
+
+  .slide-tag { position: absolute; top: 12px; right: 16px; font-size: 11px; color: #bbb; }
+
+  .two-col { display: flex; gap: 20px; }
+  .two-col > * { flex: 1; }
+
+  .tag-legend { display: flex; gap: 16px; margin: 8px 0; font-size: 11px; color: #666; align-items: center; }
+  .tag-legend-item { display: flex; align-items: center; gap: 4px; }
+
+  /* 滚动条 */
+  .slide::-webkit-scrollbar { width: 4px; }
+  .slide::-webkit-scrollbar-track { background: transparent; }
+  .slide::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="ppt-container" id="ppt">
+
+  <!-- ════════════ 第 1 页：设计总纲 ════════════ -->
+  <div class="slide active" data-page="1">
+    <div class="slide-tag">1 / 7</div>
+    <h1>经方笔记系统 · 设计总纲 <span class="sub">第一性原理推导 → 五条设计原则</span></h1>
+
+    <div class="highlight" style="margin-bottom:14px;">
+      <strong>核心问题</strong>：笔记系统服务于什么学习动作？<br>
+      → 「信息 → 理解 → 应用」的转化过程中，笔记是唯一贯穿的接口。
+    </div>
+
+    <ol style="margin-bottom:10px;">
+      <li><strong>一个笔记模型</strong>：不分类型，只分来源。所有笔记同一存储、同一 Schema、同一检索。</li>
+      <li><strong>入口即标签（核心标签自动打）</strong>：从哪个场景进入记笔记，系统自动打上对应核心标签，零操作完成分类。</li>
+      <li><strong>浮窗记笔记</strong>：原地弹出，不跳转页面，不丢失上下文。打断成本最低。</li>
+      <li><strong>临时标签用户自定</strong>：用户按个人学习目的追加标签，系统不干预。</li>
+      <li><strong>康奈尔对比产出链接笔记</strong>：两篇笔记并排 + 底部产出区（手动 / AI 生成对比总结），产出「链接笔记」——一种专门记录"两个知识点之间关系"的新品种。</li>
+    </ol>
+
+    <div class="tag-legend">
+      <span class="tag-legend-item"><span class="tag core">核心标签</span> 系统自动，标识来源</span>
+      <span class="tag-legend-item"><span class="tag temp">临时标签</span> 用户手动，个人分类</span>
+    </div>
+
+    <div class="two-col" style="margin-top:8px;">
+      <div class="card">
+        <div class="card-title">📄 Note Schema 定义</div>
+        <div style="font-size:11px;color:#555;line-height:1.8;font-family:monospace;white-space:pre;">
+{
+  id: "note_guid",
+  title: "桂枝汤条文理解",
+  content: "**辨证要点**：发热…",   // Markdown
+  coreTags: ["#条文"],               // 系统自动
+  userTags: ["桂枝汤", "表虚证"],   // 用户手动
+  source: {                          // 回跳来源
+    type: "source_panel",
+    cardId: "gui-zhi-tang",
+    sourceId: "gui-zhi-tang-src-001"
+  },
+  updatedAt: "2026-07-14T10:30:00Z"
+}
+        </div>
+      </div>
+      <div class="card" style="font-size:12px;">
+        <div class="card-title">🎯 核心标签分类</div>
+        <div style="margin:6px 0;display:flex;flex-wrap:wrap;gap:4px;">
+          <span class="tag core">#条文</span>
+          <span class="tag core">#错题</span>
+          <span class="tag core">#方剂笔记</span>
+          <span class="tag core">#经验笔记</span>
+          <span class="tag core">#临床笔记</span>
+          <span class="tag core">#跟师笔记</span>
+          <span class="tag core">#AI笔记</span>
+          <span class="tag core">#用药心得</span>
+          <span class="tag core">#患者注释</span>
+	          <span class="tag core" style="background:#6b8e6b;">#链接笔记</span>
+        </div>
+        <div style="color:#888;margin-top:6px;">核心标签 = 来源属性，标识"笔记从哪里来"。<br>临时标签 = 个人分类，标识"笔记为了什么而记"。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 第 2 页：浮窗记笔记 ════════════ -->
+  <div class="slide" data-page="2">
+    <div class="slide-tag">2 / 7</div>
+    <h1>浮窗记笔记 <span class="sub">原地弹出，不跳转，自动关联</span></h1>
+
+    <div class="highlight">
+      <strong>关键行为</strong>：你在看条文 → 点「📝记笔记」→ 浮窗弹出 → 标题/核心标签已预填 → 你专心写内容 → 保存 → 浮窗关闭 → 浮窗按钮显示「已有 N 条笔记」。
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h3>📖 条文浮窗</h3>
+        <div class="modal-mock" style="margin-top:0;">
+          <div class="modal-mock-title">📝 记笔记 · 条文</div>
+          <div class="modal-mock-tags">
+            <span class="tag core">#条文</span>
+            <span class="tag">桂枝汤</span>
+          </div>
+          <div class="modal-mock-body" style="font-size:11px;color:#888;margin-bottom:4px;">
+            <strong style="color:#5c3e2a;">标题</strong> 太阳中风证 — 理解<br>
+            <strong style="color:#5c3e2a;">关联条文</strong> 桂枝汤 · 第 12 条（不可修改）
+          </div>
+          <div class="modal-mock-body" style="min-height:60px;background:#fcfcfa;border-radius:6px;padding:8px;font-size:12px;">
+            **辨证要点**：发热、汗出、恶风、脉浮缓。<br>核心病机是**营卫不和**，太阳病表虚证。
+          </div>
+          <div class="modal-mock-input">➕ 添加临时标签…（回车添加）</div>
+          <div style="text-align:right;margin-top:6px;font-size:11px;color:#c17f59;">💾 保存 · ↩️ 回车保存</div>
+        </div>
+        <div style="font-size:11px;color:#888;margin-top:4px;">
+          ✅ 浮窗关闭后，「📝 记笔记」按钮变为「📝 <strong>2 条笔记</strong>」— 同一条文下的所有笔记可见
+        </div>
+      </div>
+      <div>
+        <h3>❌ 错题浮窗</h3>
+        <div class="modal-mock" style="margin-top:0;">
+          <div class="modal-mock-title">📝 记笔记 · 错题</div>
+          <div class="modal-mock-tags">
+            <span class="tag core">#错题</span>
+            <span class="tag core">#我的错题</span>
+            <span class="tag">小柴胡汤</span>
+          </div>
+          <div class="modal-mock-body" style="font-size:11px;color:#888;margin-bottom:4px;">
+            <strong style="color:#5c3e2a;">标题</strong> 错题：小柴胡汤或然证<br>
+            <strong style="color:#5c3e2a;">预填内容</strong> 错题原文 + 我的错误答案
+          </div>
+          <div class="modal-mock-body" style="min-height:60px;background:#fcfcfa;border-radius:6px;padding:8px;font-size:12px;">
+            我误选了「胸中烦而不呕不是或然证」<br>实际**胸中烦而不呕**正是 <u>第一条或然证</u>。
+          </div>
+          <div class="modal-mock-input">➕ 添加临时标签…（回车添加）</div>
+          <div style="text-align:right;margin-top:6px;font-size:11px;color:#c17f59;">💾 保存 · ↩️ 回车保存</div>
+        </div>
+        <div style="font-size:11px;color:#888;margin-top:4px;">
+          📎 错题本左侧 Tab 增加「📓 笔记」，展示所有 #错题 标签笔记
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:8px;">
+      <div class="card-title">浮窗交互规则</div>
+      <div style="font-size:12px;line-height:1.7;">
+        • 浮窗是轻量 modal，不跳转页面，不覆盖主内容区超过 60%<br>
+        • 标题 / 核心标签 / 关联条文（或错题）自动预填，用户无需手动关联<br>
+        • 内容区支持 Markdown，底部标签输入框支持回车添加 / 批量粘贴<br>
+        • 保存后 toast 提示「笔记已保存」，浮窗自动关闭<br>
+        • 再次点击记笔记，浮窗底部显示「已有笔记列表」，可快速翻阅
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 第 3 页：每条条文的专属笔记 ════════════ -->
+  <div class="slide" data-page="3">
+    <div class="slide-tag">3 / 7</div>
+    <h1>条文专属笔记 <span class="sub">浮窗内即可看到同一条文的所有笔记</span></h1>
+
+    <div class="highlight">
+      <strong>你提到的关键</strong>：在条文场景点出来的笔记，就是这条文的专属笔记。浮窗里可以直接看到该条文下所有历史笔记。
+    </div>
+
+    <div class="two-col">
+      <div class="card" style="font-size:12px;">
+        <div class="card-title">📖 场景示意</div>
+        <div style="line-height:1.7;">
+          <strong>你正在看：</strong>「桂枝汤 · 第 12 条」
+        </div>
+        <div style="margin:6px 0;background:#f5f0eb;padding:8px;border-radius:6px;font-size:11px;color:#666;">
+          「太阳中风，阳浮而阴弱，阳浮者热自发，阴弱者汗自出，啬啬恶寒，淅淅恶风，翕翕发热，鼻鸣干呕者，桂枝汤主之。」
+        </div>
+        <div style="margin-top:6px;">
+          下方有「📝 记笔记」按钮 → 点击后浮窗弹出
+        </div>
+        <div style="margin-top:6px;color:#c17f59;">
+          「📝 3 条笔记」— 点击弹出浮窗，底部展示本条文的已有笔记列表
+        </div>
+      </div>
+      <div>
+        <div class="modal-mock" style="margin-top:0;">
+          <div class="modal-mock-title">📝 本条文的笔记（3 条）</div>
+          <div style="font-size:11px;line-height:1.6;color:#555;">
+            <div style="padding:6px 0;border-bottom:1px solid #f0ece6;">
+              <strong>太阳中风辨证要点</strong><br>
+              <span style="color:#999;">发热、汗出、恶风、脉浮缓。核心病机是营卫不和…</span>
+            </div>
+            <div style="padding:6px 0;border-bottom:1px solid #f0ece6;">
+              <strong>与麻黄汤鉴别关键</strong><br>
+              <span style="color:#999;">有汗 vs 无汗，脉浮缓 vs 脉浮紧。有汗不可用麻黄…</span>
+            </div>
+            <div style="padding:6px 0;">
+              <strong>刘渡舟老师经验</strong><br>
+              <span style="color:#999;">桂枝汤服法关键是啜热稀粥 + 温覆。不啜粥则疗效不佳…</span>
+            </div>
+          </div>
+          <div style="border-top:1px solid #f0ece6;padding-top:6px;margin-top:4px;">
+            <div style="padding:6px 10px;background:#f5f0eb;border-radius:6px;font-size:11px;color:#999;text-align:center;">
+              ✏️ 继续写新笔记…
+            </div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:#c17f59;margin-top:4px;">
+          ✅ 核心标签自动为 #条文，用户可追加临时标签如「鉴别」「刘渡舟经验」
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:8px;">
+      <div class="card-title">💡 设计要点</div>
+      <div style="font-size:12px;line-height:1.7;">
+        • 同一条文下所有笔记按更新时间倒序排列<br>
+        • 点击任意笔记可展开查看全文（Markdown 渲染）<br>
+        • 每条笔记可「✏️ 编辑」或「🗑️ 删除」<br>
+        • 浮窗底部始终有一个「✏️ 写新笔记」入口<br>
+        • 在其他入口（错题本/列表页）查看同一条笔记时，仍可「回到原文」跳转
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 第 4 页：标签体系 · 核心 vs 临时 ════════════ -->
+  <div class="slide" data-page="4">
+    <div class="slide-tag">4 / 7</div>
+    <h1>标签体系 <span class="sub">核心标签 vs 临时标签 · 新增 #链接笔记</span></h1>
+
+    <div class="principle-item" style="background:#fff;border-radius:10px;padding:16px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div class="principle-num">核心标签</div>
+      <div style="font-size:12px;color:#666;line-height:1.7;">
+        由系统<strong>自动</strong>打上，标识这条笔记<strong>从哪个学习场景产生</strong>。用户不可删除，不可修改。<br>
+        作用：保证每条笔记天然带有分类属性，无需用户思考。
+      </div>
+    </div>
+    <div class="principle-item" style="background:#fff;border-radius:10px;padding:16px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div class="principle-num">临时标签</div>
+      <div style="font-size:12px;color:#666;line-height:1.7;">
+        由用户<strong>手动</strong>添加，按个人学习目的自由组织。<br>
+        作用：让你的笔记体系适应你的个性化学习路径——比如标记「易混淆」「刘渡舟经验」「我的盲区」「要背」。
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:8px;">
+      <div class="card">
+        <div class="card-title">📄 Note Schema（普通笔记）</div>
+        <div style="font-size:11px;color:#555;line-height:1.8;font-family:monospace;white-space:pre;">
+{
+  id: "note_guid",
+  title: "桂枝汤条文理解",
+  content: "**辨证要点**：发热…",   // Markdown
+  coreTags: ["#条文"],               // 系统自动
+  userTags: ["桂枝汤", "表虚证"],   // 用户手动
+  source: {
+    type: "source_panel",
+    cardId: "gui-zhi-tang",
+  },
+  updatedAt: "2026-07-14T10:30:00Z"
+}
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔗 Note Schema（链接笔记）</div>
+        <div style="font-size:11px;color:#555;line-height:1.8;font-family:monospace;white-space:pre;">
+{
+  id: "link_note_guid",
+  title: "桂枝汤 vs 麻黄汤",
+  content: "核心鉴别：有汗 vs 无汗…",
+  coreTags: ["#链接笔记"],          // 自动
+  userTags: ["桂枝汤","麻黄汤","鉴别"],
+  source: {
+    type: "link_note",
+    linkFrom: ["n1", "n2"],       // 关联的两篇
+  },
+  updatedAt: "2026-07-14T11:00:00Z"
+}
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:6px;">入口 → 核心标签 映射表</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:6px 0;">
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">📖 条文入口</div>
+        <div style="font-size:12px;">核心标签：<span class="tag core">#条文</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">❌ 错题入口</div>
+        <div style="font-size:12px;">核心标签：<span class="tag core">#错题</span> <span class="tag core">#我的错题</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">🃏 方剂卡入口</div>
+        <div style="font-size:12px;">核心标签：<span class="tag core">#方剂笔记</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">📚 经验入口</div>
+        <div style="font-size:12px;">核心标签：<span class="tag core">#经验笔记</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">🔗 对比入口</div>
+        <div style="font-size:12px;">核心标签：<span class="tag core" style="background:#6b8e6b;">#链接笔记</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;">🏥 临床等（未来）</div>
+        <div style="font-size:12px;">核心标签：<span class="tag core">#临床笔记</span> <span class="tag core">#用药心得</span></div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>标签继承规则</strong>：链接笔记自动合并被对比的两篇笔记的<strong>所有标签</strong>（核心 + 临时），去重后继承。<br>
+      例如：笔记A(#条文 + 桂枝汤) × 笔记B(#方剂笔记 + 麻黄汤 + 鉴别) → 链接笔记(#链接笔记 + 桂枝汤 + 麻黄汤 + 鉴别)
+    </div>
+  </div><!-- ════════════ 第 5 页：对比视图（康奈尔布局） ════════════ -->
+  <div class="slide" data-page="5">
+    <div class="slide-tag">5 / 7</div>
+    <h1>对比视图 — 康奈尔布局 <span class="sub">两篇并排 + 底部产出区 =「链接笔记」</span></h1>
+
+    <div class="highlight">
+      <strong>认知原理</strong>：对比的真正价值不在「并排看见」，而在「并排之后你产出了什么」。<br>
+      左右两栏展示原版笔记（只读），底部横条是<strong>你的对比产出区</strong>——自己写、或点 Kimi 生成对比总结后粘贴进来。<br>
+      保存后成为一条独立的新笔记品种：<span class="tag core" style="background:#6b8e6b;">#链接笔记</span>
+    </div>
+
+    <div style="font-size:11px;color:#666;margin-bottom:4px;">
+      <strong>操作路径</strong>：笔记列表页 → 勾选 2 条 → 🔍 对比 → 进入此布局
+    </div>
+
+    <div class="cornell-wrap">
+      <div class="cornell-top">
+        <div class="cornell-col">
+          <div class="cornell-col-title">🥇 桂枝汤 — 太阳中风证 <span class="tag core" style="font-size:10px;">#条文</span></div>
+          <div class="cornell-col-body">
+            <div class="line"><strong>病机</strong>：营卫不和，表虚</div>
+            <div class="line"><strong>症状</strong>：发热、汗出、恶风、脉浮缓</div>
+            <div class="line"><strong>脉象</strong>：浮缓（阳浮阴弱）</div>
+            <div class="line"><strong>汗出</strong>：有汗（自汗出）</div>
+            <div class="line"><strong>方药</strong>：桂枝 芍药 生姜 大枣 甘草</div>
+            <div class="line"><strong>禁忌</strong>：酒客、内热者不宜</div>
+          </div>
+        </div>
+        <div class="cornell-col">
+          <div class="cornell-col-title">🥈 麻黄汤 — 太阳伤寒证 <span class="tag core" style="font-size:10px;">#方剂笔记</span></div>
+          <div class="cornell-col-body">
+            <div class="line"><strong>病机</strong>：卫阳被遏，营阴郁滞，表实</div>
+            <div class="line"><strong>症状</strong>：恶寒发热、无汗、身痛、腰痛</div>
+            <div class="line"><strong>脉象</strong>：浮紧</div>
+            <div class="line"><strong>汗出</strong>：无汗</div>
+            <div class="line"><strong>方药</strong>：麻黄 桂枝 杏仁 甘草</div>
+            <div class="line"><strong>禁忌</strong>：表虚自汗、疮家、淋家</div>
+          </div>
+        </div>
+      </div>
+      <div class="cornell-bottom">
+        <div class="cornell-bottom-header">
+          <span class="cornell-bottom-title">✍️ 对比总结产出</span>
+          <span class="cornell-bottom-tags">
+            <span class="tag core" style="background:#6b8e6b;font-size:10px;">#链接笔记</span>
+            <span class="tag temp" style="font-size:10px;">桂枝汤</span>
+            <span class="tag temp" style="font-size:10px;">麻黄汤</span>
+            <span class="tag temp" style="font-size:10px;">鉴别</span>
+            <span class="tag temp" style="font-size:10px;">表证</span>
+          </span>
+        </div>
+        <div class="cornell-bottom-body">
+          核心鉴别点：<strong>有汗 vs 无汗</strong>——这是表虚和表实的根本分界。<br>
+          桂枝汤证脉浮缓（阳浮阴弱），麻黄汤证脉浮紧。<br>
+          临床关键问诊：<u>出汗吗？怕风还是怕冷？</u>
+        </div>
+        <div class="cornell-actions">
+          <span class="cornell-btn">✏️ 自己写</span>
+          <span class="cornell-btn kimi">🤖 Kimi 生成对比</span>
+          <span class="cornell-btn">💾 保存为链接笔记</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="card-title">康奈尔对比规则</div>
+      <div style="font-size:12px;line-height:1.7;">
+        • 左右两栏：<strong>只读展示</strong>原版笔记（各自可独立滚动）<br>
+        • 底部横条：你的<strong>对比产出</strong>，支持 Markdown。可手动写，也可点 Kimi 生成后粘贴<br>
+        • 底部标签：自动继承两篇笔记的<strong>所有标签</strong>（核心+临时），去重合并。用户可追加<br>
+        • 保存后：产生一条 source.type="link_note" 的新笔记，linkFrom 记录关联的笔记 ID<br>
+        • 从笔记列表点击链接笔记 → 自动进入此康奈尔布局，重新加载关联的两篇笔记
+      </div>
+    </div>
+  </div><!-- ════════════ 第 6 页：统一笔记列表页 ════════════ -->
+  <div class="slide" data-page="6">
+    <div class="slide-tag">6 / 7</div>
+    <h1>统一笔记列表页 <span class="sub">所有笔记的统一聚合入口</span></h1>
+
+    <div class="mockscreen">
+      <div class="mockscreen-left">
+        <div class="mock-header">
+          <span>📄 笔记列表（7）</span>
+          <span style="font-size:11px;color:#c17f59;">⬜ ⬜ 勾选 2 条 → 🔍 对比</span>
+        </div>
+        <div class="mock-search">🔍 搜索笔记标题、内容或标签…（统一检索）</div>
+
+        <div class="mock-item" style="display:flex;gap:8px;align-items:flex-start;">
+          <span style="font-size:14px;color:#ddd;">◻️</span>
+          <div style="flex:1;">
+            <div class="mock-item-title">桂枝汤 — 太阳中风证 <span class="tag core" style="font-size:10px;">#条文</span></div>
+            <div class="mock-item-preview">辨证要点：发热、汗出、恶风、脉浮缓。核心病机：营卫不和…</div>
+            <div class="entry-auto-tag" style="margin-top:2px;"><span class="tag temp" style="font-size:10px;">桂枝汤</span><span class="tag temp" style="font-size:10px;">表虚证</span></div>
+          </div>
+        </div>
+        <div class="mock-item" style="display:flex;gap:8px;align-items:flex-start;">
+          <span style="font-size:14px;color:#ddd;">◻️</span>
+          <div style="flex:1;">
+            <div class="mock-item-title">错题：小柴胡汤或然证 <span class="tag core" style="font-size:10px;">#错题</span></div>
+            <div class="mock-item-preview">我误选了「胸中烦而不呕不是或然证」…</div>
+            <div class="entry-auto-tag" style="margin-top:2px;"><span class="tag temp" style="font-size:10px;">小柴胡汤</span><span class="tag temp" style="font-size:10px;">少阳病</span></div>
+          </div>
+        </div>
+        <div class="mock-item" style="display:flex;gap:8px;align-items:flex-start;">
+          <span style="font-size:14px;color:#ddd;">◻️</span>
+          <div style="flex:1;">
+            <div class="mock-item-title">麻黄汤 vs 桂枝汤鉴别 <span class="tag core" style="font-size:10px;">#方剂笔记</span></div>
+            <div class="mock-item-preview">无汗 vs 有汗，脉浮紧 vs 脉浮缓，身痛明显 vs 不明显…</div>
+            <div class="entry-auto-tag" style="margin-top:2px;"><span class="tag temp" style="font-size:10px;">麻黄汤</span><span class="tag temp" style="font-size:10px;">鉴别</span></div>
+          </div>
+        </div>
+        <div class="mock-item" style="display:flex;gap:8px;align-items:flex-start;">
+          <span style="font-size:14px;color:#ddd;">◻️</span>
+          <div style="flex:1;">
+            <div class="mock-item-title">刘渡舟：桂枝汤服法 <span class="tag core" style="font-size:10px;">#经验笔记</span></div>
+            <div class="mock-item-preview">啜热稀粥一升余，以助药力。温覆令一时许…</div>
+            <div class="entry-auto-tag" style="margin-top:2px;"><span class="tag temp" style="font-size:10px;">服法</span><span class="tag temp" style="font-size:10px;">刘渡舟</span></div>
+          </div>
+        </div>
+        <div class="mock-item" style="display:flex;gap:8px;align-items:flex-start;">
+          <span style="font-size:14px;color:#ddd;">◻️</span>
+          <div style="flex:1;">
+            <div class="mock-item-title">🔗 桂枝汤 vs 麻黄汤对比 <span class="tag core" style="background:#6b8e6b;font-size:10px;">#链接笔记</span></div>
+            <div class="mock-item-preview">核心鉴别：有汗 vs 无汗，脉浮缓 vs 脉浮紧。临床问诊关键：出汗吗？怕风还是怕冷？</div>
+            <div class="entry-auto-tag" style="margin-top:2px;"><span class="tag temp" style="font-size:10px;">桂枝汤</span><span class="tag temp" style="font-size:10px;">麻黄汤</span><span class="tag temp" style="font-size:10px;">鉴别</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mockscreen-right">
+        <div style="font-size:12px;font-weight:600;color:#5c3e2a;margin-bottom:6px;">🏷️ 按标签筛选</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;">
+          <span class="tag" style="background:#c17f59;color:#fff;">全部 (7)</span>
+          <span class="tag core">#条文 (2)</span>
+          <span class="tag core">#错题 (1)</span>
+          <span class="tag core">#方剂笔记 (1)</span>
+          <span class="tag core">#经验笔记 (1)</span>
+        </div>
+        <div style="font-size:11px;color:#888;margin-bottom:8px;">临时标签</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
+          <span class="tag temp">桂枝汤 (2)</span>
+          <span class="tag temp">鉴别 (1)</span>
+          <span class="tag temp">小柴胡汤 (1)</span>
+          <span class="tag temp">刘渡舟 (1)</span>
+        </div>
+        <div style="border-top:1px solid #f0ece6;padding-top:8px;">
+          <div style="font-size:11px;color:#5c3e2a;font-weight:600;margin-bottom:4px;">📎 操作</div>
+          <div style="font-size:11px;color:#c17f59;line-height:1.7;">
+            🔍 对比选中项<br>
+            📝 新建笔记<br>
+            🔗 回到原文
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 第 7 页：迁移路径 + 优先级 ════════════ -->
+  <div class="slide" data-page="7">
+    <div class="slide-tag">7 / 7</div>
+    <h1>实施路径 & 优先级 <span class="sub">从旧数据到新系统的迁移</span></h1>
+
+    <div class="two-col">
+      <div>
+        <h2>P0（本次必须做）</h2>
+        <ul>
+          <li>✅ 统一笔记池（localStorage notes_v2）</li>
+          <li>✅ 笔记 Schema（含 coreTags / userTags / source）</li>
+          <li>✅ 浮窗记笔记（条文 / 错题 / 方剂卡三入口）</li>
+          <li>✅ 核心标签自动打（来源即标签）</li>
+          <li>✅ 临时标签输入（回车添加 / 批量粘贴）</li>
+          <li>✅ 统一笔记列表页（搜索 + 标签筛选）</li>
+          <li>✅ 每条条文浮窗可看到该条文的已有笔记</li>
+        </ul>
+
+        <h2 style="margin-top:16px;">P1（次优先）</h2>
+        <ul>
+          <li>🔲 两栏对比视图（康奈尔布局 + 链接笔记产出）</li>
+          <li>🔲 旧笔记迁移脚本（保留旧 key 备份）</li>
+          <li>🔲 错题本 Tab 切换「笔记」视图</li>
+        </ul>
+
+        <h2 style="margin-top:16px;">P2（未来扩展）</h2>
+        <ul>
+          <li>🔲 三栏对比</li>
+          <li>🔲 对比差异标注</li>
+          <li>🔲 经验/临床/AI 笔记入口</li>
+        </ul>
+      </div>
+      <div>
+        <h2>数据迁移</h2>
+        <div class="card" style="margin-top:8px;">
+          <div class="card-title">🔄 一次性迁移</div>
+          <div style="font-size:11px;color:#555;line-height:1.6;">
+            <strong>旧数据</strong>（4 套独立存储）：<br>
+            ① source_article_notes_v1 → 转 #条文<br>
+            ② source_notes_v1 → 转 #条文<br>
+            ③ sh_v9_card_notes → 转 #方剂笔记<br>
+            ④ sh_v9_notes（错题）→ 已附加在错题上，暂不迁移
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:8px;">
+          <div class="card-title">🗺️ 实施顺序</div>
+          <div style="font-size:11px;color:#555;line-height:1.6;">
+            1. 建 NoteService（CRUD + localStorage）→ 2. 建浮窗组件 → 3. 接入三入口 → 4. 建笔记列表页 → 5. 迁移旧数据 → 6. 做对比视图
+          </div>
+        </div>
+
+        <div class="highlight" style="margin-top:10px;">
+          <strong>你的验证流程</strong>：<br>
+          ① 打开 demo → ② 按 WebBridge 流程跑一遍 → ③ 确认无 Bug → ④ git commit → ⑤ 抽象为 Skill
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 导航 ── -->
+  <div class="slide-nav">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <span class="nav-hint">← → 方向键切换 · 共 7 页</span>
+  </div>
+</div>
+
+<script>
+const ppt = document.getElementById('ppt');
+const slides = ppt.querySelectorAll('.slide');
+const dots = ppt.querySelectorAll('.dot');
+let current = 0;
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, slides.length - 1));
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goTo(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(current - 1); }
+});
+
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => goTo(i));
+});
+</script>
+</body>
+</html>

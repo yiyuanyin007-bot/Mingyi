@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEMO 索引 — 经方学习系统</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Microsoft YaHei', sans-serif; background: #f5f0eb; color: #2c2416; padding: 40px 20px; }
+  .container { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 24px; color: #5c3e2a; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: #8b7355; margin-bottom: 32px; }
+  
+  .demo-card { background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; gap: 16px; align-items: flex-start; }
+  .demo-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .demo-status { font-size: 20px; line-height: 1; }
+  .demo-info { flex: 1; }
+  .demo-title { font-size: 16px; font-weight: 600; color: #5c3e2a; }
+  .demo-desc { font-size: 13px; color: #666; margin-top: 4px; line-height: 1.5; }
+  .demo-meta { font-size: 12px; color: #999; margin-top: 8px; }
+  .demo-meta a { color: #c17f59; text-decoration: none; }
+  .demo-meta a:hover { text-decoration: underline; }
+  .demo-links { margin-top: 8px; display: flex; gap: 8px; }
+  .demo-links a { font-size: 12px; color: #c17f59; text-decoration: none; border: 1px solid #c17f59; padding: 3px 10px; border-radius: 4px; }
+  .demo-links a:hover { background: #c17f59; color: #fff; }
+
+  .legend { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; font-size: 12px; color: #666; }
+  .legend span { display: flex; align-items: center; gap: 4px; }
+  
+  .empty { text-align: center; padding: 60px 0; color: #999; font-size: 14px; }
+  
+  .archive-section { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; }
+  .archive-section h2 { font-size: 14px; color: #8b7355; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>DEMO 索引</h1>
+  <p class="subtitle">经方学习系统 · 交互设计验证</p>
+
+  <div class="legend">
+    <span>🟡 设计对齐中</span>
+    <span>🔵 确认待实现</span>
+    <span>🟢 已实现</span>
+    <span>⚪ 已废弃</span>
+  </div>
+
+  <div id="demoList">
+    <!-- 由 JS 动态渲染 -->
+  </div>
+
+  <div class="archive-section" id="archiveSection" style="display:none;">
+    <h2>🗄 归档</h2>
+    <div id="archiveList"></div>
+  </div>
+
+  <div class="empty" id="emptyState">暂无 DEMO</div>
+
+  <!-- 版本号 / 更新时间 -->
+  <p style="text-align:center; font-size:11px; color:#ccc; margin-top:40px;">
+    <span id="updateTime"></span>
+  </p>
+</div>
+
+<script>
+// ── DEMO 数据 ──
+const DEMOS = [
+  {
+    status: '🔵',
+    statusLabel: '已确认待实现',
+    title: '条文笔记设计',
+    desc: '条文阅读场景下的笔记交互。读原文 → 原地记笔记 → 列表预览。合并 4 套笔记为 1 套，降低摩擦。',
+    path: '条文笔记设计',
+    date: '2026-07-15',
+    designDoc: true
+  },
+  {
+    status: '🔵',
+    statusLabel: '已确认待实现',
+    title: '标签笔记系统',
+    desc: '以笔记为核心的标签体系。回车添加标签 / 批量粘贴 / 标签检索 / Markdown 笔记 / 长文本折叠。',
+    path: '标签笔记系统',
+    date: '2026-07-14',
+    designDoc: true
+  }
+];
+
+const ARCHIVE = [];
+
+// ── 渲染 ──
+function render() {
+  const list = document.getElementById('demoList');
+  const empty = document.getElementById('emptyState');
+  const archiveSection = document.getElementById('archiveSection');
+  const archiveList = document.getElementById('archiveList');
+
+  if (DEMOS.length === 0 && ARCHIVE.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  DEMOS.forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'demo-card';
+
+    let linksHtml = '<div class="demo-links">';
+    linksHtml += '<a href="' + d.path + '/index.html">打开 DEMO</a>';
+    if (d.designDoc) linksHtml += '<a href="' + d.path + '/README.md">设计说明</a>';
+    linksHtml += '</div>';
+
+    card.innerHTML = `
+      <div class="demo-status">${d.status}</div>
+      <div class="demo-info">
+        <div class="demo-title">${d.title}</div>
+        <div class="demo-desc">${d.desc}</div>
+        <div class="demo-meta">${d.statusLabel} · ${d.date}</div>
+        ${linksHtml}
+      </div>
+    `;
+    list.appendChild(card);
+  });
+
+  if (ARCHIVE.length > 0) {
+    archiveSection.style.display = 'block';
+    ARCHIVE.forEach(d => {
+      const card = document.createElement('div');
+      card.className = 'demo-card';
+      card.innerHTML = `
+        <div class="demo-status">⚪</div>
+        <div class="demo-info">
+          <div class="demo-title">${d.title}</div>
+          <div class="demo-desc">${d.desc}</div>
+          <div class="demo-meta">已废弃 · ${d.date}</div>
+        </div>
+      `;
+      archiveList.appendChild(card);
+    });
+  }
+
+  document.getElementById('updateTime').textContent = '更新于 ' + new Date().toLocaleString('zh-CN', { hour12: false });
+}
+
+render();
+</script>
+</body>
+</html>

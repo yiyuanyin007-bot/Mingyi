@@ -1,0 +1,2705 @@
+{
+  "version": "1.1.0",
+  "total_symptoms": 385,
+  "symptoms": {
+    "不可转侧": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "翻个身都难，浑身僵硬"
+      ]
+    },
+    "无汗": {
+      "category": "汗出类",
+      "subcategory": "无汗",
+      "expressions": [
+        "不出汗，身上干干的"
+      ]
+    },
+    "不汗出": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "不汗出（患者表达待补充）"
+      ]
+    },
+    "高热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "烧得厉害，39度多，浑身烫"
+      ]
+    },
+    "中热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "发烧，38度左右"
+      ]
+    },
+    "微热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "有点低烧，37度5到38度"
+      ]
+    },
+    "翕翕发热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身上热乎乎的，像蒸桑拿，但不是很烫"
+      ]
+    },
+    "蒸蒸发热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身上热，像从里面往外蒸，觉得热得透不过气"
+      ]
+    },
+    "潮热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "每天下午三四点开始发热，像定好了一样"
+      ]
+    },
+    "至夜发热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "晚上发热，白天还好"
+      ]
+    },
+    "无大热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身上摸着不太烫，但心里觉得热"
+      ]
+    },
+    "恶寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "怕冷，盖两床被子还觉得冷"
+      ]
+    },
+    "恶风": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "怕风，风吹过来就觉得往骨头里钻，起鸡皮疙瘩"
+      ]
+    },
+    "啬啬恶寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "缩着怕冷，不敢伸出去"
+      ]
+    },
+    "微恶寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "有点怕冷，不是很严重"
+      ]
+    },
+    "背微恶寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "背上有点怕冷，其他地方还好"
+      ]
+    },
+    "时时恶风": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "有时候怕风，一阵一阵的"
+      ]
+    },
+    "不恶寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "不怕冷，还觉得热"
+      ]
+    },
+    "往来寒热": {
+      "category": "寒热类",
+      "subcategory": "寒热往来",
+      "expressions": [
+        "一会儿热一会儿冷，像打摆子"
+      ]
+    },
+    "热多寒少": {
+      "category": "寒热类",
+      "subcategory": "寒热往来",
+      "expressions": [
+        "发热的时候多，怕冷的时候少"
+      ]
+    },
+    "寒多热少": {
+      "category": "寒热类",
+      "subcategory": "寒热往来",
+      "expressions": [
+        "怕冷的时候多，发热的时候少"
+      ]
+    },
+    "如疟状": {
+      "category": "寒热类",
+      "subcategory": "寒热往来",
+      "expressions": [
+        "像打摆子一样，但不是定时的"
+      ]
+    },
+    "一日二三度发": {
+      "category": "寒热类",
+      "subcategory": "寒热往来",
+      "expressions": [
+        "一天发作两三次，好像有规律"
+      ]
+    },
+    "自汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "动不动就出汗，不动也出"
+      ]
+    },
+    "盗汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "晚上睡着出汗，醒来发现枕头湿了"
+      ]
+    },
+    "大汗出": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "大汗淋漓，衣服全湿透了"
+      ]
+    },
+    "汗出": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "出很多汗，擦了又有"
+      ]
+    },
+    "漏汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "吃了药后汗就止不住了，一直流"
+      ]
+    },
+    "微汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "出一点点汗，不明显"
+      ]
+    },
+    "汗后": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "出完汗觉得更虚了，没力气"
+      ]
+    },
+    "汗出而喘": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "出汗的时候还喘"
+      ]
+    },
+    "手足濈然汗出": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "手心脚心不停地出汗，湿漉漉的"
+      ]
+    },
+    "小便不利": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "小便少，不顺畅，尿得慢"
+      ]
+    },
+    "小便自利": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "小便倒是通的，没问题"
+      ]
+    },
+    "小便难": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "小便不通畅，尿得费劲"
+      ]
+    },
+    "小便清": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "小便很清，不黄"
+      ]
+    },
+    "小便黄": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "小便黄黄的"
+      ]
+    },
+    "尿频": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "老想尿，每次尿一点点"
+      ]
+    },
+    "夜尿频": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "晚上起夜好几次"
+      ]
+    },
+    "水入则吐": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "喝水就吐，水不下去"
+      ]
+    },
+    "大便硬": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "五六天没大便了，硬得像羊屎蛋"
+      ]
+    },
+    "大便溏": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便稀溏，不成形"
+      ]
+    },
+    "下利清谷": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "拉肚子，吃什么拉什么，不消化"
+      ]
+    },
+    "利下臭秽": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便很臭，颜色黄"
+      ]
+    },
+    "大便色黑": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便黑黑的，像柏油"
+      ]
+    },
+    "不大便": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "六七天没大便了，但肚子不胀不痛"
+      ]
+    },
+    "便硬": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便干结，拉不出来"
+      ]
+    },
+    "微利": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "拉肚子，但拉得不多"
+      ]
+    },
+    "下利不止": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "拉肚子止不住"
+      ]
+    },
+    "清便自可": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便正常，不拉肚子"
+      ]
+    },
+    "不欲饮食": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "不想吃东西，看到饭就烦"
+      ]
+    },
+    "食欲不振": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "不想吃饭，没胃口"
+      ]
+    },
+    "食少": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "吃一点点就饱了"
+      ]
+    },
+    "能食": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "还能吃，但吃不多"
+      ]
+    },
+    "消谷善饥": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "饿得快，吃得多，但吃不饱"
+      ]
+    },
+    "大烦渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "渴得要命，想喝很多冷水"
+      ]
+    },
+    "口渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "渴，想喝水"
+      ]
+    },
+    "微烦渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "有点烦躁，也渴，但不是很厉害"
+      ]
+    },
+    "渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "渴，喝水也不解渴"
+      ]
+    },
+    "消渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "渴得厉害，喝水也不解渴，越喝越渴"
+      ]
+    },
+    "不渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "不渴，不想喝水"
+      ]
+    },
+    "喜冷饮": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "想喝冷水，冰水更好"
+      ]
+    },
+    "喜热饮": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "想喝热水，喝凉的胃不舒服"
+      ]
+    },
+    "少少与饮": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "只能喝一点点水，喝多了不舒服"
+      ]
+    },
+    "干呕": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "胃里有点恶心，但又吐不出来"
+      ]
+    },
+    "呕": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "恶心想吐"
+      ]
+    },
+    "呕吐": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "吐，吃什么吐什么"
+      ]
+    },
+    "呕不止": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "吐个不停，吃什么吐什么"
+      ]
+    },
+    "喜呕": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "恶心想吐，但又吐不出多少"
+      ]
+    },
+    "但呕": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "就是想吐，恶心得厉害"
+      ]
+    },
+    "欲呕": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "恶心，想吐"
+      ]
+    },
+    "吐水": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "吐清水，像口水一样"
+      ]
+    },
+    "心中悸": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里扑通扑通跳，有时候觉得停了一下"
+      ]
+    },
+    "心烦": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里烦，坐立不安"
+      ]
+    },
+    "虚烦": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里烦，但身体不是很热"
+      ]
+    },
+    "微烦": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "有点烦"
+      ]
+    },
+    "烦躁": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "烦得厉害，坐不住，想发火"
+      ]
+    },
+    "烦惊": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "烦，容易吓一跳"
+      ]
+    },
+    "懊憹": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里像有一团火在烧，烦得想捶胸口"
+      ]
+    },
+    "反复颠倒": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "翻来覆去，躺也不是坐也不是"
+      ]
+    },
+    "心下痞": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胃这里堵得慌，按上去软软的"
+      ]
+    },
+    "心下急": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胃这里又胀又急，堵得慌"
+      ]
+    },
+    "心下满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胃这里胀满"
+      ]
+    },
+    "腹满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "肚子胀满"
+      ]
+    },
+    "少腹满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "小肚子胀胀的，像有水"
+      ]
+    },
+    "少腹硬满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "小肚子硬邦邦的，胀得很大"
+      ]
+    },
+    "少腹急结": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "小肚子下面又急又硬，按上去痛得跳起来"
+      ]
+    },
+    "绕脐痛": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "肚脐周围痛"
+      ]
+    },
+    "腹中痛": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "肚子里隐隐作痛"
+      ]
+    },
+    "按之软": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "按肚子是软的，不硬"
+      ]
+    },
+    "按之濡": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "按胃这里软软的，不硬"
+      ]
+    },
+    "拒按": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "按上去痛，不让碰"
+      ]
+    },
+    "喜按": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "按上去舒服，喜欢按"
+      ]
+    },
+    "耳鸣": {
+      "category": "耳目类",
+      "subcategory": "耳/目",
+      "expressions": [
+        "耳朵里有嗡嗡声"
+      ]
+    },
+    "耳聋": {
+      "category": "耳目类",
+      "subcategory": "耳/目",
+      "expressions": [
+        "耳朵听不清"
+      ]
+    },
+    "目眩": {
+      "category": "耳目类",
+      "subcategory": "耳/目",
+      "expressions": [
+        "头晕，看东西转"
+      ]
+    },
+    "目赤": {
+      "category": "耳目类",
+      "subcategory": "耳/目",
+      "expressions": [
+        "眼睛红"
+      ]
+    },
+    "不得眠": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "睡不着"
+      ]
+    },
+    "虚烦不得眠": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "心里烦，睡不着"
+      ]
+    },
+    "烦躁不得眠": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "烦得厉害，睡不着"
+      ]
+    },
+    "卧起不安": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "躺下也烦，坐起来也烦"
+      ]
+    },
+    "但欲寐": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "老想睡觉，昏昏沉沉的"
+      ]
+    },
+    "多梦": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "做梦多，乱七八糟的梦"
+      ]
+    },
+    "易醒": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "容易醒，睡不踏实"
+      ]
+    },
+    "昼日烦躁不得眠": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "白天烦躁得厉害，睡不着觉"
+      ]
+    },
+    "夜而安静": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "晚上反而安静了，能睡"
+      ]
+    },
+    "发汗后": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吃了发汗药之后"
+      ]
+    },
+    "下后": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吃了泻药之后"
+      ]
+    },
+    "吐后": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吐了之后"
+      ]
+    },
+    "发汗吐下后": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "又发汗又吐又泻之后"
+      ]
+    },
+    "丸药大下后": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吃了泻药丸之后"
+      ]
+    },
+    "外感": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "前几天吹了风/淋了雨/受寒了"
+      ]
+    },
+    "饮食": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "发病前吃了凉的/辣的/油腻的"
+      ]
+    },
+    "劳累": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "发病前累着了/熬夜了"
+      ]
+    },
+    "情绪": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "发病前生气了/焦虑/紧张"
+      ]
+    },
+    "误治": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "之前吃了XX药，不管用/更重了"
+      ]
+    },
+    "素有痰饮": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "平时就痰多，容易咳嗽"
+      ]
+    },
+    "体壮": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "平时身体挺好的，很少生病"
+      ]
+    },
+    "体虚": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "平时就虚，容易感冒"
+      ]
+    },
+    "易感冒": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "经常感冒，抵抗力差"
+      ]
+    },
+    "如狂": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "神志不清，像疯了一样，说胡话"
+      ]
+    },
+    "发狂": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "发狂，打人骂人"
+      ]
+    },
+    "谵语": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "说胡话，自己都不知道在说啥"
+      ]
+    },
+    "善忘": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "记性差，刚说完就忘"
+      ]
+    },
+    "默默": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "不想说话，沉默寡言"
+      ]
+    },
+    "郁郁": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "闷闷不乐，心里堵"
+      ]
+    },
+    "嘿嘿不欲饮食": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "沉默，不想吃饭"
+      ]
+    },
+    "其人如狂": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "像疯了一样，控制不住自己"
+      ]
+    },
+    "2026-06-17": {
+      "category": "精神状态类",
+      "subcategory": "模板：慢性病叙事",
+      "expressions": [
+        "v1.0 初始版，覆盖伤寒论太阳病篇、阳明病篇、少阳病篇、少阴病篇核心方剂"
+      ]
+    },
+    "脉位浮": {
+      "category": "查体",
+      "subcategory": "脉浮",
+      "expressions": [
+        "\"脉浮，轻按即得\""
+      ]
+    },
+    "脉位沉": {
+      "category": "查体",
+      "subcategory": "脉沉",
+      "expressions": [
+        "\"脉沉，重按始得\""
+      ]
+    },
+    "脉率迟": {
+      "category": "查体",
+      "subcategory": "脉迟",
+      "expressions": [
+        "\"脉迟，一息不足四至\""
+      ]
+    },
+    "脉率数": {
+      "category": "查体",
+      "subcategory": "脉数",
+      "expressions": [
+        "\"脉数，一息六至\""
+      ]
+    },
+    "脉率缓": {
+      "category": "查体",
+      "subcategory": "脉缓",
+      "expressions": [
+        "\"脉缓，一息四至，和缓\""
+      ]
+    },
+    "脉形紧": {
+      "category": "查体",
+      "subcategory": "脉紧",
+      "expressions": [
+        "\"脉紧，如牵绳转索\""
+      ]
+    },
+    "脉形微弱": {
+      "category": "查体",
+      "subcategory": "脉微弱",
+      "expressions": [
+        "\"脉微弱，若有若无\""
+      ]
+    },
+    "脉形洪大": {
+      "category": "查体",
+      "subcategory": "脉洪大",
+      "expressions": [
+        "\"脉洪大，来盛去衰\""
+      ]
+    },
+    "脉率促": {
+      "category": "查体",
+      "subcategory": "脉促",
+      "expressions": [
+        "\"脉促，数而时一止\""
+      ]
+    },
+    "舌质": {
+      "category": "查体",
+      "subcategory": "舌淡红",
+      "expressions": [
+        "\"舌质淡红\"",
+        "\"舌质红\""
+      ]
+    },
+    "舌苔": {
+      "category": "查体",
+      "subcategory": "苔薄白",
+      "expressions": [
+        "\"舌苔薄白\"",
+        "\"舌苔黄\"",
+        "\"舌苔黄燥\"",
+        "\"舌苔白腻\""
+      ]
+    },
+    "舌体": {
+      "category": "查体",
+      "subcategory": "舌体胖大",
+      "expressions": [
+        "\"舌体胖大，边有齿痕\""
+      ]
+    },
+    "一身尽重": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "一身尽重（患者表达待补充）"
+      ]
+    },
+    "上周外感史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "上周外感史（患者表达待补充）"
+      ]
+    },
+    "下后微喘": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "下后微喘（患者表达待补充）"
+      ]
+    },
+    "不吐": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "不吐（患者表达待补充）"
+      ]
+    },
+    "不吐不下": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "不吐不下（患者表达待补充）"
+      ]
+    },
+    "不欲饮水": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "不欲饮水（患者表达待补充）"
+      ]
+    },
+    "低烧不退": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "低烧不退（患者表达待补充）"
+      ]
+    },
+    "体健": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "体健（患者表达待补充）"
+      ]
+    },
+    "便溏": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "便溏（患者表达待补充）"
+      ]
+    },
+    "便溏已止": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "便溏已止（患者表达待补充）"
+      ]
+    },
+    "便秘三日": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "便秘三日（患者表达待补充）"
+      ]
+    },
+    "偶感风寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "偶感风寒（患者表达待补充）"
+      ]
+    },
+    "偶有便秘": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "偶有便秘（患者表达待补充）"
+      ]
+    },
+    "发汗史": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "发汗史（患者表达待补充）"
+      ]
+    },
+    "发汗后复发": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "发汗后复发（患者表达待补充）"
+      ]
+    },
+    "发热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "发热（患者表达待补充）"
+      ]
+    },
+    "受凉": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "受凉（患者表达待补充）"
+      ]
+    },
+    "受寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "受寒（患者表达待补充）"
+      ]
+    },
+    "受热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "受热（患者表达待补充）"
+      ]
+    },
+    "口舌干燥": {
+      "category": "其他",
+      "subcategory": "未分类",
+      "expressions": [
+        "口舌干燥（患者表达待补充）"
+      ]
+    },
+    "口苦": {
+      "category": "其他",
+      "subcategory": "其他",
+      "expressions": [
+        "口苦（患者表达待补充）"
+      ]
+    },
+    "口苦持续": {
+      "category": "其他",
+      "subcategory": "其他",
+      "expressions": [
+        "口苦持续（患者表达待补充）"
+      ]
+    },
+    "吃什么拉什么": {
+      "category": "其他",
+      "subcategory": "其他",
+      "expressions": [
+        "吃什么拉什么（患者表达待补充）"
+      ]
+    },
+    "吸烟史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吸烟史（患者表达待补充）"
+      ]
+    },
+    "咳": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "咳（患者表达待补充）"
+      ]
+    },
+    "咳引胸痛": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "咳引胸痛（患者表达待补充）"
+      ]
+    },
+    "咳痰黄": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "咳痰黄（患者表达待补充）"
+      ]
+    },
+    "喘": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "喘（患者表达待补充）"
+      ]
+    },
+    "喘持续": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "喘持续（患者表达待补充）"
+      ]
+    },
+    "四肢厥逆": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "四肢厥逆（患者表达待补充）"
+      ]
+    },
+    "四肢沉重疼痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "四肢沉重疼痛（患者表达待补充）"
+      ]
+    },
+    "壮热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "壮热（患者表达待补充）"
+      ]
+    },
+    "外感热邪": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "外感热邪（患者表达待补充）"
+      ]
+    },
+    "外感风寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "外感风寒（患者表达待补充）"
+      ]
+    },
+    "夜渴醒": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "夜渴醒（患者表达待补充）"
+      ]
+    },
+    "大汗不止": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "大汗不止（患者表达待补充）"
+      ]
+    },
+    "大汗出后": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "大汗出后（患者表达待补充）"
+      ]
+    },
+    "大渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "大渴（患者表达待补充）"
+      ]
+    },
+    "大渴喜冷饮": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "大渴喜冷饮（患者表达待补充）"
+      ]
+    },
+    "大烦渴不解": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "大烦渴不解（患者表达待补充）"
+      ]
+    },
+    "失眠": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "失眠（患者表达待补充）"
+      ]
+    },
+    "头昏": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "头昏（患者表达待补充）"
+      ]
+    },
+    "头痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "头痛（患者表达待补充）"
+      ]
+    },
+    "头痛发热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "头痛发热（患者表达待补充）"
+      ]
+    },
+    "宿有痰饮": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "宿有痰饮（患者表达待补充）"
+      ]
+    },
+    "宿痰": {
+      "category": "其他",
+      "subcategory": "未分类",
+      "expressions": [
+        "宿痰（患者表达待补充）"
+      ]
+    },
+    "寒战": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "寒战（患者表达待补充）"
+      ]
+    },
+    "小便短赤": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "小便短赤（患者表达待补充）"
+      ]
+    },
+    "小便黄少": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "小便黄少（患者表达待补充）"
+      ]
+    },
+    "尿少不畅": {
+      "category": "二便类",
+      "subcategory": "小便",
+      "expressions": [
+        "尿少不畅（患者表达待补充）"
+      ]
+    },
+    "微喘": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "微喘（患者表达待补充）"
+      ]
+    },
+    "微汗或不汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "微汗或不汗（患者表达待补充）"
+      ]
+    },
+    "微热持续": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "微热持续（患者表达待补充）"
+      ]
+    },
+    "心下有水气": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "心下有水气（患者表达待补充）"
+      ]
+    },
+    "心下有水气-卧甚": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "心下有水气-卧甚（患者表达待补充）"
+      ]
+    },
+    "心烦持续": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心烦持续（患者表达待补充）"
+      ]
+    },
+    "恶心": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "恶心（患者表达待补充）"
+      ]
+    },
+    "恶心想吐": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "恶心想吐（患者表达待补充）"
+      ]
+    },
+    "恶热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "恶热（患者表达待补充）"
+      ]
+    },
+    "情志刺激": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "情志刺激（患者表达待补充）"
+      ]
+    },
+    "情绪压力": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "情绪压力（患者表达待补充）"
+      ]
+    },
+    "慢性支气管炎": {
+      "category": "其他",
+      "subcategory": "未分类",
+      "expressions": [
+        "慢性支气管炎（患者表达待补充）"
+      ]
+    },
+    "或利": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "或利（患者表达待补充）"
+      ]
+    },
+    "或呕": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "或呕（患者表达待补充）"
+      ]
+    },
+    "或咳": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "或咳（患者表达待补充）"
+      ]
+    },
+    "或渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "或渴（患者表达待补充）"
+      ]
+    },
+    "手足汗出随潮热加重": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "手足汗出随潮热加重（患者表达待补充）"
+      ]
+    },
+    "持续发热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "持续发热（患者表达待补充）"
+      ]
+    },
+    "昏昏沉沉，叫不醒": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "昏昏沉沉，叫不醒（患者表达待补充）"
+      ]
+    },
+    "服药汗不出": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "服药汗不出（患者表达待补充）"
+      ]
+    },
+    "气喘": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "气喘（患者表达待补充）"
+      ]
+    },
+    "气粗": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "气粗（患者表达待补充）"
+      ]
+    },
+    "水肿": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "水肿（患者表达待补充）"
+      ]
+    },
+    "汗出热不退": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "汗出热不退（患者表达待补充）"
+      ]
+    },
+    "汗后口渴加重": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "汗后口渴加重（患者表达待补充）"
+      ]
+    },
+    "汗后恶寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "汗后恶寒（患者表达待补充）"
+      ]
+    },
+    "汗后恶风": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "汗后恶风（患者表达待补充）"
+      ]
+    },
+    "汗后畏寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "汗后畏寒（患者表达待补充）"
+      ]
+    },
+    "汗后醒": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "汗后醒（患者表达待补充）"
+      ]
+    },
+    "汗漏": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "汗漏（患者表达待补充）"
+      ]
+    },
+    "汗漏不止": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "汗漏不止（患者表达待补充）"
+      ]
+    },
+    "汗自出": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "汗自出（患者表达待补充）"
+      ]
+    },
+    "淋雨": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "淋雨（患者表达待补充）"
+      ]
+    },
+    "渴喜冷饮": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "渴喜冷饮（患者表达待补充）"
+      ]
+    },
+    "渴饮不解": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "渴饮不解（患者表达待补充）"
+      ]
+    },
+    "潮热持续": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "潮热持续（患者表达待补充）"
+      ]
+    },
+    "烦渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "烦渴（患者表达待补充）"
+      ]
+    },
+    "烦躁不眠": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "烦躁不眠（患者表达待补充）"
+      ]
+    },
+    "烦躁难寐": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "烦躁难寐（患者表达待补充）"
+      ]
+    },
+    "热不退": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "热不退（患者表达待补充）"
+      ]
+    },
+    "热邪伤津": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "热邪伤津（患者表达待补充）"
+      ]
+    },
+    "畏寒肢冷": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "畏寒肢冷（患者表达待补充）"
+      ]
+    },
+    "痰白泡沫": {
+      "category": "其他",
+      "subcategory": "未分类",
+      "expressions": [
+        "痰白泡沫（患者表达待补充）"
+      ]
+    },
+    "盖几床被子还冷": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "盖几床被子还冷（患者表达待补充）"
+      ]
+    },
+    "睡眠欠安": {
+      "category": "睡眠类",
+      "subcategory": "睡眠异常",
+      "expressions": [
+        "睡眠欠安（患者表达待补充）"
+      ]
+    },
+    "矢气臭秽": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "矢气臭秽（患者表达待补充）"
+      ]
+    },
+    "短气": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "短气（患者表达待补充）"
+      ]
+    },
+    "精神萎靡": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "精神萎靡（患者表达待补充）"
+      ]
+    },
+    "胃中不适": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胃中不适（患者表达待补充）"
+      ]
+    },
+    "胸满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸满（患者表达待补充）"
+      ]
+    },
+    "胸满非按痛": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸满非按痛（患者表达待补充）"
+      ]
+    },
+    "胸胁苦满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸胁苦满（患者表达待补充）"
+      ]
+    },
+    "胸胁苦满持续": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸胁苦满持续（患者表达待补充）"
+      ]
+    },
+    "胸闷": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸闷（患者表达待补充）"
+      ]
+    },
+    "腰痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "腰痛（患者表达待补充）"
+      ]
+    },
+    "腹满拒按": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "腹满拒按（患者表达待补充）"
+      ]
+    },
+    "腹满硬": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "腹满硬（患者表达待补充）"
+      ]
+    },
+    "腹痛": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "腹痛（患者表达待补充）"
+      ]
+    },
+    "腹软": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "腹软（患者表达待补充）"
+      ]
+    },
+    "腹软喜按": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "腹软喜按（患者表达待补充）"
+      ]
+    },
+    "自下利": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "自下利（患者表达待补充）"
+      ]
+    },
+    "表不解": {
+      "category": "其他",
+      "subcategory": "其他",
+      "expressions": [
+        "表不解（患者表达待补充）"
+      ]
+    },
+    "表未解": {
+      "category": "其他",
+      "subcategory": "其他",
+      "expressions": [
+        "表未解（患者表达待补充）"
+      ]
+    },
+    "西药史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "西药史（患者表达待补充）"
+      ]
+    },
+    "误下": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "误下（患者表达待补充）"
+      ]
+    },
+    "误下诱因": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "误下诱因（患者表达待补充）"
+      ]
+    },
+    "误治史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "误治史（患者表达待补充）"
+      ]
+    },
+    "起病缓慢": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "起病缓慢（患者表达待补充）"
+      ]
+    },
+    "起病过程": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "起病过程（患者表达待补充）"
+      ]
+    },
+    "越喝越渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "越喝越渴（患者表达待补充）"
+      ]
+    },
+    "身倦乏力": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身倦乏力（患者表达待补充）"
+      ]
+    },
+    "身大热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身大热（患者表达待补充）"
+      ]
+    },
+    "身大热持续": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身大热持续（患者表达待补充）"
+      ]
+    },
+    "身热不恶寒": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身热不恶寒（患者表达待补充）"
+      ]
+    },
+    "身疼": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身疼（患者表达待补充）"
+      ]
+    },
+    "身疼痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身疼痛（患者表达待补充）"
+      ]
+    },
+    "身痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身痛（患者表达待补充）"
+      ]
+    },
+    "身重": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身重（患者表达待补充）"
+      ]
+    },
+    "辛辣饮食": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "辛辣饮食（患者表达待补充）"
+      ]
+    },
+    "里热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "里热（患者表达待补充）"
+      ]
+    },
+    "面赤": {
+      "category": "其他",
+      "subcategory": "未分类",
+      "expressions": [
+        "面赤（患者表达待补充）"
+      ]
+    },
+    "项背强几几": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "项背强几几（患者表达待补充）"
+      ]
+    },
+    "项背强几几详细": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "项背强几几详细（患者表达待补充）"
+      ]
+    },
+    "饮水不止": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "饮水不止（患者表达待补充）"
+      ]
+    },
+    "饮水后加重": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "饮水后加重（患者表达待补充）"
+      ]
+    },
+    "饮食不节": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "饮食不节（患者表达待补充）"
+      ]
+    },
+    "饮食油腻": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "饮食油腻（患者表达待补充）"
+      ]
+    },
+    "骨节疼痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "骨节疼痛（患者表达待补充）"
+      ]
+    },
+    "高烧不退": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "高烧不退（患者表达待补充）"
+      ]
+    },
+    "默默不欲饮食": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "默默不欲饮食（患者表达待补充）"
+      ]
+    },
+    "鼻鸣": {
+      "category": "其他",
+      "subcategory": "其他",
+      "expressions": [
+        "鼻鸣（患者表达待补充）"
+      ]
+    },
+    "鼻鸣持续": {
+      "category": "其他",
+      "subcategory": "其他",
+      "expressions": [
+        "鼻鸣持续（患者表达待补充）"
+      ]
+    },
+    "郁郁微烦": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里闷闷的，烦，想发火又发不出来"
+      ]
+    },
+    "胸胁满而呕": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸胁胀满，呕吐"
+      ]
+    },
+    "日晡潮热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "每天下午三四点开始发热，像定好了一样"
+      ]
+    },
+    "心中懊憹": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里像有一团火在烧，烦得想捶胸口"
+      ]
+    },
+    "胸中窒": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸口堵得慌，像有什么东西塞住"
+      ]
+    },
+    "按之心下濡": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "按胃这里是软的，不硬，但堵得慌"
+      ]
+    },
+    "少气": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "说话没力气，气接不上"
+      ]
+    },
+    "胃脘不和": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "胃不舒服，说不上来哪里不对"
+      ]
+    },
+    "身热不去": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身上还是热，烧不退"
+      ]
+    },
+    "余热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "感觉还有热没退干净"
+      ]
+    },
+    "下后加重": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吃了泻药之后反而更重了"
+      ]
+    },
+    "丸药下后": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吃了泻药丸之后"
+      ]
+    },
+    "乏力": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "没力气，浑身软"
+      ]
+    },
+    "口干": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "嘴巴干，想喝水"
+      ]
+    },
+    "定时发热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "每天到点就发热"
+      ]
+    },
+    "定时寒热": {
+      "category": "寒热类",
+      "subcategory": "寒热往来",
+      "expressions": [
+        "寒热像定好时间一样准时"
+      ]
+    },
+    "惊悸": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里乱跳，一惊一惊的"
+      ]
+    },
+    "无大汗": {
+      "category": "汗出类",
+      "subcategory": "无汗",
+      "expressions": [
+        "没有大汗淋漓"
+      ]
+    },
+    "无恶寒": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "不怕冷"
+      ]
+    },
+    "无汗热不退": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "不出汗，烧也不退"
+      ]
+    },
+    "无腹满硬痛": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "肚子不胀，按上去也不硬不痛"
+      ]
+    },
+    "无谵语": {
+      "category": "精神状态类",
+      "subcategory": "精神异常",
+      "expressions": [
+        "没有说胡话，神志清楚"
+      ]
+    },
+    "无身痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身上不痛"
+      ]
+    },
+    "汗后虚": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "出完汗觉得更虚了"
+      ]
+    },
+    "汗少": {
+      "category": "汗出类",
+      "subcategory": "无汗",
+      "expressions": [
+        "汗不多，只有一点点"
+      ]
+    },
+    "渴不欲饮": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "渴但不想喝水"
+      ]
+    },
+    "胸胁满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "胸胁这里胀满"
+      ]
+    },
+    "脾胃虚寒": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "平时胃就寒，吃凉的就不舒服"
+      ]
+    },
+    "自我处理无效": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "自己吃了药不管用"
+      ]
+    },
+    "自我用药": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "自己买了药吃"
+      ]
+    },
+    "自行处理无效": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "自己处理过，没用"
+      ]
+    },
+    "自行服药无效": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "自己吃了药，不管用"
+      ]
+    },
+    "自行用药无效": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "自己用药，没效果"
+      ]
+    },
+    "营卫不和既往史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "以前就容易出汗感冒，医生说营卫不和"
+      ]
+    },
+    "西药无效": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "吃了西药不管用"
+      ]
+    },
+    "身热不甚": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身上有点热，但不是高烧"
+      ]
+    },
+    "身重持续": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身上一直沉，没力气"
+      ]
+    },
+    "颈椎既往史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "以前就有颈椎病"
+      ]
+    },
+    "首次发作": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "以前没这样过，这是第一次"
+      ]
+    },
+    "不呕": {
+      "category": "饮食类",
+      "subcategory": "胃口",
+      "expressions": [
+        "不呕（患者表达待补充）"
+      ]
+    },
+    "便秘": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "便秘（患者表达待补充）"
+      ]
+    },
+    "便秘既往史": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "便秘既往史（患者表达待补充）"
+      ]
+    },
+    "其人发狂": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "其人发狂（患者表达待补充）"
+      ]
+    },
+    "发汗或下后": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "发汗或下后（患者表达待补充）"
+      ]
+    },
+    "发病后无汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "发病后无汗（患者表达待补充）"
+      ]
+    },
+    "四肢厥冷": {
+      "category": "寒热类",
+      "subcategory": "怕冷/恶风",
+      "expressions": [
+        "四肢厥冷（患者表达待补充）"
+      ]
+    },
+    "壮实既往史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "壮实既往史（患者表达待补充）"
+      ]
+    },
+    "复发汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "复发汗（患者表达待补充）"
+      ]
+    },
+    "夜谵语": {
+      "category": "其他",
+      "subcategory": "未分类",
+      "expressions": [
+        "夜谵语（患者表达待补充）"
+      ]
+    },
+    "大便不调": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便不调（患者表达待补充）"
+      ]
+    },
+    "大便不通": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便不通（患者表达待补充）"
+      ]
+    },
+    "大便色黑易解": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便色黑易解（患者表达待补充）"
+      ]
+    },
+    "太阳病不解": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "太阳病不解（患者表达待补充）"
+      ]
+    },
+    "寒热往来": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "寒热往来（患者表达待补充）"
+      ]
+    },
+    "少腹拒按": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "少腹拒按（患者表达待补充）"
+      ]
+    },
+    "平素汗出正常，今无汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "平素汗出正常，今无汗（患者表达待补充）"
+      ]
+    },
+    "心悸": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心悸（患者表达待补充）"
+      ]
+    },
+    "情志不畅既往史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "情志不畅既往史（患者表达待补充）"
+      ]
+    },
+    "惊汗": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "惊汗（患者表达待补充）"
+      ]
+    },
+    "无喘既往史": {
+      "category": "胸腹类",
+      "subcategory": "呼吸",
+      "expressions": [
+        "无喘既往史（患者表达待补充）"
+      ]
+    },
+    "无表证": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "无表证（患者表达待补充）"
+      ]
+    },
+    "既往感冒无蓄水": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "既往感冒无蓄水（患者表达待补充）"
+      ]
+    },
+    "既往感冒汗出而解": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "既往感冒汗出而解（患者表达待补充）"
+      ]
+    },
+    "病仍不解": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "病仍不解（患者表达待补充）"
+      ]
+    },
+    "经血紫黑": {
+      "category": "其他",
+      "subcategory": "未分类",
+      "expressions": [
+        "经血紫黑（患者表达待补充）"
+      ]
+    },
+    "表证仍在": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "表证仍在（患者表达待补充）"
+      ]
+    },
+    "身无大热": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "身无大热（患者表达待补充）"
+      ]
+    },
+    "身黄": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身黄（患者表达待补充）"
+      ]
+    },
+    "身痒": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "身上痒，想挠"
+      ]
+    },
+    "无汗或少汗": {
+      "category": "汗出类",
+      "subcategory": "无汗",
+      "expressions": [
+        "汗不多，皮肤有点干"
+      ]
+    },
+    "面色有热色": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "脸有点红，像发烧"
+      ]
+    },
+    "无阳": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "身体很虚，没力气"
+      ]
+    },
+    "合病": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "又有感冒症状，又有点肠胃不舒服"
+      ]
+    },
+    "不下利": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便正常，没有拉肚子"
+      ]
+    },
+    "下后利遂不止": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "吃了泻药后，拉肚子止不住"
+      ]
+    },
+    "肛门灼热": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "拉的时候肛门热辣辣的"
+      ]
+    },
+    "项背强痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "脖子后背僵硬疼痛"
+      ]
+    },
+    "少汗": {
+      "category": "汗出类",
+      "subcategory": "无汗",
+      "expressions": [
+        "汗不多，只有一点点"
+      ]
+    },
+    "肠鸣": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "肠鸣（患者表达待补充）"
+      ]
+    },
+    "发热恶寒": {
+      "category": "寒热类",
+      "subcategory": "发热",
+      "expressions": [
+        "发热恶寒（患者表达待补充）"
+      ]
+    },
+    "皮肤干": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "皮肤干（患者表达待补充）"
+      ]
+    },
+    "呕而醒": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "呕而醒（患者表达待补充）"
+      ]
+    },
+    "大便成形": {
+      "category": "二便类",
+      "subcategory": "大便",
+      "expressions": [
+        "大便成形（患者表达待补充）"
+      ]
+    },
+    "既往感冒史": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "既往感冒史（患者表达待补充）"
+      ]
+    },
+    "渴欲饮水": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "渴欲饮水（患者表达待补充）"
+      ]
+    },
+    "喘而汗出": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "喘而汗出（患者表达待补充）"
+      ]
+    },
+    "头昏沉": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "头昏沉（患者表达待补充）"
+      ]
+    },
+    "无胸胁苦满": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "无胸胁苦满（患者表达待补充）"
+      ]
+    },
+    "皮肤干燥": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "皮肤干燥（患者表达待补充）"
+      ]
+    },
+    "痒醒": {
+      "category": "饮食类",
+      "subcategory": "呕吐/恶心",
+      "expressions": [
+        "痒醒（患者表达待补充）"
+      ]
+    },
+    "微渴": {
+      "category": "饮食类",
+      "subcategory": "口渴/饮水",
+      "expressions": [
+        "微渴（患者表达待补充）"
+      ]
+    },
+    "发汗后漏汗不止": {
+      "category": "汗出类",
+      "subcategory": "有汗",
+      "expressions": [
+        "吃了发汗药后，汗就止不住了，一直流"
+      ]
+    },
+    "四肢微急": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "手脚有点抽筋，伸不直"
+      ]
+    },
+    "难以屈伸": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "关节弯不了，伸不直"
+      ]
+    },
+    "阳虚": {
+      "category": "旧病/诱因类",
+      "subcategory": "既往/诱因表达",
+      "expressions": [
+        "身体阳虚，怕冷"
+      ]
+    },
+    "烦": {
+      "category": "胸腹类",
+      "subcategory": "心悸/心烦",
+      "expressions": [
+        "心里烦，静不下来"
+      ]
+    },
+    "面色萎黄": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "脸色黄黄的，没血色"
+      ]
+    },
+    "四肢酸痛": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "手脚酸痛，没力气"
+      ]
+    },
+    "手足烦热": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "手心脚心发热，晚上更厉害"
+      ]
+    },
+    "咽干目眩": {
+      "category": "耳目类",
+      "subcategory": "耳/目",
+      "expressions": [
+        "嗓子干，眼睛发花"
+      ]
+    },
+    "脐下悸": {
+      "category": "胸腹类",
+      "subcategory": "腹胀/腹痛",
+      "expressions": [
+        "肚脐下面一跳一跳的"
+      ]
+    },
+    "头眩": {
+      "category": "头身类",
+      "subcategory": "头身",
+      "expressions": [
+        "头晕，觉得房子在转"
+      ]
+    }
+  }
+}

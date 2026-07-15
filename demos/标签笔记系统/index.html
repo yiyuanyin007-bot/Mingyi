@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEMO — 标签+笔记系统</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Microsoft YaHei', 'PingFang SC', sans-serif; background: #f5f0eb; color: #2c2416; display: flex; justify-content: center; padding: 24px; min-height: 100vh; }
+  .container { max-width: 860px; width: 100%; }
+  .demo-header { margin-bottom: 24px; }
+  .demo-header h1 { font-size: 20px; color: #5c3e2a; }
+  .demo-header p { font-size: 13px; color: #8b7355; margin-top: 4px; }
+  .search-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+  .search-bar input { flex: 1; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; background: #fff; }
+  .search-bar input:focus { border-color: #c17f59; }
+  .split { display: flex; gap: 20px; align-items: flex-start; }
+  .side-left { flex: 1; min-width: 0; }
+  .side-right { width: 380px; flex-shrink: 0; }
+  .note-list { display: flex; flex-direction: column; gap: 10px; }
+  .note-card { background: #fff; border-radius: 10px; padding: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.06); cursor: pointer; transition: box-shadow 0.15s; overflow: hidden; }
+  .note-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .note-card.active { border-left: 3px solid #c17f59; }
+  .note-card-header { padding: 14px 16px 8px; }
+  .note-card-title { font-size: 14px; font-weight: 600; color: #5c3e2a; line-height: 1.4; }
+  .note-card-preview { font-size: 12px; color: #888; margin-top: 4px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .note-card-tags { padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .note-card-meta { padding: 8px 16px; background: #fafaf8; font-size: 11px; color: #aaa; }
+  .tag-chip { display: inline-block; background: #ede8e0; color: #7a5f44; font-size: 11px; padding: 2px 8px; border-radius: 4px; }
+  .tag-chip.active { background: #c17f59; color: #fff; }
+  .empty-notes { text-align: center; color: #ccc; padding: 40px 0; font-size: 14px; }
+  .note-detail { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
+  .note-detail-empty { padding: 40px 20px; text-align: center; color: #ccc; font-size: 14px; }
+  .detail-header { padding: 16px 16px 0; }
+  .detail-title-input { width: 100%; font-size: 16px; font-weight: 600; color: #5c3e2a; border: none; outline: none; padding: 4px 0; background: transparent; border-bottom: 1px solid transparent; }
+  .detail-title-input:focus { border-bottom-color: #c17f59; }
+  .tag-editor { padding: 12px 16px; }
+  .tag-editor-label { font-size: 11px; color: #8b7355; margin-bottom: 6px; }
+  .tag-editor-input-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .tag-editor-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag-editor-input { flex: 1; min-width: 80px; padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px; outline: none; }
+  .tag-editor-input:focus { border-color: #c17f59; }
+  .tag-remove { cursor: pointer; margin-left: 2px; opacity: 0.5; font-size: 12px; }
+  .tag-remove:hover { opacity: 1; }
+  .tag-hint { font-size: 11px; color: #bbb; margin-top: 4px; }
+  .detail-body { padding: 0 16px 16px; }
+  .detail-textarea { width: 100%; min-height: 160px; padding: 10px; border: 1px solid #e8e4de; border-radius: 6px; font-size: 13px; line-height: 1.7; font-family: inherit; outline: none; resize: vertical; background: #fcfcfa; }
+  .detail-textarea:focus { border-color: #c17f59; background: #fff; }
+  .detail-textarea-hint { font-size: 11px; color: #bbb; margin-top: 4px; }
+  .detail-preview { padding: 16px; border-top: 1px solid #f0ece6; }
+  .detail-preview-title { font-size: 11px; color: #8b7355; margin-bottom: 8px; }
+  .detail-preview-content { font-size: 13px; line-height: 1.8; color: #2c2416; word-break: break-word; }
+  .detail-preview-content strong { font-weight: 600; color: #5c3e2a; }
+  .detail-preview-content em { font-style: italic; }
+  .detail-preview-content code { background: #f0ece6; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  .detail-preview-content pre { background: #f5f0eb; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: 12px; line-height: 1.5; margin: 8px 0; }
+  .detail-preview-content pre code { background: transparent; padding: 0; }
+  .detail-preview-content blockquote { border-left: 3px solid #c17f59; padding: 4px 12px; margin: 8px 0; color: #666; background: #fafaf8; }
+  .detail-preview-content blockquote p { margin: 0; }
+  .detail-preview-content ul, .detail-preview-content ol { padding-left: 20px; margin: 6px 0; }
+  .detail-preview-content li { margin: 2px 0; }
+  .collapsible { position: relative; }
+  .collapsible-content { max-height: 120px; overflow: hidden; transition: max-height 0.3s ease; }
+  .collapsible-content.expanded { max-height: 2000px; }
+  .collapsible-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(transparent, #fff); pointer-events: none; }
+  .collapsible-fade.hidden { opacity: 0; }
+  .collapsible-toggle { display: block; width: 100%; padding: 6px; text-align: center; font-size: 12px; color: #c17f59; background: none; border: none; cursor: pointer; }
+  .collapsible-toggle:hover { background: #fafaf8; }
+  .btn { padding: 7px 16px; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; }
+  .btn-primary { background: #c17f59; color: #fff; }
+  .btn-primary:hover { background: #b06f4a; }
+  .btn-secondary { background: #ede8e0; color: #5c3e2a; }
+  .btn-secondary:hover { background: #e0d9ce; }
+  .detail-actions { padding: 12px 16px; display: flex; gap: 8px; border-top: 1px solid #f0ece6; }
+  .batch-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .batch-modal { background: #fff; border-radius: 12px; padding: 24px; width: 420px; max-width: 90%; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .batch-modal h3 { font-size: 15px; color: #5c3e2a; margin-bottom: 8px; }
+  .batch-modal p { font-size: 12px; color: #8b7355; margin-bottom: 12px; }
+  .batch-modal textarea { width: 100%; height: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; outline: none; resize: vertical; font-family: inherit; }
+  .batch-modal .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2c2416; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 13px; z-index: 200; animation: toastIn 0.25s ease; }
+  @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  @media (max-width: 700px) { .split { flex-direction: column-reverse; } .side-right { width: 100%; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="demo-header">
+    <h1>🏷️ 标签 + 笔记系统</h1>
+    <p>DEMO 交互验证 · 设计对齐版 — 点击左侧笔记可编辑 · 回车添加标签 · 输入框可检索标签/内容</p>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="搜索笔记标题、内容或标签… 如「太阳病」「桂枝」「小柴胡」" autocomplete="off">
+  </div>
+
+  <div class="split">
+    <div class="side-left">
+      <div style="font-size:12px;color:#8b7355;margin-bottom:8px;">📄 笔记列表 (<span id="noteCount">0</span>)</div>
+      <div class="note-list" id="noteList"></div>
+    </div>
+    <div class="side-right">
+      <div id="noteDetail">
+        <div class="note-detail note-detail-empty">← 从左侧选择一篇笔记，或点击「新增」</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════  Mock Data  ══════════════════════════
+let notes = [
+  { id:'n1', cardId:'gui-zhi-tang', title:'桂枝汤 — 太阳中风证',
+    content:'**辨证要点**：发热、汗出、恶风、脉浮缓。\n\n核心病机：**营卫不和**，卫强营弱。\n\n### 鉴别\n- **桂枝汤**：有汗、脉浮缓 → 表虚证\n- **麻黄汤**：无汗、脉浮紧 → 表实证\n\n> 太阳病，发热，汗出，恶风，脉缓者，名为中风。',
+    tags:['太阳病','桂枝汤','表虚证','中风'], updatedAt:'2026-07-14T10:30:00' },
+  { id:'n2', cardId:'ma-huang-tang', title:'麻黄汤 — 太阳伤寒证',
+    content:'**辨证要点**：恶寒发热、无汗、身痛、脉浮紧。\n\n核心病机：**寒邪束表**，卫阳被遏。\n\n### 鉴别\n| | 麻黄汤 | 桂枝汤 |\n|--|--------|--------|\n| 汗 | 无汗 | 有汗 |\n| 脉 | 浮紧 | 浮缓 |\n\n注意：麻黄汤证不可用桂枝汤，反之亦然。',
+    tags:['太阳病','麻黄汤','表实证','伤寒'], updatedAt:'2026-07-14T11:00:00' },
+  { id:'n3', cardId:'xiao-chai-hu-tang', title:'小柴胡汤 — 少阳病证',
+    content:'**辨证要点**：寒热往来、胸胁苦满、嘿嘿不欲饮食、心烦喜呕。\n\n核心病机：**邪入少阳**，枢机不利。\n\n### 七大或然证\n1. 胸中烦而不呕\n2. 渴\n3. 腹中痛\n4. 胁下痞硬\n5. 心下悸、小便不利\n6. 不渴、身有微热\n7. 咳\n\n### 抓主症\n口苦、咽干、目眩 + 寒热往来 = 小柴胡汤证',
+    tags:['少阳病','小柴胡汤','柴胡剂','寒热往来'], updatedAt:'2026-07-14T12:00:00' },
+  { id:'n4', cardId:'gui-zhi-tang', title:'桂枝汤加减法 — 临床变通',
+    content:'## 桂枝汤变方\n\n### 1. 桂枝加葛根汤\n桂枝汤 + 葛根 → 治太阳病，项背强几几\n\n### 2. 桂枝加厚朴杏子汤\n桂枝汤 + 厚朴、杏仁 → 治太阳病下之微喘\n\n### 3. 桂枝加附子汤\n桂枝汤 + 附子 → 治太阳病发汗太过，遂漏不止\n\n### 4. 桂枝去芍药汤\n桂枝汤 - 芍药 → 治太阳病下之后，脉促胸满\n\n---\n\n**临床经验**：抓住"营卫不和"这个核心。',
+    tags:['桂枝汤','类方','加减法','临床经验'], updatedAt:'2026-07-14T13:00:00' }
+];
+
+// ══════════════════════════  Helpers  ══════════════════════════
+function renderMarkdown(text) {
+  if (!text) return '';
+  let html = text;
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+  html = html.replace(/^> (.+)$/gm, '<blockquote><p>$1</p></blockquote>');
+  html = html.replace(/^### (.+)$/gm, '<h6 style="font-size:13px;color:#7a5f44;margin:8px 0 4px;">$1</h6>');
+  html = html.replace(/^## (.+)$/gm, '<h5 style="font-size:14px;color:#5c3e2a;margin:10px 0 4px;">$1</h5>');
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, function(m) { return m.includes('<ul>') ? m : '<ul>'+m+'</ul>'; });
+  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, function(m) { return m.includes('<ul>')||m.includes('<ol>') ? m : '<ol>'+m+'</ol>'; });
+  // 表格极简
+  html = html.replace(/^(\|.+)$/gm, function(m) {
+    if (m.includes('---')) return '';
+    const cells = m.split('|').filter(c=>c.trim()).map(c=>'<td>'+c.trim()+'</td>').join('');
+    return '<tr>'+cells+'</tr>';
+  });
+  html = html.replace(/(<tr>.*<\/tr>\n?)+/g, '<table style="border-collapse:collapse;margin:8px 0;font-size:12px;">$&</table>');
+  html = html.replace(/<table>/g, '<table style="border-collapse:collapse;margin:8px 0;font-size:12px;">');
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = html.replace(/\n/g, '<br>');
+  return '<p>' + html + '</p>';
+}
+
+function stripMd(text) {
+  return text.replace(/\*\*/g,'').replace(/`/g,'').replace(/#/g,'').replace(/>/g,'').trim();
+}
+
+function parseTags(input) {
+  return [...new Set(input.split(/[,，、\s\n]+/).map(s=>s.trim()).filter(Boolean))];
+}
+
+function nowISO() { return new Date().toISOString(); }
+
+function showToast(msg) {
+  const old = document.querySelector('.toast');
+  if (old) old.remove();
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// ══════════════════════════  State & Render  ══════════════════════════
+let activeNoteId = null, searchQuery = '';
+
+function getFilteredNotes() {
+  if (!searchQuery.trim()) return notes;
+  const q = searchQuery.trim().toLowerCase();
+  return notes.filter(n =>
+    n.title.toLowerCase().includes(q) ||
+    n.content.toLowerCase().includes(q) ||
+    n.tags.some(t => t.toLowerCase().includes(q))
+  );
+}
+
+function renderNoteList() {
+  const list = document.getElementById('noteList');
+  const filtered = getFilteredNotes();
+  document.getElementById('noteCount').textContent = filtered.length;
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty-notes">没有匹配的笔记</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(n => {
+    const preview = stripMd(n.content).substring(0, 80);
+    return `<div class="note-card ${n.id===activeNoteId?'active':''}" data-id="${n.id}">
+      <div class="note-card-header">
+        <div class="note-card-title">${n.title}</div>
+        <div class="note-card-preview">${preview}${n.content.length>80?'…':''}</div>
+      </div>
+      <div class="note-card-tags">${n.tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}</div>
+      <div class="note-card-meta">${n.updatedAt.slice(0,10)} · ${n.content.length} 字</div>
+    </div>`;
+  }).join('');
+  list.querySelectorAll('.note-card').forEach(el => {
+    el.addEventListener('click', () => {
+      const note = notes.find(n=>n.id===el.dataset.id);
+      if (note) setActiveNote(note);
+    });
+  });
+}
+
+function setActiveNote(note) {
+  activeNoteId = note.id;
+  renderNoteList();
+  renderNoteDetail(note);
+}
+
+function renderNoteDetail(note) {
+  const container = document.getElementById('noteDetail');
+  const needsCollapse = note.content.length > 200;
+
+  container.innerHTML = `
+    <div class="note-detail">
+      <div class="detail-header">
+        <input class="detail-title-input" id="detailTitle" value="${note.title.replace(/"/g,'&quot;')}" placeholder="笔记标题">
+      </div>
+      <div class="tag-editor">
+        <div class="tag-editor-label">🏷️ 标签</div>
+        <div class="tag-editor-input-row">
+          <div class="tag-editor-tags" id="editorTags">
+            ${note.tags.map(t=>`<span class="tag-chip">${t}<span class="tag-remove" data-tag="${t.replace(/"/g,'&quot;')}">✕</span></span>`).join('')}
+          </div>
+          <input class="tag-editor-input" id="tagInput" placeholder="输入标签，回车添加" autocomplete="off">
+        </div>
+        <div class="tag-hint">支持批量粘贴：用逗号、空格或换行分隔 · <a href="#" id="batchTagBtn">批量粘贴</a></div>
+      </div>
+      <div class="detail-body">
+        <div class="collapsible" id="noteCollapsible">
+          <div class="collapsible-content ${needsCollapse?'':'expanded'}" id="collapsibleContent">
+            <textarea class="detail-textarea" id="detailContent" placeholder="支持 Markdown 语法（**粗体**、\`代码\`、列表等）">${note.content}</textarea>
+          </div>
+          ${needsCollapse?'<div class="collapsible-fade" id="collapseFade"></div>':''}
+          ${needsCollapse?'<button class="collapsible-toggle" id="collapseToggle">▼ 展开全文</button>':''}
+        </div>
+        <div class="detail-textarea-hint">编辑后点击「保存」或 Ctrl+Enter</div>
+      </div>
+      <div class="detail-preview">
+        <div class="detail-preview-title">👁 预览</div>
+        <div class="detail-preview-content" id="previewContent">${renderMarkdown(note.content)}</div>
+      </div>
+      <div class="detail-actions">
+        <button class="btn btn-primary" id="saveBtn">💾 保存</button>
+        <button class="btn btn-secondary" id="newNoteBtn">＋ 新增笔记</button>
+      </div>
+    </div>
+  `;
+
+  // 标签回车
+  document.getElementById('tagInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); addTagFromInput(); }
+  });
+  document.getElementById('batchTagBtn').addEventListener('click', e => { e.preventDefault(); showBatchModal(); });
+  document.querySelectorAll('.tag-remove').forEach(el => {
+    el.addEventListener('click', e => { e.stopPropagation(); removeTag(el.dataset.tag); });
+  });
+  // 实时预览
+  document.getElementById('detailContent').addEventListener('input', () => {
+    document.getElementById('previewContent').innerHTML = renderMarkdown(document.getElementById('detailContent').value);
+  });
+  // 折叠
+  const toggleBtn = document.getElementById('collapseToggle');
+  if (toggleBtn) toggleBtn.addEventListener('click', () => {
+    const c = document.getElementById('collapsibleContent');
+    const f = document.getElementById('collapseFade');
+    const exp = c.classList.toggle('expanded');
+    toggleBtn.textContent = exp ? '▲ 收起' : '▼ 展开全文';
+    if (f) f.classList.toggle('hidden', exp);
+  });
+  // 保存
+  document.getElementById('saveBtn').addEventListener('click', saveCurrentNote);
+  document.getElementById('detailContent').addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); saveCurrentNote(); }
+  });
+  document.getElementById('newNoteBtn').addEventListener('click', createNewNote);
+}
+
+// ══════════════════════════  Tag Ops  ══════════════════════════
+function addTagFromInput() {
+  const input = document.getElementById('tagInput');
+  const raw = input.value.trim();
+  if (!raw) return;
+  const note = notes.find(n=>n.id===activeNoteId);
+  if (!note) return;
+  const tags = parseTags(raw);
+  let added = 0;
+  tags.forEach(t => { if (!note.tags.includes(t)) { note.tags.push(t); added++; } });
+  input.value = '';
+  renderNoteDetail(note);
+  if (added > 0) showToast('已添加 '+added+' 个标签');
+}
+
+function removeTag(tag) {
+  const note = notes.find(n=>n.id===activeNoteId);
+  if (!note) return;
+  note.tags = note.tags.filter(t=>t!==tag);
+  renderNoteDetail(note);
+  renderNoteList();
+}
+
+function showBatchModal() {
+  const overlay = document.createElement('div');
+  overlay.className = 'batch-overlay';
+  overlay.innerHTML = `<div class="batch-modal">
+    <h3>批量粘贴标签</h3>
+    <p>输入多个标签，用逗号、空格或换行分隔</p>
+    <textarea id="batchTextarea" placeholder="示例：太阳病, 桂枝汤, 表虚证, 自己心得"></textarea>
+    <div class="actions">
+      <button class="btn btn-secondary" id="batchCancel">取消</button>
+      <button class="btn btn-primary" id="batchConfirm">确认添加</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  const ta = overlay.querySelector('#batchTextarea');
+  setTimeout(()=>ta.focus(), 100);
+  overlay.querySelector('#batchCancel').addEventListener('click', ()=>overlay.remove());
+  overlay.querySelector('#batchConfirm').addEventListener('click', ()=>{
+    const raw = ta.value.trim();
+    if (!raw) { overlay.remove(); return; }
+    const note = notes.find(n=>n.id===activeNoteId);
+    if (!note) { overlay.remove(); return; }
+    const tags = parseTags(raw);
+    let added = 0;
+    tags.forEach(t=>{ if (!note.tags.includes(t)) { note.tags.push(t); added++; } });
+    renderNoteDetail(note); renderNoteList(); overlay.remove();
+    showToast('已添加 '+added+' 个标签（'+tags.length+' 个识别）');
+  });
+  overlay.addEventListener('click', e=>{ if (e.target===overlay) overlay.remove(); });
+}
+
+// ══════════════════════════  Note Ops  ══════════════════════════
+function saveCurrentNote() {
+  const note = notes.find(n=>n.id===activeNoteId);
+  if (!note) return;
+  const title = document.getElementById('detailTitle').value.trim();
+  const content = document.getElementById('detailContent').value.trim();
+  if (!title) { showToast('请输入标题'); return; }
+  note.title = title;
+  note.content = content || '';
+  note.updatedAt = nowISO();
+  renderNoteList();
+  showToast('✅ 笔记已保存');
+}
+
+function createNewNote() {
+  const newNote = { id:'n'+Date.now(), cardId:'', title:'新笔记', content:'', tags:[], updatedAt:nowISO() };
+  notes.unshift(newNote);
+  setActiveNote(newNote);
+  showToast('已创建新笔记');
+}
+
+// ══════════════════════════  Search  ══════════════════════════
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  if (activeNoteId && !getFilteredNotes().find(n=>n.id===activeNoteId)) {
+    activeNoteId = null;
+    document.getElementById('noteDetail').innerHTML = '<div class="note-detail note-detail-empty">← 从左侧选择一篇笔记</div>';
+  }
+  renderNoteList();
+});
+
+// ══════════════════════════  Init  ══════════════════════════
+renderNoteList();
+</script>
+</body>
+</html>

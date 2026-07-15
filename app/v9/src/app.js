@@ -176,11 +176,11 @@ async function init() {
       }
     });
 
-    // 6. 渲染仪表盘
-    renderDashboard();
+    // 6. 键盘快捷键（提前绑定 capture 阶段，确保不被任何元素拦截）
+    window.addEventListener('keydown', handleKeydown, true);
 
-    // 7. 键盘快捷键
-    document.addEventListener('keydown', handleKeydown);
+    // 7. 渲染仪表盘
+    renderDashboard();
 
     // 9. 暴露测试接口（供E2E测试直接导航）
     window.__APP_TEST__ = {
@@ -374,10 +374,8 @@ function handleSelectOption(idx) {
   const state = getState();
   console.log('[handleSelectOption] idx:', idx, 'mode:', state.exam.mode, 'current:', state.exam.current, 'finished:', state.exam.finished, 'submitted:', state.exam.submitted, 'questions.length:', state.exam.questions.length);
   const isExam = state.exam.mode === 'exam';
-  if (state.exam.finished && !isExam) {
-    console.log('[handleSelectOption] 被拦截: finished=true && !isExam');
-    return;
-  }
+  // 练习模式允许换选（覆盖之前的答案），所以不拦截
+  // 考试模式已提交后不能选
   if (isExam && state.exam.submitted) {
     console.log('[handleSelectOption] 被拦截: isExam && submitted');
     return;
@@ -986,6 +984,7 @@ function startClusterExam(cards, clusterName, mode) {
   alert(`${clusterName}复习：共 ${questions.length} 题，来自 ${cards.length} 张卡片`);
 }
 function handleKeydown(e) {
+  console.log('[KD] RAW keydown:', e.key, 'code:', e.code, 'target:', e.target?.tagName, 'active:', document.activeElement?.tagName, 'activeId:', document.activeElement?.id);
   const state = getState();
   console.log('[handleKeydown] e.key:', e.key, 'e.code:', e.code, 'page:', state.page, 'mode:', state.exam?.mode, 'current:', state.exam?.current, 'questions.length:', state.exam?.questions?.length, 'submitted:', state.exam?.submitted, 'finished:', state.exam?.finished);
 
@@ -1028,10 +1027,8 @@ function handleKeydown(e) {
   if (idx >= 0) {
     console.log('[handleKeydown] 数字键 idx:', idx, 'isExam:', isExam, 'hasAnswered:', hasAnswered, 'submitted:', state.exam.submitted);
     e.preventDefault();
-    if (!isExam && hasAnswered) {
-      console.log('[handleKeydown] 数字键被拦截: 练习模式已答过');
-      return; // 练习模式已答过不能重选
-    }
+    // 练习模式：允许多次按数字键换选（覆盖之前的答案）
+    // 考试模式已提交后不能选
     if (isExam && state.exam.submitted) {
       console.log('[handleKeydown] 数字键被拦截: 考试已提交');
       return; // 考试已提交不能选
