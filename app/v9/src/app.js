@@ -22,11 +22,17 @@ import { generateRetrievalRound, generateWrongProfile } from '@services/Retrieva
 import { getVectorLabel } from '@utils/formatters.js';
 import { getMasteryOverview } from '@services/MasteryService.js';
 import { searchCards, saveSearchHistory } from '@utils/search.js';
+import { renderClinicalView } from '@components/ClinicalView.js';
+import { renderSPView } from '@components/SPView.js';
+
+import { isLoggedIn, getUser, login, register, logout as authLogout } from './auth.js';
+import { loadMasteryState, updateMasteryVector, recordAnswer as recordAnswerApi } from './api.js';
 
 /** 全局数据引用（过渡方案） */
 let CARDS = [];
 let EXPERIENCES = [];
 let SOURCES = [];
+let SP_CASES = [];
 
 /** 搜索状态 */
 let searchState = {
@@ -42,19 +48,59 @@ let searchState = {
 async function init() {
   const app = document.getElementById('app');
 
+  // ── 检查登录状态 ──
+  if (!isLoggedIn()) {
+    renderLoginForm(app);
+    return;
+  }
+
+  // ── 已登录，加载正式应用 ──
   try {
-    // 1. 加载用户进度
+    // 1. 同步云端掌握度到本地（若首次登录，云端为空则用本地）
+    let cloudMastery = {};
+    try {
+      const items = await loadMasteryState();
+      // items: [{card_id, vector, level, status, ...}]
+      items.forEach(item => {
+        if (!cloudMastery[item.card_id]) cloudMastery[item.card_id] = {};
+        cloudMastery[item.card_id][item.vector] = {
+          level: item.level || 0,
+          status: item.status || '未知',
+          streak_right: item.streak_right || 0,
+          streak_wrong: item.streak_wrong || 0,
+          total_rights: item.total_rights || 0,
+          total_wrongs: item.total_wrongs || 0,
+          last_result: item.last_result || null,
+          last_review: item.last_review || null,
+          next_review: item.next_review || 0
+        };
+      });
+      console.log('[App] 从云端加载掌握度：', items.length, '条记录');
+    } catch (e) {
+      console.warn('[App] 加载云端掌握度失败，使用本地数据:', e.message);
+    }
+
+    // 2. 加载本地状态（作为云端兜底/本地缓存）
     const userState = loadState();
+    // 如果云端有数据，覆盖本地；否则用本地
+    if (Object.keys(cloudMastery).length > 0) {
+      userState.mastery = cloudMastery;
+    }
     console.log('[App] 用户状态加载完成', userState);
 
-    // 2. 加载卡片数据
+    // 3. 加载卡片数据
     const data = await preloadAll();
     CARDS = data.cards;
     EXPERIENCES = data.experiences;
     SOURCES = data.sources;
-    console.log('[App] 数据加载完成', { cards: CARDS.length, experiences: EXPERIENCES.length, sources: SOURCES.length });
+    SP_CASES = data.sp || [];
 
-    // 3. 将掌握度数据合并到卡片（旧版数据在 cards 里，新版在 localStorage）
+    // 挂载到 window 供 SPView 等组件访问
+    window.__CARDS = CARDS;
+
+    console.log('[App] 数据加载完成', { cards: CARDS.length, experiences: EXPERIENCES.length, sources: SOURCES.length, sp: SP_CASES.length });
+
+    // 4. 将掌握度数据合并到卡片
     CARDS.forEach(card => {
       if (userState.mastery[card.id]) {
         if (!card.mastery) card.mastery = {};
@@ -62,7 +108,8 @@ async function init() {
       }
     });
 
-    // 4. 初始化页面结构
+    // 5. 初始化页面结构
+    const user = getUser();
     app.innerHTML = `
       <div class="topbar">
         <div class="topbar-title">《伤寒论》方剂训练 · v9 <span class="version-badge">重构版</span></div>
@@ -71,7 +118,11 @@ async function init() {
           <button class="topbar-btn" id="btnStats">统计</button>
           <button class="topbar-btn" id="btnOverallReview">总体复习</button>
           <button class="topbar-btn" id="btnWrongBook">错题本</button>
+          <button class="topbar-btn" id="btnClinical">🏥 临床</button>
+          <button class="topbar-btn" id="btnSP">🩺 SP</button>
           <button class="topbar-btn" id="btnNotes">📝 笔记</button>
+          <span class="topbar-user" id="topbarUser" title="${user?.email || ''}" style="font-size:12px;color:var(--text-secondary);margin:0 4px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${user?.email || ''}</span>
+          <button class="topbar-btn topbar-btn-logout" id="btnLogout" title="登出" style="font-size:13px;">🚪</button>
           <button class="theme-btn" id="btnTheme" title="切换主题">☀️</button>
         </div>
       </div>
@@ -103,10 +154,16 @@ async function init() {
         <div class="view" id="viewStats">
           <div id="statsContainer"></div>
         </div>
+        <div class="view" id="viewClinical">
+          <div id="clinicalContainer"></div>
+        </div>
+        <div class="view" id="viewSP">
+          <div id="spContainer"></div>
+        </div>
       </div>
     `;
 
-    // 5. 绑定顶部栏按钮
+    // 6. 绑定顶部栏按钮
     document.getElementById('btnReview').addEventListener('click', startDailyReview);
     document.getElementById('btnTheme').addEventListener('click', toggleTheme);
     document.getElementById('btnStats').addEventListener('click', () => {
@@ -149,7 +206,34 @@ async function init() {
       });
     });
 
-    // 5.4 绑定笔记列表按钮
+    // 6.1 绑定登出按钮
+    document.getElementById('btnLogout').addEventListener('click', async () => {
+      await authLogout();
+      // 清理本地数据
+      ['sh_v9_state', 'sh_v9_today_stats', 'sh_v9_unified_notes', 'sh_index_v1_state', 'sh_v9_stats', 'sb-access-token', 'sb-user'].forEach(k => {
+        try { localStorage.removeItem(k); } catch {}
+      });
+      window.location.reload();
+    });
+
+    // 6.4 绑定临床录入按钮
+    document.getElementById('btnClinical').addEventListener('click', () => {
+      setPage('clinical');
+      renderClinicalView(document.getElementById('clinicalContainer'), {
+        onBack: () => {
+          setPage('dashboard');
+          renderDashboard();
+        }
+      });
+    });
+
+    // 6.4.1 绑定 SP 按钮
+    document.getElementById('btnSP').addEventListener('click', () => {
+      setPage('sp');
+      renderSP();
+    });
+
+    // 6.5 绑定笔记列表按钮
     document.getElementById('btnNotes').addEventListener('click', () => {
       showNoteList({
         onUpdate: () => {
@@ -158,7 +242,7 @@ async function init() {
       });
     });
 
-    // 5.5 绑定搜索栏
+    // 7. 绑定搜索栏
     const searchInput = document.getElementById('searchInput');
     const searchClear = document.getElementById('searchClear');
     if (searchInput) {
@@ -180,20 +264,20 @@ async function init() {
       });
     }
 
-    // 5.5 注册状态变化订阅（视图切换）
+    // 8. 注册状态变化订阅（视图切换）
     subscribe((newState, oldState) => {
       if (newState.page !== oldState.page) {
         switchView(newState.page);
       }
     });
 
-    // 6. 键盘快捷键（提前绑定 capture 阶段，确保不被任何元素拦截）
+    // 9. 键盘快捷键（提前绑定 capture 阶段，确保不被任何元素拦截）
     window.addEventListener('keydown', handleKeydown, true);
 
-    // 7. 渲染仪表盘
+    // 10. 渲染仪表盘
     renderDashboard();
 
-    // 9. 暴露测试接口（供E2E测试直接导航）
+    // 11. 暴露测试接口（供E2E测试直接导航）
     window.__APP_TEST__ = {
       CARDS,
       setActiveCard,
@@ -211,6 +295,105 @@ async function init() {
       </div>
     `;
   }
+}
+
+// ── 登录页面 ──
+
+function renderLoginForm(app) {
+  let isRegisterMode = false;
+
+  function render() {
+    app.innerHTML = `
+      <div class="login-overlay">
+        <div class="login-card">
+          <div class="login-title">《伤寒论》方剂训练</div>
+          <div class="login-subtitle">经方学习系统 · v9</div>
+          <div class="login-mode-tabs">
+            <button class="login-tab ${isRegisterMode ? '' : 'active'}" id="loginTabLogin">登录</button>
+            <button class="login-tab ${isRegisterMode ? 'active' : ''}" id="loginTabRegister">注册</button>
+          </div>
+          <div class="login-form">
+            <input class="login-input" id="loginEmail" type="email" placeholder="邮箱地址" autocomplete="email" />
+            <input class="login-input" id="loginPassword" type="password" placeholder="密码（至少6位）" autocomplete="${isRegisterMode ? 'new-password' : 'current-password'}" />
+            <div class="login-error" id="loginError" style="display:none;"></div>
+            <button class="login-submit" id="loginSubmit">${isRegisterMode ? '注册' : '登录'}</button>
+          </div>
+          <div class="login-info">
+            ${isRegisterMode
+              ? '注册后云端自动保存你的学习进度，多设备共享'
+              : '输入邮箱和密码登录，同步云端学习数据'}
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('loginTabLogin').addEventListener('click', () => {
+      isRegisterMode = false;
+      render();
+    });
+    document.getElementById('loginTabRegister').addEventListener('click', () => {
+      isRegisterMode = true;
+      render();
+    });
+    document.getElementById('loginSubmit').addEventListener('click', handleSubmit);
+    document.getElementById('loginPassword').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleSubmit();
+    });
+  }
+
+  async function handleSubmit() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errorEl = document.getElementById('loginError');
+    const submitBtn = document.getElementById('loginSubmit');
+
+    if (!email || !password) {
+      errorEl.textContent = '请填写邮箱和密码';
+      errorEl.style.display = 'block';
+      return;
+    }
+    if (isRegisterMode && password.length < 6) {
+      errorEl.textContent = '密码至少6位';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '处理中...';
+    errorEl.style.display = 'none';
+
+    let result;
+    if (isRegisterMode) {
+      result = await register(email, password);
+    } else {
+      result = await login(email, password);
+    }
+
+    if (result.success) {
+      // 注册后显示迁移信息，再 reload
+      if (isRegisterMode && result.migration) {
+        const infoEl = document.getElementById('loginError');
+        if (result.migration.message) {
+          const total = result.migration.migrated
+            ? result.migration.migred.mastery + result.migration.migred.notes + result.migration.migred.clinical
+            : 0;
+          if (total > 0) {
+            infoEl.textContent = '✅ 已自动迁移 ' + total + ' 条本地数据到云端';
+            infoEl.style.display = 'block';
+            infoEl.style.color = '#4caf50';
+          }
+        }
+      }
+      setTimeout(() => window.location.reload(), 1200);
+    } else {
+      errorEl.textContent = result.error || '操作失败，请重试';
+      errorEl.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = isRegisterMode ? '注册' : '登录';
+    }
+  }
+
+  render();
 }
 
 // ===== 视图切换 =====
@@ -256,7 +439,7 @@ function renderDashboard() {
     </div>
   `;
   document.getElementById('btnDailyReview').addEventListener('click', startDailyReview);
-  document.getElementById('btnExamMode').addEventListener('click', startExamMode);
+  document.getElementById('btnExamMode').addEventListener('click', () => startExamMode());
 
   // 卡片列表
   const container = document.getElementById('cardListContainer');
@@ -410,6 +593,34 @@ function handleSelectOption(idx) {
     updateStats(isCorrect);
     updateTodayStats(isCorrect);
     recordAnswerEvent(q.cardId, q.cardName || q.cardId, q.type, getVectorLabel(q.type), isCorrect, state.exam.mode, selected.label);
+
+    // 同步掌握度到云端（异步，不阻塞）
+    const m = loadState().mastery[q.cardId]?.[q.type];
+    if (m) {
+      updateMasteryVector(q.cardId, q.type, {
+        level: m.level,
+        status: m.status,
+        streak_right: m.streak_right,
+        streak_wrong: m.streak_wrong,
+        total_rights: m.total_rights,
+        total_wrongs: m.total_wrongs,
+        last_result: m.last_result,
+        last_review: m.last_review,
+        next_review: m.next_review
+      }).catch(err => console.warn('[App] 同步掌握度失败:', err.message));
+    }
+
+    // 同步答题记录到云端（异步）
+    recordAnswerApi({
+      card_id: q.cardId,
+      card_name: q.cardName || q.cardId,
+      vector: q.type,
+      vector_label: getVectorLabel(q.type),
+      is_correct: isCorrect,
+      mode: state.exam.mode,
+      selected: selected.label,
+      correct: Array.isArray(q.correct) ? q.correct.join(',') : (q.correct || '')
+    }).catch(err => console.warn('[App] 同步答题记录失败:', err.message));
   }
   renderExam();
 }
@@ -434,6 +645,17 @@ function finishExam() {
     console.log('[finishExam] 考试模式，answers.length:', state.exam.answers.length);
     state.exam.answers.forEach(a => {
       recordAnswerEvent(a.question.cardId, a.question.cardName || a.question.cardId, a.question.type, getVectorLabel(a.question.type), a.isCorrect, 'exam', a.selected?.label);
+      // 同步到云端（异步）
+      recordAnswerApi({
+        card_id: a.question.cardId,
+        card_name: a.question.cardName || a.question.cardId,
+        vector: a.question.type,
+        vector_label: getVectorLabel(a.question.type),
+        is_correct: a.isCorrect,
+        mode: 'exam',
+        selected: a.selected?.label || '未作答',
+        correct: Array.isArray(a.question.correct) ? a.question.correct.join(',') : (a.question.correct || '')
+      }).catch(err => console.warn('[App] 同步考试记录失败:', err.message));
     });
     // 显示考试结果页面
     console.log('[finishExam] 渲染考试结果');
@@ -658,6 +880,23 @@ function toggleTheme() {
   html.setAttribute('data-theme', isDark ? 'light' : 'dark');
   const btn = document.getElementById('btnTheme');
   if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+}
+
+// ===== 标准化病人（SP）=====
+
+function renderSP() {
+  const container = document.getElementById('spContainer');
+  if (!container) return;
+
+  const onGoToLearn = (cardId) => {
+    if (!cardId) return;
+    const card = CARDS.find(c => c.id === cardId);
+    if (!card) return;
+    setPage('learn');
+    renderLearn(cardId);
+  };
+
+  renderSPView(container, SP_CASES, CARDS, onGoToLearn);
 }
 
 function renderStats() {

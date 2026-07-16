@@ -27,15 +27,7 @@ const SPECIAL_UNIT_MAP = {
 /** 容量-重量密度映射（g/L） */
 const VOLUME_WEIGHT_MAP = {
   '半夏': { perLiter: 130, note: '柯雪帆实测：130g/L' },
-  '杏仁': { perLiter: 70, note: '实测均值：70g/L' },
-  '粳米': { perLiter: 180, note: '文献均值：180g/L' },
-  '香豉': { perLiter: 110, note: '豆豉估算：110g/L' },
-  '芒硝': { perLiter: 154, note: '仝小林实测：154g/L' },
-  '吴茱萸': { perLiter: 50, note: '文献均值：50g/L' },
-  '五味子': { perLiter: 50, note: '文献均值：50g/L' },
-  '蜀椒': { perLiter: 50, note: '文献均值：50g/L' },
-  '葶苈子': { perLiter: 60, note: '文献均值：60g/L' },
-  '虻虫': { perLiter: 16, note: '文献均值：16g/L' },
+  '粳米': { perLiter: 60, note: '仝小林实测：60g/L' },
   '麻仁': { perLiter: 50, note: '柯雪帆实测：50g/L' },
   '赤小豆': { perLiter: 150, note: '仝小林实测：150g/L' },
   '麦冬': { perLiter: 108, note: '仝小林实测：108g/L' }
@@ -44,14 +36,10 @@ const VOLUME_WEIGHT_MAP = {
 /** 单枚重量映射（g/枚） */
 const PIECE_WEIGHT_MAP = {
   '杏仁': { min: 0.3, max: 0.5, note: '0.3-0.5g/枚' },
-  '桃仁': { min: 0.34, max: 0.4, note: '0.34-0.4g/枚' },
-  '大枣': { min: 3.5, max: 4.5, note: '3.5-4.5g/枚' },
-  '附子': { min: 15, max: 25, note: '15-25g/枚（中-大者）' },
-  '栀子': { min: 1.4, max: 1.6, note: '1.4-1.6g/枚' },
-  '瓜蒌': { min: 40, max: 50, note: '40-50g/枚（瓜蒌实单枚）' },
-  '枳实': { min: 12, max: 16, note: '12-16g/枚' },
-  '石膏': { min: 35, max: 45, note: '35-45g/枚（鸡蛋大）' },
-  '乌梅': { min: 3, max: 6, note: '3-6g/枚' }
+  '桃仁': { min: 0.3, max: 0.5, note: '0.3-0.5g/枚' },
+  '大枣': { min: 3, max: 6, note: '3-6g/枚' },
+  '乌梅': { min: 3, max: 6, note: '3-6g/枚' },
+  '枳实': { min: 1, max: 2, note: '1-2g/枚' }
 };
 
 /** 四档标准 */

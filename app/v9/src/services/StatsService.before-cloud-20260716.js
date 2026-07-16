@@ -110,22 +110,8 @@ export function recordAnswerEvent(cardId, cardName, vector, vectorLabel, isCorre
   saveStats(stats);
 }
 
-/** 获取今日统计（API 优先，失败回退本地） */
-export async function getTodayStats() {
-  // 优先从 API 获取（登录后）
-  try {
-    const { isLoggedIn } = await import('@/auth.js');
-    if (isLoggedIn()) {
-      const { getTodayStats: apiGetTodayStats } = await import('@/api.js');
-      const data = await apiGetTodayStats();
-      if (data && typeof data.total === 'number') {
-        return data; // { total, right, wrong, cardCount }
-      }
-    }
-  } catch (e) {
-    console.warn('[StatsService] API 获取今日统计失败，回退本地:', e.message);
-  }
-  // 回退：本地 localStorage
+/** 获取今日统计 */
+export function getTodayStats() {
   const stats = loadStats();
   const today = new Date().toISOString().split('T')[0];
   const log = stats.daily_log[today];
@@ -138,22 +124,8 @@ export async function getTodayStats() {
   };
 }
 
-/** 获取卡片统计（API 优先，失败回退本地） */
-export async function getCardStats() {
-  // 优先从 API 获取（登录后）
-  try {
-    const { isLoggedIn } = await import('@/auth.js');
-    if (isLoggedIn()) {
-      const { getCardStats: apiGetCardStats } = await import('@/api.js');
-      const data = await apiGetCardStats();
-      if (data && typeof data === 'object') {
-        return data;
-      }
-    }
-  } catch (e) {
-    console.warn('[StatsService] API 获取卡片统计失败，回退本地:', e.message);
-  }
-  // 回退：本地 localStorage
+/** 获取卡片统计 */
+export function getCardStats() {
   return loadStats().card_stats;
 }
 

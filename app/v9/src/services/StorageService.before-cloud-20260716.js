@@ -75,12 +75,12 @@ function createInitialState() {
 }
 
 /**
- * 加载用户状态（自动迁移旧版数据；登录后尝试 API 优先）
+ * 加载用户状态（自动迁移旧版数据）
  * @returns {Object} 当前状态
  */
 export function loadState() {
   try {
-    // 先尝试读取新版数据（本地兜底）
+    // 先尝试读取新版数据
     const newRaw = localStorage.getItem(NEW_KEY);
     if (newRaw) {
       const parsed = JSON.parse(newRaw);
@@ -102,32 +102,6 @@ export function loadState() {
   } catch (e) {
     console.warn('[StorageService] 加载状态失败:', e);
     return createInitialState();
-  }
-}
-
-/**
- * 从云端加载掌握度并合并到本地状态
- * 由 app.js 在登录成功后调用
- * @param {Object} localState — 当前本地状态
- * @returns {Promise<Object>} 合并后的状态
- */
-export async function loadMasteryFromCloud(localState) {
-  try {
-    const { loadMasteryState } = await import('@/api.js');
-    const cloudMastery = await loadMasteryState();
-    if (!cloudMastery || Object.keys(cloudMastery).length === 0) {
-      console.log('[StorageService] 云端无掌握度数据，保留本地');
-      return localState;
-    }
-    // 合并：云端为真相源（覆盖本地），本地缺失的保留
-    const merged = { ...localState, mastery: { ...cloudMastery } };
-    // 保存合并后的状态到本地
-    saveState(merged);
-    console.log(`[StorageService] 云端掌握度已合并（${Object.keys(cloudMastery).length} 张卡片）`);
-    return merged;
-  } catch (e) {
-    console.warn('[StorageService] 从云端加载掌握度失败:', e.message);
-    return localState;
   }
 }
 

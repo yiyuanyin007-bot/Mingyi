@@ -12,6 +12,7 @@ import { createElement } from '@utils/dom.js';
 import { convertDosage, formatDoseCompact, isAncientDosage } from '@utils/doseConverter.js';
 import { getNotesByCardFlat, getNote, createNote, updateNote } from '@services/NoteService.js';
 import { openNoteEditor } from '@components/NoteEditor.js';
+import { formatDate } from '@utils/formatters.js';
 
 /** 6 个学习向量定义 */
 const VECTORS = [
@@ -434,7 +435,7 @@ function buildNoteSection(card, options) {
     section.appendChild(previewWrap);
 
     const meta = createElement('div', { className: 'card-note-meta', style: 'font-size:12px;color:var(--text-muted);padding:4px 16px 8px;' });
-    const dateStr = note.updatedAt ? `${note.updatedAt.split('T')[0]} ${note.updatedAt.split('T')[1]?.slice(0, 5)}` : '';
+    const dateStr = note.updatedAt ? formatDate(note.updatedAt) : '';
     const tags = note.tags && note.tags.length ? ` · ${note.tags.join(', ')}` : '';
     meta.textContent = `最后编辑：${dateStr}${tags}`;
     section.appendChild(meta);
@@ -507,55 +508,133 @@ function renderMarkdown(text) {
   if (!text) return '';
   let html = escapeHtml(text);
 
-  // 代码块（优先处理，避免内部符号被转义）
+  // 1. 代码块（优先，避免内部符号被转义）
+  html = html.replace(/```(\S*?)\n?([\s\S]*?)```/g, '<pre><code class="lang-$1">$2</code></pre>');
   html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-  // 行内代码
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  // 标题
-  html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
-  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+  // 2. 分隔线
+  html = html.replace(/^-{3,}\s*$/gim, '<hr>');
 
-  // 粗体 + 斜体
-  html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-  // 粗体
-  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  // 斜体
-  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-  // 引用
-  html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
-
-  // 无序列表（逐行处理）
+  // 3. 按行分块处理
   const lines = html.split('\n');
-  let inList = false;
   let result = [];
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
-      if (!inList) {
-        result.push('<ul>');
-        inList = true;
+  let inList = false;
+  let inTable = false;
+  let tableRows = [];
+
+  function flushList() {
+    if (inList) { result.push('</ul>'); inList = false; }
+  }
+  function flushTable() {
+    if (inTable) {
+      const header = tableRows[0];
+      const body = tableRows.slice(1);
+      result.push('<table><thead>');
+      result.push('<tr>' + header.split('|').filter(c => c.trim()).map(c => '<th>' + c.trim() + '</th>').join('') + '</tr>');
+      result.push('</thead><tbody>');
+      for (let i = 1; i < body.length; i++) {
+        const row = body[i];
+        if (/^[\s|:-]+$/.test(row)) continue;
+        result.push('<tr>' + row.split('|').filter(c => c.trim()).map(c => '<td>' + c.trim() + '</td>').join('') + '</tr>');
       }
-      result.push('<li>' + trimmed.substring(2) + '</li>');
-    } else {
-      if (inList) {
-        result.push('</ul>');
-        inList = false;
-      }
-      result.push(line);
+      result.push('</tbody></table>');
+      tableRows = [];
+      inTable = false;
     }
   }
-  if (inList) result.push('</ul>');
+
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const trimmed = raw.trim();
+
+    if (trimmed === '') {
+      flushList();
+      flushTable();
+      result.push('');
+      continue;
+    }
+
+    if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+      flushList();
+      if (!inTable) { inTable = true; tableRows = []; }
+      tableRows.push(trimmed);
+      continue;
+    }
+
+    if (/^-{3,}\s*$/.test(trimmed)) {
+      flushList();
+      flushTable();
+      result.push('<hr>');
+      continue;
+    }
+
+    const hMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (hMatch) {
+      flushList();
+      flushTable();
+      result.push(`<h${hMatch[1].length}>${inlineMarkdown(hMatch[2])}</h${hMatch[1].length}>`);
+      continue;
+    }
+
+    const bqMatch = trimmed.match(/^>\s?(.*)$/);
+    if (bqMatch) {
+      flushList();
+      flushTable();
+      result.push(`<blockquote>${inlineMarkdown(bqMatch[1])}</blockquote>`);
+      continue;
+    }
+
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+      flushTable();
+      if (!inList) { result.push('<ul>'); inList = true; }
+      result.push('<li>' + inlineMarkdown(trimmed.substring(2)) + '</li>');
+      continue;
+    }
+
+    const olMatch = trimmed.match(/^\d+[\.\）\s]\s+(.*)$/);
+    if (olMatch) {
+      flushTable();
+      if (!inList) { result.push('<ol>'); inList = true; }
+      result.push('<li>' + inlineMarkdown(olMatch[1]) + '</li>');
+      continue;
+    }
+
+    // 普通段落：合并连续非空行
+    flushList();
+    flushTable();
+    let paraLines = [trimmed];
+    let j = i + 1;
+    while (j < lines.length) {
+      const next = lines[j].trim();
+      if (next === '' || next.startsWith('#') || next.startsWith('- ') || next.startsWith('* ') ||
+          /^\d+[\.\）\s]\s+/.test(next) || next.startsWith('>') || next.startsWith('|') ||
+          /^-{3,}\s*$/.test(next)) {
+        break;
+      }
+      paraLines.push(next);
+      j++;
+    }
+    i = j - 1;
+    const paraText = paraLines.map(l => inlineMarkdown(l)).join('<br>');
+    result.push(`<p>${paraText}</p>`);
+  }
+
+  flushList();
+  flushTable();
   html = result.join('\n');
-
-  // 换行：避免在 block 元素后加 <br>
-  html = html.replace(/(<\/(?:h[1-6]|blockquote|li|ul|pre)>)\n/g, '$1');
-  html = html.replace(/\n/g, '<br>');
-
   return html;
+}
+
+/** 行内 Markdown */
+function inlineMarkdown(text) {
+  let s = text;
+  s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%">');
+  return s;
 }
 
 /**

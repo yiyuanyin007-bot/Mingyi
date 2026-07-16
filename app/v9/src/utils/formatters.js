@@ -110,3 +110,23 @@ export function scheduleNextReview(level) {
 export function nowISO() {
   return new Date().toISOString();
 }
+
+/**
+ * 格式化笔记时间戳为显示文本
+ * 支持 ISO 字符串 和 Unix 时间戳（毫秒）两种格式
+ * @param {string|number} dateInput - ISO 字符串或 Unix 时间戳
+ * @returns {string} 格式化的日期文本（如 '7月14日 15:30'）
+ */
+export function formatDate(dateInput) {
+  try {
+    const d = new Date(dateInput);
+    if (isNaN(d.getTime())) return String(dateInput);
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const hours = String(d.getHours()).padStart(2, '0');
+    const mins = String(d.getMinutes()).padStart(2, '0');
+    return `${month}月${day}日 ${hours}:${mins}`;
+  } catch (e) {
+    return String(dateInput);
+  }
+}

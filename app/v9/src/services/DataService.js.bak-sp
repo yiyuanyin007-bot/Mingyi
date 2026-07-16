@@ -7,8 +7,7 @@
 const DATA_PATHS = {
   cards: '/data/formula_cards.json',
   experiences: '/data/experience_cards.json',
-  sources: '/data/source_cards.json',
-  sp: '/data/sp_cases.json'
+  sources: '/data/source_cards.json'
 };
 
 /** 内存缓存 */
@@ -45,16 +44,15 @@ export async function loadData(key, useCache = true) {
 
 /**
  * 预加载全部数据
- * @returns {Promise<{ cards, experiences, sources, sp }>}
+ * @returns {Promise<{ cards, experiences, sources }>}
  */
 export async function preloadAll() {
-  const [cards, experiences, sources, sp] = await Promise.all([
+  const [cards, experiences, sources] = await Promise.all([
     loadData('cards'),
     loadData('experiences'),
-    loadData('sources'),
-    loadData('sp')
+    loadData('sources')
   ]);
-  return { cards, experiences, sources, sp };
+  return { cards, experiences, sources };
 }
 
 /**

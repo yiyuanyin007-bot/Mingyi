@@ -67,14 +67,16 @@ export function renderExamView(container, examState, callbacks, allCards) {
     const labelSpan = createElement('span', { className: 'option-label' }, opt.label);
     btn.appendChild(labelSpan);
 
-    // 选项统计提示（既往选择次数 + 概率）
-    const optionStats = getOptionStats(q.cardId, q.type);
-    if (optionStats && optionStats[opt.label]) {
-      const count = optionStats[opt.label];
-      const total = Object.values(optionStats).reduce((a, b) => a + b, 0);
-      const prob = total > 0 ? Math.round((count / total) * 100) : 0;
-      const hint = createElement('span', { className: 'option-hint' }, `已选 ${count} 次 · ${prob}%`);
-      btn.appendChild(hint);
+    // 选项统计提示（既往选择次数 + 概率）— 仅已答题后显示
+    if (hasAnswered) {
+      const optionStats = getOptionStats(q.cardId, q.type);
+      if (optionStats && optionStats[opt.label]) {
+        const count = optionStats[opt.label];
+        const total = Object.values(optionStats).reduce((a, b) => a + b, 0);
+        const prob = total > 0 ? Math.round((count / total) * 100) : 0;
+        const hint = createElement('span', { className: 'option-hint' }, `已选 ${count} 次 · ${prob}%`);
+        btn.appendChild(hint);
+      }
     }
 
     const isSelected = answered && answered.selected && answered.selected.id === opt.id;

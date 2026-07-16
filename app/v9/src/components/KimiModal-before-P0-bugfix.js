@@ -83,28 +83,14 @@ export function buildTutorPrompt(card) {
 
 /**
  * 打开 Kimi 弹窗
- * 支持两种调用方式：
- *   1. openKimiModal(card) — 方剂卡片模式，自动构建 tutor prompt
- *   2. openKimiModal({ prompt, title }) — 自定义 prompt 模式（错题分析等）
- * @param {Object|{prompt:string, title:string}} param — 卡片对象或 prompt 对象
+ * @param {Object} card — 当前卡片
  * @returns {HTMLElement} 弹窗元素
  */
-export function openKimiModal(param) {
+export function openKimiModal(card) {
   // 如果已有弹窗，先关闭
   closeKimiModal();
 
-  // 检测调用方式：有 data 字段视为卡片模式，否则视为自定义 prompt 模式
-  const isCardMode = param && param.data;
-  let prompt, title;
-  if (isCardMode) {
-    const card = param;
-    prompt = buildTutorPrompt(card);
-    title = '问 Kimi（复制下方 prompt）';
-  } else {
-    prompt = (param && param.prompt) || '';
-    title = (param && param.title) || '问 Kimi（复制下方 prompt）';
-  }
-
+  const prompt = buildTutorPrompt(card);
   const overlay = createElement('div', { className: 'tutor-overlay' });
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) closeKimiModal();
@@ -112,8 +98,8 @@ export function openKimiModal(param) {
 
   const modal = createElement('div', { className: 'tutor-modal' });
 
-  const titleEl = createElement('div', { className: 'tutor-title' }, title);
-  modal.appendChild(titleEl);
+  const title = createElement('div', { className: 'tutor-title' }, '问 Kimi（复制下方 prompt）');
+  modal.appendChild(title);
 
   const textarea = createElement('textarea', {
     className: 'tutor-text',

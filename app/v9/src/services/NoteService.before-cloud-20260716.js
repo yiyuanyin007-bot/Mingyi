@@ -75,16 +75,6 @@ function saveAllNotes(notes) {
   }
 }
 
-/** 检查用户是否已登录（动态导入避免循环依赖） */
-async function _isLoggedIn() {
-  try {
-    const { isLoggedIn } = await import('@/auth.js');
-    return isLoggedIn();
-  } catch {
-    return false;
-  }
-}
-
 // ===== 迁移：将旧版数据合并到统一存储 =====
 
 /**
@@ -271,53 +261,27 @@ function migrateOldData() {
  * @param {string} [options.diagnosis] - 按诊断标签过滤（仅 type=exam）
  * @returns {Array}
  */
-export async function getNotes(options = {}) {
-  // API 优先（登录后）
-  try {
-    if (await _isLoggedIn()) {
-      const { loadNotes } = await import('@/api.js');
-      const apiNotes = await loadNotes(options.type, options.cardId);
-      if (apiNotes && apiNotes.length > 0) {
-        // 缓存到本地
-        saveAllNotes(apiNotes);
-        return _filterNotes(apiNotes, options);
-      }
-    }
-  } catch (e) {
-    console.warn('[NoteService] API 获取笔记失败，回退本地:', e.message);
-  }
-  // 回退本地
+export function getNotes(options = {}) {
   let notes = loadAllNotes();
-  return _filterNotes(notes, options);
-}
-
-/** 同步过滤笔记（供内部 getNotes 和本地回退共用） */
-function _filterNotes(notes, options = {}) {
-  if (options.type) notes = notes.filter(n => n.type === options.type);
-  if (options.cardId) notes = notes.filter(n => n.cardId === options.cardId);
-  if (options.diagnosis) notes = notes.filter(n => n.diagnosis === options.diagnosis);
+  if (options.type) {
+    notes = notes.filter(n => n.type === options.type);
+  }
+  if (options.cardId) {
+    notes = notes.filter(n => n.cardId === options.cardId);
+  }
+  if (options.diagnosis) {
+    notes = notes.filter(n => n.diagnosis === options.diagnosis);
+  }
+  // 按更新时间倒序
   return notes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 }
 
 /**
  * 获取单条笔记
  * @param {string} noteId
- * @returns {Promise<Object|null>}
+ * @returns {Object|null}
  */
-export async function getNote(noteId) {
-  // API 优先（登录后）
-  try {
-    if (await _isLoggedIn()) {
-      const { loadNotes } = await import('@/api.js');
-      const apiNotes = await loadNotes();
-      if (apiNotes && apiNotes.length > 0) {
-        return apiNotes.find(n => n.id === noteId) || null;
-      }
-    }
-  } catch (e) {
-    console.warn('[NoteService] API 获取单条笔记失败，回退本地:', e.message);
-  }
-  // 回退本地
+export function getNote(noteId) {
   const notes = loadAllNotes();
   return notes.find(n => n.id === noteId) || null;
 }
@@ -370,41 +334,7 @@ export function createNote(data, extra = {}) {
   };
   notes.push(note);
   saveAllNotes(notes);
-
-  // 双写：异步同步到云端
-  _syncCreateNote(note);
-
   return note;
-}
-
-/** 异步同步创建笔记到云端 */
-async function _syncCreateNote(note) {
-  try {
-    if (await _isLoggedIn()) {
-      const { createNote: apiCreateNote } = await import('@/api.js');
-      await apiCreateNote({
-        type: note.type,
-        card_id: note.cardId,
-        source_id: note.sourceId,
-        content: note.content,
-        tags: note.tags,
-        vector: note.vector,
-        vector_label: note.vectorLabel,
-        diagnosis: note.diagnosis,
-        diagnosis_label: note.diagnosisLabel,
-        question: note.question,
-        selected: note.selected,
-        correct: note.correct,
-        prompt: note.prompt,
-        review_schedule: note.reviewSchedule,
-        source_title: note.sourceTitle,
-        source_chapter: note.sourceChapter,
-        source_text: note.sourceText,
-      });
-    }
-  } catch (e) {
-    console.warn('[NoteService] 云端同步笔记失败（不影响本地）:', e.message);
-  }
 }
 
 /**
@@ -423,30 +353,7 @@ export function updateNote(noteId, updates) {
     updatedAt: new Date().toISOString()
   };
   saveAllNotes(notes);
-
-  // 异步同步到云端
-  _syncUpdateNote(noteId, updates);
-
   return true;
-}
-
-/** 异步同步更新笔记到云端 */
-async function _syncUpdateNote(noteId, updates) {
-  try {
-    if (await _isLoggedIn()) {
-      const { updateNote: apiUpdateNote } = await import('@/api.js');
-      const apiUpdates = {};
-      if (updates.content !== undefined) apiUpdates.content = updates.content;
-      if (updates.tags !== undefined) apiUpdates.tags = updates.tags;
-      if (updates.vector !== undefined) apiUpdates.vector = updates.vector;
-      if (updates.diagnosis !== undefined) apiUpdates.diagnosis = updates.diagnosis;
-      if (updates.diagnosisLabel !== undefined) apiUpdates.diagnosis_label = updates.diagnosisLabel;
-      if (updates.question !== undefined) apiUpdates.question = updates.question;
-      await apiUpdateNote(noteId, apiUpdates);
-    }
-  } catch (e) {
-    console.warn('[NoteService] 云端同步笔记更新失败（不影响本地）:', e.message);
-  }
 }
 
 /**
@@ -459,23 +366,7 @@ export function deleteNote(noteId) {
   const filtered = notes.filter(n => n.id !== noteId);
   if (filtered.length === notes.length) return false;
   saveAllNotes(filtered);
-
-  // 异步同步到云端
-  _syncDeleteNote(noteId);
-
   return true;
-}
-
-/** 异步同步删除笔记到云端 */
-async function _syncDeleteNote(noteId) {
-  try {
-    if (await _isLoggedIn()) {
-      const { deleteNote: apiDeleteNote } = await import('@/api.js');
-      await apiDeleteNote(noteId);
-    }
-  } catch (e) {
-    console.warn('[NoteService] 云端同步删除笔记失败（不影响本地）:', e.message);
-  }
 }
 
 /**
@@ -641,9 +532,8 @@ export function searchNotes(query) {
   ).sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 }
 
-// 旧版数据迁移：不再自动触发（用户注册后通过数据迁移流程处理）
-// 如需手动迁移，调用 migrateOldData() 即可
-// migrateOldData();
+// 触发旧版数据迁移
+migrateOldData();
 
 // 暴露诊断标签映射
 export default {

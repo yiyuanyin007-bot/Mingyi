@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   root: '.',
-  base: './',
+  base: '/',
   publicDir: 'public',
   build: {
     outDir: 'dist',
@@ -25,7 +25,13 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    open: false
+    open: false,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8100',
+        changeOrigin: true
+      }
+    }
   },
   resolve: {
     alias: {

@@ -16,6 +16,7 @@
 import { createElement } from '@utils/dom.js';
 import { getNotes, getNotesByCard, deleteNote, getAllTags, searchNotes, getNoteStats } from '@services/NoteService.js';
 import { openNoteEditor } from '@components/NoteEditor.js';
+import { formatDate } from '@utils/formatters.js';
 
 /**
  * 显示笔记列表
@@ -165,7 +166,7 @@ function renderNotesInContainer(body, cardId, query, onClose, options = {}) {
       }
       // Meta
       const meta = createElement('div', { className: 'note-list-meta' });
-      const dateStr = note.updatedAt ? note.updatedAt.split('T')[0] : '';
+      const dateStr = note.updatedAt ? formatDate(note.updatedAt) : '';
       meta.textContent = `${dateStr}`;
       contentWrap.appendChild(meta);
 

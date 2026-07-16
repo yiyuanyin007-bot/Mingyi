@@ -113,34 +113,155 @@ export function openNoteEditor(options) {
   function renderMarkdown(text) {
     if (!text) return '<div style="color:var(--text-muted);">暂无内容</div>';
     let html = escapeHtml(text);
+
+    // 1. 代码块（优先，避免内部符号被转义）
+    html = html.replace(/```(\S*?)\n?([\s\S]*?)```/g, '<pre><code class="lang-$1">$2</code></pre>');
     html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-    html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
-    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-    html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+
+    // 2. 分隔线（必须在块处理之前）
+    html = html.replace(/^-{3,}\s*$/gim, '<hr>');
+
+    // 3. 按行分块处理
     const lines = html.split('\n');
-    let inList = false;
     let result = [];
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
-        if (!inList) { result.push('<ul>'); inList = true; }
-        result.push('<li>' + trimmed.substring(2) + '</li>');
-      } else {
-        if (inList) { result.push('</ul>'); inList = false; }
-        result.push(line);
+    let inList = false;
+    let inTable = false;
+    let tableRows = [];
+
+    function flushList() {
+      if (inList) { result.push('</ul>'); inList = false; }
+    }
+    function flushTable() {
+      if (inTable) {
+        const header = tableRows[0];
+        const body = tableRows.slice(1);
+        result.push('<table><thead>');
+        result.push('<tr>' + header.split('|').filter(c => c.trim()).map(c => '<th>' + c.trim() + '</th>').join('') + '</tr>');
+        result.push('</thead><tbody>');
+        for (let i = 1; i < body.length; i++) {
+          const row = body[i];
+          // skip separator rows like |---|---|
+          if (/^[\s|:-]+$/.test(row)) continue;
+          result.push('<tr>' + row.split('|').filter(c => c.trim()).map(c => '<td>' + c.trim() + '</td>').join('') + '</tr>');
+        }
+        result.push('</tbody></table>');
+        tableRows = [];
+        inTable = false;
       }
     }
-    if (inList) result.push('</ul>');
+
+    for (let i = 0; i < lines.length; i++) {
+      const raw = lines[i];
+      const trimmed = raw.trim();
+
+      // 空行 → 关闭列表/表格
+      if (trimmed === '') {
+        flushList();
+        flushTable();
+        result.push('');
+        continue;
+      }
+
+      // 表格行
+      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+        flushList();
+        if (!inTable) {
+          inTable = true;
+          tableRows = [];
+        }
+        tableRows.push(trimmed);
+        continue;
+      }
+
+      // 分隔线
+      if (/^-{3,}\s*$/.test(trimmed)) {
+        flushList();
+        flushTable();
+        result.push('<hr>');
+        continue;
+      }
+
+      // 标题
+      const hMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+      if (hMatch) {
+        flushList();
+        flushTable();
+        const level = hMatch[1].length;
+        const text = inlineMarkdown(hMatch[2]);
+        result.push(`<h${level}>${text}</h${level}>`);
+        continue;
+      }
+
+      // 引用
+      const bqMatch = trimmed.match(/^>\s?(.*)$/);
+      if (bqMatch) {
+        flushList();
+        flushTable();
+        const text = inlineMarkdown(bqMatch[1]);
+        result.push(`<blockquote>${text}</blockquote>`);
+        continue;
+      }
+
+      // 无序列表
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        flushTable();
+        if (!inList) { result.push('<ul>'); inList = true; }
+        result.push('<li>' + inlineMarkdown(trimmed.substring(2)) + '</li>');
+        continue;
+      }
+
+      // 有序列表
+      const olMatch = trimmed.match(/^\d+[\.\）\s]\s+(.*)$/);
+      if (olMatch) {
+        flushTable();
+        if (!inList) { result.push('<ol>'); inList = true; }
+        result.push('<li>' + inlineMarkdown(olMatch[1]) + '</li>');
+        continue;
+      }
+
+      // 普通段落
+      flushList();
+      flushTable();
+      // 连续非空行合并为一段
+      let paraLines = [trimmed];
+      let j = i + 1;
+      while (j < lines.length) {
+        const next = lines[j].trim();
+        if (next === '' || next.startsWith('#') || next.startsWith('- ') || next.startsWith('* ') ||
+            /^\d+[\.\）\s]\s+/.test(next) || next.startsWith('>') || next.startsWith('|') ||
+            /^-{3,}\s*$/.test(next)) {
+          break;
+        }
+        paraLines.push(next);
+        j++;
+      }
+      i = j - 1;
+      const paraText = paraLines.map(l => inlineMarkdown(l)).join('<br>');
+      result.push(`<p>${paraText}</p>`);
+    }
+
+    flushList();
+    flushTable();
     html = result.join('\n');
-    html = html.replace(/(<\/(?:h[1-6]|blockquote|li|ul|pre)>)\n/g, '$1');
-    html = html.replace(/\n/g, '<br>');
     return html;
+  }
+
+  /** 行内 Markdown：粗体、斜体、行内代码、链接 */
+  function inlineMarkdown(text) {
+    let s = text;
+    // 粗斜体 *** ***
+    s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    // 粗体 ** **
+    s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // 斜体 * *
+    s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    // 行内代码 ` `
+    s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+    // 链接 [text](url)
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // 图片 ![alt](url)
+    s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%">');
+    return s;
   }
 
   function escapeHtml(text) {

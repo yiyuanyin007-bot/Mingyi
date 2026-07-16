@@ -698,6 +698,17 @@
   text-align: center;
 }
 
+@media (max-width: 480px) {
+  .wrongbook-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .wrongbook-title { font-size: 18px; }
+  .wrongbook-filter { padding: 4px 8px; font-size: 10px; }
+  .wrongbook-filters { gap: 4px; }
+  .wrongbook-item { padding: 10px; }
+  .wrong-card { padding: 10px; }
+  .wrong-card-title { height: auto; -webkit-line-clamp: 3; }
+  .wrong-detail-modal .modal-box { width: 95%; }
+  .wrong-detail-choices { grid-template-columns: 1fr; }
+}
 
 /* ======================= */
 /* 再来一组按钮             */
@@ -838,6 +849,7 @@
     grid-template-columns: 1fr;
   }
 }
+/* moved to base.css to ensure source-order wins over default */
 /*
 /* ======================= */
 /* 条文面板 SourcePanel    */
@@ -1672,6 +1684,67 @@
   max-height: 400px;
   overflow-y: auto;
 }
+/* note-editor + learn-view 内的 MD 渲染样式 */
+.note-editor-preview h1, .note-editor-preview h2, .note-editor-preview h3, .note-editor-preview h4,
+.note-section-content h1, .note-section-content h2, .note-section-content h3, .note-section-content h4 {
+  margin: 16px 0 8px 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.note-editor-preview h1, .note-section-content h1 { font-size: 20px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+.note-editor-preview h2, .note-section-content h2 { font-size: 17px; }
+.note-editor-preview h3, .note-section-content h3 { font-size: 15px; }
+.note-editor-preview h4, .note-section-content h4 { font-size: 14px; }
+.note-editor-preview p, .note-section-content p { margin: 6px 0; }
+.note-editor-preview hr, .note-section-content hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+.note-editor-preview blockquote, .note-section-content blockquote {
+  border-left: 3px solid var(--brand-primary);
+  padding: 6px 12px;
+  margin: 8px 0;
+  background: var(--bg-subtle, rgba(128,128,128,0.05));
+  color: var(--text-secondary);
+}
+.note-editor-preview table, .note-section-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8px 0;
+  font-size: 13px;
+}
+.note-editor-preview th, .note-section-content th {
+  background: var(--bg-subtle, rgba(128,128,128,0.08));
+  font-weight: 600;
+  text-align: left;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+}
+.note-editor-preview td, .note-section-content td {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+}
+.note-editor-preview ul, .note-editor-preview ol, .note-section-content ul, .note-section-content ol {
+  margin: 6px 0;
+  padding-left: 22px;
+}
+.note-editor-preview li, .note-section-content li { margin: 3px 0; }
+.note-editor-preview pre, .note-section-content pre {
+  background: var(--bg-subtle, #f5f5f5);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  overflow-x: auto;
+  font-size: 13px;
+  margin: 8px 0;
+}
+.note-editor-preview code, .note-section-content code {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  background: var(--bg-subtle, #f0f0f0);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.note-editor-preview pre code, .note-section-content pre code {
+  background: none;
+  padding: 0;
+}
 .note-editor-tags {
   display: flex;
   flex-wrap: wrap;
@@ -1964,7 +2037,97 @@
   color: var(--text-primary);
 }
 .note-list-btn-del:hover {
+
+/* ======================= */
+/* 顶栏样式补全              */
+/* ======================= */
+
+.topbar-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.topbar-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--brand-primary);
+  color: var(--text-primary);
+}
+.topbar-actions { display: flex; gap: 8px; align-items: center; }
+
+@media (max-width: 480px) {
+  .topbar { padding: 0 10px; }
+  .topbar-title { display: none; }
+  .topbar-btn { padding: 6px 8px; font-size: 0; min-width: 36px; justify-content: center; }
+  .topbar-btn#btnReview::before,
+  .topbar-btn#btnStats::before,
+  .topbar-btn#btnOverallReview::before,
+  .topbar-btn#btnWrongBook::before,
+  .topbar-btn#btnClinical::before,
+  .topbar-btn#btnNotes::before { font-size: 16px; }
+  .topbar-btn#btnReview::before { content: "1F4DA"; }
+  .topbar-btn#btnStats::before { content: "1F4CA"; }
+  .topbar-btn#btnOverallReview::before { content: "1F504"; }
+  .topbar-btn#btnWrongBook::before { content: "2753"; }
+  .topbar-btn#btnClinical::before { content: "1F3E5"; }
+  .topbar-btn#btnNotes::before { content: "1F4DD"; }
+  .topbar-actions { gap: 4px; }
+}
   color: var(--danger);
+}
+
+/* ======================= */
+/* 临床视图                  */
+/* ======================= */
+
+.clinical-header { margin-bottom: 16px; }
+.clinical-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+.clinical-tab {
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.clinical-tab:hover { background: var(--bg-hover); border-color: var(--brand-primary); }
+.clinical-tab.active { background: var(--brand-primary); color: white; border-color: var(--brand-primary); }
+.clinical-content { min-height: 200px; }
+.clinical-section {
+  margin-bottom: 16px;
+  padding: 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.clinical-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 8px;
+}
+.clinical-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+@media (max-width: 480px) {
+  .clinical-tab { padding: 4px 10px; font-size: 12px; }
+  .clinical-section { padding: 10px; }
+  .clinical-label { font-size: 12px; }
 }
 
 /* ===== 动画 ===== */
